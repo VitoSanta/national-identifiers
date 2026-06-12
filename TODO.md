@@ -251,12 +251,11 @@ con due bloccanti piccoli e ben delimitati; il resto e' rifinitura.
       CL, CO, CZ/SK, FI, ID, LB, PA, PE, SE, SN, TN, UY, VE) piu' i casi
       delle nuove regole. La fixture PE ha intercettato subito una
       correzione mancante durante l'implementazione: il meccanismo funziona.
-- [ ] P1 - Rendere PUBBLICO il repo GitHub `VitoSanta/CF`: esiste ed e'
-      allineato (verificato via SSH), ma e' privato, quindi i link nei
-      metadati npm/nuspec/SECURITY.md rispondono 404 agli utenti anonimi.
-      Da fare manualmente su GitHub: Settings -> General -> Danger Zone ->
-      Change visibility -> Make public. Va fatto PRIMA del publish dei
-      pacchetti.
+- [x] P1 - Repo GitHub pubblico e rinominato in
+      `VitoSanta/national-identifiers` (il vecchio nome `CF` fa redirect).
+      Aggiornati remote git locale, `package.json` (repository, bugs,
+      homepage), entrambi i csproj (RepositoryUrl, PackageProjectUrl) e
+      SECURITY.md. Link verificati: rispondono 200 anche da anonimi.
 - [ ] P1 - Tag `v0.1.0` e data nel CHANGELOG al momento del taglio.
 
 ### Prima del primo publish (P2 — farli ora evita breaking change dopo)

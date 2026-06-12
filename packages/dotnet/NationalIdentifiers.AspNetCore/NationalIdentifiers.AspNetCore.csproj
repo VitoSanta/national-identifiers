@@ -10,8 +10,8 @@
     <PackageId>NationalIdentifiers.AspNetCore</PackageId>
     <Version>0.1.0</Version>
     <Authors>Vito Santanelli</Authors>
-    <PackageProjectUrl>https://github.com/VitoSanta/CF</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/VitoSanta/CF.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/VitoSanta/national-identifiers</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/VitoSanta/national-identifiers.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Description>ASP.NET Core integration for policy-aware local pre-validation of national identifiers in web APIs.</Description>

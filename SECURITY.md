@@ -10,7 +10,7 @@ Do not open a public issue for a vulnerability involving package integrity,
 dependency compromise, denial of service or sensitive-data exposure.
 
 Use GitHub private vulnerability reporting for
-`https://github.com/VitoSanta/CF`. Include reproduction steps, affected
+`https://github.com/VitoSanta/national-identifiers`. Include reproduction steps, affected
 versions and expected impact. You should receive an acknowledgement within
 seven days.
 

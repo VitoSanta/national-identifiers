@@ -16,13 +16,13 @@
   ],
   "author": "Vito Santanelli",
   "license": "MIT",
-  "homepage": "https://github.com/VitoSanta/CF#readme",
+  "homepage": "https://github.com/VitoSanta/national-identifiers#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VitoSanta/CF.git"
+    "url": "git+https://github.com/VitoSanta/national-identifiers.git"
   },
   "bugs": {
-    "url": "https://github.com/VitoSanta/CF/issues"
+    "url": "https://github.com/VitoSanta/national-identifiers/issues"
   },
   "engines": {
     "node": ">=20.19"
