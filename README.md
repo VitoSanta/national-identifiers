@@ -190,6 +190,8 @@ Rules are expressed as structured objects. The current TypeScript implementation
 
 A future improvement is to replace the explicit switch-based dispatcher with a data-driven country registry and shared rule metadata. Each country rule can carry a small metadata object describing `identifierType`, `hasChecksum`, `validationLevelHint`, supported formats, and known limitations. That metadata can drive both JS and .NET dispatchers, reduce duplication, and make maintenance easier as coverage expands.
 
+The current refactor already implements a centralized JS/TS country registry for validation dispatch, and the `taxIdCheckOutcome` policy helper now derives `block` decisions directly from registry metadata instead of from a separate hardcoded checksum list.
+
 Adding a new country currently requires:
 
 1. A rule object (or JSON definition) specifying pattern, lengths, and optionally checksum algorithm and metadata extraction.

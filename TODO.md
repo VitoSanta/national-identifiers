@@ -260,6 +260,7 @@ prioritari (CU, DO, EC, GT, IR, LK, PY, UZ, ZA), Africa format-only
   - `packages/dotnet/NationalIdentifiers.Core/README.md`
   - `packages/dotnet/NationalIdentifiers.AspNetCore/README.md`
   - `packages/dotnet/NationalIdentifiers.AspNetCore/README.md`
+- [x] Preparare la documentazione per il deploy manuale: aggiornamenti registrati e test green
 
 ## Giurisdizioni e territori
 

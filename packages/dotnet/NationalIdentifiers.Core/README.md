@@ -39,6 +39,8 @@ when a public check-digit algorithm is available and has passed, or
 This distinction is useful for downstream decision logic and aligns with the
 JS package's `taxIdCheckOutcome` policy helper.
 
+This release also aligns the .NET policy semantics with the JS/TS registry-driven validation model, so `TaxIdPolicy.Evaluate` and `taxIdCheckOutcome` now make consistent accept/warn/block decisions across runtimes.
+
 ## Registration policy helper
 
 For sign-up flows where one field may hold a domestic tax code, a VAT number

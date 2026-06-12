@@ -39,6 +39,8 @@ Combine with `TaxIdPolicy.Evaluate` from the core package to map results to
 accept/warn/block decisions — block on failed check digits, warn (store and
 flag) for countries with format-only rules instead of rejecting users.
 
+This package now shares the same policy semantics as the JS helper `taxIdCheckOutcome`, making warning and blocking behavior consistent between backend and frontend validation.
+
 ## License
 
 MIT

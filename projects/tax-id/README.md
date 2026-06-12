@@ -4,6 +4,8 @@ Angular and TypeScript utilities for validating tax identifiers by country.
 
 This package is designed for international sign-up and onboarding flows where user-provided national identifiers must be validated with a combination of normalization, format rules and, when available, checksum algorithms. The same validation semantics are replicated in the .NET package so frontend and backend behavior stay aligned.
 
+The package now uses a centralized `TAX_ID_VALIDATION_REGISTRY` to map ISO country codes to validator functions and rule metadata. The `taxIdCheckOutcome` helper uses this shared registry metadata to determine whether an invalid identifier should be treated as `warn` or `block`.
+
 The current MVP supports:
 
 - Italian personal fiscal codes, including omocodia characters;
