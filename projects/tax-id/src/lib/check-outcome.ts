@@ -1,4 +1,5 @@
 import { TaxIdValidationResult } from './models';
+import { TAX_ID_VALIDATION_REGISTRY } from './country-registry';
 
 export type TaxIdCheckOutcome = 'accept' | 'warn' | 'block';
 
@@ -6,13 +7,11 @@ export type TaxIdCheckOutcome = 'accept' | 'warn' | 'block';
  * Countries whose rules are institutionally verified up to the check digit.
  * For these, a length or format failure is definitive and worth blocking on.
  */
-export const CHECKSUM_TAX_ID_COUNTRIES: ReadonlySet<string> = new Set([
-  'AR', 'AU', 'BA', 'BE', 'BG', 'BR', 'CA', 'CH', 'CL', 'CN', 'CO', 'CV',
-  'CZ', 'DE', 'DO', 'EC', 'EE', 'ES', 'FI', 'FR', 'GN', 'GR', 'GT', 'HR',
-  'HU', 'ID', 'IE', 'IL', 'IR', 'IS', 'IT', 'JP', 'KZ', 'LT', 'LU', 'LV',
-  'ME', 'MK', 'MX', 'NL', 'NO', 'NZ', 'PE', 'PL', 'PS', 'PT', 'PY', 'RO',
-  'RS', 'RU', 'SE', 'SG', 'SI', 'SK', 'SN', 'TH', 'TR', 'UY', 'VE', 'ZA',
-]);
+export const CHECKSUM_TAX_ID_COUNTRIES: ReadonlySet<string> = new Set(
+  Object.entries(TAX_ID_VALIDATION_REGISTRY)
+    .filter(([, entry]) => entry.validationLevel === 'checksum')
+    .map(([country]) => country),
+);
 
 /**
  * Maps a validation result to a registration policy decision.
@@ -37,6 +36,10 @@ export function taxIdCheckOutcome(result: TaxIdValidationResult): TaxIdCheckOutc
     case 'unsupported_country':
       return 'warn';
     default:
-      return CHECKSUM_TAX_ID_COUNTRIES.has(result.country) ? 'block' : 'warn';
+      return TAX_ID_VALIDATION_REGISTRY[
+        result.country as keyof typeof TAX_ID_VALIDATION_REGISTRY
+      ]?.validationLevel === 'checksum'
+        ? 'block'
+        : 'warn';
   }
 }

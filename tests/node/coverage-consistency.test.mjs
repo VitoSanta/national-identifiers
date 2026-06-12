@@ -7,7 +7,7 @@ const files = {
   manualDemo: 'projects/manual-test/src/app/app.ts',
   readme: 'README.md',
   todo: 'TODO.md',
-  tsDispatcher: 'projects/tax-id/src/lib/validate-tax-id.ts',
+  tsRegistry: 'projects/tax-id/src/lib/country-registry.ts',
   tsModel: 'projects/tax-id/src/lib/models.ts',
   tsSupportedCountries: 'projects/tax-id/src/lib/supported-countries.ts',
   csharpSupportedCountries: 'packages/dotnet/NationalIdentifiers.Core/TaxIdCountries.cs',
@@ -42,7 +42,7 @@ test('keeps supported country coverage aligned across every runtime and the demo
   const [
     todo,
     tsModel,
-    tsDispatcher,
+    tsRegistry,
     tsSupportedCountries,
     csharpDispatcher,
     csharpSupportedCountries,
@@ -52,7 +52,7 @@ test('keeps supported country coverage aligned across every runtime and the demo
     await Promise.all([
       read(files.todo),
       read(files.tsModel),
-      read(files.tsDispatcher),
+      read(files.tsRegistry),
       read(files.tsSupportedCountries),
       read(files.csharpDispatcher),
       read(files.csharpSupportedCountries),
@@ -72,9 +72,9 @@ test('keeps supported country coverage aligned across every runtime and the demo
     'TaxIdCountry',
     matches(tsModel, /^\s*\| '([A-Z]{2})'/gm),
   );
-  const tsDispatcherCountries = uniqueSet(
-    'TypeScript dispatcher',
-    matches(tsDispatcher, /^\s*case '([A-Z]{2})':/gm),
+  const tsRegistryCountries = uniqueSet(
+    'TypeScript registry',
+    matches(tsRegistry, /^\s*([A-Z]{2}):/gm),
   );
   const csharpDispatcherCountries = uniqueSet(
     '.NET dispatcher',
@@ -107,7 +107,7 @@ test('keeps supported country coverage aligned across every runtime and the demo
 
   assert.equal(allTodoCountries.size, 195, 'TODO.md must list all 195 target countries');
   assertSameCountries('TODO.md', checkedCountries, 'TaxIdCountry', modelCountries);
-  assertSameCountries('TODO.md', checkedCountries, 'TypeScript dispatcher', tsDispatcherCountries);
+  assertSameCountries('TODO.md', checkedCountries, 'TypeScript registry', tsRegistryCountries);
   assertSameCountries(
     'TODO.md',
     checkedCountries,
