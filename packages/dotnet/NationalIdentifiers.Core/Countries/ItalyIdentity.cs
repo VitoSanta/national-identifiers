@@ -22,6 +22,11 @@ internal static class ItalyIdentity
         string normalizedTaxId,
         TaxIdIdentity identity)
     {
+        // Biographical data is encoded only in the 16-character personal
+        // fiscal code; an 11-digit partita IVA carries none.
+        if (normalizedTaxId.Length != 16)
+            return ([], []);
+
         var checkedFields = new List<string>();
         var mismatchedFields = new List<string>();
         var code = DecodeOmocodia(normalizedTaxId);

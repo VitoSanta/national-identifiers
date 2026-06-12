@@ -68,6 +68,12 @@ export function checkItalianIdentity(
   normalizedTaxId: string,
   identity: TaxIdIdentity,
 ): { checked: TaxIdIdentityField[]; mismatched: TaxIdIdentityField[] } {
+  // Biographical data is encoded only in the 16-character personal fiscal
+  // code; an 11-digit partita IVA carries none, so nothing is checkable.
+  if (normalizedTaxId.length !== 16) {
+    return { checked: [], mismatched: [] };
+  }
+
   const checked: TaxIdIdentityField[] = [];
   const mismatched: TaxIdIdentityField[] = [];
   const code = decodeItalianOmocodia(normalizedTaxId);

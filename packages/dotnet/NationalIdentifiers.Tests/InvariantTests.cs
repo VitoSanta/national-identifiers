@@ -28,6 +28,19 @@ public class InvariantTests
         }
     }
 
+    [Fact]
+    public void Identity_Consistency_Does_Not_Throw_For_Generated_Inputs()
+    {
+        var identity = new TaxIdIdentity("Mario", "Rossi", new DateOnly(1985, 12, 10), 'M', "A562");
+
+        foreach (var value in GenerateValues(300))
+        {
+            var exception = Record.Exception(
+                () => TaxIdIdentityValidator.Validate("IT", value, identity));
+            Assert.Null(exception);
+        }
+    }
+
     private static IReadOnlyList<string> GenerateValues(int count)
     {
         const string alphabet = " abcdefghijklmnopqrstuvwxyz0123456789-./_";

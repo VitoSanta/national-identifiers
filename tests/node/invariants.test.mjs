@@ -41,3 +41,15 @@ test('never throws while validating generated input across supported countries',
     }
   }
 });
+
+test('never throws while checking identity consistency for generated input', async () => {
+  const { validateTaxIdIdentity } = await import('../../dist/tax-id/fesm2022/tax-id.mjs');
+  const identity = { firstName: 'Mario', lastName: 'Rossi', birthDate: '1985-12-10', gender: 'M', birthPlaceCode: 'A562' };
+
+  for (const value of generatedValues(300)) {
+    assert.doesNotThrow(
+      () => validateTaxIdIdentity({ country: 'IT', taxId: value, identity }),
+      `IT: ${value}`,
+    );
+  }
+});

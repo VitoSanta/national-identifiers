@@ -206,5 +206,27 @@
     "checkedFields": [],
     "mismatchedFields": [],
     "missingFields": []
+  },
+  {
+    "country": "IT",
+    "taxId": "00743110157",
+    "identity": {
+      "firstName": "Mario",
+      "lastName": "Rossi",
+      "birthDate": "1985-12-10",
+      "gender": "M",
+      "birthPlaceCode": "A562"
+    },
+    "status": "insufficient_data",
+    "taxIdValid": true,
+    "checkedFields": [],
+    "mismatchedFields": [],
+    "missingFields": [
+      "firstName",
+      "lastName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ]
   }
 ]
