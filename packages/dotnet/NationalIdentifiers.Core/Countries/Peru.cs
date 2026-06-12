@@ -8,7 +8,7 @@ internal static class Peru
 
     internal static ValidationResult Validate(object? value)
     {
-        var n = TaxIdNormalizer.Normalize(value);
+        var n = TaxIdNormalizer.Normalize(value).Replace(".", string.Empty, StringComparison.Ordinal);
         if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("PE", n, ValidationErrorCode.Empty);
         if (n.Length != 8 && n.Length != 9 && n.Length != 11)
             return ValidationResult.Fail("PE", n, ValidationErrorCode.InvalidLength);

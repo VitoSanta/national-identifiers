@@ -15,8 +15,14 @@ export type TaxIdValidatorMode = 'policy' | 'strict';
 
 export interface TaxIdValidatorOptions {
   /**
-   * `policy` blocks only definitive failures and allows advisory warnings.
-   * `strict` rejects every non-valid result.
+   * `policy` (default) blocks only definitive failures (`block` outcome of
+   * `taxIdCheckOutcome`). Advisory `warn` results — format or length errors
+   * in countries with format-only rules, unsupported countries, countries
+   * without a personal TIN — return `null`: the control stays valid and the
+   * user sees no error. Handle the `warn` signal server-side by storing and
+   * flagging the value.
+   *
+   * `strict` rejects every non-valid result, including advisory warnings.
    */
   readonly mode?: TaxIdValidatorMode;
 }

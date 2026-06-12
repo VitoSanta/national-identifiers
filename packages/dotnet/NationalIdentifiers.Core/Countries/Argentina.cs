@@ -5,7 +5,7 @@ internal static class Argentina
     private static readonly int[] W = { 5, 4, 3, 2, 7, 6, 5, 4, 3, 2 };
     internal static ValidationResult Validate(object? value)
     {
-        var n = TaxIdNormalizer.Normalize(value);
+        var n = TaxIdNormalizer.Normalize(value).Replace(".", string.Empty, StringComparison.Ordinal);
         if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("AR", n, ValidationErrorCode.Empty);
         if (n.Length != 11) return ValidationResult.Fail("AR", n, ValidationErrorCode.InvalidLength);
         if (!Regex.IsMatch(n, @"^\d{11}$")) return ValidationResult.Fail("AR", n, ValidationErrorCode.InvalidFormat);

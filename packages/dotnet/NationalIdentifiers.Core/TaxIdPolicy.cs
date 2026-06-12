@@ -53,6 +53,7 @@ public static class TaxIdPolicy
         {
             "CZ" or "SK" when result.NormalizedValue.Length == 9 => false,
             "ID" when result.NormalizedValue.Length == 16 => false,
+            "PE" when result.NormalizedValue.Length == 8 => false,
             "SG" when result.NormalizedValue.StartsWith('M') => false,
             _ => ChecksumGradeCountries.Contains(result.Country),
         };

@@ -5,7 +5,7 @@ internal static class Colombia
     private static readonly int[] Primes = { 3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71 };
     internal static ValidationResult Validate(object? value)
     {
-        var n = TaxIdNormalizer.Normalize(value);
+        var n = TaxIdNormalizer.Normalize(value).Replace(".", string.Empty, StringComparison.Ordinal);
         if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("CO", n, ValidationErrorCode.Empty);
         if (n.Length < 2 || n.Length > 15) return ValidationResult.Fail("CO", n, ValidationErrorCode.InvalidLength);
         if (!Regex.IsMatch(n, @"^\d+$")) return ValidationResult.Fail("CO", n, ValidationErrorCode.InvalidFormat);

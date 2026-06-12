@@ -6,8 +6,8 @@ export function validateTonganTaxId(value: unknown): TaxIdValidationResult {
   const base = { country: 'TO', normalizedValue } as const;
 
   if (!normalizedValue) return { ...base, valid: false, error: 'empty' };
-  if (normalizedValue.length > 16) return { ...base, valid: false, error: 'invalid_length' };
-  if (!/^[A-Z0-9]{1,16}$/.test(normalizedValue)) {
+  if (normalizedValue.length < 4 || normalizedValue.length > 16) return { ...base, valid: false, error: 'invalid_length' };
+  if (!/^[A-Z0-9]{4,16}$/.test(normalizedValue)) {
     return { ...base, valid: false, error: 'invalid_format' };
   }
   return { ...base, valid: true, validationLevel: 'format' };

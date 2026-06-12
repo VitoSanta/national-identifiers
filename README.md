@@ -76,9 +76,9 @@ national-identifiers/
 | Package | Responsibility |
 |---|---|
 | `js/core` | Normalisation, regex validation, checksum computation, result model. No runtime dependencies. |
-| `js/angular` | Sync and async `ValidatorFn` factories, `ControlValueAccessor` helpers, lazy country-rule loading. Peer dependency on Angular. |
+| `js/angular` | Sync `ValidatorFn` factory with policy/strict modes. Optional peer dependency on Angular. Async validation and `ControlValueAccessor` helpers are on the roadmap. |
 | `dotnet/Core` | .NET port of the validation engine. Targets `net8.0` and `net10.0`. |
-| `dotnet/AspNetCore` | `IServiceCollection` extensions, `ValidationAttribute`, `IActionFilter`, model binders. Targets `net8.0` and `net10.0`. |
+| `dotnet/AspNetCore` | `IServiceCollection` extensions, `ValidationAttribute`, `IActionFilter`. Targets `net8.0` and `net10.0`. |
 
 ### Application enforcement model
 
@@ -453,25 +453,32 @@ Access in a template:
 
 `taxIdValidator` returns `null` (valid) on empty input. Combine with `Validators.required` when the field is mandatory. This separation avoids double error messages when a required field is simply blank.
 
-By default the adapter follows `taxIdCheckOutcome`: advisory `warn` results do
-not invalidate the control. Pass `{ mode: 'strict' }` as the second argument
-when every non-valid result must block submission.
+### Policy mode and silent warnings
+
+The default mode is `policy`, which follows `taxIdCheckOutcome`: only
+definitive failures (`block`) invalidate the control. **Advisory `warn`
+results return `null`, so the form shows no error at all** — a user entering
+a wrong-length identifier for a format-only country (for example `12` for
+Somalia) sees a perfectly valid field. The `warn` signal is intended to be
+acted on server-side, where the value can be stored and flagged for review;
+the form adapter has no channel to surface it.
+
+If you prefer the form to reject every failed local check, pass
+`{ mode: 'strict' }`:
+
+```ts
+taxIdValidator(() => form.controls.country.value, { mode: 'strict' })
+```
+
+Choose `strict` when there is no backend review queue and silent acceptance
+of unverifiable input is worse than occasionally blocking an unusual but
+legitimate identifier.
 
 ### Async validation and lazy loading
 
-For applications loading country data on demand, an async variant defers validation until the country rule module resolves:
-
-```ts
-import { taxIdValidatorAsync } from 'tax-id/angular';
-import { countryRuleLoader } from './country-rule-loader';
-
-const taxId = new FormControl('', {
-  asyncValidators: [taxIdValidatorAsync('FR', countryRuleLoader)],
-  updateOn: 'blur',
-});
-```
-
-`updateOn: 'blur'` is recommended for async validators to avoid redundant network requests on each keystroke.
+Not available yet: an async `ValidatorFn` with lazy country-rule loading is
+planned (see `ROADMAP.md`). Today the bundle ships all rules; the core entry
+point is tree-shakable and has no Angular dependency.
 
 ### UX guidelines
 

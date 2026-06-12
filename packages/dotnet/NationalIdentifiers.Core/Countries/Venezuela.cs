@@ -7,7 +7,7 @@ internal static class Venezuela
         { ['V']=1, ['E']=2, ['J']=3, ['C']=3, ['P']=4, ['G']=5 };
     internal static ValidationResult Validate(object? value)
     {
-        var n = TaxIdNormalizer.Normalize(value);
+        var n = TaxIdNormalizer.Normalize(value).Replace(".", string.Empty, StringComparison.Ordinal);
         if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("VE", n, ValidationErrorCode.Empty);
         if (n.Length != 10) return ValidationResult.Fail("VE", n, ValidationErrorCode.InvalidLength);
         if (!Regex.IsMatch(n, @"^[VEJPCG]\d{9}$"))

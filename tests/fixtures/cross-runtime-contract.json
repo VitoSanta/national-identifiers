@@ -124,5 +124,166 @@
     "valid": false,
     "error": "unsupported_country",
     "outcome": "warn"
+  },
+  {
+    "country": "AR",
+    "value": "20-26756539-3",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "AT",
+    "value": "12-345/6789",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "BE",
+    "value": "85.07.30-033.28",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CA",
+    "value": "046 454 286",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CH",
+    "value": "756.1234.5678.97",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CL",
+    "value": "12.345.678-5",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CO",
+    "value": "890.321.567-0",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CZ",
+    "value": "800101/0006",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "SK",
+    "value": "800101/0006",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "FI",
+    "value": "131052-308T",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "ID",
+    "value": "01.300.066.6-091.000",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "LB",
+    "value": "123456-601",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "PA",
+    "value": "8-340-1234",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "PE",
+    "value": "10.000.000-8",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "SE",
+    "value": "811228-9874",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "SN",
+    "value": "3067221 2G2",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "TN",
+    "value": "1234567/A/M/000",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "UY",
+    "value": "1.234.567-2",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "VE",
+    "value": "J-07013380-5",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "PE",
+    "value": "12345678",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "PE",
+    "value": "1234567A",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
+  },
+  {
+    "country": "TD",
+    "value": "AB12",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "TD",
+    "value": "AB1",
+    "valid": false,
+    "error": "invalid_length",
+    "outcome": "warn"
   }
 ]

@@ -335,7 +335,11 @@ export const TAX_ID_VALIDATION_REGISTRY: Readonly<Record<TaxIdCountry, TaxIdVali
   NZ: { validate: validateNewZealandTaxId, validationLevel: 'checksum' },
   OM: { validate: notApplicable('OM') },
   PA: { validate: validatePanamanianTaxId },
-  PE: { validate: validatePeruvianTaxId, validationLevel: 'checksum' },
+  PE: {
+    validate: validatePeruvianTaxId,
+    validationLevel: 'checksum',
+    policyValidationLevel: (value) => value.length === 8 ? 'format' : 'checksum',
+  },
   PG: { validate: validatePapuaNewGuineanTaxId },
   PH: { validate: validatePhilippineTaxId },
   PK: { validate: validatePakistaniTaxId },

@@ -27,15 +27,15 @@ il comportamento corretto non sara documentato esplicitamente.
 - [x] CV - Capo Verde - NIF (checksum modulo 11)
 - [x] CM - Camerun - NIU personale (struttura)
 - [x] CF - Repubblica Centrafricana - NIF (struttura)
-- [x] TD - Ciad - NIF/NIFU alfanumerico (struttura, fino a 16 caratteri)
+- [x] TD - Ciad - NIF/NIFU alfanumerico (struttura, 4-16 caratteri)
 - [x] KM - Comore - NIF numerico (struttura, 8-10 cifre)
 - [x] CG - Repubblica del Congo - NIU (struttura)
 - [x] CD - Repubblica Democratica del Congo - NIF (struttura 9 caratteri)
 - [x] CI - Costa d'Avorio - numero contribuente (struttura)
-- [x] DJ - Gibuti - NIF alfanumerico (struttura, fino a 16 caratteri)
+- [x] DJ - Gibuti - NIF alfanumerico (struttura, 4-16 caratteri)
 - [x] EG - Egitto - TIN (struttura)
 - [x] GQ - Guinea Equatoriale - NIF alfanumerico (struttura, 7-9 caratteri)
-- [x] ER - Eritrea - TIN alfanumerico (struttura, fino a 16 caratteri)
+- [x] ER - Eritrea - TIN alfanumerico (struttura, 4-16 caratteri)
 - [x] SZ - Eswatini - TIN (struttura 9 cifre)
 - [x] ET - Etiopia - TIN (struttura)
 - [x] GA - Gabon - NIF (struttura 13 cifre)
@@ -213,7 +213,7 @@ il comportamento corretto non sara documentato esplicitamente.
 
 - [x] AU - Australia - TFN (9 cifre)
 - [x] FJ - Figi - TIN (struttura)
-- [x] KI - Kiribati - TIN alfanumerico (struttura, fino a 16 caratteri)
+- [x] KI - Kiribati - TIN alfanumerico (struttura, 4-16 caratteri)
 - [x] MH - Isole Marshall - employee identification number (struttura)
 - [x] FM - Micronesia - Social Security Number (struttura 2+6 cifre)
 - [x] NR - Nauru - nessun TIN personale generalizzato
@@ -222,15 +222,9 @@ il comportamento corretto non sara documentato esplicitamente.
 - [x] PG - Papua Nuova Guinea - TIN (struttura)
 - [x] WS - Samoa - TIN (struttura 5-9 cifre)
 - [x] SB - Isole Salomone - TIN (struttura 9 cifre)
-- [x] TO - Tonga - TIN alfanumerico (struttura, fino a 16 caratteri)
+- [x] TO - Tonga - TIN alfanumerico (struttura, 4-16 caratteri)
 - [x] TV - Tuvalu - nessun TIN personale generalizzato
 - [x] VU - Vanuatu - nessun TIN personale generalizzato
-
-## Giurisdizioni e territori
-
-Da aggiungere dopo la copertura dei 195 Stati: Hong Kong, Macao, Taiwan,
-Groenlandia, Isole Faroe, Porto Rico, territori britannici, francesi, olandesi,
-statunitensi e altre giurisdizioni ISO 3166-1 con sistemi fiscali autonomi.
 
 ## Prossimo blocco
 
@@ -238,6 +232,84 @@ Completati i blocchi Asia-Pacifico (AU, CN, IL, IN, JP, KR, NZ, SG, TH),
 Sud-Est asiatico/Asia centrale (GE, ID, KG, KZ, MY, PH, PK, VN), candidati
 prioritari (CU, DO, EC, GT, IR, LK, PY, UZ, ZA), Africa format-only
 (EG, GH, KE, MU, NG, RW, TZ, UG, ZM) e sezione 2 residua (IQ, MV, WS).
+
+## Production readiness — esito review pre-pubblicazione 2026-06-12
+
+Piano derivato dalla review tecnica completa (552 test verdi, artefatti
+ispezionati, regole campionate su entrambi i runtime). Verdetto: NOT READY
+con due bloccanti piccoli e ben delimitati; il resto e' rifinitura.
+
+### Bloccanti per la 0.1.0 (P0/P1 — senza questi non si pubblica)
+
+- [x] P0 - Allineata la normalizzazione .NET alla TS per i 6 paesi con
+      strip dei punti: AR, CL, CO, PE, UY, VE (approccio mutuato da
+      `Brazil.cs`). Verificato con probe su entrambi i runtime: il RUT
+      cileno `12.345.678-5`, il NIT colombiano `890.321.567-0` e la CI
+      uruguaiana `1.234.567-2` producono ora lo stesso `normalizedValue`.
+- [x] P0 - Fixture contract espanse da 18 a 41 casi con la forma puntata
+      canonica di ogni paese a normalizzazione custom (AR, AT, BE, CA, CH,
+      CL, CO, CZ/SK, FI, ID, LB, PA, PE, SE, SN, TN, UY, VE) piu' i casi
+      delle nuove regole. La fixture PE ha intercettato subito una
+      correzione mancante durante l'implementazione: il meccanismo funziona.
+- [ ] P1 - Pubblicare il repo GitHub `VitoSanta/CF` (oggi i metadati npm,
+      i nuspec con SourceLink e SECURITY.md puntano a un URL che risponde
+      404) e verificare che tutti i link risolvano.
+- [ ] P1 - Tag `v0.1.0` e data nel CHANGELOG al momento del taglio.
+
+### Prima del primo publish (P2 — farli ora evita breaking change dopo)
+
+- [x] P2 - Policy per famiglia anche per PE: `policyValidationLevel`
+      (lunghezza 8 -> format) in `country-registry.ts`, caso PE in
+      `TaxIdPolicy.UsesChecksumPolicy`, PE citato accanto a CZ/SK/ID/SG nel
+      README del Core, fixture dedicate (DNI 8 cifre valido -> accept,
+      malformato -> warn).
+- [x] P2 - Lunghezza minima 4 per TD, DJ, ER, KI, TO in entrambi i runtime
+      (`^[A-Z0-9]{4,16}$` + check di lunghezza), descrizioni TODO aggiornate
+      e fixture dedicate (TD `AB12` valido, `AB1` -> invalid_length).
+- [x] P2 - Documentato in README (sezione "Policy mode and silent warnings")
+      e nella JSDoc di `TaxIdValidatorOptions` che la modalita' `policy`
+      (default) restituisce `null` sugli esiti `warn`. Rimossa dal README la
+      sezione sull'API async non ancora esistente (`taxIdValidatorAsync`).
+- [x] P2 - Release gate completo eseguito dopo le correzioni: Node 168/168,
+      Karma 164/164, xUnit Release 220/220 (con le 41 fixture contract),
+      build demo, `npm pack` 66.6 kB, `dotnet pack` di entrambi i pacchetti.
+
+### Rifiniture consigliate (P3 — non bloccano la 0.1.0)
+
+- [ ] P3 - Accettare (o documentare il rifiuto del) prefisso ISO nella
+      P.IVA italiana: `IT00743110157` oggi produce `invalid_length -> Block`.
+- [ ] P3 - Esporre la capability di validazione per paese (es.
+      `getCountryValidationCapability(country)`): il registry e' interno e
+      un consumer non puo' sapere se un paese e' checksum-grade.
+- [ ] P3 - README root: la sezione "Project Architecture" descrive una
+      struttura non ancora esistente (`packages/js/core`, `rules/*.json`,
+      `examples/`); etichettarla come architettura target o allinearla.
+- [ ] P3 - Workflow di release automatizzato: publish npm con
+      `--provenance` e push NuGet al tag, sopra la CI esistente.
+- [ ] P3 - Dichiarare nei README che la libreria non logga ne' trattiene
+      gli identificativi (gia' vero nel codice, va solo scritto).
+
+### 0.2.0
+
+- [ ] Fixture contract per tutti i 195 paesi (almeno una coppia
+      valido/invalido per paese, generazione semi-automatica dai test).
+- [ ] Canale di warning osservabile nell'adapter Angular (oggi `warn` e'
+      indistinguibile da `valid` lato form).
+- [ ] `validateIdentifier({ country, type, value })` con famiglie separate;
+      la distinzione CF/P.IVA italiana e' il primo caso d'uso reale.
+- [ ] Generare i set di policy checksum-grade da un'unica fonte condivisa
+      invece di mantenerli a mano in `country-registry.ts` e
+      `TaxIdPolicy.cs`.
+
+### Prima della 1.0
+
+- [ ] Migrare le regole a definizioni JSON condivise tra i runtime: elimina
+      strutturalmente la classe di bug della divergenza di normalizzazione.
+- [ ] Completare il catalogo fonti per regola con date di accesso e review
+      (vedi `docs/RULE-SOURCE-POLICY.md`).
+- [ ] Property-based testing su normalizzazione e checksum.
+- [ ] Congelare i contratti di risultato/errore e pubblicare la
+      deprecation policy.
 
 ## Documentazione e roadmap
 
