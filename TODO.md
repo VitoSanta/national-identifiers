@@ -239,6 +239,33 @@ Sud-Est asiatico/Asia centrale (GE, ID, KG, KZ, MY, PH, PK, VN), candidati
 prioritari (CU, DO, EC, GT, IR, LK, PY, UZ, ZA), Africa format-only
 (EG, GH, KE, MU, NG, RW, TZ, UG, ZM) e sezione 2 residua (IQ, MV, WS).
 
+## Documentazione e roadmap
+
+- [ ] Consolidare il README principale con le note su:
+  - validazione frontend = UX, validazione backend = fonte di verità
+  - `unsupported_country` vs `not_applicable`
+  - aspettative per i codici paese in uppercase
+  - comportamento del validatore JS/TS e del validatore .NET
+- [ ] Documentare il helper di policy:
+  - `taxIdCheckOutcome` in JS
+  - `TaxIdPolicy.Evaluate` in .NET
+  - significato di `block`, `warn`, `accept`
+- [ ] Aggiungere la roadmap di espansione a nuovi tipi di identificativi:
+  - `vat_number`, `tax_id_company`, `company_registration`, `national_id`
+  - metadati estratti (data di nascita, genere, regione)
+  - regole condivise JSON tra JS e .NET
+- [ ] Segnalare l'opportunità di passare da dispatcher esplicito a registry data-driven
+- [ ] Aggiornare i README specifici per:
+  - `projects/tax-id/README.md`
+  - `packages/dotnet/NationalIdentifiers.Core/README.md`
+  - `packages/dotnet/NationalIdentifiers.AspNetCore/README.md`
+
+## Giurisdizioni e territori
+
+Da aggiungere dopo la copertura dei 195 Stati: Hong Kong, Macao, Taiwan,
+Groenlandia, Isole Faroe, Porto Rico, territori britannici, francesi, olandesi,
+statunitensi e altre giurisdizioni ISO 3166-1 con sistemi fiscali autonomi.
+
 Panama è stato implementato usando la struttura pubblicata dalla DGI. Libano e
 Suriname sono ora coperti con regole istituzionali verificate; gli altri paesi
 rimanenti sono elencati nella sezione 3 di PAESI-NON-COPERTI.md.
