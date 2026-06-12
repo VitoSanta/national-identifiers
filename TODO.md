@@ -256,7 +256,11 @@ con due bloccanti piccoli e ben delimitati; il resto e' rifinitura.
       Aggiornati remote git locale, `package.json` (repository, bugs,
       homepage), entrambi i csproj (RepositoryUrl, PackageProjectUrl) e
       SECURITY.md. Link verificati: rispondono 200 anche da anonimi.
-- [ ] P1 - Tag `v0.1.0` e data nel CHANGELOG al momento del taglio.
+- [x] P1 - Tag `v0.1.0` pushato e CHANGELOG datato 2026-06-12. Pubblicati:
+      `tax-id@0.1.0` su npm (publish locale) e
+      `NationalIdentifiers.Core`/`NationalIdentifiers.AspNetCore` 0.1.0 su
+      NuGet via trusted publishing (workflow `release.yml`, OIDC, nessuna
+      API key). Smoke test post-publish superato da entrambi i registry.
 
 ### Prima del primo publish (P2 — farli ora evita breaking change dopo)
 
@@ -286,8 +290,9 @@ con due bloccanti piccoli e ben delimitati; il resto e' rifinitura.
 - [ ] P3 - README root: la sezione "Project Architecture" descrive una
       struttura non ancora esistente (`packages/js/core`, `rules/*.json`,
       `examples/`); etichettarla come architettura target o allinearla.
-- [ ] P3 - Workflow di release automatizzato: publish npm con
-      `--provenance` e push NuGet al tag, sopra la CI esistente.
+- [x] P3 (parziale) - Workflow `release.yml`: push NuGet al tag via trusted
+      publishing OIDC. Resta da aggiungere il publish npm con `--provenance`
+      dallo stesso workflow (oggi npm e' pubblicato manualmente).
 - [ ] P3 - Dichiarare nei README che la libreria non logga ne' trattiene
       gli identificativi (gia' vero nel codice, va solo scritto).
 
