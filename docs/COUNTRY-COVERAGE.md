@@ -1,20 +1,20 @@
-# Tax ID country coverage
+# Country Coverage
 
-Obiettivo: coprire gli identificativi fiscali personali dei 195 Stati comunemente
-riconosciuti (193 membri ONU, Palestina e Citta del Vaticano).
+This catalogue records coverage for the 195 commonly recognised states:
+193 UN members, Palestine and Vatican City.
 
-Una voce viene spuntata solo quando dispone di:
+A checked entry requires:
 
-- fonte normativa o istituzionale registrata;
-- normalizzazione e validazione del formato;
-- checksum, quando l'algoritmo e pubblico;
-- test automatici validi e non validi;
-- caso interattivo nella suite `manual-test`;
-- documentazione dei limiti della verifica.
+- a recorded institutional or normative source;
+- normalization and format validation;
+- a checksum when its algorithm is public;
+- valid and invalid automated tests;
+- an interactive case in `manual-test`;
+- documented validation limitations.
 
-La validazione locale non certifica che l'identificativo sia realmente assegnato.
-Paesi senza TIN personale o senza algoritmo pubblico resteranno non spuntati finche
-il comportamento corretto non sara documentato esplicitamente.
+Local validation does not certify that an identifier was actually issued.
+Countries without a generalized personal TIN are represented explicitly as
+`not_applicable`; undocumented checksums are not inferred.
 
 ## Africa (54)
 
@@ -226,127 +226,16 @@ il comportamento corretto non sara documentato esplicitamente.
 - [x] TV - Tuvalu - nessun TIN personale generalizzato
 - [x] VU - Vanuatu - nessun TIN personale generalizzato
 
-## Prossimo blocco
+## Stato della copertura
 
-Completati i blocchi Asia-Pacifico (AU, CN, IL, IN, JP, KR, NZ, SG, TH),
-Sud-Est asiatico/Asia centrale (GE, ID, KG, KZ, MY, PH, PK, VN), candidati
-prioritari (CU, DO, EC, GT, IR, LK, PY, UZ, ZA), Africa format-only
-(EG, GH, KE, MU, NG, RW, TZ, UG, ZM) e sezione 2 residua (IQ, MV, WS).
-
-## Production readiness — esito review pre-pubblicazione 2026-06-12
-
-Piano derivato dalla review tecnica completa (552 test verdi, artefatti
-ispezionati, regole campionate su entrambi i runtime). Verdetto: NOT READY
-con due bloccanti piccoli e ben delimitati; il resto e' rifinitura.
-
-### Bloccanti per la 0.1.0 (P0/P1 — senza questi non si pubblica)
-
-- [x] P0 - Allineata la normalizzazione .NET alla TS per i 6 paesi con
-      strip dei punti: AR, CL, CO, PE, UY, VE (approccio mutuato da
-      `Brazil.cs`). Verificato con probe su entrambi i runtime: il RUT
-      cileno `12.345.678-5`, il NIT colombiano `890.321.567-0` e la CI
-      uruguaiana `1.234.567-2` producono ora lo stesso `normalizedValue`.
-- [x] P0 - Fixture contract espanse da 18 a 41 casi con la forma puntata
-      canonica di ogni paese a normalizzazione custom (AR, AT, BE, CA, CH,
-      CL, CO, CZ/SK, FI, ID, LB, PA, PE, SE, SN, TN, UY, VE) piu' i casi
-      delle nuove regole. La fixture PE ha intercettato subito una
-      correzione mancante durante l'implementazione: il meccanismo funziona.
-- [x] P1 - Repo GitHub pubblico e rinominato in
-      `VitoSanta/national-identifiers` (il vecchio nome `CF` fa redirect).
-      Aggiornati remote git locale, `package.json` (repository, bugs,
-      homepage), entrambi i csproj (RepositoryUrl, PackageProjectUrl) e
-      SECURITY.md. Link verificati: rispondono 200 anche da anonimi.
-- [x] P1 - Tag `v0.1.0` pushato e CHANGELOG datato 2026-06-12. Pubblicati:
-      `tax-id@0.1.0` su npm (publish locale) e
-      `NationalIdentifiers.Core`/`NationalIdentifiers.AspNetCore` 0.1.0 su
-      NuGet via trusted publishing (workflow `release.yml`, OIDC, nessuna
-      API key). Smoke test post-publish superato da entrambi i registry.
-
-### Prima del primo publish (P2 — farli ora evita breaking change dopo)
-
-- [x] P2 - Policy per famiglia anche per PE: `policyValidationLevel`
-      (lunghezza 8 -> format) in `country-registry.ts`, caso PE in
-      `TaxIdPolicy.UsesChecksumPolicy`, PE citato accanto a CZ/SK/ID/SG nel
-      README del Core, fixture dedicate (DNI 8 cifre valido -> accept,
-      malformato -> warn).
-- [x] P2 - Lunghezza minima 4 per TD, DJ, ER, KI, TO in entrambi i runtime
-      (`^[A-Z0-9]{4,16}$` + check di lunghezza), descrizioni TODO aggiornate
-      e fixture dedicate (TD `AB12` valido, `AB1` -> invalid_length).
-- [x] P2 - Documentato in README (sezione "Policy mode and silent warnings")
-      e nella JSDoc di `TaxIdValidatorOptions` che la modalita' `policy`
-      (default) restituisce `null` sugli esiti `warn`. Rimossa dal README la
-      sezione sull'API async non ancora esistente (`taxIdValidatorAsync`).
-- [x] P2 - Release gate completo eseguito dopo le correzioni: Node 168/168,
-      Karma 164/164, xUnit Release 220/220 (con le 41 fixture contract),
-      build demo, `npm pack` 66.6 kB, `dotnet pack` di entrambi i pacchetti.
-
-### Rifiniture consigliate (P3 — non bloccano la 0.1.0)
-
-- [ ] P3 - Accettare (o documentare il rifiuto del) prefisso ISO nella
-      P.IVA italiana: `IT00743110157` oggi produce `invalid_length -> Block`.
-- [ ] P3 - Esporre la capability di validazione per paese (es.
-      `getCountryValidationCapability(country)`): il registry e' interno e
-      un consumer non puo' sapere se un paese e' checksum-grade.
-- [ ] P3 - README root: la sezione "Project Architecture" descrive una
-      struttura non ancora esistente (`packages/js/core`, `rules/*.json`,
-      `examples/`); etichettarla come architettura target o allinearla.
-- [x] P3 (parziale) - Workflow `release.yml`: push NuGet al tag via trusted
-      publishing OIDC. Resta da aggiungere il publish npm con `--provenance`
-      dallo stesso workflow (oggi npm e' pubblicato manualmente).
-- [ ] P3 - Dichiarare nei README che la libreria non logga ne' trattiene
-      gli identificativi (gia' vero nel codice, va solo scritto).
-
-### 0.2.0
-
-- [ ] Fixture contract per tutti i 195 paesi (almeno una coppia
-      valido/invalido per paese, generazione semi-automatica dai test).
-- [ ] Canale di warning osservabile nell'adapter Angular (oggi `warn` e'
-      indistinguibile da `valid` lato form).
-- [ ] `validateIdentifier({ country, type, value })` con famiglie separate;
-      la distinzione CF/P.IVA italiana e' il primo caso d'uso reale.
-- [ ] Generare i set di policy checksum-grade da un'unica fonte condivisa
-      invece di mantenerli a mano in `country-registry.ts` e
-      `TaxIdPolicy.cs`.
-
-### Prima della 1.0
-
-- [ ] Migrare le regole a definizioni JSON condivise tra i runtime: elimina
-      strutturalmente la classe di bug della divergenza di normalizzazione.
-- [ ] Completare il catalogo fonti per regola con date di accesso e review
-      (vedi `docs/RULE-SOURCE-POLICY.md`).
-- [ ] Property-based testing su normalizzazione e checksum.
-- [ ] Congelare i contratti di risultato/errore e pubblicare la
-      deprecation policy.
-
-## Documentazione e roadmap
-
-- [x] Consolidare il README principale con le note su:
-  - validazione frontend = UX, validazione backend = fonte di verità
-  - `unsupported_country` vs `not_applicable`
-  - aspettative per i codici paese in uppercase
-  - comportamento del validatore JS/TS e del validatore .NET
-- [x] Documentare il helper di policy:
-  - `taxIdCheckOutcome` in JS
-  - `TaxIdPolicy.Evaluate` in .NET
-  - significato di `block`, `warn`, `accept`
-- [x] Aggiungere la roadmap di espansione a nuovi tipi di identificativi:
-  - `vat_number`, `tax_id_company`, `company_registration`, `national_id`
-  - metadati estratti (data di nascita, genere, regione)
-  - regole condivise JSON tra JS e .NET
-- [x] Sostituire il dispatcher JS/TS esplicito con un registry data-driven
-- [x] Aggiornare i README specifici per:
-  - `projects/tax-id/README.md`
-  - `packages/dotnet/NationalIdentifiers.Core/README.md`
-  - `packages/dotnet/NationalIdentifiers.AspNetCore/README.md`
-  - `README.md`
-- [x] Preparare la documentazione per il deploy manuale: aggiornamenti registrati e test green
+La copertura dei 195 Stati e completa in TypeScript e .NET. Ogni voce
+indica la profondita disponibile: checksum, formato, dati codificati oppure
+`not_applicable`. I miglioramenti futuri sono tracciati nella roadmap e nei
+limiti noti, non in questa matrice.
 
 ## Giurisdizioni e territori
 
-Da aggiungere dopo la copertura dei 195 Stati: Hong Kong, Macao, Taiwan,
-Groenlandia, Isole Faroe, Porto Rico, territori britannici, francesi, olandesi,
-statunitensi e altre giurisdizioni ISO 3166-1 con sistemi fiscali autonomi.
-
-Panama è stato implementato usando la struttura pubblicata dalla DGI. Libano e
-Suriname sono ora coperti con regole istituzionali verificate; gli altri paesi
-rimanenti sono elencati nella sezione 3 di PAESI-NON-COPERTI.md.
+Territories and independently administered tax jurisdictions are outside the
+current 195-state scope. Examples include Hong Kong, Macao, Taiwan, Greenland,
+the Faroe Islands, Puerto Rico and other territories with autonomous tax
+systems.

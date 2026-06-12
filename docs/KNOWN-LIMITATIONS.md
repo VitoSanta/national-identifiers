@@ -1,11 +1,9 @@
-# Paesi non ancora coperti
+# Known Validation Limitations
 
-Stato al 2026-06-12 (195 paesi coperti — tutti i 195 Stati comunemente riconosciuti).
-Censimento dei paesi della checklist di [TODO.md](TODO.md) non ancora
-implementati, raggruppati per motivo. Le note tecniche derivano da conoscenza
-generale consolidata (OECD AEOI, librerie di validazione note); dove possibile
-la fonte va verificata online prima dell'implementazione, come richiesto dai
-criteri del TODO.
+Status as of 2026-06-12: all 195 states in the current scope are represented.
+This document records deliberately limited validation and the institutional
+sources used for rules where no public checksum is available. Coverage does
+not imply equal confidence across countries.
 
 Nota operativa: la sentinella "paese non supportato" nei test automatici e nella
 suite manuale è ora `XX` (codice non assegnato a nessuno Stato ISO 3166-1).
@@ -47,7 +45,7 @@ Fonti istituzionali verificate per gli inserimenti del 2026-06-11:
   guida usa `A1011126F`, nel formato lettera + 7 cifre + lettera. Il portale
   impone almeno 9 caratteri; non e pubblicato un checksum.
 
-## 1. Candidati prioritari - algoritmo di controllo noto da fonti secondarie
+## Completed research batches
 
 Sezione svuotata l'11-06-2026: tutte le voci (CU, DO, EC, GT, IR, LK, PY, UZ,
 ZA) sono state implementate. Fonti verificate online durante l'implementazione:
@@ -65,26 +63,16 @@ ZA) sono state implementate. Fonti verificate online durante l'implementazione:
 - LK, UZ: solo struttura e data; l'algoritmo della cifra di controllo non è
   pubblico.
 
-## 2. Struttura nota, checksum assente o non pubblico - candidati format-only
-
-La struttura è riportata da fonti secondarie (principalmente schede OECD
-AEOI); serve conferma istituzionale prima di implementare.
-
-### Africa
-
-
-### Asia
-
-## 3. Informazioni insufficienti - serve ricerca con fonti online
+## Format-only research
 
 Sezione svuotata il 12-06-2026: le ultime 12 voci (TD, KM, DJ, GQ, ER, GM, NE,
 SO, TM, YE, KI, TO) sono state implementate con struttura format-only, poiché
 non sono disponibili algoritmi di checksum pubblici per questi paesi.
 
-## Limiti dichiarati nei paesi già coperti (da rivisitare)
+## Country limitations to revisit
 
-Voci già spuntate in TODO.md ma con validazione ridotta, da potenziare se
-emergono fonti:
+These countries are supported with deliberately reduced validation and should
+be upgraded only when stronger institutional sources become available:
 
 - US - SSN solo struttura (le aree non sono più predittive dopo la
   randomizzazione del 2011).

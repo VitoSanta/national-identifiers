@@ -29,6 +29,9 @@ ownership or registry-verification service.
 - [Technical Roadmap](#technical-roadmap)
 - [Development](#development)
 - [Roadmap](ROADMAP.md)
+- [Country coverage](docs/COUNTRY-COVERAGE.md)
+- [Known limitations](docs/KNOWN-LIMITATIONS.md)
+- [Identity consistency proposal](docs/IDENTITY-CONSISTENCY.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
 - [Changelog](CHANGELOG.md)
@@ -45,40 +48,27 @@ layers add reactive-forms, dependency-injection and HTTP integration.
 ```
 national-identifiers/
 │
-├── packages/
-│   ├── js/
-│   │   ├── core/              # Framework-independent TypeScript validation engine
-│   │   └── angular/           # Angular reactive-forms validator and directives
-│   │
-│   └── dotnet/
-│       ├── NationalIdentifiers.Core/          # .NET 8/10 validation engine
-│       └── NationalIdentifiers.AspNetCore/    # ASP.NET Core middleware, attributes, DI
-│
-├── rules/                     # Country rule definitions (JSON, language-agnostic)
-│   ├── IT.json
-│   ├── FR.json
-│   ├── DE.json
-│   └── …
-│
-├── docs/                      # Extended documentation and decision records
-├── examples/
-│   ├── angular-demo/          # Interactive manual-test application
-│   ├── aspnetcore-api/        # Minimal API example
-│   └── console/               # Node.js and .NET CLI examples
-│
+├── projects/
+│   ├── tax-id/                # TypeScript package and Angular entry point
+│   └── manual-test/           # Interactive Angular test application
+├── packages/dotnet/
+│   ├── NationalIdentifiers.Core/
+│   ├── NationalIdentifiers.AspNetCore/
+│   └── NationalIdentifiers.Tests/
+├── docs/                      # Coverage, limitations and design proposals
 └── tests/
-    ├── node/                  # Node.js integration tests (no Angular)
-    └── dotnet/                # .NET unit and integration tests
+    ├── fixtures/              # Shared cross-runtime contracts
+    └── node/                  # Node.js integration and consistency tests
 ```
 
 ### Package responsibilities
 
 | Package | Responsibility |
 |---|---|
-| `js/core` | Normalisation, regex validation, checksum computation, result model. No runtime dependencies. |
-| `js/angular` | Sync `ValidatorFn` factory with policy/strict modes. Optional peer dependency on Angular. Async validation and `ControlValueAccessor` helpers are on the roadmap. |
-| `dotnet/Core` | .NET port of the validation engine. Targets `net8.0` and `net10.0`. |
-| `dotnet/AspNetCore` | `IServiceCollection` extensions, `ValidationAttribute`, `IActionFilter`. Targets `net8.0` and `net10.0`. |
+| `tax-id` | Normalisation, validation registry, checksums, result model and policy helper. |
+| `tax-id/angular` | Synchronous `ValidatorFn` with policy and strict modes. |
+| `NationalIdentifiers.Core` | .NET validation engine targeting `net8.0` and `net10.0`. |
+| `NationalIdentifiers.AspNetCore` | Dependency injection, `ValidationAttribute` and action filter integration. |
 
 ### Application enforcement model
 
@@ -91,13 +81,13 @@ issued the identifier.
 User input
     │
     ▼
-[js/core] ──────── realtime UX feedback (format errors, checksum errors)
+[tax-id] ───────── realtime UX feedback (format errors, checksum errors)
     │
     ▼
 HTTP request
     │
     ▼
-[dotnet/AspNetCore] ── server-side policy enforcement before business logic
+[NationalIdentifiers.AspNetCore] ── server-side policy enforcement
     │
     ▼
 Business logic / storage
@@ -237,17 +227,13 @@ The current release focuses on `tax_id_person` and `personal_id`. Company and VA
 
 ## Country Coverage
 
-Full coverage details are in [`projects/tax-id/README.md`](projects/tax-id/README.md). Coverage targets all 195 commonly recognised states (193 UN members, Palestine, Vatican City). Progress is tracked in [`TODO.md`](TODO.md); countries pending research are documented in [`PAESI-NON-COPERTI.md`](PAESI-NON-COPERTI.md).
+The current scope represents all 195 commonly recognised states: 193 UN
+members, Palestine and Vatican City. Every entry is classified as checksum,
+format-level or `not_applicable`; coverage does not imply equal confidence.
 
-**Validation levels by region (current release)**
-
-| Region | Countries tracked | Checksum | Format + date | Format only | Not applicable | Pending |
-|---|---|---|---|---|---|---|
-| Europe | 44 | 36 | 5 | 3 | 1 | 0 |
-| Americas | 35 | 16 | 4 | 10 | 4 | 1 |
-| Asia | 48 | 16 | 8 | 15 | 7 | 2 |
-| Africa | 54 | 5 | 0 | 21 | 0 | 28 |
-| Oceania | 14 | 2 | 1 | 4 | 2 | 5 |
+See the [country catalogue](docs/COUNTRY-COVERAGE.md), the
+[known limitations](docs/KNOWN-LIMITATIONS.md), and the package-specific
+[coverage details](projects/tax-id/README.md).
 
 A `checksum` result means a publicly documented algorithm was applied. `format + date` means the identifier encodes a birth date that is validated in addition to the regex. `format only` means structure is checked but no algorithm is claimed.
 
@@ -801,7 +787,8 @@ Frontend validation is classified as UX assistance, not a security control. The 
 
 ### Future API rate limiting
 
-If a centralised validation API is introduced (Phase 4 roadmap), the following controls will apply:
+If a hosted validation API is introduced in a future release, the following
+controls will apply:
 
 - Per-IP and per-authenticated-key rate limits via token bucket
 - Request size limit (identifier field max 64 bytes)
@@ -813,44 +800,10 @@ If a centralised validation API is introduced (Phase 4 roadmap), the following c
 
 ## Technical Roadmap
 
-### Phase 1 — Core architecture and European coverage ✅
-
-- Framework-independent TypeScript validation engine
-- Angular reactive-forms integration
-- Complete EU-27 coverage plus EEA and candidate countries
-- Automated test suite with per-country cases
-- Monorepo structure with separate `core` and `angular` packages
-
-### Phase 2 — Global coverage (personal TIN) ✅ in progress
-
-- Americas: all 35 jurisdictions
-- Asia: 48 jurisdictions (46 covered, 2 pending)
-- Africa: 54 jurisdictions (26 covered, 28 pending — see `PAESI-NON-COPERTI.md`)
-- Oceania: 14 jurisdictions (9 covered, 5 pending)
-- Explicit `not_applicable` results for jurisdictions without personal TIN
-
-### Phase 3 — .NET package and multi-type support
-
-- Port validation engine to .NET 8 and .NET 10
-- `NationalIdentifiers.AspNetCore` integration package
-- Add `vat_number` identifier type for EU VAT numbers (EC Regulation 2454/93 format rules)
-- Add `company_registration` type for selected jurisdictions
-- Shared JSON rule definitions consumed by both JS and .NET engines
-
-### Phase 4 — Centralised API / SaaS
-
-- REST API: `POST /validate` with `{ country, identifierType, value }` payload
-- Batch endpoint: up to 100 identifiers per request
-- Authentication: API key with per-key rate limits
-- SLA: p99 < 50 ms
-- No persistence of identifier values; audit log records only country, type, result code, and timestamp
-- OpenAPI specification published with the release
-
-### Phase 5 — AI-assisted rule generation
-
-- Semi-automated pipeline: supply OECD AEOI PDF or official tax authority document → extract pattern, lengths, checksum algorithm
-- Human review gate before merge; generated rules flagged in metadata
-- Target: reduce the research-to-implementation cycle for new countries from days to hours
+The maintained roadmap lives in [ROADMAP.md](ROADMAP.md). Design work for
+optional matching between encoded identifier data and user-supplied
+biographical attributes is documented separately in
+[Identity Consistency Validation](docs/IDENTITY-CONSISTENCY.md).
 
 ---
 
@@ -887,7 +840,7 @@ dotnet build packages/dotnet/NationalIdentifiers.AspNetCore/NationalIdentifiers.
 5. Export from `public-api.ts`.
 6. Add test cases in `validate-tax-id.spec.ts` and `tests/node/tax-id.test.mjs`.
 7. Add an entry in `projects/manual-test/src/app/app.ts`.
-8. Check off the country in `TODO.md` and update `PAESI-NON-COPERTI.md` if it was listed there.
+8. Update `docs/COUNTRY-COVERAGE.md` and `docs/KNOWN-LIMITATIONS.md`.
 9. Update `projects/tax-id/README.md` with the new entry and its validation level.
 
 A country implementation is only merged when all nine steps are complete and tests pass.

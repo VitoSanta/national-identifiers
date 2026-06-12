@@ -23,6 +23,15 @@
 - Add automated stale-review reporting.
 - Expand shared fixtures to every supported country and identifier family.
 
+## Post-0.2 - Identity consistency
+
+- Add capability metadata for identifiers that encode biographical data.
+- Introduce a separate cross-runtime identity-consistency API.
+- Implement Italy first, including omocodia and historical birthplace codes.
+- Never represent local consistency as proof of identity or official issuance.
+
+See [the design proposal](docs/IDENTITY-CONSISTENCY.md).
+
 ## 1.0 - Compatibility commitment
 
 - Freeze the core result and error contracts.

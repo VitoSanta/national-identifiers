@@ -8,7 +8,7 @@ const files = {
   csharpPolicy: 'packages/dotnet/NationalIdentifiers.Core/TaxIdPolicy.cs',
   manualDemo: 'projects/manual-test/src/app/app.ts',
   readme: 'README.md',
-  todo: 'TODO.md',
+  coverage: 'docs/COUNTRY-COVERAGE.md',
   tsRegistry: 'projects/tax-id/src/lib/country-registry.ts',
   tsModel: 'projects/tax-id/src/lib/models.ts',
   tsSupportedCountries: 'projects/tax-id/src/lib/supported-countries.ts',
@@ -42,7 +42,7 @@ function assertSameCountries(expectedName, expected, actualName, actual) {
 
 test('keeps supported country coverage aligned across every runtime and the demo', async () => {
   const [
-    todo,
+    coverage,
     tsModel,
     tsRegistry,
     tsSupportedCountries,
@@ -52,7 +52,7 @@ test('keeps supported country coverage aligned across every runtime and the demo
     readme,
   ] =
     await Promise.all([
-      read(files.todo),
+      read(files.coverage),
       read(files.tsModel),
       read(files.tsRegistry),
       read(files.tsSupportedCountries),
@@ -63,12 +63,12 @@ test('keeps supported country coverage aligned across every runtime and the demo
     ]);
 
   const checkedCountries = uniqueSet(
-    'TODO.md checked countries',
-    matches(todo, /^- \[x\] ([A-Z]{2}) -/gm),
+    'country coverage checked countries',
+    matches(coverage, /^- \[x\] ([A-Z]{2}) -/gm),
   );
   const allTodoCountries = uniqueSet(
-    'TODO.md countries',
-    matches(todo, /^- \[[ x]\] ([A-Z]{2}) -/gm),
+    'country coverage countries',
+    matches(coverage, /^- \[[ x]\] ([A-Z]{2}) -/gm),
   );
   const modelCountries = uniqueSet(
     'TaxIdCountry',
@@ -107,23 +107,23 @@ test('keeps supported country coverage aligned across every runtime and the demo
     matches(countriesBlock, /\{ code: '([A-Z]{2})', label:/g),
   );
 
-  assert.equal(allTodoCountries.size, 195, 'TODO.md must list all 195 target countries');
-  assertSameCountries('TODO.md', checkedCountries, 'TaxIdCountry', modelCountries);
-  assertSameCountries('TODO.md', checkedCountries, 'TypeScript registry', tsRegistryCountries);
+  assert.equal(allTodoCountries.size, 195, 'country coverage must list all 195 target countries');
+  assertSameCountries('country coverage', checkedCountries, 'TaxIdCountry', modelCountries);
+  assertSameCountries('country coverage', checkedCountries, 'TypeScript registry', tsRegistryCountries);
   assertSameCountries(
-    'TODO.md',
+    'country coverage',
     checkedCountries,
     'TypeScript supported countries API',
     tsSupportedCountryCodes,
   );
-  assertSameCountries('TODO.md', checkedCountries, '.NET dispatcher', csharpDispatcherCountries);
+  assertSameCountries('country coverage', checkedCountries, '.NET dispatcher', csharpDispatcherCountries);
   assertSameCountries(
-    'TODO.md',
+    'country coverage',
     checkedCountries,
     '.NET supported countries API',
     csharpSupportedCountryCodes,
   );
-  assertSameCountries('TODO.md', checkedCountries, 'manual-test selector', manualCountries);
+  assertSameCountries('country coverage', checkedCountries, 'manual-test selector', manualCountries);
 
   assert.deepEqual(
     [...tsSupportedCountryCodes],

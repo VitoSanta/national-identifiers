@@ -20,6 +20,9 @@ Thank you for improving National Identifiers.
 5. Update the country documentation and validation limitations.
 6. Run the complete release gate from the root README.
 
+Coverage belongs in `docs/COUNTRY-COVERAGE.md`; reduced or intentionally
+unsupported behavior belongs in `docs/KNOWN-LIMITATIONS.md`.
+
 ## Pull requests
 
 Describe the affected country and identifier family, source authority, source
