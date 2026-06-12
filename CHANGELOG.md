@@ -3,10 +3,16 @@
 All notable changes to this project are documented in this file. The project
 follows Semantic Versioning.
 
-## [Unreleased]
+## [0.1.0] - 2026-06-12
+
+Initial public release.
 
 ### Added
 
+- 195-country validation coverage: TypeScript core (`tax-id`), Angular
+  adapter (`tax-id/angular`), .NET core (`NationalIdentifiers.Core`) and
+  ASP.NET Core integration (`NationalIdentifiers.AspNetCore`).
+- Format/checksum confidence levels and accept/warn/block policy helpers.
 - Shared cross-runtime contract fixtures consumed by Node.js and xUnit.
 - Configurable policy and strict modes for Angular and ASP.NET Core adapters.
 - Repository, issue tracker and provenance metadata for npm and NuGet.
@@ -36,9 +42,3 @@ follows Semantic Versioning.
 - The README documents that the Angular adapter's default `policy` mode
   silences advisory warnings, and no longer describes the unreleased async
   validator API.
-
-## [0.1.0] - Unreleased
-
-- Initial 195-country validation coverage.
-- TypeScript core, Angular adapter, .NET core and ASP.NET Core integration.
-- Format/checksum confidence levels and accept/warn/block policy helpers.
