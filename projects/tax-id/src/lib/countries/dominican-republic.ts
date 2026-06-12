@@ -1,0 +1,30 @@
+import { TaxIdValidationResult } from '../models';
+import { normalizeTaxId } from '../normalize';
+
+export function validateDominicanTaxId(value: unknown): TaxIdValidationResult {
+  const normalizedValue = normalizeTaxId(value);
+  const base = { country: 'DO', normalizedValue } as const;
+
+  if (!normalizedValue) {
+    return { ...base, valid: false, error: 'empty' };
+  }
+
+  if (normalizedValue.length !== 11) {
+    return { ...base, valid: false, error: 'invalid_length' };
+  }
+
+  if (!/^\d{11}$/.test(normalizedValue) || /^0{11}$/.test(normalizedValue)) {
+    return { ...base, valid: false, error: 'invalid_format' };
+  }
+
+  const luhnSum = [...normalizedValue].reverse().reduce((sum, digit, index) => {
+    const product = Number(digit) * (index % 2 === 0 ? 1 : 2);
+    return sum + (product > 9 ? product - 9 : product);
+  }, 0);
+
+  if (luhnSum % 10 !== 0) {
+    return { ...base, valid: false, error: 'invalid_checksum' };
+  }
+
+  return { ...base, valid: true, validationLevel: 'checksum' };
+}

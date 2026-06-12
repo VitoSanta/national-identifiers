@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>NationalIdentifiers.AspNetCore</RootNamespace>
+    <AssemblyName>NationalIdentifiers.AspNetCore</AssemblyName>
+    <PackageId>NationalIdentifiers.AspNetCore</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Vito Santanelli</Authors>
+    <Description>ASP.NET Core integration for NationalIdentifiers.Core: DI extensions, validation attribute, action filter for validating national tax identifiers in web APIs.</Description>
+    <PackageTags>tax-id;tin;codice-fiscale;partita-iva;aspnetcore;validation</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\NationalIdentifiers.Core\NationalIdentifiers.Core.csproj" />
+  </ItemGroup>
+
+</Project>

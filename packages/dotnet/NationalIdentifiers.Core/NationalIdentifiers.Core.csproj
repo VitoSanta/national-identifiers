@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>NationalIdentifiers.Core</RootNamespace>
+    <AssemblyName>NationalIdentifiers.Core</AssemblyName>
+    <PackageId>NationalIdentifiers.Core</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Vito Santanelli</Authors>
+    <Description>Validation of national tax identifiers for 195 countries: normalization, format rules and check-digit algorithms (Italian Codice Fiscale and Partita IVA, Spanish DNI/NIE, Brazilian CPF, and many more). Includes a registration policy helper that maps results to accept/warn/block decisions.</Description>
+    <PackageTags>tax-id;tin;codice-fiscale;partita-iva;vat;national-identifier;validation;checksum</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="NationalIdentifiers.AspNetCore/NationalIdentifiers.AspNetCore.csproj" />
+  <Project Path="NationalIdentifiers.Tests/NationalIdentifiers.Tests.csproj" />
+</Solution>

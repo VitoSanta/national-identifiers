@@ -1,0 +1,149 @@
+<header class="app-header">
+  <div>
+    <p class="product-name">Tax ID Validator</p>
+    <h1>Suite di test manuale</h1>
+  </div>
+  <span class="version">Angular 20 · {{ countries.length }} Paesi</span>
+</header>
+
+<main>
+  <section class="workspace" aria-labelledby="validator-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Reactive Forms</p>
+        <h2 id="validator-title">Verifica un identificativo</h2>
+      </div>
+      <button class="secondary-button" type="button" (click)="clear()">Pulisci</button>
+    </div>
+
+    <form (ngSubmit)="validate()">
+      <div class="field-grid">
+        <label>
+          <span>Paese</span>
+          <select [formControl]="country">
+            @for (item of countries; track item.code) {
+              <option [value]="item.code">{{ item.code }} · {{ item.label }}</option>
+            }
+          </select>
+        </label>
+
+        <label class="tax-id-field">
+          <span class="field-label">
+            Codice fiscale o Tax ID
+            @if (taxId.value) {
+              <small [class.valid-label]="taxId.valid">
+                {{ taxId.valid ? 'Valido' : 'Non valido' }}
+              </small>
+            }
+          </span>
+          <input
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="RSSMRA85T10A562S"
+            [formControl]="taxId"
+            [class.input-invalid]="taxId.value && taxId.invalid"
+            [class.input-valid]="taxId.value && taxId.valid"
+          />
+        </label>
+
+        <button class="primary-button" type="submit">Valida</button>
+      </div>
+    </form>
+
+    <div class="normalization-row">
+      <span>Valore normalizzato</span>
+      <code>{{ normalizedPreview() || '—' }}</code>
+    </div>
+
+    <div class="result-band" [class.valid]="result()?.valid" [class.invalid]="result() && !result()?.valid">
+      @if (!result()) {
+        <div class="status-mark neutral" aria-hidden="true">?</div>
+        <div>
+          <strong>In attesa di un valore</strong>
+          <p>Inserisci un identificativo oppure scegli uno dei casi di prova.</p>
+        </div>
+      } @else if (result()?.valid) {
+        <div class="status-mark success" aria-hidden="true">✓</div>
+        <div>
+          <strong>Identificativo valido</strong>
+          @if (result()?.validationLevel === 'format') {
+            <p>Struttura e data sono corrette; il Paese non garantisce un checksum universale.</p>
+          } @else {
+            <p>Formato e carattere di controllo sono corretti.</p>
+          }
+        </div>
+      } @else {
+        <div class="status-mark error" aria-hidden="true">!</div>
+        <div>
+          <strong>{{ errorLabel(result()?.error) }}</strong>
+          <p>Codice errore: <code>{{ result()?.error }}</code></p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="details-grid" aria-label="Dettagli della validazione">
+    <div class="detail-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Angular ValidatorFn</p>
+          <h2>Stato del controllo</h2>
+        </div>
+        <span class="state-badge" [class.ok]="taxId.valid">{{ taxId.valid ? 'VALID' : 'INVALID' }}</span>
+      </div>
+
+      <dl class="metrics">
+        <div>
+          <dt>Valid</dt>
+          <dd>{{ taxId.valid }}</dd>
+        </div>
+        <div>
+          <dt>Touched</dt>
+          <dd>{{ taxId.touched }}</dd>
+        </div>
+        <div>
+          <dt>Dirty</dt>
+          <dd>{{ taxId.dirty }}</dd>
+        </div>
+      </dl>
+
+      <pre>{{ taxId.errors | json }}</pre>
+    </div>
+
+    <div class="detail-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">TypeScript API</p>
+          <h2>Risultato strutturato</h2>
+        </div>
+      </div>
+      <pre>{{ result() | json }}</pre>
+    </div>
+  </section>
+
+  <section class="test-cases" aria-labelledby="cases-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Scenari rapidi</p>
+        <h2 id="cases-title">Casi di prova</h2>
+      </div>
+      <span class="case-count">{{ testCases.length }} casi</span>
+    </div>
+
+    <div class="case-list">
+      @for (testCase of testCases; track testCase.label) {
+        <button type="button" class="case-row" (click)="useTestCase(testCase)">
+          <span class="case-title">{{ testCase.label }}</span>
+          <code>{{ testCase.value }}</code>
+          <span class="expectation">{{ testCase.expectation }}</span>
+          <span class="run-label">Esegui →</span>
+        </button>
+      }
+    </div>
+  </section>
+</main>
+
+<footer>
+  La validazione controlla formato e checksum; non conferma che il codice sia stato emesso.
+</footer>
