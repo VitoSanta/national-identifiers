@@ -41,6 +41,8 @@ JS package's `taxIdCheckOutcome` policy helper.
 
 This release also aligns the .NET policy semantics with the JS/TS registry-driven validation model, so `TaxIdPolicy.Evaluate` and `taxIdCheckOutcome` now make consistent accept/warn/block decisions across runtimes.
 
+Policy is evaluated per identifier family where a country mixes validation levels. Historical 9-digit Czech and Slovak birth numbers, Indonesian NIK values and Singapore `M` FIN values remain format-only and therefore produce `Warn` for non-empty format failures; their checksum-backed variants produce `Block`.
+
 ## Registration policy helper
 
 For sign-up flows where one field may hold a domestic tax code, a VAT number

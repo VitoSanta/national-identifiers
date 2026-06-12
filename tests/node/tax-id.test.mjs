@@ -3,7 +3,6 @@ import { test } from 'node:test';
 
 import '@angular/compiler';
 import {
-  CHECKSUM_TAX_ID_COUNTRIES,
   SUPPORTED_TAX_ID_COUNTRIES,
   calculateItalianFiscalCodeCheckCharacter,
   isSupportedTaxIdCountry,
@@ -66,9 +65,17 @@ test('maps validation results to registration policy outcomes', () => {
   assert.equal(taxIdCheckOutcome(validateTaxId('SO', '12345678')), 'accept');
   assert.equal(taxIdCheckOutcome(validateTaxId('AE', '123456789')), 'warn');
   assert.equal(taxIdCheckOutcome(validateTaxId('XX', '123456789')), 'warn');
-  for (const country of CHECKSUM_TAX_ID_COUNTRIES) {
-    assert.equal(isSupportedTaxIdCountry(country), true, `${country} must be supported`);
-  }
+});
+
+test('uses value-specific policy metadata for countries with mixed validation levels', () => {
+  assert.equal(taxIdCheckOutcome(validateTaxId('CZ', '531332/123')), 'warn');
+  assert.equal(taxIdCheckOutcome(validateTaxId('CZ', '800101/0007')), 'block');
+  assert.equal(taxIdCheckOutcome(validateTaxId('SK', '531332/123')), 'warn');
+  assert.equal(taxIdCheckOutcome(validateTaxId('SK', '800101/0007')), 'block');
+  assert.equal(taxIdCheckOutcome(validateTaxId('ID', '3173013213990001')), 'warn');
+  assert.equal(taxIdCheckOutcome(validateTaxId('ID', '123456789012345')), 'block');
+  assert.equal(taxIdCheckOutcome(validateTaxId('SG', 'M1234567!')), 'warn');
+  assert.equal(taxIdCheckOutcome(validateTaxId('SG', 'S1234567A')), 'block');
 });
 
 test('reports unsupported countries', () => {
@@ -1186,4 +1193,12 @@ test('leaves empty values to Validators.required', () => {
   const control = new FormControl('', [Validators.required, taxIdValidator('IT')]);
 
   assert.deepEqual(control.errors, { required: true });
+});
+
+test('uses policy mode by default and supports strict Angular validation', () => {
+  const advisory = new FormControl('12', taxIdValidator('SO'));
+  const strict = new FormControl('12', taxIdValidator('SO', { mode: 'strict' }));
+
+  assert.equal(advisory.valid, true);
+  assert.equal(strict.errors?.taxId.error, 'invalid_length');
 });

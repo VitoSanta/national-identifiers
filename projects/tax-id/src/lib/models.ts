@@ -205,10 +205,31 @@ export type TaxIdErrorCode =
   | 'not_applicable'
   | 'unsupported_country';
 
-export interface TaxIdValidationResult {
-  readonly valid: boolean;
+interface TaxIdValidationResultBase {
   readonly country: string;
   readonly normalizedValue: string;
-  readonly error?: TaxIdErrorCode;
+}
+
+/** A structurally plausible identifier that passed every available local check. */
+export interface ValidTaxIdValidationResult extends TaxIdValidationResultBase {
+  readonly valid: true;
+  readonly error?: never;
   readonly validationLevel?: TaxIdValidationLevel;
 }
+
+/** An identifier that failed a local check or cannot be validated for the jurisdiction. */
+export interface InvalidTaxIdValidationResult extends TaxIdValidationResultBase {
+  readonly valid: false;
+  readonly error: TaxIdErrorCode;
+  readonly validationLevel?: never;
+}
+
+/**
+ * Result of local, offline validation.
+ *
+ * A successful result confirms format and, when declared, checksum validity.
+ * It does not confirm that an authority issued the identifier or that it is active.
+ */
+export type TaxIdValidationResult =
+  | ValidTaxIdValidationResult
+  | InvalidTaxIdValidationResult;

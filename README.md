@@ -1,8 +1,14 @@
 # National Identifiers
 
-A multi-target platform for validating national tax identifiers, personal identification numbers, and related government-issued codes across all supported jurisdictions.
+A multi-target platform for local pre-validation of national tax identifiers,
+personal identification numbers and related government-issued codes across 195
+jurisdictions.
 
 Validation covers format, checksum, and encoded metadata (birth date, region, century) where rules are institutionally documented. The platform does not confirm that an identifier was issued or is currently active.
+
+The core product promise is precise: reduce input errors, normalize identifiers
+and communicate how confidently a value was checked. It is not an identity,
+ownership or registry-verification service.
 
 ---
 
@@ -22,12 +28,19 @@ Validation covers format, checksum, and encoded metadata (birth date, region, ce
 - [Security](#security)
 - [Technical Roadmap](#technical-roadmap)
 - [Development](#development)
+- [Roadmap](ROADMAP.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+- [Changelog](CHANGELOG.md)
 
 ---
 
 ## Project Architecture
 
-The repository is organised as a monorepo hosting packages for multiple runtimes. All packages share the same validation logic and rule definitions; platform-specific layers add only the integration surface (reactive forms, DI container, HTTP middleware).
+The repository is organised as a monorepo hosting packages for multiple
+runtimes. TypeScript and .NET currently maintain equivalent implementations,
+protected by shared contract fixtures and consistency tests. Platform-specific
+layers add reactive-forms, dependency-injection and HTTP integration.
 
 ```
 national-identifiers/
@@ -65,11 +78,14 @@ national-identifiers/
 | `js/core` | Normalisation, regex validation, checksum computation, result model. No runtime dependencies. |
 | `js/angular` | Sync and async `ValidatorFn` factories, `ControlValueAccessor` helpers, lazy country-rule loading. Peer dependency on Angular. |
 | `dotnet/Core` | .NET port of the validation engine. Targets `net8.0` and `net10.0`. |
-| `dotnet/AspNetCore` | `IServiceCollection` extensions, `ValidationAttribute`, `IActionFilter`, model binders. Targets `net8.0` and `net9.0`. |
+| `dotnet/AspNetCore` | `IServiceCollection` extensions, `ValidationAttribute`, `IActionFilter`, model binders. Targets `net8.0` and `net10.0`. |
 
-### Validation authority model
+### Application enforcement model
 
 Frontend validation is UX assistance, not a security control. The canonical decision on whether an identifier is valid must come from the backend. Any form that submits a national identifier to an API must revalidate server-side; the frontend result is discarded. The client and server share the same result model so validation behavior is consistent across runtimes.
+This makes the backend authoritative for the application's decision, but does
+not turn local format or checksum validation into proof that an authority
+issued the identifier.
 
 ```
 User input
@@ -81,7 +97,7 @@ User input
 HTTP request
     │
     ▼
-[dotnet/AspNetCore] ── authoritative validation, rejects invalid input before business logic
+[dotnet/AspNetCore] ── server-side policy enforcement before business logic
     │
     ▼
 Business logic / storage
@@ -188,15 +204,13 @@ Rules are expressed as structured objects. The current TypeScript implementation
 
 ### Extensibility
 
-A future improvement is to replace the explicit switch-based dispatcher with a data-driven country registry and shared rule metadata. Each country rule can carry a small metadata object describing `identifierType`, `hasChecksum`, `validationLevelHint`, supported formats, and known limitations. That metadata can drive both JS and .NET dispatchers, reduce duplication, and make maintenance easier as coverage expands.
-
-The current refactor already implements a centralized JS/TS country registry for validation dispatch, and the `taxIdCheckOutcome` policy helper now derives `block` decisions directly from registry metadata instead of from a separate hardcoded checksum list.
+The JS/TS package uses the centralized `TAX_ID_VALIDATION_REGISTRY` for validation dispatch and policy metadata. `validateTaxId` resolves validators from this registry, while `taxIdCheckOutcome` derives `block` or `warn` decisions from the same entries. Countries with multiple identifier families can provide value-specific policy metadata, so format-only variants are not treated as checksum failures.
 
 Adding a new country currently requires:
 
 1. A rule object (or JSON definition) specifying pattern, lengths, and optionally checksum algorithm and metadata extraction.
 2. A validator function calling `normalizeTaxId` then applying the rule steps.
-3. A `case` entry in the central dispatcher (`validate-tax-id.ts` / `ValidationDispatcher.cs`).
+3. An entry in `country-registry.ts` and the equivalent mapping in the .NET validator.
 4. At least two positive and two negative test cases.
 
 No changes to the pipeline or result model are needed for standard countries.
@@ -250,7 +264,7 @@ A `checksum` result means a publicly documented algorithm was applied. `format +
 
 ## JavaScript / TypeScript Package
 
-**Package:** `tax-id` (current: `tax-id` during alpha)
+**Package:** `tax-id`
 
 ### Installation
 
@@ -340,11 +354,11 @@ taxIdCheckOutcome(validateTaxId('IT', 'RSSMRA85T10A562S')); // 'accept'
 ```
 
 `block` means the value is definitively wrong (failed check digit, empty,
-or broke the rules of one of the 60 countries with checksum-grade
-validation — the set is exported as `CHECKSUM_TAX_ID_COUNTRIES`). `warn`
-means the value could not be verified with confidence; store it and flag
-it rather than rejecting the user. The same logic is available in .NET as
-`TaxIdPolicy.Evaluate(result)` returning a `TaxIdCheckOutcome` enum.
+or broke a checksum-grade rule). `warn` means the value could not be
+verified with confidence; store it and flag it rather than rejecting the
+user. Policy metadata can vary by identifier family within one country.
+The same logic is available in .NET as `TaxIdPolicy.Evaluate(result)`
+returning a `TaxIdCheckOutcome` enum.
 
 This helper is useful when the country is supported but only format-level
 validation exists, or when the identifier belongs to a jurisdiction without a
@@ -373,7 +387,7 @@ The function strips leading/trailing whitespace, internal whitespace, and hyphen
 ### Installation
 
 ```bash
-npm install tax-id tax-id/angular
+npm install tax-id
 ```
 
 ### Reactive Forms — static country
@@ -439,6 +453,10 @@ Access in a template:
 
 `taxIdValidator` returns `null` (valid) on empty input. Combine with `Validators.required` when the field is mandatory. This separation avoids double error messages when a required field is simply blank.
 
+By default the adapter follows `taxIdCheckOutcome`: advisory `warn` results do
+not invalidate the control. Pass `{ mode: 'strict' }` as the second argument
+when every non-valid result must block submission.
+
 ### Async validation and lazy loading
 
 For applications loading country data on demand, an async variant defers validation until the country rule module resolves:
@@ -458,7 +476,7 @@ const taxId = new FormControl('', {
 ### UX guidelines
 
 - Show validation feedback only after the control is `dirty` and `touched`, not on initial render.
-- Use `validationLevel` from the error payload to distinguish format errors (user typo) from checksum errors (plausible but incorrect identifier) and surface different messages.
+- Use the `error` code for user-facing messages. `validationLevel` is present only on successful results; use `taxIdCheckOutcome` when the UI needs an `accept`/`warn`/`block` decision.
 - Do not disable form submission based solely on frontend validation; always validate server-side.
 - For country selectors with many options, pre-load rules for the default country on init and lazy-load others on `country` change.
 
@@ -615,29 +633,13 @@ public enum ValidationLevel { Format, Checksum }
 
 **Build outputs**
 
-| Format | Target | File |
-|---|---|---|
-| ESM | Modern bundlers, Node.js 16+ | `dist/esm/index.js` |
-| CJS | CommonJS consumers, Jest | `dist/cjs/index.js` |
-| TypeScript declarations | Type checking | `dist/types/index.d.ts` |
+The Angular package builder emits ESM bundles and TypeScript declarations for
+the root API and both secondary entry points. The supported runtime baseline is
+Node.js 20.19 or newer.
 
-```json
-// package.json excerpt
-{
-  "name": "tax-id",
-  "version": "1.0.0",
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/types/index.d.ts"
-    }
-  },
-  "peerDependencies": {}
-}
-```
-
-The core package has zero runtime dependencies. The Angular package declares Angular as a peer dependency with a minimum version range (`>=17.0.0`).
+The package has one small runtime dependency (`tslib`). Angular is declared as
+an optional peer dependency (`^20.3.0`) and is required only when importing the
+`tax-id/angular` entry point.
 
 **Versioning:** semantic versioning. A new country with checksum validation is a minor release. A new country format-only is a patch release. Any change to the result model shape or error codes is a major release.
 
@@ -645,11 +647,11 @@ The core package has zero runtime dependencies. The Angular package declares Ang
 
 ```bash
 npm run build
-npm publish --access public --workspace packages/js/core
-npm publish --access public --workspace packages/js/angular
+npm publish ./dist/tax-id --access public
 ```
 
-Publish is gated behind CI; direct `npm publish` from a developer machine is blocked by the `.npmrc` configuration in CI environments.
+The Angular adapter is published as the `tax-id/angular` secondary entry point
+of the same package.
 
 ### NuGet (`NationalIdentifiers.Core`, `NationalIdentifiers.AspNetCore`)
 
@@ -690,44 +692,19 @@ dotnet nuget push artifacts/*.nupkg \
 
 ## CI/CD
 
-### GitHub Actions pipeline
+### Recommended release gate
 
 ```
-push / pull_request
-        │
-        ├── lint ──────────────── ESLint (JS), dotnet format (C#)
-        │
-        ├── test-js ────────────── Node.js matrix (20, 22, 24)
-        │                          npm test (Angular Vitest runner)
-        │                          node tests/node/tax-id.test.mjs
-        │
-        ├── test-dotnet ─────────── dotnet test (net8.0, net9.0)
-        │
-        ├── coverage ────────────── collect lcov, upload to Codecov
-        │
-        └── (on tag) publish ────── npm publish + dotnet nuget push
+npm ci
+        ├── npm test
+        ├── npm run test:angular
+        ├── npm run build:demo
+        ├── dotnet test -c Release
+        ├── npm pack --dry-run ./dist/tax-id
+        └── dotnet pack -c Release
 ```
 
-**Workflow file structure**
-
-```
-.github/
-└── workflows/
-    ├── ci.yml          # lint + test on every push and PR
-    ├── publish-npm.yml # triggered on tags matching v*.*.*
-    └── publish-nuget.yml
-```
-
-**Tag-triggered release**
-
-```yaml
-on:
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
-```
-
-Both publish workflows are conditioned on the same tag pattern. A single `git tag v1.2.0 && git push --tags` triggers coordinated npm and NuGet releases.
+Automate this gate in the CI provider before publishing npm or NuGet packages.
 
 **Required repository secrets**
 
@@ -882,22 +859,23 @@ If a centralised validation API is introduced (Phase 4 roadmap), the following c
 ```bash
 # JavaScript / Angular
 npm install
-npm test                  # Angular Vitest runner (143 tests)
-node tests/node/tax-id.test.mjs   # Node.js runner (no Angular dependency)
+npm test                  # build package + Node.js integration/consistency suite
+npm run test:angular      # Angular Karma suite in Chrome
 npm run build             # compile the library
 npm run demo              # start the interactive manual-test application on :4200
 
-# .NET (once packages/dotnet exists)
+# .NET
 dotnet restore
-dotnet test
-dotnet build -c Release
+dotnet test packages/dotnet/NationalIdentifiers.Tests/NationalIdentifiers.Tests.csproj -c Release
+dotnet build packages/dotnet/NationalIdentifiers.Core/NationalIdentifiers.Core.csproj -c Release
+dotnet build packages/dotnet/NationalIdentifiers.AspNetCore/NationalIdentifiers.AspNetCore.csproj -c Release
 ```
 
 ### Adding a new country
 
-1. Create `packages/js/core/src/countries/{country-code}.ts`.
+1. Create `projects/tax-id/src/lib/countries/{country-code}.ts`.
 2. Implement `validateXxxTaxId(value: unknown): TaxIdValidationResult` using `normalizeTaxId` and the rule steps.
-3. Add `import` and `case` in `validate-tax-id.ts`.
+3. Add the validator import and metadata entry in `country-registry.ts`.
 4. Add the country code to `TaxIdCountry` in `models.ts`.
 5. Export from `public-api.ts`.
 6. Add test cases in `validate-tax-id.spec.ts` and `tests/node/tax-id.test.mjs`.

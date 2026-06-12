@@ -1,0 +1,128 @@
+[
+  {
+    "country": "IT",
+    "value": "RSSMRA85T10A562S",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "IT",
+    "value": "RSSMRA85T10A562A",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "IT",
+    "value": "RSSMRA85",
+    "valid": false,
+    "error": "invalid_length",
+    "outcome": "block"
+  },
+  {
+    "country": "BR",
+    "value": "111.444.777-35",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "BR",
+    "value": "111.444.777-36",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "US",
+    "value": "123-45-6789",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "US",
+    "value": "000-45-6789",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
+  },
+  {
+    "country": "CZ",
+    "value": "530101/123",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "CZ",
+    "value": "531332/123",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
+  },
+  {
+    "country": "CZ",
+    "value": "800101/0007",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "ID",
+    "value": "3171011708450001",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "ID",
+    "value": "3173013213990001",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
+  },
+  {
+    "country": "SG",
+    "value": "M1234567X",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "SG",
+    "value": "M1234567!",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
+  },
+  {
+    "country": "SG",
+    "value": "S1234567A",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "SO",
+    "value": "12",
+    "valid": false,
+    "error": "invalid_length",
+    "outcome": "warn"
+  },
+  {
+    "country": "AE",
+    "value": "123456789",
+    "valid": false,
+    "error": "not_applicable",
+    "outcome": "warn"
+  },
+  {
+    "country": "XX",
+    "value": "123456789",
+    "valid": false,
+    "error": "unsupported_country",
+    "outcome": "warn"
+  }
+]

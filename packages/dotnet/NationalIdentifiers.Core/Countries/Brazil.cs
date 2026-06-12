@@ -4,7 +4,7 @@ internal static class Brazil
 {
     internal static ValidationResult Validate(object? value)
     {
-        var n = TaxIdNormalizer.Normalize(value);
+        var n = TaxIdNormalizer.Normalize(value).Replace(".", string.Empty, StringComparison.Ordinal);
         if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("BR", n, ValidationErrorCode.Empty);
         if (n.Length != 11) return ValidationResult.Fail("BR", n, ValidationErrorCode.InvalidLength);
         if (!Regex.IsMatch(n, @"^\d{11}$")) return ValidationResult.Fail("BR", n, ValidationErrorCode.InvalidFormat);

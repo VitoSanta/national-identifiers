@@ -9,7 +9,8 @@
     "build": "ng build tax-id",
     "watch": "ng build --watch --configuration development",
     "test": "npm run build && node --test tests/node/*.test.mjs",
-    "test:angular": "ng test tax-id --watch=false"
+    "test:angular": "ng test tax-id --watch=false",
+    "verify": "npm test && npm run test:angular && npm run build:demo"
   },
   "prettier": {
     "printWidth": 100,

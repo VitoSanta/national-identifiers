@@ -254,12 +254,12 @@ prioritari (CU, DO, EC, GT, IR, LK, PY, UZ, ZA), Africa format-only
   - `vat_number`, `tax_id_company`, `company_registration`, `national_id`
   - metadati estratti (data di nascita, genere, regione)
   - regole condivise JSON tra JS e .NET
-- [x] Segnalare l'opportunità di passare da dispatcher esplicito a registry data-driven
+- [x] Sostituire il dispatcher JS/TS esplicito con un registry data-driven
 - [x] Aggiornare i README specifici per:
   - `projects/tax-id/README.md`
   - `packages/dotnet/NationalIdentifiers.Core/README.md`
   - `packages/dotnet/NationalIdentifiers.AspNetCore/README.md`
-  - `packages/dotnet/NationalIdentifiers.AspNetCore/README.md`
+  - `README.md`
 - [x] Preparare la documentazione per il deploy manuale: aggiornamenti registrati e test green
 
 ## Giurisdizioni e territori

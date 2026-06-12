@@ -17,14 +17,14 @@ describe('supported countries', () => {
     expect(SUPPORTED_TAX_ID_COUNTRIES).toContain('LB');
     expect(SUPPORTED_TAX_ID_COUNTRIES).toContain('SR');
     expect(SUPPORTED_TAX_ID_COUNTRIES).toContain('CD');
-    expect(Object.isFrozen(SUPPORTED_TAX_ID_COUNTRIES)).toBeTrue();
+    expect(Object.isFrozen(SUPPORTED_TAX_ID_COUNTRIES)).toBe(true);
   });
 
   it('recognises exact uppercase ISO country codes', () => {
-    expect(isSupportedTaxIdCountry('IT')).toBeTrue();
-    expect(isSupportedTaxIdCountry('it')).toBeFalse();
-    expect(isSupportedTaxIdCountry('TD')).toBeTrue();
-    expect(isSupportedTaxIdCountry('XX')).toBeFalse();
-    expect(isSupportedTaxIdCountry(null)).toBeFalse();
+    expect(isSupportedTaxIdCountry('IT')).toBe(true);
+    expect(isSupportedTaxIdCountry('it')).toBe(false);
+    expect(isSupportedTaxIdCountry('TD')).toBe(true);
+    expect(isSupportedTaxIdCountry('XX')).toBe(false);
+    expect(isSupportedTaxIdCountry(null)).toBe(false);
   });
 });

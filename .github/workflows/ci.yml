@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  javascript:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run test:angular -- --browsers=ChromeHeadless
+      - run: npm run build:demo
+      - run: npm pack --dry-run ./dist/tax-id
+
+  dotnet:
+    name: .NET 8 and 10 packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet restore packages/dotnet/NationalIdentifiers.Tests/NationalIdentifiers.Tests.csproj
+      - run: dotnet test packages/dotnet/NationalIdentifiers.Tests/NationalIdentifiers.Tests.csproj --configuration Release --no-restore
+      - run: dotnet build packages/dotnet/NationalIdentifiers.Core/NationalIdentifiers.Core.csproj --configuration Release --no-restore
+      - run: dotnet build packages/dotnet/NationalIdentifiers.AspNetCore/NationalIdentifiers.AspNetCore.csproj --configuration Release --no-restore
+      - run: dotnet pack packages/dotnet/NationalIdentifiers.Core/NationalIdentifiers.Core.csproj --configuration Release --no-build --no-restore
+      - run: dotnet pack packages/dotnet/NationalIdentifiers.AspNetCore/NationalIdentifiers.AspNetCore.csproj --configuration Release --no-build --no-restore

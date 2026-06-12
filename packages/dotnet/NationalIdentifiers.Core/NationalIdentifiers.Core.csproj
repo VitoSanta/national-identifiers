@@ -10,7 +10,11 @@
     <PackageId>NationalIdentifiers.Core</PackageId>
     <Version>0.1.0</Version>
     <Authors>Vito Santanelli</Authors>
-    <Description>Validation of national tax identifiers for 195 countries: normalization, format rules and check-digit algorithms (Italian Codice Fiscale and Partita IVA, Spanish DNI/NIE, Brazilian CPF, and many more). Includes a registration policy helper that maps results to accept/warn/block decisions.</Description>
+    <PackageProjectUrl>https://github.com/VitoSanta/CF</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/VitoSanta/CF.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <Description>Local pre-validation of national identifiers for 195 countries, with normalization, format and checksum confidence levels, and accept/warn/block policy decisions.</Description>
     <PackageTags>tax-id;tin;codice-fiscale;partita-iva;vat;national-identifier;validation;checksum</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>

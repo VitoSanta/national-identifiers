@@ -20,6 +20,12 @@ public sealed class ValidTaxIdAttribute : ValidationAttribute
     /// <summary>Name of the sibling property containing an ISO country code.</summary>
     public string CountryProperty { get; }
 
+    /// <summary>
+    /// Gets or sets how advisory failures are handled. Defaults to
+    /// <see cref="TaxIdValidationMode.Policy"/>.
+    /// </summary>
+    public TaxIdValidationMode Mode { get; set; } = TaxIdValidationMode.Policy;
+
     /// <inheritdoc />
     protected override DataAnnotationsValidationResult? IsValid(
         object? value,
@@ -48,7 +54,9 @@ public sealed class ValidTaxIdAttribute : ValidationAttribute
             ?? new TaxIdValidator();
         var result = validator.Validate(country, value);
 
-        if (result.IsValid)
+        if (result.IsValid ||
+            Mode == TaxIdValidationMode.Policy &&
+            TaxIdPolicy.Evaluate(result) != TaxIdCheckOutcome.Block)
             return DataAnnotationsValidationResult.Success;
 
         var message = ErrorMessage

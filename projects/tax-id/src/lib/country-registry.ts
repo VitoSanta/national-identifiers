@@ -184,6 +184,7 @@ import { validateZimbabweanTaxId } from './countries/zimbabwe';
 export type TaxIdValidationEntry = {
   readonly validate: (value: unknown) => TaxIdValidationResult;
   readonly validationLevel?: TaxIdValidationLevel;
+  readonly policyValidationLevel?: (normalizedValue: string) => TaxIdValidationLevel;
 };
 
 const notApplicable = (country: TaxIdCountry) => (value: unknown): TaxIdValidationResult =>
@@ -231,7 +232,11 @@ export const TAX_ID_VALIDATION_REGISTRY: Readonly<Record<TaxIdCountry, TaxIdVali
   CR: { validate: validateCostaRicanTaxId },
   CU: { validate: validateCubanTaxId },
   CV: { validate: validateCapeVerdeanTaxId, validationLevel: 'checksum' },
-  CZ: { validate: validateCzechTaxId, validationLevel: 'checksum' },
+  CZ: {
+    validate: validateCzechTaxId,
+    validationLevel: 'checksum',
+    policyValidationLevel: (value) => value.length === 9 ? 'format' : 'checksum',
+  },
   CY: { validate: validateCypriotTaxId },
   DK: { validate: validateDanishTaxId },
   DE: { validate: validateGermanTaxId, validationLevel: 'checksum' },
@@ -265,7 +270,11 @@ export const TAX_ID_VALIDATION_REGISTRY: Readonly<Record<TaxIdCountry, TaxIdVali
   HR: { validate: validateCroatianTaxId, validationLevel: 'checksum' },
   HT: { validate: validateHaitianTaxId },
   HU: { validate: validateHungarianTaxId, validationLevel: 'checksum' },
-  ID: { validate: validateIndonesianTaxId, validationLevel: 'checksum' },
+  ID: {
+    validate: validateIndonesianTaxId,
+    validationLevel: 'checksum',
+    policyValidationLevel: (value) => value.length === 16 ? 'format' : 'checksum',
+  },
   IS: { validate: validateIcelandicTaxId, validationLevel: 'checksum' },
   IE: { validate: validateIrishTaxId, validationLevel: 'checksum' },
   IL: { validate: validateIsraeliTaxId, validationLevel: 'checksum' },
@@ -345,9 +354,17 @@ export const TAX_ID_VALIDATION_REGISTRY: Readonly<Record<TaxIdCountry, TaxIdVali
   SC: { validate: validateSeychelloisTaxId },
   SD: { validate: validateSudaneseTaxId },
   SE: { validate: validateSwedishTaxId, validationLevel: 'checksum' },
-  SG: { validate: validateSingaporeanTaxId, validationLevel: 'checksum' },
+  SG: {
+    validate: validateSingaporeanTaxId,
+    validationLevel: 'checksum',
+    policyValidationLevel: (value) => value.startsWith('M') ? 'format' : 'checksum',
+  },
   SI: { validate: validateSlovenianTaxId, validationLevel: 'checksum' },
-  SK: { validate: validateSlovakTaxId, validationLevel: 'checksum' },
+  SK: {
+    validate: validateSlovakTaxId,
+    validationLevel: 'checksum',
+    policyValidationLevel: (value) => value.length === 9 ? 'format' : 'checksum',
+  },
   SL: { validate: validateSierraLeoneanTaxId },
   SM: { validate: validateSammarineseTaxId },
   SN: { validate: validateSenegaleseTaxId, validationLevel: 'checksum' },

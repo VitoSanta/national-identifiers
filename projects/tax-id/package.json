@@ -1,7 +1,7 @@
 {
   "name": "tax-id",
   "version": "0.1.0",
-  "description": "Validation of national tax identifiers for 195 countries: normalization, format rules and check-digit algorithms. Framework-agnostic TypeScript core with an optional Angular reactive-forms adapter (tax-id/angular).",
+  "description": "Local pre-validation of national identifiers for 195 countries, with normalization, confidence levels, checksums and an optional Angular adapter.",
   "keywords": [
     "tax-id",
     "tin",
@@ -16,6 +16,21 @@
   ],
   "author": "Vito Santanelli",
   "license": "MIT",
+  "homepage": "https://github.com/VitoSanta/CF#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitoSanta/CF.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VitoSanta/CF/issues"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "peerDependencies": {
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0",

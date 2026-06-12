@@ -6,6 +6,8 @@ This package is designed for international sign-up and onboarding flows where us
 
 The package now uses a centralized `TAX_ID_VALIDATION_REGISTRY` to map ISO country codes to validator functions and rule metadata. The `taxIdCheckOutcome` helper uses this shared registry metadata to determine whether an invalid identifier should be treated as `warn` or `block`.
 
+For countries with multiple identifier families, policy can be value-specific. Indonesian NPWP values use checksum validation while NIK values are format-only; Singapore `S`/`T`/`F`/`G` identifiers use checksum validation while `M` FIN values are format-only.
+
 The current MVP supports:
 
 - Italian personal fiscal codes, including omocodia characters;
@@ -282,7 +284,7 @@ an identifier was issued by a government authority.
 
 ```ts
 import { FormControl, Validators } from '@angular/forms';
-import { taxIdValidator } from 'tax-id';
+import { taxIdValidator } from 'tax-id/angular';
 
 const fiscalCode = new FormControl('', [
   Validators.required,
@@ -312,12 +314,16 @@ Invalid controls expose a structured `taxId` error:
 }
 ```
 
-Empty values are accepted by `taxIdValidator`; combine it with
-`Validators.required` when the field is mandatory.
+The Angular validator uses policy mode by default: definitive failures block,
+while format-only advisory failures are allowed. Use
+`taxIdValidator('IT', { mode: 'strict' })` to reject every failed result.
+Empty values are accepted; combine the validator with `Validators.required`
+when the field is mandatory.
 
 ## Development
 
 ```bash
 npm test
+npm run test:angular
 npm run build
 ```

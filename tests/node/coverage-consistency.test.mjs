@@ -3,7 +3,9 @@ import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 
 const files = {
+  checkOutcome: 'projects/tax-id/src/lib/check-outcome.ts',
   csharpDispatcher: 'packages/dotnet/NationalIdentifiers.Core/TaxIdValidator.cs',
+  csharpPolicy: 'packages/dotnet/NationalIdentifiers.Core/TaxIdPolicy.cs',
   manualDemo: 'projects/manual-test/src/app/app.ts',
   readme: 'README.md',
   todo: 'TODO.md',
@@ -142,4 +144,60 @@ test('keeps supported country coverage aligned across every runtime and the demo
   );
   assert.equal(documentedReadmeCount, checkedCountries.size, 'README country count is stale');
   assert.equal(documentedCsharpCount, checkedCountries.size, '.NET XML summary count is stale');
+});
+
+test('keeps checksum policy metadata aligned across TypeScript and .NET', async () => {
+  const [tsRegistry, checkOutcome, csharpPolicy] = await Promise.all([
+    read(files.tsRegistry),
+    read(files.checkOutcome),
+    read(files.csharpPolicy),
+  ]);
+
+  const registryEntries = [...tsRegistry.matchAll(
+    /^  ([A-Z]{2}): (?<body>[\s\S]*?)(?=^  [A-Z]{2}: |^\};)/gm,
+  )];
+  const tsChecksumCountries = uniqueSet(
+    'TypeScript checksum metadata',
+    registryEntries
+      .filter((entry) => entry.groups?.body.includes("validationLevel: 'checksum'"))
+      .map((entry) => entry[1]),
+  );
+  const csharpChecksumBlock = csharpPolicy.match(
+    /ChecksumGradeCountries = new\(StringComparer\.Ordinal\)\s*\{(?<countries>[\s\S]*?)\};/,
+  )?.groups?.countries;
+  assert.ok(csharpChecksumBlock, '.NET checksum policy metadata was not found');
+  const csharpChecksumCountries = uniqueSet(
+    '.NET checksum policy metadata',
+    matches(csharpChecksumBlock, /"([A-Z]{2})"/g),
+  );
+
+  assert.equal(tsChecksumCountries.size, 60, 'TypeScript checksum metadata count is stale');
+  assertSameCountries(
+    'TypeScript checksum metadata',
+    tsChecksumCountries,
+    '.NET checksum policy metadata',
+    csharpChecksumCountries,
+  );
+  assert.doesNotMatch(
+    checkOutcome,
+    /CHECKSUM_TAX_ID_COUNTRIES/,
+    'check-outcome.ts must derive policy from registry metadata',
+  );
+
+  for (const country of ['CZ', 'ID', 'SG', 'SK']) {
+    const registryEntry = tsRegistry.match(
+      new RegExp(`^  ${country}: \\{[\\s\\S]*?^  \\},`, 'm'),
+    )?.[0];
+    assert.ok(registryEntry, `${country} registry entry was not found`);
+    assert.match(
+      registryEntry,
+      /policyValidationLevel:/,
+      `${country} must declare value-specific TypeScript policy metadata`,
+    );
+    assert.match(
+      csharpPolicy,
+      new RegExp(`"${country}"`),
+      `${country} must be covered by .NET policy metadata`,
+    );
+  }
 });

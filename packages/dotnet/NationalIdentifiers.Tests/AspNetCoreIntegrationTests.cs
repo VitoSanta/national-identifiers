@@ -74,6 +74,22 @@ public class AspNetCoreIntegrationTests
     }
 
     [Fact]
+    public void ValidTaxId_PolicyMode_AllowsAdvisoryFailures()
+    {
+        var model = new AdvisoryTaxIdRequest { Country = "SO", TaxId = "12" };
+
+        Assert.Empty(Validate(model));
+    }
+
+    [Fact]
+    public void ValidTaxId_StrictMode_RejectsAdvisoryFailures()
+    {
+        var model = new StrictTaxIdRequest { Country = "SO", TaxId = "12" };
+
+        Assert.Single(Validate(model));
+    }
+
+    [Fact]
     public async Task Filter_ReturnsBadRequest_ForInvalidTaxId()
     {
         using var services = new ServiceCollection()
@@ -191,5 +207,21 @@ public class AspNetCoreIntegrationTests
     {
         [ValidTaxId("Country")]
         public string TaxId { get; init; } = string.Empty;
+    }
+
+    private sealed class AdvisoryTaxIdRequest
+    {
+        public string Country { get; init; } = string.Empty;
+
+        [ValidTaxId(nameof(Country))]
+        public string? TaxId { get; init; }
+    }
+
+    private sealed class StrictTaxIdRequest
+    {
+        public string Country { get; init; } = string.Empty;
+
+        [ValidTaxId(nameof(Country), Mode = TaxIdValidationMode.Strict)]
+        public string? TaxId { get; init; }
     }
 }

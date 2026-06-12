@@ -14,7 +14,13 @@ export function validateTaxId(
   ];
 
   if (entry) {
-    return entry.validate(value);
+    const result = entry.validate(value);
+
+    if (result.valid && !result.validationLevel && entry.validationLevel) {
+      return { ...result, validationLevel: entry.validationLevel };
+    }
+
+    return result;
   }
 
   return {

@@ -31,6 +31,7 @@ public static class TaxIdPolicy
         "RS", "RU", "SE", "SG", "SI", "SK", "SN", "TH", "TR", "UY", "VE", "ZA",
     };
 
+    /// <summary>Returns the registration policy decision for a validation result.</summary>
     public static TaxIdCheckOutcome Evaluate(ValidationResult result)
     {
         if (result.IsValid) return TaxIdCheckOutcome.Accept;
@@ -41,9 +42,18 @@ public static class TaxIdPolicy
             ValidationErrorCode.InvalidChecksum => TaxIdCheckOutcome.Block,
             ValidationErrorCode.NotApplicable => TaxIdCheckOutcome.Warn,
             ValidationErrorCode.UnsupportedCountry => TaxIdCheckOutcome.Warn,
-            _ => ChecksumGradeCountries.Contains(result.Country)
+            _ => UsesChecksumPolicy(result)
                 ? TaxIdCheckOutcome.Block
                 : TaxIdCheckOutcome.Warn,
         };
     }
+
+    private static bool UsesChecksumPolicy(ValidationResult result) =>
+        result.Country switch
+        {
+            "CZ" or "SK" when result.NormalizedValue.Length == 9 => false,
+            "ID" when result.NormalizedValue.Length == 16 => false,
+            "SG" when result.NormalizedValue.StartsWith('M') => false,
+            _ => ChecksumGradeCountries.Contains(result.Country),
+        };
 }

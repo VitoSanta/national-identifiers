@@ -2,6 +2,7 @@ import { FormControl, Validators } from '@angular/forms';
 
 import { calculateItalianFiscalCodeCheckCharacter, validateItalianFiscalCode } from './countries/italy';
 import { taxIdValidator } from 'tax-id/angular';
+import { taxIdCheckOutcome } from './check-outcome';
 import { normalizeTaxId } from './normalize';
 import { validateTaxId } from './validate-tax-id';
 
@@ -27,7 +28,7 @@ describe('tax ID validation', () => {
   });
 
   it('reports unsupported countries', () => {
-    expect(validateTaxId('TD', '123').error).toBe('unsupported_country');
+    expect(validateTaxId('XX', '123').error).toBe('unsupported_country');
     expect(validateTaxId(null, '123')).toEqual({
       valid: false,
       country: '',
@@ -37,44 +38,53 @@ describe('tax ID validation', () => {
     expect(validateTaxId('  ', '123').error).toBe('unsupported_country');
   });
 
+  it('uses value-specific policy metadata for mixed validation levels', () => {
+    expect(taxIdCheckOutcome(validateTaxId('CZ', '531332/123'))).toBe('warn');
+    expect(taxIdCheckOutcome(validateTaxId('CZ', '800101/0007'))).toBe('block');
+    expect(taxIdCheckOutcome(validateTaxId('ID', '3173013213990001'))).toBe('warn');
+    expect(taxIdCheckOutcome(validateTaxId('ID', '123456789012345'))).toBe('block');
+    expect(taxIdCheckOutcome(validateTaxId('SG', 'M1234567!'))).toBe('warn');
+    expect(taxIdCheckOutcome(validateTaxId('SG', 'S1234567A'))).toBe('block');
+  });
+
   it('validates Spanish DNI and NIE identifiers', () => {
-    expect(validateTaxId('ES', '12345678Z').valid).toBeTrue();
-    expect(validateTaxId('ES', 'X1234567L').valid).toBeTrue();
+    expect(validateTaxId('ES', '12345678Z').valid).toBe(true);
+    expect(validateTaxId('ES', 'X1234567L').valid).toBe(true);
     expect(validateTaxId('ES', '12345678A').error).toBe('invalid_checksum');
   });
 
   it('validates French SPI identifiers', () => {
-    expect(validateTaxId('FR', '3023217600053').valid).toBeTrue();
+    expect(validateTaxId('FR', '3023217600053').valid).toBe(true);
     expect(validateTaxId('FR', '3023217600054').error).toBe('invalid_checksum');
   });
 
   it('validates Portuguese NIF identifiers', () => {
-    expect(validateTaxId('PT', '123456789').valid).toBeTrue();
+    expect(validateTaxId('PT', '123456789').valid).toBe(true);
     expect(validateTaxId('PT', '123456788').error).toBe('invalid_checksum');
   });
 
   it('validates Greek AFM identifiers', () => {
-    expect(validateTaxId('GR', '094259216').valid).toBeTrue();
+    expect(validateTaxId('GR', '094259216').valid).toBe(true);
     expect(validateTaxId('GR', '094259217').error).toBe('invalid_checksum');
   });
 
   it('validates Belgian national register numbers', () => {
-    expect(validateTaxId('BE', '85.07.30-033.28').valid).toBeTrue();
+    expect(validateTaxId('BE', '85.07.30-033.28').valid).toBe(true);
     expect(validateTaxId('BE', '85073003329').error).toBe('invalid_checksum');
   });
 
   it('validates Croatian OIB identifiers', () => {
-    expect(validateTaxId('HR', '12345678903').valid).toBeTrue();
+    expect(validateTaxId('HR', '12345678903').valid).toBe(true);
     expect(validateTaxId('HR', '12345678904').error).toBe('invalid_checksum');
   });
 
   it('validates Polish PESEL identifiers', () => {
-    expect(validateTaxId('PL', '44051401458').valid).toBeTrue();
+    expect(validateTaxId('PL', '44051401458').valid).toBe(true);
     expect(validateTaxId('PL', '44051401459').error).toBe('invalid_checksum');
   });
 
   it('validates Finnish personal identity codes', () => {
-    expect(validateTaxId('FI', '131052-308T').valid).toBeTrue();
+    expect(validateTaxId('FI', '131052-308T').valid).toBe(true);
     expect(validateTaxId('FI', '131052-308A').error).toBe('invalid_checksum');
   });
 
@@ -89,44 +99,44 @@ describe('tax ID validation', () => {
   });
 
   it('validates Norwegian national identity numbers', () => {
-    expect(validateTaxId('NO', '01010100050').valid).toBeTrue();
+    expect(validateTaxId('NO', '01010100050').valid).toBe(true);
     expect(validateTaxId('NO', '01010100051').error).toBe('invalid_checksum');
   });
 
   it('validates Swedish personal identity numbers', () => {
-    expect(validateTaxId('SE', '811228-9874').valid).toBeTrue();
+    expect(validateTaxId('SE', '811228-9874').valid).toBe(true);
     expect(validateTaxId('SE', '811228-9875').error).toBe('invalid_checksum');
   });
 
   it('validates Icelandic kennitala identifiers', () => {
-    expect(validateTaxId('IS', '120174-0029').valid).toBeTrue();
+    expect(validateTaxId('IS', '120174-0029').valid).toBe(true);
     expect(validateTaxId('IS', '120174-0039').error).toBe('invalid_checksum');
   });
 
   it('validates Estonian personal identification codes', () => {
-    expect(validateTaxId('EE', '37605030299').valid).toBeTrue();
+    expect(validateTaxId('EE', '37605030299').valid).toBe(true);
     expect(validateTaxId('EE', '37605030298').error).toBe('invalid_checksum');
   });
 
   it('validates historical and opaque Latvian personal codes', () => {
-    expect(validateTaxId('LV', '010190-12349').valid).toBeTrue();
-    expect(validateTaxId('LV', '320000-12340').valid).toBeTrue();
+    expect(validateTaxId('LV', '010190-12349').valid).toBe(true);
+    expect(validateTaxId('LV', '320000-12340').valid).toBe(true);
     expect(validateTaxId('LV', '320000-12341').error).toBe('invalid_checksum');
   });
 
   it('validates Lithuanian personal codes', () => {
-    expect(validateTaxId('LT', '38409152012').valid).toBeTrue();
+    expect(validateTaxId('LT', '38409152012').valid).toBe(true);
     expect(validateTaxId('LT', '38409152013').error).toBe('invalid_checksum');
   });
 
   it('validates Dutch BSN identifiers', () => {
-    expect(validateTaxId('NL', '123456782').valid).toBeTrue();
+    expect(validateTaxId('NL', '123456782').valid).toBe(true);
     expect(validateTaxId('NL', '123456783').error).toBe('invalid_checksum');
   });
 
   it('validates Czech and Slovak birth numbers', () => {
-    expect(validateTaxId('CZ', '800101/0006').valid).toBeTrue();
-    expect(validateTaxId('SK', '800101/0006').valid).toBeTrue();
+    expect(validateTaxId('CZ', '800101/0006').valid).toBe(true);
+    expect(validateTaxId('SK', '800101/0006').valid).toBe(true);
     expect(validateTaxId('CZ', '800101/0007').error).toBe('invalid_checksum');
   });
 
@@ -140,7 +150,7 @@ describe('tax ID validation', () => {
   });
 
   it('validates Slovenian tax numbers', () => {
-    expect(validateTaxId('SI', '12345679').valid).toBeTrue();
+    expect(validateTaxId('SI', '12345679').valid).toBe(true);
     expect(validateTaxId('SI', '12345678').error).toBe('invalid_checksum');
   });
 
@@ -154,44 +164,44 @@ describe('tax ID validation', () => {
   });
 
   it('validates German tax identification numbers', () => {
-    expect(validateTaxId('DE', '12345678911').valid).toBeTrue();
+    expect(validateTaxId('DE', '12345678911').valid).toBe(true);
     expect(validateTaxId('DE', '12345678912').error).toBe('invalid_checksum');
   });
 
   it('validates Swiss AHV identifiers', () => {
-    expect(validateTaxId('CH', '756.1234.5678.97').valid).toBeTrue();
+    expect(validateTaxId('CH', '756.1234.5678.97').valid).toBe(true);
     expect(validateTaxId('CH', '756.1234.5678.98').error).toBe('invalid_checksum');
   });
 
   it('validates Hungarian tax identification signs', () => {
-    expect(validateTaxId('HU', '8123456786').valid).toBeTrue();
+    expect(validateTaxId('HU', '8123456786').valid).toBe(true);
     expect(validateTaxId('HU', '8123456787').error).toBe('invalid_checksum');
   });
 
   it('validates Romanian CNP identifiers', () => {
-    expect(validateTaxId('RO', '1960523420017').valid).toBeTrue();
+    expect(validateTaxId('RO', '1960523420017').valid).toBe(true);
     expect(validateTaxId('RO', '1960523420018').error).toBe('invalid_checksum');
   });
 
   it('validates Bulgarian EGN identifiers', () => {
-    expect(validateTaxId('BG', '0041010002').valid).toBeTrue();
+    expect(validateTaxId('BG', '0041010002').valid).toBe(true);
     expect(validateTaxId('BG', '0041010003').error).toBe('invalid_checksum');
     expect(validateTaxId('BG', '0053010000').error).toBe('invalid_format');
   });
 
   it('validates Serbian JMBG identifiers', () => {
-    expect(validateTaxId('RS', '0101006710000').valid).toBeTrue();
+    expect(validateTaxId('RS', '0101006710000').valid).toBe(true);
     expect(validateTaxId('RS', '0101006710001').error).toBe('invalid_checksum');
     expect(validateTaxId('RS', '0101006210008').error).toBe('invalid_format');
   });
 
   it('validates Montenegrin JMBG identifiers', () => {
-    expect(validateTaxId('ME', '0101006210008').valid).toBeTrue();
+    expect(validateTaxId('ME', '0101006210008').valid).toBe(true);
     expect(validateTaxId('ME', '0101006210009').error).toBe('invalid_checksum');
   });
 
   it('validates North Macedonian EMBG identifiers', () => {
-    expect(validateTaxId('MK', '0101006410007').valid).toBeTrue();
+    expect(validateTaxId('MK', '0101006410007').valid).toBe(true);
     expect(validateTaxId('MK', '0101006410008').error).toBe('invalid_checksum');
   });
 
@@ -206,13 +216,13 @@ describe('tax ID validation', () => {
   });
 
   it('validates Bosnian JMBG identifiers', () => {
-    expect(validateTaxId('BA', '0101006170006').valid).toBeTrue();
+    expect(validateTaxId('BA', '0101006170006').valid).toBe(true);
     expect(validateTaxId('BA', '0101006170007').error).toBe('invalid_checksum');
     expect(validateTaxId('BA', '0101006210008').error).toBe('invalid_format');
   });
 
   it('validates Turkish identity numbers', () => {
-    expect(validateTaxId('TR', '10000000146').valid).toBeTrue();
+    expect(validateTaxId('TR', '10000000146').valid).toBe(true);
     expect(validateTaxId('TR', '10000000147').error).toBe('invalid_checksum');
     expect(validateTaxId('TR', '00000000146').error).toBe('invalid_format');
   });
@@ -248,13 +258,13 @@ describe('tax ID validation', () => {
   });
 
   it('validates Irish PPS numbers', () => {
-    expect(validateTaxId('IE', '1234567T').valid).toBeTrue();
-    expect(validateTaxId('IE', '1234567TW').valid).toBeTrue();
+    expect(validateTaxId('IE', '1234567T').valid).toBe(true);
+    expect(validateTaxId('IE', '1234567TW').valid).toBe(true);
     expect(validateTaxId('IE', '1234567A').error).toBe('invalid_checksum');
   });
 
   it('validates Luxembourg national identification numbers', () => {
-    expect(validateTaxId('LU', '2000010100125').valid).toBeTrue();
+    expect(validateTaxId('LU', '2000010100125').valid).toBe(true);
     expect(validateTaxId('LU', '2000010100126').error).toBe('invalid_checksum');
     expect(validateTaxId('LU', '2000023000125').error).toBe('invalid_format');
   });
@@ -306,9 +316,9 @@ describe('tax ID validation', () => {
   });
 
   it('validates Russian tax identifiers', () => {
-    expect(validateTaxId('RU', '7728168971').valid).toBeTrue();
+    expect(validateTaxId('RU', '7728168971').valid).toBe(true);
     expect(validateTaxId('RU', '7728168972').error).toBe('invalid_checksum');
-    expect(validateTaxId('RU', '500100732259').valid).toBeTrue();
+    expect(validateTaxId('RU', '500100732259').valid).toBe(true);
     expect(validateTaxId('RU', '500100732258').error).toBe('invalid_checksum');
   });
 
@@ -377,61 +387,61 @@ describe('tax ID validation', () => {
   });
 
   it('validates Canadian tax identifiers', () => {
-    expect(validateTaxId('CA', '046454286').valid).toBeTrue();
+    expect(validateTaxId('CA', '046454286').valid).toBe(true);
     expect(validateTaxId('CA', '046454287').error).toBe('invalid_checksum');
   });
 
   it('validates Brazilian tax identifiers', () => {
-    expect(validateTaxId('BR', '11144477735').valid).toBeTrue();
+    expect(validateTaxId('BR', '11144477735').valid).toBe(true);
     expect(validateTaxId('BR', '11144477736').error).toBe('invalid_checksum');
     expect(validateTaxId('BR', '00000000000').error).toBe('invalid_format');
   });
 
   it('validates Mexican tax identifiers', () => {
-    expect(validateTaxId('MX', 'GODE561231GR8').valid).toBeTrue();
+    expect(validateTaxId('MX', 'GODE561231GR8').valid).toBe(true);
     expect(validateTaxId('MX', 'GODE561231GR9').error).toBe('invalid_checksum');
   });
 
   it('validates Argentine tax identifiers', () => {
-    expect(validateTaxId('AR', '20267565393').valid).toBeTrue();
+    expect(validateTaxId('AR', '20267565393').valid).toBe(true);
     expect(validateTaxId('AR', '20267565394').error).toBe('invalid_checksum');
   });
 
   it('validates Chilean tax identifiers', () => {
-    expect(validateTaxId('CL', '123456785').valid).toBeTrue();
-    expect(validateTaxId('CL', '1111122K').valid).toBeTrue();
+    expect(validateTaxId('CL', '123456785').valid).toBe(true);
+    expect(validateTaxId('CL', '1111122K').valid).toBe(true);
     expect(validateTaxId('CL', '123456786').error).toBe('invalid_checksum');
   });
 
   it('validates Colombian tax identifiers', () => {
-    expect(validateTaxId('CO', '8903215670').valid).toBeTrue();
+    expect(validateTaxId('CO', '8903215670').valid).toBe(true);
     expect(validateTaxId('CO', '8903215671').error).toBe('invalid_checksum');
   });
 
   it('validates Peruvian tax identifiers', () => {
-    expect(validateTaxId('PE', '100000008').valid).toBeTrue(); // DNI
-    expect(validateTaxId('PE', '20100000009').valid).toBeTrue(); // RUC
+    expect(validateTaxId('PE', '100000008').valid).toBe(true); // DNI
+    expect(validateTaxId('PE', '20100000009').valid).toBe(true); // RUC
     expect(validateTaxId('PE', '20100000008').error).toBe('invalid_checksum');
   });
 
   it('validates Uruguayan tax identifiers', () => {
-    expect(validateTaxId('UY', '12345672').valid).toBeTrue();
+    expect(validateTaxId('UY', '12345672').valid).toBe(true);
     expect(validateTaxId('UY', '12345673').error).toBe('invalid_checksum');
   });
 
   it('validates Venezuelan tax identifiers', () => {
-    expect(validateTaxId('VE', 'J070133805').valid).toBeTrue();
+    expect(validateTaxId('VE', 'J070133805').valid).toBe(true);
     expect(validateTaxId('VE', 'J070133806').error).toBe('invalid_checksum');
   });
 
   it('validates Australian tax file numbers', () => {
-    expect(validateTaxId('AU', '123456782').valid).toBeTrue();
+    expect(validateTaxId('AU', '123456782').valid).toBe(true);
     expect(validateTaxId('AU', '123456783').error).toBe('invalid_checksum');
     expect(validateTaxId('AU', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Chinese resident identity numbers', () => {
-    expect(validateTaxId('CN', '11010519491231002X').valid).toBeTrue();
+    expect(validateTaxId('CN', '11010519491231002X').valid).toBe(true);
     expect(validateTaxId('CN', '110105194912310021').error).toBe('invalid_checksum');
     expect(validateTaxId('CN', '110105194913310029').error).toBe('invalid_format');
   });
@@ -447,12 +457,12 @@ describe('tax ID validation', () => {
   });
 
   it('validates Israeli identity numbers', () => {
-    expect(validateTaxId('IL', '123456782').valid).toBeTrue();
+    expect(validateTaxId('IL', '123456782').valid).toBe(true);
     expect(validateTaxId('IL', '123456783').error).toBe('invalid_checksum');
   });
 
   it('validates Japanese My Number identifiers', () => {
-    expect(validateTaxId('JP', '123456789018').valid).toBeTrue();
+    expect(validateTaxId('JP', '123456789018').valid).toBe(true);
     expect(validateTaxId('JP', '123456789019').error).toBe('invalid_checksum');
   });
 
@@ -467,13 +477,13 @@ describe('tax ID validation', () => {
   });
 
   it('validates New Zealand IRD numbers', () => {
-    expect(validateTaxId('NZ', '49-091-850').valid).toBeTrue();
+    expect(validateTaxId('NZ', '49-091-850').valid).toBe(true);
     expect(validateTaxId('NZ', '49091851').error).toBe('invalid_checksum');
     expect(validateTaxId('NZ', '999999999').error).toBe('invalid_format');
   });
 
   it('validates Singaporean NRIC and FIN identifiers', () => {
-    expect(validateTaxId('SG', 'S1234567D').valid).toBeTrue();
+    expect(validateTaxId('SG', 'S1234567D').valid).toBe(true);
     expect(validateTaxId('SG', 'S1234567A').error).toBe('invalid_checksum');
     expect(validateTaxId('SG', 'M1234567X')).toEqual({
       valid: true,
@@ -484,7 +494,7 @@ describe('tax ID validation', () => {
   });
 
   it('validates Thai national identification numbers', () => {
-    expect(validateTaxId('TH', '1101700230708').valid).toBeTrue();
+    expect(validateTaxId('TH', '1101700230708').valid).toBe(true);
     expect(validateTaxId('TH', '1101700230709').error).toBe('invalid_checksum');
     expect(validateTaxId('TH', '0101700230708').error).toBe('invalid_format');
   });
@@ -500,7 +510,7 @@ describe('tax ID validation', () => {
   });
 
   it('validates Indonesian NPWP and NIK identifiers', () => {
-    expect(validateTaxId('ID', '01.300.066.6-091.000').valid).toBeTrue();
+    expect(validateTaxId('ID', '01.300.066.6-091.000').valid).toBe(true);
     expect(validateTaxId('ID', '013000667091000').error).toBe('invalid_checksum');
     expect(validateTaxId('ID', '3171011708450001')).toEqual({
       valid: true,
@@ -508,12 +518,12 @@ describe('tax ID validation', () => {
       normalizedValue: '3171011708450001',
       validationLevel: 'format',
     });
-    expect(validateTaxId('ID', '3171015708450001').valid).toBeTrue();
+    expect(validateTaxId('ID', '3171015708450001').valid).toBe(true);
     expect(validateTaxId('ID', '3171011713450001').error).toBe('invalid_format');
   });
 
   it('validates Kazakh IIN identifiers', () => {
-    expect(validateTaxId('KZ', '900101300007').valid).toBeTrue();
+    expect(validateTaxId('KZ', '900101300007').valid).toBe(true);
     expect(validateTaxId('KZ', '900101300008').error).toBe('invalid_checksum');
     expect(validateTaxId('KZ', '901301300007').error).toBe('invalid_format');
   });
@@ -545,7 +555,7 @@ describe('tax ID validation', () => {
       normalizedValue: '123456789',
       validationLevel: 'format',
     });
-    expect(validateTaxId('PH', '123456789000').valid).toBeTrue();
+    expect(validateTaxId('PH', '123456789000').valid).toBe(true);
     expect(validateTaxId('PH', '12345678').error).toBe('invalid_length');
   });
 
@@ -556,7 +566,7 @@ describe('tax ID validation', () => {
       normalizedValue: '1234512345671',
       validationLevel: 'format',
     });
-    expect(validateTaxId('PK', '1234567').valid).toBeTrue();
+    expect(validateTaxId('PK', '1234567').valid).toBe(true);
     expect(validateTaxId('PK', '0234512345671').error).toBe('invalid_format');
   });
 
@@ -567,44 +577,44 @@ describe('tax ID validation', () => {
       normalizedValue: '0123456789',
       validationLevel: 'format',
     });
-    expect(validateTaxId('VN', '012345678901').valid).toBeTrue();
+    expect(validateTaxId('VN', '012345678901').valid).toBe(true);
     expect(validateTaxId('VN', '012345678').error).toBe('invalid_length');
   });
 
   it('validates South African tax reference and identity numbers', () => {
-    expect(validateTaxId('ZA', '0001339050').valid).toBeTrue();
+    expect(validateTaxId('ZA', '0001339050').valid).toBe(true);
     expect(validateTaxId('ZA', '0001339051').error).toBe('invalid_checksum');
     expect(validateTaxId('ZA', '4001339050').error).toBe('invalid_format');
-    expect(validateTaxId('ZA', '9405105678082').valid).toBeTrue();
+    expect(validateTaxId('ZA', '9405105678082').valid).toBe(true);
     expect(validateTaxId('ZA', '9405105678083').error).toBe('invalid_checksum');
   });
 
   it('validates Iranian national identity codes', () => {
-    expect(validateTaxId('IR', '1234567891').valid).toBeTrue();
+    expect(validateTaxId('IR', '1234567891').valid).toBe(true);
     expect(validateTaxId('IR', '1234567892').error).toBe('invalid_checksum');
     expect(validateTaxId('IR', '1111111111').error).toBe('invalid_format');
   });
 
   it('validates Ecuadorian cedula and personal RUC identifiers', () => {
-    expect(validateTaxId('EC', '1714616123').valid).toBeTrue();
-    expect(validateTaxId('EC', '1714616123001').valid).toBeTrue();
+    expect(validateTaxId('EC', '1714616123').valid).toBe(true);
+    expect(validateTaxId('EC', '1714616123001').valid).toBe(true);
     expect(validateTaxId('EC', '1714616124').error).toBe('invalid_checksum');
     expect(validateTaxId('EC', '9914616123').error).toBe('invalid_format');
   });
 
   it('validates Dominican cedula identifiers', () => {
-    expect(validateTaxId('DO', '00100082700').valid).toBeTrue();
+    expect(validateTaxId('DO', '00100082700').valid).toBe(true);
     expect(validateTaxId('DO', '00100082701').error).toBe('invalid_checksum');
   });
 
   it('validates Paraguayan RUC identifiers', () => {
-    expect(validateTaxId('PY', '3966931-9').valid).toBeTrue();
+    expect(validateTaxId('PY', '3966931-9').valid).toBe(true);
     expect(validateTaxId('PY', '39669318').error).toBe('invalid_checksum');
   });
 
   it('validates Guatemalan NIT identifiers', () => {
-    expect(validateTaxId('GT', '3602978-5').valid).toBeTrue();
-    expect(validateTaxId('GT', '576937K').valid).toBeTrue();
+    expect(validateTaxId('GT', '3602978-5').valid).toBe(true);
+    expect(validateTaxId('GT', '576937K').valid).toBe(true);
     expect(validateTaxId('GT', '36029786').error).toBe('invalid_checksum');
   });
 
@@ -615,7 +625,7 @@ describe('tax ID validation', () => {
       normalizedValue: '790930622V',
       validationLevel: 'format',
     });
-    expect(validateTaxId('LK', '199012300123').valid).toBeTrue();
+    expect(validateTaxId('LK', '199012300123').valid).toBe(true);
     expect(validateTaxId('LK', '794430622V').error).toBe('invalid_format');
   });
 
@@ -640,151 +650,151 @@ describe('tax ID validation', () => {
   });
 
   it('validates Egyptian TIN identifiers as format-only', () => {
-    expect(validateTaxId('EG', '123456789').valid).toBeTrue();
+    expect(validateTaxId('EG', '123456789').valid).toBe(true);
     expect(validateTaxId('EG', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Ghanaian tax identifiers as format-only', () => {
-    expect(validateTaxId('GH', 'GHA1234567890').valid).toBeTrue();
+    expect(validateTaxId('GH', 'GHA1234567890').valid).toBe(true);
     expect(validateTaxId('GH', 'GHA12345A7890').error).toBe('invalid_format');
   });
 
   it('validates Kenyan KRA PIN identifiers as format-only', () => {
-    expect(validateTaxId('KE', 'A123456789B').valid).toBeTrue();
+    expect(validateTaxId('KE', 'A123456789B').valid).toBe(true);
     expect(validateTaxId('KE', 'B123456789B').error).toBe('invalid_format');
   });
 
   it('validates Mauritian TAN identifiers as format-only', () => {
-    expect(validateTaxId('MU', '12345678').valid).toBeTrue();
+    expect(validateTaxId('MU', '12345678').valid).toBe(true);
     expect(validateTaxId('MU', '00000000').error).toBe('invalid_format');
   });
 
   it('validates Nigerian TIN identifiers as format-only', () => {
-    expect(validateTaxId('NG', '1234567890').valid).toBeTrue();
-    expect(validateTaxId('NG', '123456780001').valid).toBeTrue();
+    expect(validateTaxId('NG', '1234567890').valid).toBe(true);
+    expect(validateTaxId('NG', '123456780001').valid).toBe(true);
     expect(validateTaxId('NG', '0000000000').error).toBe('invalid_format');
   });
 
   it('validates Rwandan TIN identifiers as format-only', () => {
-    expect(validateTaxId('RW', '123456789').valid).toBeTrue();
+    expect(validateTaxId('RW', '123456789').valid).toBe(true);
     expect(validateTaxId('RW', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Tanzanian TIN identifiers as format-only', () => {
-    expect(validateTaxId('TZ', '123456789').valid).toBeTrue();
-    expect(validateTaxId('TZ', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('TZ', '123456789').valid).toBe(true);
+    expect(validateTaxId('TZ', '1234567890').valid).toBe(true);
     expect(validateTaxId('TZ', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Ugandan TIN identifiers as format-only', () => {
-    expect(validateTaxId('UG', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('UG', '1234567890').valid).toBe(true);
     expect(validateTaxId('UG', '0000000000').error).toBe('invalid_format');
   });
 
   it('validates Zambian TPIN identifiers as format-only', () => {
-    expect(validateTaxId('ZM', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('ZM', '1234567890').valid).toBe(true);
     expect(validateTaxId('ZM', '0000000000').error).toBe('invalid_format');
   });
 
   it('validates Costa Rican personal identifiers as format-only', () => {
-    expect(validateTaxId('CR', '123456789').valid).toBeTrue();
+    expect(validateTaxId('CR', '123456789').valid).toBe(true);
     expect(validateTaxId('CR', '023456789').error).toBe('invalid_format');
   });
 
   it('validates Bangladeshi eTIN identifiers as format-only', () => {
-    expect(validateTaxId('BD', '123456789012').valid).toBeTrue();
+    expect(validateTaxId('BD', '123456789012').valid).toBe(true);
     expect(validateTaxId('BD', '000000000000').error).toBe('invalid_format');
   });
 
   it('validates Nepalese PAN identifiers as format-only', () => {
-    expect(validateTaxId('NP', '123456789').valid).toBeTrue();
+    expect(validateTaxId('NP', '123456789').valid).toBe(true);
     expect(validateTaxId('NP', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Fijian TIN identifiers as format-only', () => {
-    expect(validateTaxId('FJ', '123456789').valid).toBeTrue();
+    expect(validateTaxId('FJ', '123456789').valid).toBe(true);
     expect(validateTaxId('FJ', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Papua New Guinean TIN identifiers as format-only', () => {
-    expect(validateTaxId('PG', '123456789').valid).toBeTrue();
+    expect(validateTaxId('PG', '123456789').valid).toBe(true);
     expect(validateTaxId('PG', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Jamaican TRN identifiers as format-only', () => {
-    expect(validateTaxId('JM', '123456789').valid).toBeTrue();
+    expect(validateTaxId('JM', '123456789').valid).toBe(true);
     expect(validateTaxId('JM', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Trinidad and Tobago BIR identifiers as format-only', () => {
-    expect(validateTaxId('TT', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('TT', '1234567890').valid).toBe(true);
     expect(validateTaxId('TT', '0000000000').error).toBe('invalid_format');
   });
 
   it('validates Guyanese TIN identifiers as format-only', () => {
-    expect(validateTaxId('GY', '123456789').valid).toBeTrue();
+    expect(validateTaxId('GY', '123456789').valid).toBe(true);
     expect(validateTaxId('GY', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Honduran RTN identifiers as format-only', () => {
-    expect(validateTaxId('HN', '08011990123456').valid).toBeTrue();
+    expect(validateTaxId('HN', '08011990123456').valid).toBe(true);
     expect(validateTaxId('HN', '00000000000000').error).toBe('invalid_format');
   });
 
   it('validates Armenian PSN identifiers as format-only', () => {
-    expect(validateTaxId('AM', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('AM', '1234567890').valid).toBe(true);
     expect(validateTaxId('AM', '0000000000').error).toBe('invalid_format');
   });
 
   it('validates Ethiopian TIN identifiers as format-only', () => {
-    expect(validateTaxId('ET', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('ET', '1234567890').valid).toBe(true);
     expect(validateTaxId('ET', '0000000000').error).toBe('invalid_format');
   });
 
   it('validates Namibian TIN identifiers as format-only', () => {
-    expect(validateTaxId('NA', '123456789').valid).toBeTrue();
+    expect(validateTaxId('NA', '123456789').valid).toBe(true);
     expect(validateTaxId('NA', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Belizean TIN identifiers as format-only', () => {
-    expect(validateTaxId('BZ', '123456').valid).toBeTrue();
+    expect(validateTaxId('BZ', '123456').valid).toBe(true);
     expect(validateTaxId('BZ', '000000').error).toBe('invalid_format');
   });
 
   it('validates Azerbaijani TIN identifiers as format-only', () => {
-    expect(validateTaxId('AZ', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('AZ', '1234567890').valid).toBe(true);
     expect(validateTaxId('AZ', '0000000000').error).toBe('invalid_format');
   });
 
   it('validates Cambodian TIN identifiers as format-only', () => {
-    expect(validateTaxId('KH', '123456789').valid).toBeTrue();
-    expect(validateTaxId('KH', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('KH', '123456789').valid).toBe(true);
+    expect(validateTaxId('KH', '1234567890').valid).toBe(true);
     expect(validateTaxId('KH', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Barbadian TIN identifiers as format-only', () => {
-    expect(validateTaxId('BB', '1234567890123').valid).toBeTrue();
+    expect(validateTaxId('BB', '1234567890123').valid).toBe(true);
     expect(validateTaxId('BB', '0000000000000').error).toBe('invalid_format');
   });
 
   it('validates Salvadoran NIT identifiers as format-only', () => {
-    expect(validateTaxId('SV', '0614-241287-102-5').valid).toBeTrue();
+    expect(validateTaxId('SV', '0614-241287-102-5').valid).toBe(true);
     expect(validateTaxId('SV', '0614-321287-102-5').error).toBe('invalid_format');
   });
 
   it('validates Nicaraguan RUC identifiers as format-only', () => {
-    expect(validateTaxId('NI', '001-241287-1234A').valid).toBeTrue();
+    expect(validateTaxId('NI', '001-241287-1234A').valid).toBe(true);
     expect(validateTaxId('NI', '001-321287-1234A').error).toBe('invalid_format');
   });
 
   it('validates Jordanian TIN identifiers as format-only', () => {
-    expect(validateTaxId('JO', '123456789').valid).toBeTrue();
+    expect(validateTaxId('JO', '123456789').valid).toBe(true);
     expect(validateTaxId('JO', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Bolivian NIT identifiers as format-only', () => {
-    expect(validateTaxId('BO', '1234567').valid).toBeTrue();
-    expect(validateTaxId('BO', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('BO', '1234567').valid).toBe(true);
+    expect(validateTaxId('BO', '1234567890').valid).toBe(true);
     expect(validateTaxId('BO', '0000000').error).toBe('invalid_format');
   });
 
@@ -829,22 +839,22 @@ describe('tax ID validation', () => {
   });
 
   it('validates Moroccan fiscal identifiers as format-only', () => {
-    expect(validateTaxId('MA', '12345678').valid).toBeTrue();
+    expect(validateTaxId('MA', '12345678').valid).toBe(true);
     expect(validateTaxId('MA', '00000000').error).toBe('invalid_format');
   });
 
   it('validates Tunisian fiscal identifiers as format-only', () => {
-    expect(validateTaxId('TN', '1234567/A/M/000').valid).toBeTrue();
+    expect(validateTaxId('TN', '1234567/A/M/000').valid).toBe(true);
     expect(validateTaxId('TN', '0000000/A/M/000').error).toBe('invalid_format');
   });
 
   it('validates Botswana Omang identifiers as format-only', () => {
-    expect(validateTaxId('BW', '123456789').valid).toBeTrue();
+    expect(validateTaxId('BW', '123456789').valid).toBe(true);
     expect(validateTaxId('BW', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Mongolian civil registration numbers as format-only', () => {
-    expect(validateTaxId('MN', 'УБ90103112').valid).toBeTrue();
+    expect(validateTaxId('MN', 'УБ90103112').valid).toBe(true);
     expect(validateTaxId('MN', 'УБ90323112').error).toBe('invalid_format');
   });
 
@@ -853,66 +863,66 @@ describe('tax ID validation', () => {
   });
 
   it('validates Angolan NIF identifiers as format-only', () => {
-    expect(validateTaxId('AO', '1234567890').valid).toBeTrue();
+    expect(validateTaxId('AO', '1234567890').valid).toBe(true);
     expect(validateTaxId('AO', '0000000000').error).toBe('invalid_format');
   });
 
   it('validates Cape Verdean NIF identifiers', () => {
-    expect(validateTaxId('CV', '501442600').valid).toBeTrue();
+    expect(validateTaxId('CV', '501442600').valid).toBe(true);
     expect(validateTaxId('CV', '501442601').error).toBe('invalid_checksum');
   });
 
   it('validates Mozambican NUIT identifiers as format-only', () => {
-    expect(validateTaxId('MZ', '123456789').valid).toBeTrue();
+    expect(validateTaxId('MZ', '123456789').valid).toBe(true);
     expect(validateTaxId('MZ', '000000000').error).toBe('invalid_format');
   });
 
   it('validates Bhutanese citizen identifiers as format-only', () => {
-    expect(validateTaxId('BT', '12345678901').valid).toBeTrue();
+    expect(validateTaxId('BT', '12345678901').valid).toBe(true);
     expect(validateTaxId('BT', '00000000000').error).toBe('invalid_format');
   });
 
   it('validates Palestinian identity numbers', () => {
-    expect(validateTaxId('PS', '123456782').valid).toBeTrue();
+    expect(validateTaxId('PS', '123456782').valid).toBe(true);
     expect(validateTaxId('PS', '123456783').error).toBe('invalid_checksum');
   });
 
   it('validates Algerian NIF identifiers as format-only', () => {
-    expect(validateTaxId('DZ', '408 020 000 150 039').valid).toBeTrue();
-    expect(validateTaxId('DZ', '41201600000606600001').valid).toBeTrue();
+    expect(validateTaxId('DZ', '408 020 000 150 039').valid).toBe(true);
+    expect(validateTaxId('DZ', '41201600000606600001').valid).toBe(true);
     expect(validateTaxId('DZ', '12345').error).toBe('invalid_length');
   });
 
   it('validates Guinean permanent fiscal identifiers', () => {
-    expect(validateTaxId('GN', '693-770-885').valid).toBeTrue();
+    expect(validateTaxId('GN', '693-770-885').valid).toBe(true);
     expect(validateTaxId('GN', '693770880').error).toBe('invalid_checksum');
   });
 
   it('validates Senegalese NINEA identifiers with optional COFI', () => {
-    expect(validateTaxId('SN', '306 7221').valid).toBeTrue();
-    expect(validateTaxId('SN', '3067221 2G2').valid).toBeTrue();
+    expect(validateTaxId('SN', '306 7221').valid).toBe(true);
+    expect(validateTaxId('SN', '3067221 2G2').valid).toBe(true);
     expect(validateTaxId('SN', '3067222').error).toBe('invalid_checksum');
     expect(validateTaxId('SN', '3067221 9G2').error).toBe('invalid_format');
   });
 
   it('validates Iraqi TIN identifiers as format-only', () => {
-    expect(validateTaxId('IQ', '377819054').valid).toBeTrue();
+    expect(validateTaxId('IQ', '377819054').valid).toBe(true);
     expect(validateTaxId('IQ', '000000000').error).toBe('invalid_format');
     expect(validateTaxId('IQ', '12345678').error).toBe('invalid_length');
     expect(validateTaxId('IQ', '1234567890').error).toBe('invalid_length');
   });
 
   it('validates Maldivian TIN identifiers as format-only', () => {
-    expect(validateTaxId('MV', '1099060').valid).toBeTrue();
+    expect(validateTaxId('MV', '1099060').valid).toBe(true);
     expect(validateTaxId('MV', '0000000').error).toBe('invalid_format');
     expect(validateTaxId('MV', '123456').error).toBe('invalid_length');
     expect(validateTaxId('MV', '12345678').error).toBe('invalid_length');
   });
 
   it('validates Samoan TIN identifiers as format-only', () => {
-    expect(validateTaxId('WS', '70004').valid).toBeTrue();
-    expect(validateTaxId('WS', '11001').valid).toBeTrue();
-    expect(validateTaxId('WS', '123456789').valid).toBeTrue();
+    expect(validateTaxId('WS', '70004').valid).toBe(true);
+    expect(validateTaxId('WS', '11001').valid).toBe(true);
+    expect(validateTaxId('WS', '123456789').valid).toBe(true);
     expect(validateTaxId('WS', '0000').error).toBe('invalid_length');
     expect(validateTaxId('WS', '1234567890').error).toBe('invalid_length');
     expect(validateTaxId('WS', '00000').error).toBe('invalid_format');
@@ -960,7 +970,7 @@ describe('tax ID validation', () => {
       normalizedValue: '123456',
       validationLevel: 'format',
     });
-    expect(validateTaxId('DM', '42').valid).toBeTrue();
+    expect(validateTaxId('DM', '42').valid).toBe(true);
     expect(validateTaxId('DM', '000000').error).toBe('invalid_format');
     expect(validateTaxId('DM', '1234567').error).toBe('invalid_length');
   });
@@ -1007,8 +1017,8 @@ describe('tax ID validation', () => {
       normalizedValue: '83401234',
       validationLevel: 'format',
     });
-    expect(validateTaxId('PA', 'E-8-340-1234').valid).toBeTrue();
-    expect(validateTaxId('PA', '8-PE-340-1234').valid).toBeTrue();
+    expect(validateTaxId('PA', 'E-8-340-1234').valid).toBe(true);
+    expect(validateTaxId('PA', '8-PE-340-1234').valid).toBe(true);
     expect(validateTaxId('PA', '8-340-1234-5').error).toBe('invalid_format');
     expect(validateTaxId('PA', '0-000-0000').error).toBe('invalid_format');
     expect(validateTaxId('PA', '83401234').error).toBe('invalid_format');
@@ -1044,9 +1054,9 @@ describe('tax ID validation', () => {
       normalizedValue: '123456601',
       validationLevel: 'format',
     });
-    expect(validateTaxId('LB', '123456').valid).toBeTrue();
-    expect(validateTaxId('LB', '123456-603').valid).toBeTrue();
-    expect(validateTaxId('LB', '123456-604').valid).toBeTrue();
+    expect(validateTaxId('LB', '123456').valid).toBe(true);
+    expect(validateTaxId('LB', '123456-603').valid).toBe(true);
+    expect(validateTaxId('LB', '123456-604').valid).toBe(true);
     expect(validateTaxId('LB', '123456-602').error).toBe('invalid_format');
     expect(validateTaxId('LB', 'ABC123').error).toBe('invalid_format');
     expect(validateTaxId('LB', '').error).toBe('empty');
@@ -1059,7 +1069,7 @@ describe('tax ID validation', () => {
       normalizedValue: '1234567890',
       validationLevel: 'format',
     });
-    expect(validateTaxId('SR', '1').valid).toBeTrue();
+    expect(validateTaxId('SR', '1').valid).toBe(true);
     expect(validateTaxId('SR', '12345678901').error).toBe('invalid_length');
     expect(validateTaxId('SR', '1234A').error).toBe('invalid_format');
     expect(validateTaxId('SR', '12 34').error).toBe('invalid_format');
@@ -1100,8 +1110,8 @@ describe('tax ID validation', () => {
     ] as const;
 
     for (const [country, valid, invalid] of cases) {
-      expect(validateTaxId(country, valid).valid).withContext(country).toBeTrue();
-      expect(validateTaxId(country, invalid).error).withContext(country).toBe('invalid_format');
+      expect(validateTaxId(country, valid).valid).toBe(true);
+      expect(validateTaxId(country, invalid).error).toBe('invalid_format');
     }
   });
 
@@ -1127,12 +1137,20 @@ describe('tax ID validation', () => {
     expect(control.errors?.['taxId'].error).toBe('invalid_checksum');
 
     control.setValue('RSSMRA85T10A562S');
-    expect(control.valid).toBeTrue();
+    expect(control.valid).toBe(true);
   });
 
   it('leaves empty-value validation to Validators.required', () => {
     const control = new FormControl('', [Validators.required, taxIdValidator('IT')]);
 
     expect(control.errors).toEqual({ required: true });
+  });
+
+  it('uses policy mode by default and supports strict Angular validation', () => {
+    const advisory = new FormControl('12', taxIdValidator('SO'));
+    const strict = new FormControl('12', taxIdValidator('SO', { mode: 'strict' }));
+
+    expect(advisory.valid).toBe(true);
+    expect(strict.errors?.['taxId'].error).toBe('invalid_length');
   });
 });

@@ -28,6 +28,14 @@ field checks to `[Required]` and matching the Angular validator's behavior.
 It also returns a structured failure message rather than throwing, which is
 compatible with ASP.NET Core `ModelState` and problem-detail payloads.
 
+The default policy mode rejects only definitive failures. Use strict mode when
+every failed local check must block the request:
+
+```csharp
+[ValidTaxId(nameof(Country), Mode = TaxIdValidationMode.Strict)]
+public string? TaxId { get; init; }
+```
+
 ## Action filter
 
 `TaxIdValidationFilter` validates incoming requests centrally and produces

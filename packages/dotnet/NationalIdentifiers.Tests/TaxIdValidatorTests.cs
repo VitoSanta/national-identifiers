@@ -85,6 +85,19 @@ public class TaxIdValidatorTests
     }
 
     [Fact]
+    public void Policy_Uses_Value_Specific_Metadata_For_Mixed_Validation_Levels()
+    {
+        Assert.Equal(TaxIdCheckOutcome.Warn, TaxIdPolicy.Evaluate(V.Validate("CZ", "531332/123")));
+        Assert.Equal(TaxIdCheckOutcome.Block, TaxIdPolicy.Evaluate(V.Validate("CZ", "800101/0007")));
+        Assert.Equal(TaxIdCheckOutcome.Warn, TaxIdPolicy.Evaluate(V.Validate("SK", "531332/123")));
+        Assert.Equal(TaxIdCheckOutcome.Block, TaxIdPolicy.Evaluate(V.Validate("SK", "800101/0007")));
+        Assert.Equal(TaxIdCheckOutcome.Warn, TaxIdPolicy.Evaluate(V.Validate("ID", "3173013213990001")));
+        Assert.Equal(TaxIdCheckOutcome.Block, TaxIdPolicy.Evaluate(V.Validate("ID", "123456789012345")));
+        Assert.Equal(TaxIdCheckOutcome.Warn, TaxIdPolicy.Evaluate(V.Validate("SG", "M1234567!")));
+        Assert.Equal(TaxIdCheckOutcome.Block, TaxIdPolicy.Evaluate(V.Validate("SG", "S1234567A")));
+    }
+
+    [Fact]
     public void Spain()
     {
         Ok("ES", "12345678Z");

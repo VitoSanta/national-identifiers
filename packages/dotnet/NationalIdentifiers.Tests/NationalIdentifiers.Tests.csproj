@@ -30,4 +30,10 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\..\tests\fixtures\cross-runtime-contract.json"
+          Link="cross-runtime-contract.json"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
