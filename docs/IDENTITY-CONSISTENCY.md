@@ -104,12 +104,22 @@ region can be checked.
 
 ## Delivery Plan
 
-1. Define cross-runtime request, result and capability models.
-2. Implement Italy in TypeScript and .NET from institutional rules.
-3. Add shared fixtures for ordinary, omocodic and historical cases.
+1. ~~Define cross-runtime request, result and capability models.~~ Done:
+   `validateTaxIdIdentity` / `taxIdIdentityCapability` (TS) and
+   `TaxIdIdentityValidator.Validate` / `.Capability` (.NET) share the same
+   status, field-name and result semantics.
+2. ~~Implement Italy in TypeScript and .NET from institutional rules.~~ Done:
+   surname/given-name encoding with diacritic folding, birth date, sex via
+   the +40 day offset, Belfiore birthplace code and omocodia decoding.
+3. ~~Add shared fixtures for ordinary, omocodic and historical cases.~~ Done:
+   `tests/fixtures/identity-consistency-contract.json` is consumed unchanged
+   by the Node.js and xUnit suites (ordinary, omocodic, female, diacritic,
+   mismatch, partial, insufficient-data and not-supported cases).
 4. Add Angular and ASP.NET integration only after the core contract stabilizes.
 5. Expand country by country where official semantics make meaningful checks
    possible.
 
-This feature is a candidate for a post-0.2 release after identifier families
-are modeled explicitly.
+Steps 1-3 shipped ahead of the identifier-families work; the API is additive
+and does not touch the stable `validateTaxId` contract. Historical
+municipality catalogues and official name-collision edge cases remain open
+items for the Italian slice.

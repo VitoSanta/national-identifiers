@@ -152,6 +152,7 @@ export * from './lib/countries/timor-leste';
 export * from './lib/countries/togo';
 export * from './lib/countries/zimbabwe';
 export * from './lib/check-outcome';
+export * from './lib/identity-consistency';
 export * from './lib/models';
 export * from './lib/normalize';
 export * from './lib/supported-countries';

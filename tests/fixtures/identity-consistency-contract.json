@@ -1,0 +1,210 @@
+[
+  {
+    "country": "IT",
+    "taxId": "RSSMRA85T10A562S",
+    "identity": {
+      "firstName": "Mario",
+      "lastName": "Rossi",
+      "birthDate": "1985-12-10",
+      "gender": "M",
+      "birthPlaceCode": "A562"
+    },
+    "status": "match",
+    "taxIdValid": true,
+    "checkedFields": [
+      "lastName",
+      "firstName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ],
+    "mismatchedFields": [],
+    "missingFields": []
+  },
+  {
+    "country": "IT",
+    "taxId": "RSSMRA85T10A56NH",
+    "identity": {
+      "firstName": "Mario",
+      "lastName": "Rossi",
+      "birthDate": "1985-12-10",
+      "gender": "M",
+      "birthPlaceCode": "A562"
+    },
+    "status": "match",
+    "taxIdValid": true,
+    "checkedFields": [
+      "lastName",
+      "firstName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ],
+    "mismatchedFields": [],
+    "missingFields": []
+  },
+  {
+    "country": "IT",
+    "taxId": "BNCMRA85T50A562C",
+    "identity": {
+      "firstName": "Maria",
+      "lastName": "Bianchi",
+      "birthDate": "1985-12-10",
+      "gender": "F",
+      "birthPlaceCode": "A562"
+    },
+    "status": "match",
+    "taxIdValid": true,
+    "checkedFields": [
+      "lastName",
+      "firstName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ],
+    "mismatchedFields": [],
+    "missingFields": []
+  },
+  {
+    "country": "IT",
+    "taxId": "RSSMRA85T10A562S",
+    "identity": {
+      "firstName": "Mario",
+      "lastName": "Rossi",
+      "birthDate": "1985-12-11",
+      "gender": "M",
+      "birthPlaceCode": "A562"
+    },
+    "status": "mismatch",
+    "taxIdValid": true,
+    "checkedFields": [
+      "lastName",
+      "firstName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ],
+    "mismatchedFields": [
+      "birthDate"
+    ],
+    "missingFields": []
+  },
+  {
+    "country": "IT",
+    "taxId": "RSSMRA85T10A562S",
+    "identity": {
+      "firstName": "Mario",
+      "lastName": "Rossi",
+      "birthDate": "1985-12-10",
+      "gender": "F",
+      "birthPlaceCode": "A562"
+    },
+    "status": "mismatch",
+    "taxIdValid": true,
+    "checkedFields": [
+      "lastName",
+      "firstName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ],
+    "mismatchedFields": [
+      "gender"
+    ],
+    "missingFields": []
+  },
+  {
+    "country": "IT",
+    "taxId": "RSSMRA85T10A562S",
+    "identity": {
+      "birthDate": "1985-12-10",
+      "gender": "M"
+    },
+    "status": "partial_match",
+    "taxIdValid": true,
+    "checkedFields": [
+      "birthDate",
+      "gender"
+    ],
+    "mismatchedFields": [],
+    "missingFields": [
+      "firstName",
+      "lastName",
+      "birthPlaceCode"
+    ]
+  },
+  {
+    "country": "IT",
+    "taxId": "RSSNCL85T10A562B",
+    "identity": {
+      "firstName": "Nicolò",
+      "lastName": "Rossi"
+    },
+    "status": "partial_match",
+    "taxIdValid": true,
+    "checkedFields": [
+      "lastName",
+      "firstName"
+    ],
+    "mismatchedFields": [],
+    "missingFields": [
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ]
+  },
+  {
+    "country": "IT",
+    "taxId": "RSSMRA85T10A562S",
+    "identity": {},
+    "status": "insufficient_data",
+    "taxIdValid": true,
+    "checkedFields": [],
+    "mismatchedFields": [],
+    "missingFields": [
+      "firstName",
+      "lastName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ]
+  },
+  {
+    "country": "IT",
+    "taxId": "RSSMRA85",
+    "identity": {
+      "firstName": "Mario",
+      "lastName": "Rossi",
+      "birthDate": "1985-12-10",
+      "gender": "M",
+      "birthPlaceCode": "A562"
+    },
+    "status": "insufficient_data",
+    "taxIdValid": false,
+    "checkedFields": [],
+    "mismatchedFields": [],
+    "missingFields": [
+      "firstName",
+      "lastName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ]
+  },
+  {
+    "country": "DE",
+    "taxId": "12345678911",
+    "identity": {
+      "firstName": "Mario",
+      "lastName": "Rossi",
+      "birthDate": "1985-12-10",
+      "gender": "M",
+      "birthPlaceCode": "A562"
+    },
+    "status": "not_supported",
+    "taxIdValid": true,
+    "checkedFields": [],
+    "mismatchedFields": [],
+    "missingFields": []
+  }
+]

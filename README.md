@@ -800,10 +800,35 @@ controls will apply:
 
 ## Technical Roadmap
 
-The maintained roadmap lives in [ROADMAP.md](ROADMAP.md). Design work for
-optional matching between encoded identifier data and user-supplied
-biographical attributes is documented separately in
-[Identity Consistency Validation](docs/IDENTITY-CONSISTENCY.md).
+The maintained roadmap lives in [ROADMAP.md](ROADMAP.md). Optional matching
+between encoded identifier data and user-supplied biographical attributes is
+documented in [Identity Consistency Validation](docs/IDENTITY-CONSISTENCY.md);
+the cross-runtime contract and the Italian first slice are implemented:
+
+```ts
+import { validateTaxIdIdentity } from 'tax-id';
+
+const result = validateTaxIdIdentity({
+  country: 'IT',
+  taxId: 'RSSMRA85T10A562S',
+  identity: {
+    firstName: 'Mario',
+    lastName: 'Rossi',
+    birthDate: '1985-12-10',
+    gender: 'M',
+    birthPlaceCode: 'A562',
+  },
+});
+// result.status: 'match' | 'partial_match' | 'mismatch'
+//              | 'insufficient_data' | 'not_supported'
+```
+
+The .NET equivalent is `TaxIdIdentityValidator.Validate(country, taxId, new
+TaxIdIdentity(...))`. Capabilities are declared per country
+(`taxIdIdentityCapability('IT')` / `TaxIdIdentityValidator.Capability("IT")`);
+omocodia, diacritics and the female day-offset are handled. A `match` means
+only that the identifier can be derived from compatible data — it is not
+identity verification, and no personal value is logged or echoed back.
 
 ---
 

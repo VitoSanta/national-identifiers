@@ -3,6 +3,18 @@
 All notable changes to this project are documented in this file. The project
 follows Semantic Versioning.
 
+## [Unreleased]
+
+### Added
+
+- Identity consistency validation (docs/IDENTITY-CONSISTENCY.md, steps 1-3):
+  `validateTaxIdIdentity` and `taxIdIdentityCapability` in TypeScript,
+  `TaxIdIdentityValidator` in .NET. The Italian first slice compares a
+  Codice Fiscale with first name, last name, birth date, sex and Belfiore
+  birthplace code, handling omocodia, diacritics and the female day offset.
+  Results carry status and field names only — personal values are never
+  echoed back. Shared fixtures keep both runtimes aligned.
+
 ## [0.1.0] - 2026-06-12
 
 Initial public release.

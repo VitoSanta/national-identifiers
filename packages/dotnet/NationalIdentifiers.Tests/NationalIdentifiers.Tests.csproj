@@ -34,6 +34,9 @@
     <None Include="..\..\..\tests\fixtures\cross-runtime-contract.json"
           Link="cross-runtime-contract.json"
           CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\tests\fixtures\identity-consistency-contract.json"
+          Link="identity-consistency-contract.json"
+          CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
