@@ -7,6 +7,11 @@ import { isSupportedTaxIdCountry } from './supported-countries';
 import { isSupportedTaxIdTerritory } from './territory-registry';
 import { validateTaxId } from './validate-tax-id';
 import { VAT_VALIDATION_REGISTRY } from './vat-registry';
+import {
+  validateBrazilianCnpj,
+  validateIndianGstin,
+  validateAustralianAcn,
+} from './countries/company-tax-id';
 
 export interface IdentifierValidationRequest {
   readonly country: string | null | undefined;
@@ -16,7 +21,21 @@ export interface IdentifierValidationRequest {
 
 type IdentifierValidator = (value: unknown) => TaxIdValidationResult;
 
-const COMPANY_TAX_ID_REGISTRY: Readonly<Record<string, IdentifierValidator>> = {};
+const COMPANY_TAX_ID_REGISTRY: Readonly<Record<string, IdentifierValidator>> = {
+  AU: validateAustralianAcn,
+  BR: validateBrazilianCnpj,
+  IN: validateIndianGstin,
+};
+
+export const SUPPORTED_COMPANY_TAX_COUNTRIES = Object.freeze(
+  Object.keys(COMPANY_TAX_ID_REGISTRY).sort(),
+);
+
+const supportedCompanyTaxCountries = new Set<string>(SUPPORTED_COMPANY_TAX_COUNTRIES);
+
+export function isSupportedCompanyTaxCountry(country: unknown): boolean {
+  return typeof country === 'string' && supportedCompanyTaxCountries.has(country);
+}
 
 export const SUPPORTED_IDENTIFIER_TYPES = Object.freeze([
   'tax_id_person',

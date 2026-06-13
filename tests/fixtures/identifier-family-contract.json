@@ -518,5 +518,61 @@
     "valid": false,
     "error": "invalid_checksum",
     "outcome": "block"
+  },
+  {
+    "country": "BR",
+    "type": "tax_id_company",
+    "value": "11.222.333/0001-81",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "BR",
+    "type": "tax_id_company",
+    "value": "11222333000182",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "IN",
+    "type": "tax_id_company",
+    "value": "27AAPFU0939F1ZV",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "IN",
+    "type": "tax_id_company",
+    "value": "27AAPFU0939F1ZW",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "AU",
+    "type": "tax_id_company",
+    "value": "010 499 966",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "AU",
+    "type": "tax_id_company",
+    "value": "010499967",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "DE",
+    "type": "tax_id_company",
+    "value": "12345",
+    "valid": false,
+    "error": "unsupported_identifier_type",
+    "outcome": "warn"
   }
 ]

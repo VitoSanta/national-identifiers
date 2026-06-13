@@ -19,7 +19,11 @@ alphanumeric French key variants remain unsupported. The Latvian VAT rule
 covers legal-entity registration numbers rather than historical personal
 codes. The Bulgarian VAT rule covers the 9-digit EIK and the 10-digit
 sole-trader (EGN) check; foreigner (PNF) and miscellaneous 10-digit variants
-are not validated. Other VAT and `tax_id_company` combinations return
+are not validated. The `tax_id_company` family is implemented for Brazil
+(CNPJ), India (GSTIN) and Australia (ACN); further company identifiers (e.g.
+Korea BRN, Turkey VKN, Singapore UEN, Japan corporate number) are candidates
+pending a confirmed public algorithm and a verifiable example. Other VAT and
+`tax_id_company` combinations return
 `unsupported_identifier_type`; they are not silently routed through personal
 tax-id rules.
 

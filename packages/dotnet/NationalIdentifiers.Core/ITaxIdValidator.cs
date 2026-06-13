@@ -14,6 +14,9 @@ public interface ITaxIdValidator
     /// <summary>Gets countries with dedicated offline VAT validation.</summary>
     IReadOnlyList<string> SupportedVatCountries { get; }
 
+    /// <summary>Gets countries with dedicated company/entity tax validation.</summary>
+    IReadOnlyList<string> SupportedCompanyTaxCountries { get; }
+
     /// <summary>
     /// Validates <paramref name="value"/> as a national identifier for <paramref name="country"/>.
     /// </summary>

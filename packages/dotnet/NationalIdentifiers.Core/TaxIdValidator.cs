@@ -14,6 +14,9 @@ public class TaxIdValidator : ITaxIdValidator
     /// <inheritdoc />
     public IReadOnlyList<string> SupportedVatCountries => VatCountries.Supported;
 
+    /// <inheritdoc />
+    public IReadOnlyList<string> SupportedCompanyTaxCountries => CompanyTaxCountries.Supported;
+
     /// <summary>Validates a national identifier for an ISO 3166-1 alpha-2 country code.</summary>
     /// <param name="country">The two-letter country code.</param>
     /// <param name="value">The identifier to normalize and validate.</param>
@@ -264,6 +267,9 @@ public class TaxIdValidator : ITaxIdValidator
             ("SE", IdentifierType.Vat) => EuropeanVat.Sweden(value),
             ("SI", IdentifierType.Vat) => EuropeanVat.Slovenia(value),
             ("SK", IdentifierType.Vat) => EuropeanVat.Slovakia(value),
+            ("AU", IdentifierType.TaxIdCompany) => CompanyTaxId.Australia(value),
+            ("BR", IdentifierType.TaxIdCompany) => CompanyTaxId.Brazil(value),
+            ("IN", IdentifierType.TaxIdCompany) => CompanyTaxId.India(value),
             _ => null,
         };
 

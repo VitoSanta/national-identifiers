@@ -328,6 +328,12 @@ Per-country VAT (each sourced before coding):
       business identifiers will be added incrementally as public algorithms
       and representative institutional examples are sourced — ongoing, not a
       release blocker.
+- [x] First **`tax_id_company`** batch: Brazil (CNPJ, two-pass modulo 11),
+      India (GSTIN, modulo-36 check) and Australia (ACN, modulo-10 ASIC),
+      mirrored in both runtimes with real-example fixtures. Further company
+      identifiers (Korea BRN, Turkey VKN, Singapore UEN, Japan corporate
+      number) are documented as candidates pending a confirmed algorithm and
+      a verifiable example.
 - [x] **VIES / live registry lookups**: explicitly an *optional online add-on*
       package, kept OUT of the offline core (offline = format/checksum only).
 

@@ -7,6 +7,10 @@ import {
   isSupportedTaxIdTerritory,
 } from './territory-registry';
 import { SUPPORTED_VAT_COUNTRIES, isSupportedVatCountry } from './vat-registry';
+import {
+  SUPPORTED_COMPANY_TAX_COUNTRIES,
+  isSupportedCompanyTaxCountry,
+} from './validate-identifier';
 
 describe('supported countries', () => {
   it('exposes an alphabetically sorted immutable list', () => {
@@ -51,5 +55,12 @@ describe('supported countries', () => {
     expect(isSupportedVatCountry('FR')).toBe(true);
     expect(isSupportedVatCountry('ES')).toBe(true);
     expect(isSupportedVatCountry('US')).toBe(false);
+  });
+
+  it('exposes dedicated company tax coverage separately', () => {
+    expect(SUPPORTED_COMPANY_TAX_COUNTRIES).toEqual(['AU', 'BR', 'IN']);
+    expect(Object.isFrozen(SUPPORTED_COMPANY_TAX_COUNTRIES)).toBe(true);
+    expect(isSupportedCompanyTaxCountry('BR')).toBe(true);
+    expect(isSupportedCompanyTaxCountry('DE')).toBe(false);
   });
 });

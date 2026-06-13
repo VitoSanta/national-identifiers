@@ -225,8 +225,10 @@ The family API currently exposes `tax_id_person`, `vat` and
 `tax_id_company`. Personal identifiers use the established coverage; offline
 VAT format/checksum validation is implemented for all 27 EU countries: AT,
 BE, BG, CY, CZ, DE, DK, EE, ES, FI, FR, GR, HR, HU, IE, IT, LT, LU, LV, MT,
-NL, PL, PT, RO, SE, SI and SK, plus AU, CH, GB and NO. Unsupported country/family
-combinations return `unsupported_identifier_type`.
+NL, PL, PT, RO, SE, SI and SK, plus AU, CH, GB and NO. Offline
+`tax_id_company` checksum validation is implemented for Brazil (CNPJ), India
+(GSTIN) and Australia (ACN). Unsupported country/family combinations return
+`unsupported_identifier_type`.
 
 ---
 

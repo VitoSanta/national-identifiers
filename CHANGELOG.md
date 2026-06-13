@@ -12,8 +12,10 @@ follows Semantic Versioning.
   `TaxIdValidator.Validate(country, type, value)`. Dedicated offline VAT
   format/checksum validation covers all 27 EU countries: AT, BE, BG, CY, CZ,
   DE, DK, EE, ES, FI, FR (numeric key), GR, HR, HU, IE, IT, LT, LU, LV, MT,
-  NL, PL, PT, RO, SE, SI and SK, plus AU (ABN), CH (UID), GB and NO. Unsupported
-  family/country combinations do not fall back to personal TIN rules.
+  NL, PL, PT, RO, SE, SI and SK, plus AU (ABN), CH (UID), GB and NO. The
+  `tax_id_company` family is implemented for Brazil (CNPJ), India (GSTIN) and
+  Australia (ACN). Unsupported family/country combinations do not fall back to
+  personal TIN rules.
 - Full Mexican CURP identity consistency, including name initials, internal
   consonants, common first names, surname particles, inconvenient-word
   substitution and the CURP check digit. Mexico is now the second `full`
