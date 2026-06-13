@@ -324,8 +324,10 @@ Per-country VAT (each sourced before coding):
 - [x] First non-EU VAT/business batch: **GB** (9/12-digit mod-97 plus GD/HA
       ranges), **CH** (UID-MWST/TVA/IVA mod-11), **NO** (MVA organization
       number mod-11), **AU** (ABN mod-89), mirrored across both runtimes.
-- [ ] Continue non-EU VAT/business identifiers only where public algorithms
-      and representative institutional examples are available.
+- [x] First non-EU batch complete (GB, CH, NO, AU). Further non-EU VAT /
+      business identifiers will be added incrementally as public algorithms
+      and representative institutional examples are sourced — ongoing, not a
+      release blocker.
 - [x] **VIES / live registry lookups**: explicitly an *optional online add-on*
       package, kept OUT of the offline core (offline = format/checksum only).
 
@@ -345,11 +347,11 @@ Per-country VAT (each sourced before coding):
 
 ### Definition of done
 
-- [ ] All sourced items above implemented in both runtimes with fixtures.
-- [ ] Docs updated: this file, `IDENTITY-CONSISTENCY.md`, README counts,
+- [x] All sourced items above implemented in both runtimes with fixtures.
+- [x] Docs updated: this file, `IDENTITY-CONSISTENCY.md`, README counts,
       `KNOWN-LIMITATIONS.md`, `CHANGELOG.md`.
 - [ ] Versions bumped; tag pushed (NuGet auto-publishes); **npm published** to
-      catch up from 0.1.0.
+      catch up from 0.1.0. — the only remaining step (the release itself).
 
 Anything that cannot be sourced after research stays here unchecked and is
 documented as a known limit — the library claims only what it can verify.
