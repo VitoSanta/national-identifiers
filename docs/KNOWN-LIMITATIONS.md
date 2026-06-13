@@ -98,6 +98,22 @@ Sezione svuotata il 12-06-2026: le ultime 12 voci (TD, KM, DJ, GQ, ER, GM, NE,
 SO, TM, YE, KI, TO) sono state implementate con struttura format-only, poiché
 non sono disponibili algoritmi di checksum pubblici per questi paesi.
 
+## Territories researched but not validated
+
+These ISO 3166-1 territories were researched for the expansion roadmap but
+expose no institutionally documented structure or check digit that can be
+validated honestly, so they are intentionally not supported:
+
+- Gibraltar (GI): taxpayer reference is numeric only, with no published fixed
+  length or check digit.
+- Isle of Man (IM): individuals use UK NINO-style references that overlap the
+  GB rules; not separately modelled.
+- Macao (MO): the resident-ID check digit algorithm is not publicly documented.
+- Aruba (AW), Curaçao (CW), Sint Maarten (SX): persoonsnummer / crib structure
+  is not institutionally documented.
+
+They will be added if an official source becomes available.
+
 ## Country limitations to revisit
 
 These countries are supported with deliberately reduced validation and should

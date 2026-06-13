@@ -10,7 +10,7 @@ public static class TaxIdTerritories
 {
     private static readonly ReadOnlyCollection<string> Codes = Array.AsReadOnly(
     [
-        "FO", "GL", "HK", "PR", "TW"
+        "FO", "GG", "GL", "HK", "JE", "PR", "TW"
     ]);
 
     private static readonly HashSet<string> CodeSet = new(Codes, StringComparer.OrdinalIgnoreCase);

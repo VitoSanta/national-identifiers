@@ -31,7 +31,7 @@ public class TaxIdValidatorTests
     [Fact]
     public void SupportedTerritories_ArePublicSortedAndReadOnly()
     {
-        Assert.Equal(["FO", "GL", "HK", "PR", "TW"], V.SupportedTerritories);
+        Assert.Equal(["FO", "GG", "GL", "HK", "JE", "PR", "TW"], V.SupportedTerritories);
         Assert.DoesNotContain(V.SupportedTerritories, V.SupportedCountries.Contains);
         Assert.True(TaxIdTerritories.IsSupported(" hk "));
         Assert.False(TaxIdTerritories.IsSupported("IT"));

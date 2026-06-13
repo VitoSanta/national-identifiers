@@ -18,11 +18,11 @@ follows Semantic Versioning.
   consonants, common first names, surname particles, inconvenient-word
   substitution and the CURP check digit. Mexico is now the second `full`
   identity capability after Italy.
-- Tax-id validation for five ISO territories, tracked separately from the
+- Tax-id validation for seven ISO territories, tracked separately from the
   195-state invariant: Hong Kong and Taiwan with checksum validation,
-  Greenland and the Faroe Islands through Danish CPR rules, and Puerto Rico
-  through US SSN rules. Both runtimes expose a dedicated supported-territory
-  list.
+  Greenland and the Faroe Islands through Danish CPR rules, Puerto Rico
+  through US SSN rules, and Jersey and Guernsey as OECD-sourced format-only
+  rules. Both runtimes expose a dedicated supported-territory list.
 - Identity consistency now covers 47 jurisdictions (was 38). Ten decode a
   national identity document validated independently of the tax identifier:
   Egypt (National ID), France (NIR), Kuwait (Civil ID), Mexico (CURP),

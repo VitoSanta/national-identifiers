@@ -235,9 +235,9 @@ combinations return `unsupported_identifier_type`.
 The current scope represents all 195 commonly recognised states: 193 UN
 members, Palestine and Vatican City. Every entry is classified as checksum,
 format-level or `not_applicable`; coverage does not imply equal confidence.
-Five ISO territories are supported through a separate registry: Faroe Islands,
-Greenland, Hong Kong, Puerto Rico and Taiwan. They do not alter the 195-state
-coverage invariant.
+Seven ISO territories are supported through a separate registry: Faroe
+Islands, Greenland, Guernsey, Hong Kong, Jersey, Puerto Rico and Taiwan. They
+do not alter the 195-state coverage invariant.
 
 See the [country catalogue](docs/COUNTRY-COVERAGE.md), the
 [known limitations](docs/KNOWN-LIMITATIONS.md), and the package-specific

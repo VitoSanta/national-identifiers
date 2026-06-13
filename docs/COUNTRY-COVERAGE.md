@@ -277,17 +277,18 @@ Per territory (source → TS validator → .NET validator → fixtures → tests
       validator (reuse, don't reimplement).
 - [x] **GL** Greenland & **FO** Faroe — use the Danish CPR system: reuse the
       `DK` validator and the `DK` identity decoder (date + sex) verbatim.
-- [ ] **MO** Macao — resident ID (prefix 1/5/7 + 6 digits + parenthesised
-      check); verify the check-digit source before coding.
+- [x] Macao (MO) resident ID — the parenthesised check digit has no published
+      algorithm; documented as a limit (see the entry below).
 - [x] **PR** Puerto Rico — personal identifier is the US SSN/ITIN (reuse `US`);
       the local merchant-registration number is separate and out of scope.
-- [ ] **GI** Gibraltar, **JE** Jersey, **GG** Guernsey, **IM** Isle of Man —
-      verify each tax-reference format (UK-linked); implement those with a
-      documented structure.
-- [ ] **AW** Aruba, **CW** Curaçao, **SX** Sint Maarten — verify
-      persoonsnummer / crib structure.
-- [ ] Sweep remaining ISO 3166-1 territories with autonomous tax systems and
-      record which expose a documented format vs. which do not.
+- [x] **JE** Jersey (JY + 6 digits + letter) and **GG** Guernsey (digit + 2
+      letters + 6 digits + optional letter) — format-only, OECD AEOI-sourced.
+- [x] Researched, documented as limits (no public fixed structure or check
+      digit to validate honestly): Gibraltar (numerals only, no fixed length),
+      Isle of Man (UK NINO-style, overlaps GB), Macao (no published check
+      algorithm), Aruba, Curaçao and Sint Maarten (persoonsnummer/crib
+      structure not institutionally documented). Recorded in
+      `KNOWN-LIMITATIONS.md`; revisit if an official source appears.
 
 ### Workstream B — VAT & business identifiers (new identifier family)
 

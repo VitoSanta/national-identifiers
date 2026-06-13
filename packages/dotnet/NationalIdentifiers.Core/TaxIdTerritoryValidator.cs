@@ -8,8 +8,10 @@ internal static class TaxIdTerritoryValidator
         territory switch
         {
             "FO" => Denmark.Validate(value) with { Country = "FO" },
+            "GG" => CrownDependencies.ValidateGuernsey(value),
             "GL" => Denmark.Validate(value) with { Country = "GL" },
             "HK" => HongKong.Validate(value),
+            "JE" => CrownDependencies.ValidateJersey(value),
             "PR" => UnitedStates.Validate(value) with { Country = "PR" },
             "TW" => Taiwan.Validate(value),
             _ => ValidationResult.Fail(

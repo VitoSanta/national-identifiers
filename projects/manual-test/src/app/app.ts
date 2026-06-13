@@ -222,8 +222,10 @@ export class App {
 
   protected readonly territories = [
     { code: 'FO', label: 'Isole Faroe' },
+    { code: 'GG', label: 'Guernsey' },
     { code: 'GL', label: 'Groenlandia' },
     { code: 'HK', label: 'Hong Kong' },
+    { code: 'JE', label: 'Jersey' },
     { code: 'PR', label: 'Porto Rico' },
     { code: 'TW', label: 'Taiwan' },
   ];

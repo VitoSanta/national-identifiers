@@ -34,7 +34,7 @@ describe('supported countries', () => {
   });
 
   it('keeps supported territories in a separate immutable list', () => {
-    expect(SUPPORTED_TAX_ID_TERRITORIES).toEqual(['FO', 'GL', 'HK', 'PR', 'TW']);
+    expect(SUPPORTED_TAX_ID_TERRITORIES).toEqual(['FO', 'GG', 'GL', 'HK', 'JE', 'PR', 'TW']);
     expect(Object.isFrozen(SUPPORTED_TAX_ID_TERRITORIES)).toBe(true);
     expect(isSupportedTaxIdTerritory('HK')).toBe(true);
     expect(isSupportedTaxIdTerritory('IT')).toBe(false);

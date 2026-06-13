@@ -4,6 +4,7 @@ import { validateHongKongTaxId } from './countries/hong-kong';
 import { validateTaiwanTaxId } from './countries/taiwan';
 import { validateDanishTaxId } from './countries/denmark';
 import { validateUnitedStatesTaxId } from './countries/united-states';
+import { validateJerseyTaxId, validateGuernseyTaxId } from './countries/crown-dependencies';
 
 /**
  * ISO 3166-1 codes for jurisdictions and territories with autonomous tax
@@ -11,7 +12,7 @@ import { validateUnitedStatesTaxId } from './countries/united-states';
  * `validateTaxId` entry point but tracked in a separate set so the 195-state
  * coverage invariant stays exact. See docs/COUNTRY-COVERAGE.md.
  */
-export type TaxIdTerritory = 'FO' | 'GL' | 'HK' | 'PR' | 'TW';
+export type TaxIdTerritory = 'FO' | 'GG' | 'GL' | 'HK' | 'JE' | 'PR' | 'TW';
 
 function withCountry(
   result: TaxIdValidationResult,
@@ -38,8 +39,10 @@ export const TAX_ID_TERRITORY_REGISTRY: Readonly<
   Record<TaxIdTerritory, TaxIdValidationEntry>
 > = {
   FO: { validate: validateFaroeTaxId },
+  GG: { validate: validateGuernseyTaxId },
   GL: { validate: validateGreenlandTaxId },
   HK: { validate: validateHongKongTaxId, validationLevel: 'checksum' },
+  JE: { validate: validateJerseyTaxId },
   PR: { validate: validatePuertoRicoTaxId },
   TW: { validate: validateTaiwanTaxId, validationLevel: 'checksum' },
 };

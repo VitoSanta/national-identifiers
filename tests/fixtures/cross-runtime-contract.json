@@ -341,5 +341,26 @@
     "valid": false,
     "error": "invalid_format",
     "outcome": "warn"
+  },
+  {
+    "country": "JE",
+    "value": "JY123456A",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "GG",
+    "value": "1AB123456C",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "JE",
+    "value": "JY12345A",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
   }
 ]

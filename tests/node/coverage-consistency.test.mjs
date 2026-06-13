@@ -199,7 +199,7 @@ test('keeps territory coverage separate and aligned across runtimes', async () =
     matches(manualTerritoryBlock, /\{ code: '([A-Z]{2})', label:/g),
   );
 
-  assert.equal(documentedTerritories.size, 5, 'territory coverage count is stale');
+  assert.equal(documentedTerritories.size, 7, 'territory coverage count is stale');
   assertSameCountries(
     'territory coverage',
     documentedTerritories,
