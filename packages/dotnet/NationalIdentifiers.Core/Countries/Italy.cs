@@ -18,7 +18,7 @@ internal static class Italy
     {
         var n = TaxIdNormalizer.Normalize(value);
         if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("IT", n, ValidationErrorCode.Empty);
-        if (n.Length == 11) return ValidateVatNumber(n);
+        if (n.Length == 11) return ValidateVatNumberNormalized(n);
         if (n.Length != 16) return ValidationResult.Fail("IT", n, ValidationErrorCode.InvalidLength);
         if (!Pattern.IsMatch(n)) return ValidationResult.Fail("IT", n, ValidationErrorCode.InvalidFormat);
 
@@ -38,7 +38,17 @@ internal static class Italy
 
     // Numeric tax IDs (partita IVA and the fiscal code assigned to legal
     // entities) share the same 11-digit layout and Luhn-style check digit.
-    private static ValidationResult ValidateVatNumber(string n)
+    internal static ValidationResult ValidateVatNumber(object? value)
+    {
+        var n = TaxIdNormalizer.Normalize(value);
+        if (string.IsNullOrEmpty(n))
+            return ValidationResult.Fail("IT", n, ValidationErrorCode.Empty);
+        if (n.Length != 11)
+            return ValidationResult.Fail("IT", n, ValidationErrorCode.InvalidLength);
+        return ValidateVatNumberNormalized(n);
+    }
+
+    private static ValidationResult ValidateVatNumberNormalized(string n)
     {
         if (!Regex.IsMatch(n, @"^\d{11}$") || n == "00000000000")
             return ValidationResult.Fail("IT", n, ValidationErrorCode.InvalidFormat);

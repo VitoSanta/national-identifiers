@@ -6,6 +6,19 @@ This package is designed for international sign-up and onboarding flows where us
 
 The package now uses a centralized `TAX_ID_VALIDATION_REGISTRY` to map ISO country codes to validator functions and rule metadata. The `taxIdCheckOutcome` helper uses this shared registry metadata to determine whether an invalid identifier should be treated as `warn` or `block`.
 
+The 195-state coverage invariant remains unchanged. Faroe Islands, Greenland,
+Hong Kong, Puerto Rico and Taiwan are exposed separately through
+`SUPPORTED_TAX_ID_TERRITORIES` and use the same `validateTaxId` entry point.
+
+Use `validateIdentifier({ country, type, value })` for explicit identifier
+families. `type` accepts `tax_id_person`, `vat` and `tax_id_company`; VAT
+format/checksum validation is available for AT, BE, CY, CZ, DE, DK, EE, ES,
+FI, FR, GR, HR, HU, IE, IT, LT, LU, LV, MT, NL, PL, PT, RO, SE, SI and SK,
+plus AU, CH, GB and NO. Use `SUPPORTED_VAT_COUNTRIES` to discover this set at
+runtime.
+Unsupported country/family combinations return
+`unsupported_identifier_type`.
+
 For countries with multiple identifier families, policy can be value-specific. Indonesian NPWP values use checksum validation while NIK values are format-only; Singapore `S`/`T`/`F`/`G` identifiers use checksum validation while `M` FIN values are format-only.
 
 The current MVP supports:

@@ -55,7 +55,7 @@ export function validateItalianFiscalCode(value: unknown): TaxIdValidationResult
   }
 
   if (normalizedValue.length === 11) {
-    return validateItalianVatNumber(normalizedValue, base);
+    return validateItalianVatNumberNormalized(normalizedValue, base);
   }
 
   if (normalizedValue.length !== 16) {
@@ -79,7 +79,7 @@ export function validateItalianFiscalCode(value: unknown): TaxIdValidationResult
 
 // Numeric tax IDs (partita IVA and the fiscal code assigned to legal
 // entities) share the same 11-digit layout and Luhn-style check digit.
-function validateItalianVatNumber(
+function validateItalianVatNumberNormalized(
   normalizedValue: string,
   base: { readonly country: string; readonly normalizedValue: string },
 ): TaxIdValidationResult {
@@ -106,6 +106,22 @@ function validateItalianVatNumber(
   }
 
   return { ...base, valid: true };
+}
+
+/** Validates an Italian 11-digit Partita IVA independently of the fiscal code family. */
+export function validateItalianVatNumber(value: unknown): TaxIdValidationResult {
+  const normalizedValue = normalizeTaxId(value);
+  const base = { country: 'IT', normalizedValue } as const;
+
+  if (!normalizedValue) {
+    return { ...base, valid: false, error: 'empty' };
+  }
+  if (normalizedValue.length !== 11) {
+    return { ...base, valid: false, error: 'invalid_length' };
+  }
+
+  const result = validateItalianVatNumberNormalized(normalizedValue, base);
+  return result.valid ? { ...result, validationLevel: 'checksum' } : result;
 }
 
 export function calculateItalianFiscalCodeCheckCharacter(first15Characters: string): string {

@@ -73,14 +73,23 @@ describe('identity consistency', () => {
   });
 
   describe('national identity documents', () => {
-    it('checks the Mexican CURP for date, sex and state', () => {
+    it('checks the Mexican CURP for name, date, sex and state', () => {
       const result = validateTaxIdIdentity({
         country: 'MX',
         taxId: 'HEGG560427MVZRRL04',
-        identity: { birthDate: '1956-04-27', gender: 'F', birthPlaceCode: 'VZ' },
+        identity: {
+          firstName: 'Gloria',
+          lastName: 'Hernández García',
+          birthDate: '1956-04-27',
+          gender: 'F',
+          birthPlaceCode: 'VZ',
+        },
       });
       expect(result.status).toBe('match');
-      expect([...result.checkedFields]).toEqual(['birthDate', 'gender', 'birthPlaceCode']);
+      expect([...result.checkedFields]).toEqual([
+        'lastName', 'firstName', 'birthDate', 'gender', 'birthPlaceCode',
+      ]);
+      expect(taxIdIdentityCapability('MX')?.level).toBe('full');
     });
 
     it('falls back to the Mexican RFC as a date-only partial check', () => {
@@ -91,7 +100,9 @@ describe('identity consistency', () => {
       });
       expect(result.status).toBe('partial_match');
       expect([...result.checkedFields]).toEqual(['birthDate']);
-      expect([...result.missingFields]).toEqual(['gender', 'birthPlaceCode']);
+      expect([...result.missingFields]).toEqual([
+        'firstName', 'lastName', 'gender', 'birthPlaceCode',
+      ]);
     });
 
     it('matches the French NIR on year and month, ignoring the absent day', () => {

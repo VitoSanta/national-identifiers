@@ -8,6 +8,12 @@ public class TaxIdValidator : ITaxIdValidator
     /// <inheritdoc />
     public IReadOnlyList<string> SupportedCountries => TaxIdCountries.Supported;
 
+    /// <inheritdoc />
+    public IReadOnlyList<string> SupportedTerritories => TaxIdTerritories.Supported;
+
+    /// <inheritdoc />
+    public IReadOnlyList<string> SupportedVatCountries => VatCountries.Supported;
+
     /// <summary>Validates a national identifier for an ISO 3166-1 alpha-2 country code.</summary>
     /// <param name="country">The two-letter country code.</param>
     /// <param name="value">The identifier to normalize and validate.</param>
@@ -213,10 +219,66 @@ public class TaxIdValidator : ITaxIdValidator
             "ZA" => SouthAfrica.Validate(value),
             "ZM" => Zambia.Validate(value),
             "ZW" => Zimbabwe.Validate(value),
-            _ => ValidationResult.Fail(
-                normalizedCountry,
-                TaxIdNormalizer.Normalize(value),
-                ValidationErrorCode.UnsupportedCountry)
+            _ => TaxIdTerritoryValidator.Validate(normalizedCountry, value)
         };
+    }
+
+    /// <inheritdoc />
+    public ValidationResult Validate(string? country, IdentifierType type, object? value)
+    {
+        var normalizedCountry = country?.Trim().ToUpperInvariant() ?? string.Empty;
+
+        if (type == IdentifierType.TaxIdPerson)
+            return Validate(normalizedCountry, value) with { IdentifierType = type };
+
+        ValidationResult? result = (normalizedCountry, type) switch
+        {
+            ("AT", IdentifierType.Vat) => EuropeanVat.Austria(value),
+            ("AU", IdentifierType.Vat) => EuropeanVat.Australia(value),
+            ("BE", IdentifierType.Vat) => EuropeanVat.Belgium(value),
+            ("CH", IdentifierType.Vat) => EuropeanVat.Switzerland(value),
+            ("CY", IdentifierType.Vat) => EuropeanVat.Cyprus(value),
+            ("CZ", IdentifierType.Vat) => EuropeanVat.CzechRepublic(value),
+            ("DE", IdentifierType.Vat) => EuropeanVat.Germany(value),
+            ("DK", IdentifierType.Vat) => EuropeanVat.Denmark(value),
+            ("EE", IdentifierType.Vat) => EuropeanVat.Estonia(value),
+            ("ES", IdentifierType.Vat) => EuropeanVat.Spain(value),
+            ("FI", IdentifierType.Vat) => EuropeanVat.Finland(value),
+            ("FR", IdentifierType.Vat) => EuropeanVat.France(value),
+            ("GB", IdentifierType.Vat) => EuropeanVat.UnitedKingdom(value),
+            ("GR", IdentifierType.Vat) => EuropeanVat.Greece(value),
+            ("HR", IdentifierType.Vat) => EuropeanVat.Croatia(value),
+            ("HU", IdentifierType.Vat) => EuropeanVat.Hungary(value),
+            ("IE", IdentifierType.Vat) => EuropeanVat.Ireland(value),
+            ("IT", IdentifierType.Vat) => EuropeanVat.Italy(value),
+            ("LT", IdentifierType.Vat) => EuropeanVat.Lithuania(value),
+            ("LU", IdentifierType.Vat) => EuropeanVat.Luxembourg(value),
+            ("LV", IdentifierType.Vat) => EuropeanVat.Latvia(value),
+            ("MT", IdentifierType.Vat) => EuropeanVat.Malta(value),
+            ("NL", IdentifierType.Vat) => EuropeanVat.Netherlands(value),
+            ("NO", IdentifierType.Vat) => EuropeanVat.Norway(value),
+            ("PL", IdentifierType.Vat) => EuropeanVat.Poland(value),
+            ("PT", IdentifierType.Vat) => EuropeanVat.Portugal(value),
+            ("RO", IdentifierType.Vat) => EuropeanVat.Romania(value),
+            ("SE", IdentifierType.Vat) => EuropeanVat.Sweden(value),
+            ("SI", IdentifierType.Vat) => EuropeanVat.Slovenia(value),
+            ("SK", IdentifierType.Vat) => EuropeanVat.Slovakia(value),
+            _ => null,
+        };
+
+        if (result is not null)
+            return result with { IdentifierType = type };
+
+        var countryKnown = TaxIdCountries.IsSupported(normalizedCountry)
+            || TaxIdTerritories.IsSupported(normalizedCountry);
+        return ValidationResult.Fail(
+            normalizedCountry,
+            TaxIdNormalizer.Normalize(value),
+            countryKnown
+                ? ValidationErrorCode.UnsupportedIdentifierType
+                : ValidationErrorCode.UnsupportedCountry) with
+            {
+                IdentifierType = type
+            };
     }
 }

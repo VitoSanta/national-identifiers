@@ -6,6 +6,7 @@ import {
   buildEncodedIdentityCheck,
 } from './countries/encoded-identity';
 import { IDENTITY_DOCUMENTS } from './countries/identity-documents';
+import { checkMexicanCurpIdentity } from './countries/mexico-identity';
 
 /**
  * Outcome of a local structural-consistency check between an identifier and
@@ -112,14 +113,23 @@ const document = (
 // Mexico exposes two documents: the CURP (date + sex + state) and the RFC
 // (date only). Accept either; decode by length.
 const mexico: IdentityChecker = {
-  capability: { level: 'partial', requiredFields: DATE_GENDER_PLACE },
+  capability: {
+    level: 'full',
+    requiredFields: ['firstName', 'lastName', 'birthDate', 'gender', 'birthPlaceCode'],
+  },
   resolve: (value) => IDENTITY_DOCUMENTS['MX'].resolve(value) ?? viaTaxId(value, 'MX'),
   check: (normalizedValue, identity) => {
     const decoder =
       normalizedValue.length === 18
         ? IDENTITY_DOCUMENTS['MX'].decode
         : ENCODED_IDENTITY_DECODERS['MX'];
-    return buildEncodedIdentityCheck(decoder)(normalizedValue, identity);
+    const encodedCheck = buildEncodedIdentityCheck(decoder)(normalizedValue, identity);
+    if (normalizedValue.length !== 18) return encodedCheck;
+    const nameCheck = checkMexicanCurpIdentity(normalizedValue, identity);
+    return {
+      checked: [...nameCheck.checked, ...encodedCheck.checked],
+      mismatched: [...nameCheck.mismatched, ...encodedCheck.mismatched],
+    };
   },
 };
 

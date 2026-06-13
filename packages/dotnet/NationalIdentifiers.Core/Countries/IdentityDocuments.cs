@@ -18,6 +18,7 @@ internal static class IdentityDocuments
 {
     private static readonly Regex Curp =
         new(@"^[A-Z]{4}\d{6}[HM][A-Z]{2}[A-Z]{3}[0-9A-Z]\d$", RegexOptions.Compiled);
+    private const string CurpCheckAlphabet = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
 
     internal static readonly IReadOnlyDictionary<string, IdentityDocument> All =
         new Dictionary<string, IdentityDocument>(StringComparer.Ordinal)
@@ -75,7 +76,12 @@ internal static class IdentityDocuments
         var n = Compact(value);
         if (!Curp.IsMatch(n)) return null;
         int century = char.IsDigit(n[16]) ? 1900 : 2000;
-        return IsValidYmd(century + Num(n, 4, 6), Num(n, 6, 8), Num(n, 8, 10)) ? n : null;
+        if (!IsValidYmd(century + Num(n, 4, 6), Num(n, 6, 8), Num(n, 8, 10)))
+            return null;
+        var sum = 0;
+        for (var index = 0; index < 17; index++)
+            sum += CurpCheckAlphabet.IndexOf(n[index]) * (18 - index);
+        return (10 - sum % 10) % 10 == n[17] - '0' ? n : null;
     }
 
     private static DecodedIdentity DecodeMexico(string n) => new(

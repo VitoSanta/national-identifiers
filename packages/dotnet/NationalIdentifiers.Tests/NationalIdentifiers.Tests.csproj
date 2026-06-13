@@ -40,6 +40,9 @@
     <None Include="..\..\..\tests\fixtures\identity-consistency-country-cases.json"
           Link="identity-consistency-country-cases.json"
           CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\tests\fixtures\identifier-family-contract.json"
+          Link="identifier-family-contract.json"
+          CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

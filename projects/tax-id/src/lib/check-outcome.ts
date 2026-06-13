@@ -1,5 +1,6 @@
 import { TaxIdValidationResult } from './models';
 import { TAX_ID_VALIDATION_REGISTRY } from './country-registry';
+import { TAX_ID_TERRITORY_REGISTRY } from './territory-registry';
 
 export type TaxIdCheckOutcome = 'accept' | 'warn' | 'block';
 
@@ -24,11 +25,16 @@ export function taxIdCheckOutcome(result: TaxIdValidationResult): TaxIdCheckOutc
       return 'block';
     case 'not_applicable':
     case 'unsupported_country':
+    case 'unsupported_identifier_type':
       return 'warn';
     default: {
-      const entry = TAX_ID_VALIDATION_REGISTRY[
-        result.country as keyof typeof TAX_ID_VALIDATION_REGISTRY
-      ];
+      const entry =
+        TAX_ID_VALIDATION_REGISTRY[
+          result.country as keyof typeof TAX_ID_VALIDATION_REGISTRY
+        ] ??
+        TAX_ID_TERRITORY_REGISTRY[
+          result.country as keyof typeof TAX_ID_TERRITORY_REGISTRY
+        ];
       const validationLevel =
         entry?.policyValidationLevel?.(result.normalizedValue) ?? entry?.validationLevel;
 

@@ -1,0 +1,506 @@
+[
+  {
+    "country": "AT",
+    "type": "vat",
+    "value": "ATU10223006",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "AT",
+    "type": "vat",
+    "value": "ATU10223007",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "BE",
+    "type": "vat",
+    "value": "BE0428.759.497",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "BE",
+    "type": "vat",
+    "value": "BE0428759498",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "DE",
+    "type": "vat",
+    "value": "DE136695976",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "DE",
+    "type": "vat",
+    "value": "DE136695977",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "DK",
+    "type": "vat",
+    "value": "DK13585628",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "DK",
+    "type": "vat",
+    "value": "DK13585629",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "EE",
+    "type": "vat",
+    "value": "EE100594102",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "EE",
+    "type": "vat",
+    "value": "EE100594103",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "FI",
+    "type": "vat",
+    "value": "FI15728600",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "FI",
+    "type": "vat",
+    "value": "FI15728601",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "FR",
+    "type": "vat",
+    "value": "FR40303265045",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "FR",
+    "type": "vat",
+    "value": "FR41303265045",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "GR",
+    "type": "vat",
+    "value": "EL094259216",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "HR",
+    "type": "vat",
+    "value": "HR33392005961",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "HR",
+    "type": "vat",
+    "value": "HR33392005962",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "HU",
+    "type": "vat",
+    "value": "HU12892312",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "HU",
+    "type": "vat",
+    "value": "HU12892313",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "IT",
+    "type": "tax_id_person",
+    "value": "RSSMRA85T10A562S",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "IT",
+    "type": "vat",
+    "value": "00743110157",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "IT",
+    "type": "vat",
+    "value": "00743110158",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "LU",
+    "type": "vat",
+    "value": "LU26375245",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "LU",
+    "type": "vat",
+    "value": "LU26375246",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "IT",
+    "type": "vat",
+    "value": "RSSMRA85T10A562S",
+    "valid": false,
+    "error": "invalid_length",
+    "outcome": "block"
+  },
+  {
+    "country": "NL",
+    "type": "vat",
+    "value": "NL123456782B01",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "NL",
+    "type": "vat",
+    "value": "NL123456783B01",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "PL",
+    "type": "vat",
+    "value": "PL8567346215",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "PL",
+    "type": "vat",
+    "value": "PL8567346216",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "PT",
+    "type": "vat",
+    "value": "PT123456789",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "SE",
+    "type": "vat",
+    "value": "SE556188840401",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "SE",
+    "type": "vat",
+    "value": "SE556188840501",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "SI",
+    "type": "vat",
+    "value": "SI15012557",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "SI",
+    "type": "vat",
+    "value": "SI15012558",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "SK",
+    "type": "vat",
+    "value": "SK2022749619",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "SK",
+    "type": "vat",
+    "value": "SK2022749618",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "CY",
+    "type": "vat",
+    "value": "CY10259033P",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CY",
+    "type": "vat",
+    "value": "CY10259033Q",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "ES",
+    "type": "vat",
+    "value": "ESA58818501",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "ES",
+    "type": "vat",
+    "value": "ESA58818502",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "LT",
+    "type": "vat",
+    "value": "LT119511515",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "LT",
+    "type": "vat",
+    "value": "LT119511516",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "LV",
+    "type": "vat",
+    "value": "LV40003009497",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "LV",
+    "type": "vat",
+    "value": "LV40003009498",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "MT",
+    "type": "vat",
+    "value": "MT11679112",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "MT",
+    "type": "vat",
+    "value": "MT11679113",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "RO",
+    "type": "vat",
+    "value": "RO14399840",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "RO",
+    "type": "vat",
+    "value": "RO14399841",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "BG",
+    "type": "vat",
+    "value": "BG123456789",
+    "valid": false,
+    "error": "unsupported_identifier_type",
+    "outcome": "warn"
+  },
+  {
+    "country": "AU",
+    "type": "vat",
+    "value": "51 824 753 556",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "AU",
+    "type": "vat",
+    "value": "51 824 753 557",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "CH",
+    "type": "vat",
+    "value": "CHE-107.787.577 MWST",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CH",
+    "type": "vat",
+    "value": "CHE-107.787.578 MWST",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "GB",
+    "type": "vat",
+    "value": "GB999 9999 73",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "GB",
+    "type": "vat",
+    "value": "GB999 9999 74",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "NO",
+    "type": "vat",
+    "value": "NO 974 760 673 MVA",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "NO",
+    "type": "vat",
+    "value": "NO 974 760 674 MVA",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "CZ",
+    "type": "vat",
+    "value": "CZ25123891",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CZ",
+    "type": "vat",
+    "value": "CZ25123892",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "IE",
+    "type": "vat",
+    "value": "IE6388047V",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "IE",
+    "type": "vat",
+    "value": "IE6388047W",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "IT",
+    "type": "tax_id_company",
+    "value": "00743110157",
+    "valid": false,
+    "error": "unsupported_identifier_type",
+    "outcome": "warn"
+  },
+  {
+    "country": "XX",
+    "type": "vat",
+    "value": "123",
+    "valid": false,
+    "error": "unsupported_country",
+    "outcome": "warn"
+  }
+]

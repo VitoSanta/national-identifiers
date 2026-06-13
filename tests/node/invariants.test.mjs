@@ -3,6 +3,7 @@ import { test } from 'node:test';
 
 import {
   SUPPORTED_TAX_ID_COUNTRIES,
+  SUPPORTED_TAX_ID_TERRITORIES,
   normalizeTaxId,
   validateTaxId,
 } from '../../dist/tax-id/fesm2022/tax-id.mjs';
@@ -38,6 +39,16 @@ test('never throws while validating generated input across supported countries',
   for (const country of SUPPORTED_TAX_ID_COUNTRIES) {
     for (const value of values) {
       assert.doesNotThrow(() => validateTaxId(country, value), `${country}: ${value}`);
+    }
+  }
+});
+
+test('never throws while validating generated input across supported territories', () => {
+  const values = generatedValues(200);
+
+  for (const territory of SUPPORTED_TAX_ID_TERRITORIES) {
+    for (const value of values) {
+      assert.doesNotThrow(() => validateTaxId(territory, value), `${territory}: ${value}`);
     }
   }
 });

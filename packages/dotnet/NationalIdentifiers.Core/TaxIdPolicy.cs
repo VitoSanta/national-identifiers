@@ -31,6 +31,11 @@ public static class TaxIdPolicy
         "RS", "RU", "SE", "SG", "SI", "SK", "SN", "TH", "TR", "UY", "VE", "ZA",
     };
 
+    private static readonly HashSet<string> ChecksumGradeTerritories = new(StringComparer.Ordinal)
+    {
+        "HK", "TW",
+    };
+
     /// <summary>Returns the registration policy decision for a validation result.</summary>
     public static TaxIdCheckOutcome Evaluate(ValidationResult result)
     {
@@ -42,6 +47,7 @@ public static class TaxIdPolicy
             ValidationErrorCode.InvalidChecksum => TaxIdCheckOutcome.Block,
             ValidationErrorCode.NotApplicable => TaxIdCheckOutcome.Warn,
             ValidationErrorCode.UnsupportedCountry => TaxIdCheckOutcome.Warn,
+            ValidationErrorCode.UnsupportedIdentifierType => TaxIdCheckOutcome.Warn,
             _ => UsesChecksumPolicy(result)
                 ? TaxIdCheckOutcome.Block
                 : TaxIdCheckOutcome.Warn,
@@ -55,6 +61,7 @@ public static class TaxIdPolicy
             "ID" when result.NormalizedValue.Length == 16 => false,
             "PE" when result.NormalizedValue.Length == 8 => false,
             "SG" when result.NormalizedValue.StartsWith('M') => false,
-            _ => ChecksumGradeCountries.Contains(result.Country),
+            _ => ChecksumGradeCountries.Contains(result.Country)
+                || ChecksumGradeTerritories.Contains(result.Country),
         };
 }

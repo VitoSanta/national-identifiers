@@ -197,17 +197,22 @@ export type TaxIdCountry =
 
 export type TaxIdValidationLevel = 'checksum' | 'format';
 
+export type IdentifierType = 'tax_id_person' | 'vat' | 'tax_id_company';
+
 export type TaxIdErrorCode =
   | 'empty'
   | 'invalid_length'
   | 'invalid_format'
   | 'invalid_checksum'
   | 'not_applicable'
-  | 'unsupported_country';
+  | 'unsupported_country'
+  | 'unsupported_identifier_type';
 
 interface TaxIdValidationResultBase {
   readonly country: string;
   readonly normalizedValue: string;
+  /** Present when validation was requested through `validateIdentifier`. */
+  readonly identifierType?: IdentifierType;
 }
 
 /** A structurally plausible identifier that passed every available local check. */

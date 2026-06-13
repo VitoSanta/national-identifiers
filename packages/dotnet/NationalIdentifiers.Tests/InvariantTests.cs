@@ -29,6 +29,20 @@ public class InvariantTests
     }
 
     [Fact]
+    public void Territory_Validation_Does_Not_Throw_For_Generated_Inputs()
+    {
+        var validator = new TaxIdValidator();
+        var values = GenerateValues(200);
+
+        foreach (var territory in validator.SupportedTerritories)
+        foreach (var value in values)
+        {
+            var exception = Record.Exception(() => validator.Validate(territory, value));
+            Assert.Null(exception);
+        }
+    }
+
+    [Fact]
     public void Identity_Consistency_Does_Not_Throw_For_Generated_Inputs()
     {
         var identity = new TaxIdIdentity("Mario", "Rossi", new DateOnly(1985, 12, 10), 'M', "A562");

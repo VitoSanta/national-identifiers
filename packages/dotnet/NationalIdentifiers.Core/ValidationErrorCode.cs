@@ -22,4 +22,7 @@ public enum ValidationErrorCode
 
     /// <summary>No rule is registered for the given country code.</summary>
     UnsupportedCountry,
+
+    /// <summary>The country is supported, but no rule exists for the requested identifier family.</summary>
+    UnsupportedIdentifierType,
 }

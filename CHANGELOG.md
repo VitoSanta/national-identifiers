@@ -7,13 +7,28 @@ follows Semantic Versioning.
 
 ### Added
 
+- Explicit identifier-family APIs in TypeScript and .NET:
+  `validateIdentifier({ country, type, value })` and
+  `TaxIdValidator.Validate(country, type, value)`. Dedicated offline VAT
+  format/checksum validation covers 26 EU countries: AT, BE, CY, CZ, DE, DK,
+  EE, ES, FI, FR (numeric key), GR, HR, HU, IE, IT, LT, LU, LV, MT, NL, PL,
+  PT, RO, SE, SI and SK, plus AU (ABN), CH (UID), GB and NO. Unsupported
+  family/country combinations do not fall back to personal TIN rules.
+- Full Mexican CURP identity consistency, including name initials, internal
+  consonants, common first names, surname particles, inconvenient-word
+  substitution and the CURP check digit. Mexico is now the second `full`
+  identity capability after Italy.
+- Tax-id validation for five ISO territories, tracked separately from the
+  195-state invariant: Hong Kong and Taiwan with checksum validation,
+  Greenland and the Faroe Islands through Danish CPR rules, and Puerto Rico
+  through US SSN rules. Both runtimes expose a dedicated supported-territory
+  list.
 - Identity consistency now covers 47 jurisdictions (was 38). Ten decode a
   national identity document validated independently of the tax identifier:
   Egypt (National ID), France (NIR), Kuwait (Civil ID), Mexico (CURP),
   Vietnam (CCCD), the UAE (Emirates ID), Bahrain (CPR), Qatar (QID),
   Bangladesh (17-digit NID) and Taiwan (National ID). Mexico still accepts the
-  RFC tax id as a date-only fallback. Taiwan is a jurisdiction outside the
-  195-state tax-id set, supported for identity consistency only.
+  RFC tax id as a date-only fallback.
 - Partial-date matching: identifiers that encode an incomplete birth date
   (France: year + month; UAE/Qatar/Bangladesh/Vietnam: year only) are compared
   to the granularity they encode and still report `birthDate` as checked.

@@ -1,7 +1,7 @@
 # NationalIdentifiers.Core
 
-Validation of national tax identifiers for **195 countries** — every commonly
-recognised state (193 UN members, Palestine, Vatican City). Pure .NET, no
+Validation of national tax identifiers for **195 countries**, plus 5
+separately tracked ISO territories (FO, GL, HK, PR, TW). Pure .NET, no
 dependencies, targets .NET 8 and .NET 10.
 
 ```csharp
@@ -13,7 +13,12 @@ var result = TaxIdValidator.Validate("IT", "RSSMRA85T10A562S");
 // result.ValidationLevel  → ValidationLevel.Checksum
 
 TaxIdValidator.Validate("IT", "00743110157");  // Partita IVA: also valid
+TaxIdValidator.Validate("IT", IdentifierType.Vat, "00743110157");
 TaxIdValidator.Validate("BR", "111.444.777-35"); // CPF: normalized and checked
+TaxIdValidator.Validate("HK", "A123456(3)"); // HKID: checksum validated
+
+var vatCountries = new TaxIdValidator().SupportedVatCountries;
+// 30 countries; inspect this immutable list at runtime
 ```
 
 ## What you get
@@ -24,6 +29,9 @@ TaxIdValidator.Validate("BR", "111.444.777-35"); // CPF: normalized and checked
   wrong.
 - **Format/structure validation for the rest** — length and pattern rules
   from institutional sources (OECD AEOI, national tax authorities).
+- **Dedicated VAT validation for 30 countries** — 26 EU countries plus
+  Australia, Switzerland, the United Kingdom and Norway, discoverable through
+  `SupportedVatCountries`, with the same coverage as the TypeScript package.
 - **Explicit confidence levels** — every successful result carries
   `ValidationLevel.Checksum` or `ValidationLevel.Format`, so you always know
   how strong the check was.
@@ -72,7 +80,8 @@ switch (outcome)
 
 Local validation confirms the value is *well-formed*, not that it was
 actually *issued* to someone. For registry-level verification use official
-services (e.g. VIES for EU VAT numbers).
+services (e.g. VIES for EU VAT numbers). Live lookups are intentionally not
+part of the offline core.
 
 ## Related packages
 

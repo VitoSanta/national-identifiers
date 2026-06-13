@@ -28,6 +28,46 @@ public class TaxIdValidatorTests
             () => ((IList<string>)V.SupportedCountries).Add("TD"));
     }
 
+    [Fact]
+    public void SupportedTerritories_ArePublicSortedAndReadOnly()
+    {
+        Assert.Equal(["FO", "GL", "HK", "PR", "TW"], V.SupportedTerritories);
+        Assert.DoesNotContain(V.SupportedTerritories, V.SupportedCountries.Contains);
+        Assert.True(TaxIdTerritories.IsSupported(" hk "));
+        Assert.False(TaxIdTerritories.IsSupported("IT"));
+        Assert.Throws<NotSupportedException>(
+            () => ((IList<string>)V.SupportedTerritories).Add("MO"));
+    }
+
+    [Fact]
+    public void SupportedVatCountries_ArePublicSortedAndReadOnly()
+    {
+        Assert.Equal([
+                "AT", "AU", "BE", "CH", "CY", "CZ", "DE", "DK", "EE", "ES",
+                "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IT", "LT", "LU",
+                "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"
+            ],
+            V.SupportedVatCountries);
+        Assert.True(VatCountries.IsSupported(" fr "));
+        Assert.True(VatCountries.IsSupported("ES"));
+        Assert.False(VatCountries.IsSupported("BG"));
+        Assert.Throws<NotSupportedException>(
+            () => ((IList<string>)V.SupportedVatCountries).Add("ES"));
+    }
+
+    [Fact]
+    public void Territories()
+    {
+        Ok("HK", "A123456(3)");
+        Err("HK", "A123456(4)", ValidationErrorCode.InvalidChecksum);
+        Ok("TW", "A123456789");
+        Err("TW", "A123456788", ValidationErrorCode.InvalidChecksum);
+        Ok("GL", "010101-1234", ValidationLevel.Format);
+        Ok("FO", "010101-1234", ValidationLevel.Format);
+        Ok("PR", "123-45-6789", ValidationLevel.Format);
+        Err("PR", "000-45-6789", ValidationErrorCode.InvalidFormat);
+    }
+
     private static void Ok(string cc, string input, ValidationLevel level = ValidationLevel.Checksum)
     {
         var r = V.Validate(cc, input);
@@ -82,6 +122,8 @@ public class TaxIdValidatorTests
         Assert.Equal(TaxIdCheckOutcome.Accept, TaxIdPolicy.Evaluate(V.Validate("SO", "12345678")));
         Assert.Equal(TaxIdCheckOutcome.Warn, TaxIdPolicy.Evaluate(V.Validate("AE", "123456789")));
         Assert.Equal(TaxIdCheckOutcome.Warn, TaxIdPolicy.Evaluate(V.Validate("XX", "123456789")));
+        Assert.Equal(TaxIdCheckOutcome.Block, TaxIdPolicy.Evaluate(V.Validate("HK", "A123456")));
+        Assert.Equal(TaxIdCheckOutcome.Warn, TaxIdPolicy.Evaluate(V.Validate("PR", "123")));
     }
 
     [Fact]

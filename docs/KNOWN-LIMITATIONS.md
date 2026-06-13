@@ -8,6 +8,33 @@ not imply equal confidence across countries.
 Nota operativa: la sentinella "paese non supportato" nei test automatici e nella
 suite manuale è ora `XX` (codice non assegnato a nessuno Stato ISO 3166-1).
 
+## Identifier families and online verification
+
+The explicit family API currently validates `tax_id_person` for the existing
+country/territory coverage and `vat` for 26 EU countries: AT, BE, CY, CZ, DE,
+DK, EE, ES, FI, FR, GR, HR, HU, IE, IT, LT, LU, LV, MT, NL, PL, PT, RO, SE,
+SI and SK, plus AU, CH, GB and NO. The French offline rule accepts the numeric
+two-character VAT key;
+alphanumeric French key variants remain unsupported. The Latvian VAT rule
+covers legal-entity registration numbers rather than historical personal
+codes. Other VAT and `tax_id_company` combinations return
+`unsupported_identifier_type`; they are not silently routed through personal
+tax-id rules.
+
+Bulgarian VAT remains unsupported because its 9/10-digit space includes
+multiple entity and personal-number checksum families. It will be enabled
+only when every accepted branch can be sourced and tested without treating
+the personal EGN algorithm as a universal Bulgarian VAT rule.
+
+For the United Kingdom, ordinary 9/12-digit VAT numbers receive checksum
+validation. Government departments (`GD`) and health authorities (`HA`) have
+only a documented range rule and therefore return `validationLevel: 'format'`.
+
+The core remains fully offline. It validates format and checksum but does not
+query VIES or national registries, and therefore cannot prove that a VAT
+number was issued, is active or belongs to a specific entity. Any future VIES
+integration will live in an optional online package.
+
 Fonti istituzionali verificate per gli inserimenti del 2026-06-11:
 
 - DM: scheda OECD AEOI `Dominica-TIN.pdf`, versione archiviata il

@@ -220,6 +220,14 @@ export class App {
     { code: 'TO', label: 'Tonga' },
   ];
 
+  protected readonly territories = [
+    { code: 'FO', label: 'Isole Faroe' },
+    { code: 'GL', label: 'Groenlandia' },
+    { code: 'HK', label: 'Hong Kong' },
+    { code: 'PR', label: 'Porto Rico' },
+    { code: 'TW', label: 'Taiwan' },
+  ];
+
   protected readonly testCases: readonly TestCase[] = [
     {
       label: 'Codice valido',

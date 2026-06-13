@@ -13,6 +13,11 @@ const files = {
   tsModel: 'projects/tax-id/src/lib/models.ts',
   tsSupportedCountries: 'projects/tax-id/src/lib/supported-countries.ts',
   csharpSupportedCountries: 'packages/dotnet/NationalIdentifiers.Core/TaxIdCountries.cs',
+  csharpTerritoryDispatcher: 'packages/dotnet/NationalIdentifiers.Core/TaxIdTerritoryValidator.cs',
+  csharpSupportedTerritories: 'packages/dotnet/NationalIdentifiers.Core/TaxIdTerritories.cs',
+  tsTerritoryRegistry: 'projects/tax-id/src/lib/territory-registry.ts',
+  tsVatRegistry: 'projects/tax-id/src/lib/vat-registry.ts',
+  csharpVatCountries: 'packages/dotnet/NationalIdentifiers.Core/VatCountries.cs',
 };
 
 async function read(path) {
@@ -99,7 +104,7 @@ test('keeps supported country coverage aligned across every runtime and the demo
     matches(csharpSupportedCountryBlock, /"([A-Z]{2})"/g),
   );
   const countriesBlock = manualDemo.match(
-    /protected readonly countries = \[(?<countries>[\s\S]*?)\n  \];\n\n  protected readonly testCases/,
+    /protected readonly countries = \[(?<countries>[\s\S]*?)\n  \];\n\n  protected readonly territories/,
   )?.groups?.countries;
   assert.ok(countriesBlock, 'manual-test countries list was not found');
   const manualCountries = uniqueSet(
@@ -146,9 +151,130 @@ test('keeps supported country coverage aligned across every runtime and the demo
   assert.equal(documentedCsharpCount, checkedCountries.size, '.NET XML summary count is stale');
 });
 
+test('keeps territory coverage separate and aligned across runtimes', async () => {
+  const [
+    coverage,
+    tsRegistry,
+    csharpDispatcher,
+    csharpSupportedTerritories,
+    manualDemo,
+  ] = await Promise.all([
+    read(files.coverage),
+    read(files.tsTerritoryRegistry),
+    read(files.csharpTerritoryDispatcher),
+    read(files.csharpSupportedTerritories),
+    read(files.manualDemo),
+  ]);
+
+  const territoryCoverageSection = coverage.match(
+    /### Workstream A[\s\S]*?(?=### Workstream B)/,
+  )?.[0] ?? '';
+  const documentedTerritories = uniqueSet(
+    'checked territory coverage',
+    [...territoryCoverageSection.matchAll(/^- \[x\] (?<line>.*)$/gm)]
+      .flatMap((match) => matches(match.groups?.line ?? '', /\*\*([A-Z]{2})\*\*/g)),
+  );
+  const tsRegistryTerritories = uniqueSet(
+    'TypeScript territory registry',
+    matches(tsRegistry, /^\s{2}([A-Z]{2}): \{/gm),
+  );
+  const csharpDispatcherTerritories = uniqueSet(
+    '.NET territory dispatcher',
+    matches(csharpDispatcher, /^\s*"([A-Z]{2})"\s*=>/gm),
+  );
+  const csharpSupportedBlock = csharpSupportedTerritories.match(
+    /Array\.AsReadOnly\(\s*\[(?<territories>[\s\S]*?)\]\);/,
+  )?.groups?.territories;
+  assert.ok(csharpSupportedBlock, '.NET supported territories list was not found');
+  const csharpSupportedCodes = uniqueSet(
+    '.NET supported territories API',
+    matches(csharpSupportedBlock, /"([A-Z]{2})"/g),
+  );
+  const manualTerritoryBlock = manualDemo.match(
+    /protected readonly territories = \[(?<territories>[\s\S]*?)\n  \];\n\n  protected readonly testCases/,
+  )?.groups?.territories;
+  assert.ok(manualTerritoryBlock, 'manual-test territories list was not found');
+  const manualTerritories = uniqueSet(
+    'manual-test territory selector',
+    matches(manualTerritoryBlock, /\{ code: '([A-Z]{2})', label:/g),
+  );
+
+  assert.equal(documentedTerritories.size, 5, 'territory coverage count is stale');
+  assertSameCountries(
+    'territory coverage',
+    documentedTerritories,
+    'TypeScript territory registry',
+    tsRegistryTerritories,
+  );
+  assertSameCountries(
+    'territory coverage',
+    documentedTerritories,
+    '.NET territory dispatcher',
+    csharpDispatcherTerritories,
+  );
+  assertSameCountries(
+    'territory coverage',
+    documentedTerritories,
+    '.NET supported territories API',
+    csharpSupportedCodes,
+  );
+  assertSameCountries(
+    'territory coverage',
+    documentedTerritories,
+    'manual-test territory selector',
+    manualTerritories,
+  );
+  assert.deepEqual([...csharpSupportedCodes], [...csharpSupportedCodes].sort());
+});
+
+test('keeps VAT coverage separate and aligned across runtimes', async () => {
+  const [tsRegistry, csharpDispatcher, csharpVatCountries] = await Promise.all([
+    read(files.tsVatRegistry),
+    read(files.csharpDispatcher),
+    read(files.csharpVatCountries),
+  ]);
+
+  const tsVatCountries = uniqueSet(
+    'TypeScript VAT registry',
+    matches(tsRegistry, /^\s{2}([A-Z]{2}):/gm),
+  );
+  const csharpVatBlock = csharpVatCountries.match(
+    /Array\.AsReadOnly\(\s*\[(?<countries>[\s\S]*?)\]\);/,
+  )?.groups?.countries;
+  assert.ok(csharpVatBlock, '.NET supported VAT countries list was not found');
+  const csharpSupportedVatCountries = uniqueSet(
+    '.NET supported VAT countries API',
+    matches(csharpVatBlock, /"([A-Z]{2})"/g),
+  );
+  const csharpVatDispatcherCountries = uniqueSet(
+    '.NET VAT dispatcher',
+    matches(csharpDispatcher, /\("([A-Z]{2})", IdentifierType\.Vat\)/g),
+  );
+
+  assert.equal(tsVatCountries.size, 30, 'VAT coverage count is stale');
+  assertSameCountries(
+    'TypeScript VAT registry',
+    tsVatCountries,
+    '.NET supported VAT countries API',
+    csharpSupportedVatCountries,
+  );
+  assertSameCountries(
+    'TypeScript VAT registry',
+    tsVatCountries,
+    '.NET VAT dispatcher',
+    csharpVatDispatcherCountries,
+  );
+  assert.deepEqual([...tsVatCountries], [...tsVatCountries].sort());
+  assert.deepEqual(
+    [...csharpSupportedVatCountries],
+    [...csharpSupportedVatCountries].sort(),
+  );
+});
+
 test('keeps checksum policy metadata aligned across TypeScript and .NET', async () => {
-  const [tsRegistry, checkOutcome, csharpPolicy] = await Promise.all([
+  const [tsRegistry, tsTerritoryRegistry, checkOutcome, csharpPolicy] = await Promise.all([
     read(files.tsRegistry),
+    read(files.tsTerritoryRegistry),
     read(files.checkOutcome),
     read(files.csharpPolicy),
   ]);
@@ -182,6 +308,29 @@ test('keeps checksum policy metadata aligned across TypeScript and .NET', async 
     checkOutcome,
     /CHECKSUM_TAX_ID_COUNTRIES/,
     'check-outcome.ts must derive policy from registry metadata',
+  );
+
+  const tsChecksumTerritories = uniqueSet(
+    'TypeScript territory checksum metadata',
+    [...tsTerritoryRegistry.matchAll(
+      /^  ([A-Z]{2}): (?<body>[\s\S]*?)(?=^  [A-Z]{2}: |^\};)/gm,
+    )]
+      .filter((entry) => entry.groups?.body.includes("validationLevel: 'checksum'"))
+      .map((entry) => entry[1]),
+  );
+  const csharpTerritoryChecksumBlock = csharpPolicy.match(
+    /ChecksumGradeTerritories = new\(StringComparer\.Ordinal\)\s*\{(?<territories>[\s\S]*?)\};/,
+  )?.groups?.territories;
+  assert.ok(csharpTerritoryChecksumBlock, '.NET territory checksum metadata was not found');
+  const csharpChecksumTerritories = uniqueSet(
+    '.NET territory checksum metadata',
+    matches(csharpTerritoryChecksumBlock, /"([A-Z]{2})"/g),
+  );
+  assertSameCountries(
+    'TypeScript territory checksum metadata',
+    tsChecksumTerritories,
+    '.NET territory checksum metadata',
+    csharpChecksumTerritories,
   );
 
   for (const country of ['CZ', 'ID', 'SG', 'SK']) {

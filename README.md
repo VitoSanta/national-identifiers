@@ -217,11 +217,16 @@ The platform validates the following identifier categories. Not every country im
 | `tax_id_company` | Company or entity tax number | FR SIREN/SIRET, DE Steuernummer |
 | `national_id` | Civil / personal identity number | CN 居民身份证, IN Aadhaar (scope-limited) |
 | `personal_id` | Integrated personal identifier used as functional TIN | DK CPR, SE Personnummer, MY NRIC |
-| `vat_number` | Value-added tax registration number | EU VAT numbers (prefix + base) |
+| `vat` | Value-added tax registration number | 30 countries |
 | `social_security` | Social insurance / pension number | US SSN, CA SIN, FR NIR |
 | `company_registration` | Commercial registry entry number | UK Companies House, DE Handelsregister |
 
-The current release focuses on `tax_id_person` and `personal_id`. Company and VAT validation is on the roadmap.
+The family API currently exposes `tax_id_person`, `vat` and
+`tax_id_company`. Personal identifiers use the established coverage; offline
+VAT format/checksum validation is implemented for 26 EU countries: AT, BE,
+CY, CZ, DE, DK, EE, ES, FI, FR, GR, HR, HU, IE, IT, LT, LU, LV, MT, NL, PL,
+PT, RO, SE, SI and SK, plus AU, CH, GB and NO. Unsupported country/family
+combinations return `unsupported_identifier_type`.
 
 ---
 
@@ -230,6 +235,9 @@ The current release focuses on `tax_id_person` and `personal_id`. Company and VA
 The current scope represents all 195 commonly recognised states: 193 UN
 members, Palestine and Vatican City. Every entry is classified as checksum,
 format-level or `not_applicable`; coverage does not imply equal confidence.
+Five ISO territories are supported through a separate registry: Faroe Islands,
+Greenland, Hong Kong, Puerto Rico and Taiwan. They do not alter the 195-state
+coverage invariant.
 
 See the [country catalogue](docs/COUNTRY-COVERAGE.md), the
 [known limitations](docs/KNOWN-LIMITATIONS.md), and the package-specific
@@ -313,17 +321,41 @@ The supported codes can also be queried at runtime:
 ```ts
 import {
   SUPPORTED_TAX_ID_COUNTRIES,
+  SUPPORTED_TAX_ID_TERRITORIES,
   isSupportedTaxIdCountry,
+  isSupportedTaxIdTerritory,
 } from 'tax-id';
 
 SUPPORTED_TAX_ID_COUNTRIES.length; // 195
+SUPPORTED_TAX_ID_TERRITORIES.length; // 5
 isSupportedTaxIdCountry('IT');     // true
+isSupportedTaxIdTerritory('HK');   // true
 isSupportedTaxIdCountry('it');     // false: ISO codes are uppercase
 ```
 
 For Italy the validator accepts both the 16-character personal Codice
 Fiscale and the 11-digit Partita IVA / numeric fiscal code assigned to
 legal entities, each with its own check-digit algorithm.
+
+### Explicit identifier families
+
+Use `validateIdentifier` when the field semantics are known:
+
+```ts
+import { validateIdentifier } from 'tax-id';
+
+const vat = validateIdentifier({
+  country: 'IT',
+  type: 'vat',
+  value: '00743110157',
+});
+
+vat.valid;          // true
+vat.identifierType; // 'vat'
+```
+
+`validateTaxId(country, value)` remains backward compatible. The core never
+performs VIES or other live registry lookups.
 
 ### Registration policy helper
 
@@ -480,8 +512,9 @@ point is tree-shakable and has no Angular dependency.
 **Package:** `NationalIdentifiers.Core` (NuGet)  
 **Integration package:** `NationalIdentifiers.AspNetCore`
 
-Both packages currently cover the same 195 country codes as the
-JavaScript/TypeScript implementation and target .NET 8 and .NET 10.
+Both packages currently cover the same 195 country codes and 5 separately
+tracked territory codes as the JavaScript/TypeScript implementation, and
+target .NET 8 and .NET 10.
 
 ### Installation
 
@@ -498,8 +531,11 @@ using NationalIdentifiers.Core;
 var validator = new TaxIdValidator();
 
 ValidationResult result = validator.Validate("IT", "RSSMRA85T10A562S");
+ValidationResult vat = validator.Validate("IT", IdentifierType.Vat, "00743110157");
 IReadOnlyList<string> countries = validator.SupportedCountries;
+IReadOnlyList<string> territories = validator.SupportedTerritories;
 bool supportsItaly = TaxIdCountries.IsSupported("it"); // true
+bool supportsHongKong = TaxIdTerritories.IsSupported("hk"); // true
 
 if (result.IsValid)
 {

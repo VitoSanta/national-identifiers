@@ -92,11 +92,11 @@ identityConsistency: {
 
 The current implementation exposes 47 jurisdictions:
 
-- full name, birth date, gender and birthplace: IT;
+- full name, birth date, gender and birthplace: IT and MX;
 - birth date and gender: BA, BE, BG, CZ, DK, EE, FI, FR, KR, KZ, LK, LT, ME,
   MK, NO, PL, RO, RS, SE, SK, UA, UZ and ZA;
-- birth date, gender and an encoded administrative place code: CN, EG, ID, MX,
-  MY and VN;
+- birth date, gender and an encoded administrative place code: CN, EG, ID, MY
+  and VN;
 - birth date only: AE, AL, BD, BH, CU, HU, IS, KG, KW, LU, LV, MN, NI, QA
   and SV;
 - gender and registration region: TW;
@@ -108,8 +108,14 @@ AE (Emirates ID), BH (CPR), QA (QID), BD (17-digit NID) and TW (National ID).
 These are validated structurally inside the identity layer, so the
 `validateTaxId` contract is untouched. Mexico also accepts the RFC tax id as a
 fallback, which yields a date-only (`partial_match`) check. Taiwan is a
-jurisdiction outside the 195-state tax-id set; `validateTaxId('TW', …)` still
-returns `unsupported_country`.
+jurisdiction outside the 195-state set and is exposed through the separate
+territory registry.
+
+For Mexican CURPs, `lastName` must contain the paternal surname followed by
+the maternal surname when both exist, for example `Hernández García`. The
+check applies RENAPO name initials, internal consonants, common-name handling,
+surname particles, `Ñ` substitution and the inconvenient-word catalogue. The
+RFC fallback cannot encode the full name and therefore remains partial.
 
 The year-only formats (AE, BD, QA — and VN, which adds sex and province)
 compare just the birth year and are the weakest date signal; AE/BD/QA encode

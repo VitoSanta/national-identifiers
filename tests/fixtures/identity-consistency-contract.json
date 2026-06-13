@@ -228,5 +228,49 @@
       "gender",
       "birthPlaceCode"
     ]
+  },
+  {
+    "country": "MX",
+    "taxId": "HEGG560427MVZRRL04",
+    "identity": {
+      "firstName": "Gloria",
+      "lastName": "Hernández García",
+      "birthDate": "1956-04-27",
+      "gender": "F",
+      "birthPlaceCode": "VZ"
+    },
+    "status": "match",
+    "taxIdValid": true,
+    "checkedFields": [
+      "lastName",
+      "firstName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ],
+    "mismatchedFields": [],
+    "missingFields": []
+  },
+  {
+    "country": "MX",
+    "taxId": "BXEI800101MVZLSR07",
+    "identity": {
+      "firstName": "Irma",
+      "lastName": "Buelna Espinoza",
+      "birthDate": "1980-01-01",
+      "gender": "F",
+      "birthPlaceCode": "VZ"
+    },
+    "status": "match",
+    "taxIdValid": true,
+    "checkedFields": [
+      "lastName",
+      "firstName",
+      "birthDate",
+      "gender",
+      "birthPlaceCode"
+    ],
+    "mismatchedFields": [],
+    "missingFields": []
   }
 ]

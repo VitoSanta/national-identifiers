@@ -8,7 +8,8 @@ public sealed record ValidationResult(
     string Country,
     string NormalizedValue,
     ValidationErrorCode? Error = null,
-    ValidationLevel? ValidationLevel = null)
+    ValidationLevel? ValidationLevel = null,
+    IdentifierType? IdentifierType = null)
 {
     /// <summary>Creates a successful result.</summary>
     internal static ValidationResult Ok(string country, string normalizedValue, ValidationLevel level)

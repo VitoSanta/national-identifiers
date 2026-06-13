@@ -260,26 +260,26 @@ These extend tax-id *validation* to ISO 3166-1 codes outside the 195 UN states.
 
 Architecture (do first):
 
-- [ ] Introduce a `SUPPORTED_TAX_ID_TERRITORIES` set kept **separate** from
+- [x] Introduce a `SUPPORTED_TAX_ID_TERRITORIES` set kept **separate** from
       `SUPPORTED_TAX_ID_COUNTRIES` (which stays exactly the 195). Dispatch both
       through `validateTaxId`; the result keeps the ISO code.
-- [ ] Update `coverage-consistency` to assert "195 states + N territories"
+- [x] Update `coverage-consistency` to assert "195 states + N territories"
       instead of a single 195 count, so the invariant stays meaningful.
 
 Per territory (source → TS validator → .NET validator → fixtures → tests → docs):
 
-- [ ] **HK** Hong Kong — HKID: 1–2 letters + 6 digits + mod-11 check
+- [x] **HK** Hong Kong — HKID: 1–2 letters + 6 digits + mod-11 check
       (letters A=10…Z=35, leading blank=36, weights 9→2 then check; check =
       (11 − sum mod 11), 11→0, 10→A). Algorithm confirmed; reuse the Taiwan
       letter-mapping pattern in `identity-documents`.
-- [ ] **TW** Taiwan — ROC ID as a tax id: identical letter+digit checksum
+- [x] **TW** Taiwan — ROC ID as a tax id: identical letter+digit checksum
       already implemented for identity consistency; promote it to a tax-id
       validator (reuse, don't reimplement).
-- [ ] **GL** Greenland & **FO** Faroe — use the Danish CPR system: reuse the
+- [x] **GL** Greenland & **FO** Faroe — use the Danish CPR system: reuse the
       `DK` validator and the `DK` identity decoder (date + sex) verbatim.
 - [ ] **MO** Macao — resident ID (prefix 1/5/7 + 6 digits + parenthesised
       check); verify the check-digit source before coding.
-- [ ] **PR** Puerto Rico — personal identifier is the US SSN/ITIN (reuse `US`);
+- [x] **PR** Puerto Rico — personal identifier is the US SSN/ITIN (reuse `US`);
       the local merchant-registration number is separate and out of scope.
 - [ ] **GI** Gibraltar, **JE** Jersey, **GG** Guernsey, **IM** Isle of Man —
       verify each tax-reference format (UK-linked); implement those with a
@@ -295,38 +295,50 @@ This is the largest expansion and introduces identifier *families*.
 
 Architecture (do first):
 
-- [ ] Add `validateIdentifier({ country, type, value })` with
+- [x] Add `validateIdentifier({ country, type, value })` with
       `type ∈ { 'tax_id_person', 'vat', 'tax_id_company' }`; keep
       `validateTaxId(country, value)` as the person-scoped alias (no breaking
       change). Add `identifierType` to the result model.
-- [ ] Mirror the family API in .NET (`TaxIdValidator.Validate(country, type,
+- [x] Mirror the family API in .NET (`TaxIdValidator.Validate(country, type,
       value)` overload or a sibling validator).
 
 Per-country VAT (each sourced before coding):
 
-- [ ] **IT** — the 11-digit partita IVA is already validated; expose it as
+- [x] **IT** — the 11-digit partita IVA is already validated; expose it as
       `type: 'vat'` (wire-up, not new logic).
-- [ ] **EU-27** VAT: format + check digit per state — FR (mod-97 key over
-      SIREN), DE (ISO 7064 / 11), NL (mod-11 + `B` suffix), BE (mod-97), ES
-      (CIF letter/number), IE, PT (mod-11), GR, PL, etc. Verify each algorithm
-      individually; implement only the sourced ones.
-- [ ] Non-EU VAT with public algorithms: **GB** (9/12-digit mod-97), **CH**
-      (UID-MWST mod-11), **NO** (MVA = org. number mod-11), **AU** (ABN
-      mod-89), and others as sourced.
-- [ ] **VIES / live registry lookups**: explicitly an *optional online add-on*
+- [x] First **EU VAT** batch: **BE**, **DE**, **FR** (numeric key), **GR**,
+      **IT**, **NL**, **PL**, **PT** — dedicated format/checksum rules in both
+      runtimes and shared fixtures.
+- [x] Second **EU VAT** batch: **AT**, **DK**, **EE**, **FI**, **HR**, **HU**,
+      **LU**, **SE**, **SI**, **SK** — dedicated checksum rules in both
+      runtimes and shared fixtures.
+- [x] Third **EU VAT** batch: **CY**, **ES**, **LT**, **LV** (legal entities),
+      **MT**, **RO** — dedicated checksum rules, national subtypes and shared
+      cross-runtime fixtures.
+- [x] Fourth **EU VAT** batch: **CZ** (IČO plus personal DIČ variants) and
+      **IE** (modern Tax Reference Number variants), mirrored across runtimes.
+- [ ] Remaining **EU-27 VAT**: **BG**. Source and implement all 9/10-digit
+      entity/person checksum branches before declaring the country covered.
+- [x] First non-EU VAT/business batch: **GB** (9/12-digit mod-97 plus GD/HA
+      ranges), **CH** (UID-MWST/TVA/IVA mod-11), **NO** (MVA organization
+      number mod-11), **AU** (ABN mod-89), mirrored across both runtimes.
+- [ ] Continue non-EU VAT/business identifiers only where public algorithms
+      and representative institutional examples are available.
+- [x] **VIES / live registry lookups**: explicitly an *optional online add-on*
       package, kept OUT of the offline core (offline = format/checksum only).
 
 ### Workstream C — Mexico full identity (CURP name matching)
 
-- [ ] Implement the RENAPO name-encoding algorithm: paternal surname (1st
+- [x] Implement the RENAPO name-encoding algorithm: paternal surname (1st
       letter + 1st internal vowel), maternal surname (1st letter), given name
       (1st letter, skipping common first names like MARIA/JOSE), internal
       consonants at positions 14–16, plus the "inconvenient words" substitution
-      table (e.g. `BUEI`→`BUEX`). Source: RENAPO instructivo.
-- [ ] Verify `firstName` / `lastName` against the CURP and promote **MX** to
+      table (e.g. `BUEI`→`BXEI`, replacing the second character). Source:
+      RENAPO instructivo.
+- [x] Verify `firstName` / `lastName` against the CURP and promote **MX** to
       `level: 'full'` (date + sex + state + name) — the second full country
       after Italy.
-- [ ] Fixtures with canonical CURPs including an inconvenient-word case; TS +
+- [x] Fixtures with canonical CURPs including an inconvenient-word case; TS +
       .NET parity.
 
 ### Definition of done

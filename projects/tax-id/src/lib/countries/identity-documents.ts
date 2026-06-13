@@ -35,6 +35,7 @@ const num = (v: string, start: number, end: number): number => Number(v.slice(st
 // We verify date, sex and state here; reproducing RENAPO's name algorithm
 // (with its profanity filter) is deferred, so name is not asserted.
 const CURP_PATTERN = /^[A-Z]{4}\d{6}[HM][A-Z]{2}[A-Z]{3}[0-9A-Z]\d$/;
+const CURP_CHECK_ALPHABET = '0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
 const curp: IdentityDocument = {
   resolve: (value) => {
     const n = compact(value);
@@ -42,6 +43,11 @@ const curp: IdentityDocument = {
     // Century from the homonym character: digit => 1900s, letter => 2000s.
     const century = /\d/.test(n[16]) ? 1900 : 2000;
     if (!isValidYmd(century + num(n, 4, 6), num(n, 6, 8), num(n, 8, 10))) return null;
+    let sum = 0;
+    for (let index = 0; index < 17; index += 1) {
+      sum += CURP_CHECK_ALPHABET.indexOf(n[index]) * (18 - index);
+    }
+    if ((10 - (sum % 10)) % 10 !== Number(n[17])) return null;
     return n;
   },
   decode: (n): DecodedIdentity => ({

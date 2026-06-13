@@ -48,6 +48,7 @@ public class IdentityConsistencyTests
         Assert.NotNull(capability);
         Assert.Equal("full", capability.Level);
         Assert.Equal(5, capability.RequiredFields.Count);
+        Assert.Equal("full", TaxIdIdentityValidator.Capability("MX")?.Level);
         Assert.Null(TaxIdIdentityValidator.Capability("DE"));
         Assert.Null(TaxIdIdentityValidator.Capability(null));
     }
@@ -110,17 +111,22 @@ public class IdentityConsistencyTests
     [Fact]
     public void Validates_National_Identity_Documents()
     {
-        // Mexican CURP: full date + sex + state.
+        // Mexican CURP: name + full date + sex + state.
         var curp = TaxIdIdentityValidator.Validate("MX", "HEGG560427MVZRRL04",
-            new TaxIdIdentity(BirthDate: new DateOnly(1956, 4, 27), Gender: 'F', BirthPlaceCode: "VZ"));
+            new TaxIdIdentity("Gloria", "Hernández García",
+                new DateOnly(1956, 4, 27), 'F', "VZ"));
         Assert.Equal(IdentityConsistencyStatus.Match, curp.Status);
-        Assert.Equal(new[] { "birthDate", "gender", "birthPlaceCode" }, curp.CheckedFields);
+        Assert.Equal(
+            new[] { "lastName", "firstName", "birthDate", "gender", "birthPlaceCode" },
+            curp.CheckedFields);
 
         // Mexican RFC fallback: date only → partial.
         var rfc = TaxIdIdentityValidator.Validate("MX", "GODE561231GR8",
             new TaxIdIdentity(BirthDate: new DateOnly(1956, 12, 31), Gender: 'M', BirthPlaceCode: "VZ"));
         Assert.Equal(IdentityConsistencyStatus.PartialMatch, rfc.Status);
-        Assert.Equal(new[] { "gender", "birthPlaceCode" }, rfc.MissingFields);
+        Assert.Equal(
+            new[] { "firstName", "lastName", "gender", "birthPlaceCode" },
+            rfc.MissingFields);
 
         // French NIR: year + month, no day.
         Assert.Equal(IdentityConsistencyStatus.Match, TaxIdIdentityValidator.Validate(

@@ -174,7 +174,13 @@ public static class TaxIdIdentityValidator
             var decoder = normalized.Length == 18
                 ? IdentityDocuments.All["MX"].Decode
                 : EncodedIdentity.Decoders["MX"];
-            return EncodedIdentity.Check(decoder, normalized, identity);
+            var encodedCheck = EncodedIdentity.Check(decoder, normalized, identity);
+            if (normalized.Length != 18)
+                return encodedCheck;
+            var nameCheck = MexicoIdentity.Check(normalized, identity);
+            return (
+                nameCheck.Checked.Concat(encodedCheck.Item1).ToArray(),
+                nameCheck.Mismatched.Concat(encodedCheck.Item2).ToArray());
         }
 
         if (IdentityDocuments.All.TryGetValue(country, out var document))
@@ -192,6 +198,7 @@ public static class TaxIdIdentityValidator
             new Dictionary<string, TaxIdIdentityCapability>(StringComparer.Ordinal)
             {
                 ["IT"] = new("full", ItalianFields),
+                ["MX"] = new("full", ItalianFields),
             };
 
         Add(
@@ -199,7 +206,7 @@ public static class TaxIdIdentityValidator
             DateAndGenderFields,
             "BA", "BE", "BG", "CZ", "DK", "EE", "FI", "FR", "KR", "KZ", "LK",
             "LT", "ME", "MK", "NO", "PL", "RO", "RS", "SE", "SK", "UA", "UZ", "ZA");
-        Add(capabilities, DateGenderAndPlaceFields, "CN", "EG", "ID", "MX", "MY", "VN");
+        Add(capabilities, DateGenderAndPlaceFields, "CN", "EG", "ID", "MY", "VN");
         Add(
             capabilities,
             DateFields,

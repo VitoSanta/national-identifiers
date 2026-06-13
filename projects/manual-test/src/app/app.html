@@ -3,7 +3,9 @@
     <p class="product-name">Tax ID Validator</p>
     <h1>Suite di test manuale</h1>
   </div>
-  <span class="version">Angular 20 · {{ countries.length }} Paesi</span>
+  <span class="version">
+    Angular 20 · {{ countries.length }} Paesi · {{ territories.length }} Territori
+  </span>
 </header>
 
 <main>
@@ -21,9 +23,16 @@
         <label>
           <span>Paese</span>
           <select [formControl]="country">
-            @for (item of countries; track item.code) {
-              <option [value]="item.code">{{ item.code }} · {{ item.label }}</option>
-            }
+            <optgroup label="Paesi">
+              @for (item of countries; track item.code) {
+                <option [value]="item.code">{{ item.code }} · {{ item.label }}</option>
+              }
+            </optgroup>
+            <optgroup label="Territori">
+              @for (item of territories; track item.code) {
+                <option [value]="item.code">{{ item.code }} · {{ item.label }}</option>
+              }
+            </optgroup>
           </select>
         </label>
 

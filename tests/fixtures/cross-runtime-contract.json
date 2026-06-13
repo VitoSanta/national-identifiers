@@ -285,5 +285,61 @@
     "valid": false,
     "error": "invalid_length",
     "outcome": "warn"
+  },
+  {
+    "country": "HK",
+    "value": "A123456(3)",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "HK",
+    "value": "A123456(4)",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "TW",
+    "value": "A123456789",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "TW",
+    "value": "A123456788",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "GL",
+    "value": "010101-1234",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "FO",
+    "value": "010101-1234",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "PR",
+    "value": "123-45-6789",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "PR",
+    "value": "000-45-6789",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
   }
 ]
