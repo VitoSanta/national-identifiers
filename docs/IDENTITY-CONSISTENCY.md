@@ -90,8 +90,19 @@ identityConsistency: {
 }
 ```
 
-Other countries may expose `partial` support when only birth date, sex or
-region can be checked.
+The current implementation exposes 37 countries:
+
+- full name, birth date, gender and birthplace: IT;
+- birth date and gender: BA, BE, BG, CZ, DK, EE, FI, KR, KZ, LK, LT, ME, MK,
+  NO, PL, RO, RS, SE, SK, UA, UZ and ZA;
+- birth date, gender and an encoded administrative place code: CN, ID and MY;
+- birth date only: AL, CU, HU, IS, KG, LV, MN, MX, NI and SV;
+- gender only: PK.
+
+For formats that encode only a two-digit year, consistency compares the final
+two digits and does not infer a century. Administrative codes are compared as
+encoded values; they are not presented as proof of birthplace unless the
+country specification defines them that way.
 
 ## Privacy and Security
 
@@ -115,11 +126,14 @@ region can be checked.
    `tests/fixtures/identity-consistency-contract.json` is consumed unchanged
    by the Node.js and xUnit suites (ordinary, omocodic, female, diacritic,
    mismatch, partial, insufficient-data and not-supported cases).
-4. Add Angular and ASP.NET integration only after the core contract stabilizes.
-5. Expand country by country where official semantics make meaningful checks
-   possible.
+4. ~~Expand countries where the existing identifier rules encode meaningful
+   attributes.~~ Done for 36 additional countries, protected by
+   `identity-consistency-country-cases.json` in both runtimes.
+5. Add Angular and ASP.NET integration only after the core contract stabilizes.
+6. Extend support only where institutional specifications make additional
+   comparisons meaningful.
 
-Steps 1-3 shipped ahead of the identifier-families work; the API is additive
+Steps 1-4 shipped ahead of the identifier-families work; the API is additive
 and does not touch the stable `validateTaxId` contract. Historical
 municipality catalogues and official name-collision edge cases remain open
 items for the Italian slice.

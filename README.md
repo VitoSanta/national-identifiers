@@ -824,11 +824,14 @@ const result = validateTaxIdIdentity({
 ```
 
 The .NET equivalent is `TaxIdIdentityValidator.Validate(country, taxId, new
-TaxIdIdentity(...))`. Capabilities are declared per country
-(`taxIdIdentityCapability('IT')` / `TaxIdIdentityValidator.Capability("IT")`);
-omocodia, diacritics and the female day-offset are handled. A `match` means
-only that the identifier can be derived from compatible data — it is not
-identity verification, and no personal value is logged or echoed back.
+TaxIdIdentity(...))`. Capabilities are declared per country through
+`taxIdIdentityCapability` and `TaxIdIdentityValidator.Capability`.
+
+The current implementation covers 37 countries: Italy has full name, date,
+gender and place consistency, while 36 additional formats expose partial
+checks for encoded birth date, gender or administrative place code. See the
+[capability matrix](docs/IDENTITY-CONSISTENCY.md). A `match` is not identity
+verification, and no personal value is logged or echoed back.
 
 ---
 

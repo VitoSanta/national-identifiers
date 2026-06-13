@@ -280,6 +280,14 @@ if (!result.valid) {
 Validation checks the public format and checksum rules. It does not confirm that
 an identifier was issued by a government authority.
 
+## Identity consistency
+
+`validateTaxIdIdentity` optionally compares user-supplied attributes with data
+encoded in an identifier. `taxIdIdentityCapability(country)` reports whether
+full or partial comparison is available. The current release covers 37
+countries; see `docs/IDENTITY-CONSISTENCY.md` in the repository for the
+capability matrix and privacy constraints.
+
 ## Angular reactive forms
 
 ```ts

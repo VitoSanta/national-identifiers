@@ -1,6 +1,10 @@
 import { TaxIdCountry } from './models';
 import { validateTaxId } from './validate-tax-id';
 import { checkItalianIdentity } from './countries/italy-identity';
+import {
+  ENCODED_IDENTITY_DECODERS,
+  buildEncodedIdentityCheck,
+} from './countries/encoded-identity';
 
 /**
  * Outcome of a local structural-consistency check between an identifier and
@@ -67,6 +71,20 @@ interface IdentityChecker {
   ) => { checked: TaxIdIdentityField[]; mismatched: TaxIdIdentityField[] };
 }
 
+const encoded = (
+  country: keyof typeof ENCODED_IDENTITY_DECODERS,
+  requiredFields: readonly TaxIdIdentityField[],
+): IdentityChecker => ({
+  capability: { level: 'partial', requiredFields },
+  check: buildEncodedIdentityCheck(ENCODED_IDENTITY_DECODERS[country]),
+});
+
+const DATE_AND_GENDER: readonly TaxIdIdentityField[] = ['birthDate', 'gender'];
+const DATE_GENDER_PLACE: readonly TaxIdIdentityField[] = [
+  'birthDate', 'gender', 'birthPlaceCode',
+];
+const DATE_ONLY: readonly TaxIdIdentityField[] = ['birthDate'];
+
 const IDENTITY_CHECKERS: Readonly<Partial<Record<TaxIdCountry, IdentityChecker>>> = {
   IT: {
     capability: {
@@ -75,6 +93,47 @@ const IDENTITY_CHECKERS: Readonly<Partial<Record<TaxIdCountry, IdentityChecker>>
     },
     check: checkItalianIdentity,
   },
+  // Birth date and sex are encoded in the identifier.
+  BA: encoded('BA', DATE_AND_GENDER),
+  BE: encoded('BE', DATE_AND_GENDER),
+  BG: encoded('BG', DATE_AND_GENDER),
+  CZ: encoded('CZ', DATE_AND_GENDER),
+  DK: encoded('DK', DATE_AND_GENDER),
+  EE: encoded('EE', DATE_AND_GENDER),
+  FI: encoded('FI', DATE_AND_GENDER),
+  KR: encoded('KR', DATE_AND_GENDER),
+  KZ: encoded('KZ', DATE_AND_GENDER),
+  LK: encoded('LK', DATE_AND_GENDER),
+  LT: encoded('LT', DATE_AND_GENDER),
+  ME: encoded('ME', DATE_AND_GENDER),
+  MK: encoded('MK', DATE_AND_GENDER),
+  NO: encoded('NO', DATE_AND_GENDER),
+  PL: encoded('PL', DATE_AND_GENDER),
+  RO: encoded('RO', DATE_AND_GENDER),
+  RS: encoded('RS', DATE_AND_GENDER),
+  SE: encoded('SE', DATE_AND_GENDER),
+  SK: encoded('SK', DATE_AND_GENDER),
+  UA: encoded('UA', DATE_AND_GENDER),
+  UZ: encoded('UZ', DATE_AND_GENDER),
+  ZA: encoded('ZA', DATE_AND_GENDER),
+  // Birth date, sex and a registration-division code are encoded.
+  CN: encoded('CN', DATE_GENDER_PLACE),
+  ID: encoded('ID', DATE_GENDER_PLACE),
+  MY: encoded('MY', DATE_GENDER_PLACE),
+  // Only the birth date is encoded (or the sex convention is not
+  // institutionally settled, as for AL and KG).
+  AL: encoded('AL', DATE_ONLY),
+  CU: encoded('CU', DATE_ONLY),
+  HU: encoded('HU', DATE_ONLY),
+  IS: encoded('IS', DATE_ONLY),
+  KG: encoded('KG', DATE_ONLY),
+  LV: encoded('LV', DATE_ONLY),
+  MN: encoded('MN', DATE_ONLY),
+  MX: encoded('MX', DATE_ONLY),
+  NI: encoded('NI', DATE_ONLY),
+  SV: encoded('SV', DATE_ONLY),
+  // Only the sex is encoded (CNIC final digit).
+  PK: encoded('PK', ['gender']),
 };
 
 /** Declared identity-consistency capability for a country, or `null`. */

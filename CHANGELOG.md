@@ -12,6 +12,8 @@ follows Semantic Versioning.
   `TaxIdIdentityValidator` in .NET. The Italian first slice compares a
   Codice Fiscale with first name, last name, birth date, sex and Belfiore
   birthplace code, handling omocodia, diacritics and the female day offset.
+  Partial birth-date, gender or administrative-code consistency is also
+  available for 36 additional countries.
   Results carry status and field names only — personal values are never
   echoed back. Shared fixtures keep both runtimes aligned.
 

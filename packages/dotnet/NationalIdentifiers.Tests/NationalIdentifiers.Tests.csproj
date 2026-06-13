@@ -37,6 +37,9 @@
     <None Include="..\..\..\tests\fixtures\identity-consistency-contract.json"
           Link="identity-consistency-contract.json"
           CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\tests\fixtures\identity-consistency-country-cases.json"
+          Link="identity-consistency-country-cases.json"
+          CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

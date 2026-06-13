@@ -30,6 +30,9 @@ TaxIdValidator.Validate("BR", "111.444.777-35"); // CPF: normalized and checked
 - **Graceful handling of edge cases** — countries without a personal TIN
   (UAE, Qatar, Kuwait…) return `NotApplicable` instead of failing; unknown
   country codes return `UnsupportedCountry` instead of throwing.
+- **Optional identity consistency for 37 countries** — compares encoded birth
+  date, gender or administrative place codes and, for Italy, name fragments.
+  This remains a local consistency check, not identity verification.
 
 ### Confidence semantics
 

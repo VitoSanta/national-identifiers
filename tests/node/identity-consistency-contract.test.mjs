@@ -2,11 +2,21 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 
-import { validateTaxIdIdentity } from '../../dist/tax-id/fesm2022/tax-id.mjs';
+import {
+  taxIdIdentityCapability,
+  validateTaxIdIdentity,
+} from '../../dist/tax-id/fesm2022/tax-id.mjs';
 
 const fixtures = JSON.parse(
   await readFile(
     new URL('../fixtures/identity-consistency-contract.json', import.meta.url),
+    'utf8',
+  ),
+);
+
+const countryCases = JSON.parse(
+  await readFile(
+    new URL('../fixtures/identity-consistency-country-cases.json', import.meta.url),
     'utf8',
   ),
 );
@@ -25,5 +35,20 @@ test('matches the shared identity-consistency contract', () => {
     assert.deepEqual([...result.checkedFields], fixture.checkedFields, `${context} checked`);
     assert.deepEqual([...result.mismatchedFields], fixture.mismatchedFields, `${context} mismatched`);
     assert.deepEqual([...result.missingFields], fixture.missingFields, `${context} missing`);
+  }
+});
+
+test('matches encoded identity data for every declared non-Italian country', () => {
+  assert.equal(countryCases.length, 36);
+
+  for (const fixture of countryCases) {
+    const result = validateTaxIdIdentity(fixture);
+    const context = `${fixture.country} ${fixture.taxId}`;
+
+    assert.ok(taxIdIdentityCapability(fixture.country), `${context} capability`);
+    assert.equal(result.status, 'match', `${context} status`);
+    assert.equal(result.taxIdValid, true, `${context} taxIdValid`);
+    assert.deepEqual([...result.mismatchedFields], [], `${context} mismatched`);
+    assert.deepEqual([...result.missingFields], [], `${context} missing`);
   }
 });

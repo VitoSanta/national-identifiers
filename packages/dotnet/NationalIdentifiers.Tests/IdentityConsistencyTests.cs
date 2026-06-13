@@ -52,6 +52,60 @@ public class IdentityConsistencyTests
         Assert.Null(TaxIdIdentityValidator.Capability(null));
     }
 
+    [Fact]
+    public void Declares_All_Encoded_Identity_Capabilities()
+    {
+        string[] expectedCountries =
+        [
+            "AL", "BA", "BE", "BG", "CN", "CU", "CZ", "DK", "EE", "FI", "HU",
+            "ID", "IS", "IT", "KG", "KR", "KZ", "LK", "LT", "LV", "ME", "MK",
+            "MN", "MX", "MY", "NI", "NO", "PK", "PL", "RO", "RS", "SE", "SK",
+            "SV", "UA", "UZ", "ZA",
+        ];
+
+        Assert.All(expectedCountries, country =>
+            Assert.NotNull(TaxIdIdentityValidator.Capability(country)));
+        Assert.Equal(37, expectedCountries.Length);
+    }
+
+    [Fact]
+    public void Matches_Encoded_Identity_Data_For_Every_Non_Italian_Country()
+    {
+        var path = Path.Combine(
+            AppContext.BaseDirectory,
+            "identity-consistency-country-cases.json");
+        var fixtures = JsonSerializer.Deserialize<List<IdentityCountryCase>>(
+            File.ReadAllText(path),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        Assert.NotNull(fixtures);
+        Assert.Equal(36, fixtures.Count);
+
+        foreach (var fixture in fixtures)
+        {
+            var identity = new TaxIdIdentity(
+                fixture.Identity.FirstName,
+                fixture.Identity.LastName,
+                fixture.Identity.BirthDate is null
+                    ? null
+                    : DateOnly.Parse(fixture.Identity.BirthDate),
+                fixture.Identity.Gender?[0],
+                fixture.Identity.BirthPlaceCode);
+            var result = TaxIdIdentityValidator.Validate(
+                fixture.Country,
+                fixture.TaxId,
+                identity);
+
+            Assert.NotNull(TaxIdIdentityValidator.Capability(fixture.Country));
+            Assert.True(
+                result.Status == IdentityConsistencyStatus.Match,
+                $"{fixture.Country} '{fixture.TaxId}': expected Match, got {result.Status}.");
+            Assert.True(result.TaxIdValid);
+            Assert.Empty(result.MismatchedFields);
+            Assert.Empty(result.MissingFields);
+        }
+    }
+
     [Theory]
     [InlineData("Rossi", "RSS")]
     [InlineData("Fo", "FOX")]
@@ -99,4 +153,9 @@ public class IdentityConsistencyTests
         string? BirthDate,
         string? Gender,
         string? BirthPlaceCode);
+
+    private sealed record IdentityCountryCase(
+        string Country,
+        string TaxId,
+        IdentityFields Identity);
 }

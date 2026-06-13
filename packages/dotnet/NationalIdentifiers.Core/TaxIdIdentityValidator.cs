@@ -59,16 +59,28 @@ public static class TaxIdIdentityValidator
 {
     private static readonly TaxIdValidator Validator = new();
 
-    private static readonly IReadOnlyList<string> ItalianRequiredFields =
+    private static readonly IReadOnlyList<string> ItalianFields =
         ["firstName", "lastName", "birthDate", "gender", "birthPlaceCode"];
 
+    private static readonly IReadOnlyList<string> DateAndGenderFields =
+        ["birthDate", "gender"];
+
+    private static readonly IReadOnlyList<string> DateGenderAndPlaceFields =
+        ["birthDate", "gender", "birthPlaceCode"];
+
+    private static readonly IReadOnlyList<string> DateFields = ["birthDate"];
+
+    private static readonly IReadOnlyList<string> GenderFields = ["gender"];
+
+    private static readonly IReadOnlyDictionary<string, TaxIdIdentityCapability> Capabilities =
+        BuildCapabilities();
+
     /// <summary>Returns the declared capability for a country, or <c>null</c>.</summary>
-    public static TaxIdIdentityCapability? Capability(string? country) =>
-        country?.Trim().ToUpperInvariant() switch
-        {
-            "IT" => new TaxIdIdentityCapability("full", ItalianRequiredFields),
-            _ => null,
-        };
+    public static TaxIdIdentityCapability? Capability(string? country)
+    {
+        var normalizedCountry = country?.Trim().ToUpperInvariant() ?? string.Empty;
+        return Capabilities.GetValueOrDefault(normalizedCountry);
+    }
 
     /// <summary>Checks whether <paramref name="taxId"/> is structurally consistent with <paramref name="identity"/>.</summary>
     public static TaxIdIdentityConsistencyResult Validate(
@@ -100,8 +112,28 @@ public static class TaxIdIdentityValidator
                 capability.RequiredFields.ToArray());
         }
 
-        var (checkedFields, mismatchedFields) =
-            ItalyIdentity.Check(validation.NormalizedValue, identity);
+        IReadOnlyList<string> checkedFields;
+        IReadOnlyList<string> mismatchedFields;
+
+        if (validation.Country == "IT")
+        {
+            (checkedFields, mismatchedFields) =
+                ItalyIdentity.Check(validation.NormalizedValue, identity);
+        }
+        else if (EncodedIdentity.Decoders.TryGetValue(validation.Country, out var decoder))
+        {
+            (checkedFields, mismatchedFields) =
+                EncodedIdentity.Check(decoder, validation.NormalizedValue, identity);
+        }
+        else
+        {
+            return new TaxIdIdentityConsistencyResult(
+                IdentityConsistencyStatus.NotSupported,
+                validation.Country,
+                true,
+                [], [], []);
+        }
+
         var missingFields = capability.RequiredFields
             .Where(field => !checkedFields.Contains(field))
             .ToArray();
@@ -118,5 +150,37 @@ public static class TaxIdIdentityValidator
             checkedFields,
             mismatchedFields,
             missingFields);
+    }
+
+    private static IReadOnlyDictionary<string, TaxIdIdentityCapability> BuildCapabilities()
+    {
+        var capabilities =
+            new Dictionary<string, TaxIdIdentityCapability>(StringComparer.Ordinal)
+            {
+                ["IT"] = new("full", ItalianFields),
+            };
+
+        Add(
+            capabilities,
+            DateAndGenderFields,
+            "BA", "BE", "BG", "CZ", "DK", "EE", "FI", "KR", "KZ", "LK", "LT",
+            "ME", "MK", "NO", "PL", "RO", "RS", "SE", "SK", "UA", "UZ", "ZA");
+        Add(capabilities, DateGenderAndPlaceFields, "CN", "ID", "MY");
+        Add(
+            capabilities,
+            DateFields,
+            "AL", "CU", "HU", "IS", "KG", "LV", "MN", "MX", "NI", "SV");
+        Add(capabilities, GenderFields, "PK");
+
+        return capabilities;
+    }
+
+    private static void Add(
+        IDictionary<string, TaxIdIdentityCapability> capabilities,
+        IReadOnlyList<string> requiredFields,
+        params string[] countries)
+    {
+        foreach (var country in countries)
+            capabilities[country] = new TaxIdIdentityCapability("partial", requiredFields);
     }
 }
