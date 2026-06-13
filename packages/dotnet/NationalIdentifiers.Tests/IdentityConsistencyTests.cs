@@ -58,14 +58,14 @@ public class IdentityConsistencyTests
         string[] expectedCountries =
         [
             "AL", "BA", "BE", "BG", "CN", "CU", "CZ", "DK", "EE", "FI", "HU",
-            "ID", "IS", "IT", "KG", "KR", "KZ", "LK", "LT", "LV", "ME", "MK",
-            "MN", "MX", "MY", "NI", "NO", "PK", "PL", "RO", "RS", "SE", "SK",
-            "SV", "UA", "UZ", "ZA",
+            "ID", "IS", "IT", "KG", "KR", "KZ", "LK", "LT", "LU", "LV", "ME",
+            "MK", "MN", "MX", "MY", "NI", "NO", "PK", "PL", "RO", "RS", "SE",
+            "SK", "SV", "UA", "UZ", "ZA",
         ];
 
         Assert.All(expectedCountries, country =>
             Assert.NotNull(TaxIdIdentityValidator.Capability(country)));
-        Assert.Equal(37, expectedCountries.Length);
+        Assert.Equal(38, expectedCountries.Length);
     }
 
     [Fact]
@@ -79,7 +79,7 @@ public class IdentityConsistencyTests
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
         Assert.NotNull(fixtures);
-        Assert.Equal(36, fixtures.Count);
+        Assert.Equal(37, fixtures.Count);
 
         foreach (var fixture in fixtures)
         {

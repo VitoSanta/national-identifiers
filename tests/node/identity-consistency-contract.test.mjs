@@ -39,7 +39,7 @@ test('matches the shared identity-consistency contract', () => {
 });
 
 test('matches encoded identity data for every declared non-Italian country', () => {
-  assert.equal(countryCases.length, 36);
+  assert.equal(countryCases.length, 37);
 
   for (const fixture of countryCases) {
     const result = validateTaxIdIdentity(fixture);

@@ -169,7 +169,7 @@ public static class TaxIdIdentityValidator
         Add(
             capabilities,
             DateFields,
-            "AL", "CU", "HU", "IS", "KG", "LV", "MN", "MX", "NI", "SV");
+            "AL", "CU", "HU", "IS", "KG", "LU", "LV", "MN", "MX", "NI", "SV");
         Add(capabilities, GenderFields, "PK");
 
         return capabilities;

@@ -5,17 +5,36 @@ follows Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-13
+
 ### Added
 
-- Identity consistency validation (docs/IDENTITY-CONSISTENCY.md, steps 1-3):
+- Identity consistency validation (docs/IDENTITY-CONSISTENCY.md):
   `validateTaxIdIdentity` and `taxIdIdentityCapability` in TypeScript,
-  `TaxIdIdentityValidator` in .NET. The Italian first slice compares a
-  Codice Fiscale with first name, last name, birth date, sex and Belfiore
-  birthplace code, handling omocodia, diacritics and the female day offset.
-  Partial birth-date, gender or administrative-code consistency is also
-  available for 36 additional countries.
-  Results carry status and field names only — personal values are never
-  echoed back. Shared fixtures keep both runtimes aligned.
+  `TaxIdIdentityValidator` in .NET. A new optional API compares an
+  identifier with user-supplied biographical data where the format encodes
+  it, returning `match`, `partial_match`, `mismatch`, `insufficient_data`
+  or `not_supported`. It never claims registry-level verification.
+- Full Italian Codice Fiscale slice: first name, last name, birth date,
+  sex and Belfiore birthplace code, handling omocodia, diacritics and the
+  female day offset.
+- Partial consistency for 37 additional countries (38 in total) whose
+  identifiers institutionally encode biographical data: birth date and sex
+  for 22 (PESEL, CNP, EGN, JMBG family, Nordic codes, RRN, Baltic codes,
+  KZ, UA, UZ, ZA, …), birth date plus an administrative place code for
+  CN/ID/MY, birth date only for 11 (including the Luxembourg matricule and
+  the Mexican RFC), and sex only for PK.
+- Per-country capabilities are declared explicitly; identifiers with random
+  or serial structure (DE, US, NL, FR SPI, BR, …) remain `not_supported`
+  with no fabricated checks.
+- Shared `identity-consistency-country-cases.json` fixture, consumed
+  unchanged by the Node.js and xUnit suites, derived from canonical
+  published examples rather than decoder output.
+
+### Security
+
+- Identity-consistency results carry status and field names only; submitted
+  identifiers and biographical attributes are never logged or echoed back.
 
 ## [0.1.0] - 2026-06-12
 

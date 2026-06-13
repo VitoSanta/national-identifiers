@@ -90,13 +90,13 @@ identityConsistency: {
 }
 ```
 
-The current implementation exposes 37 countries:
+The current implementation exposes 38 countries:
 
 - full name, birth date, gender and birthplace: IT;
 - birth date and gender: BA, BE, BG, CZ, DK, EE, FI, KR, KZ, LK, LT, ME, MK,
   NO, PL, RO, RS, SE, SK, UA, UZ and ZA;
 - birth date, gender and an encoded administrative place code: CN, ID and MY;
-- birth date only: AL, CU, HU, IS, KG, LV, MN, MX, NI and SV;
+- birth date only: AL, CU, HU, IS, KG, LU, LV, MN, MX, NI and SV;
 - gender only: PK.
 
 For formats that encode only a two-digit year, consistency compares the final
@@ -127,7 +127,7 @@ country specification defines them that way.
    by the Node.js and xUnit suites (ordinary, omocodic, female, diacritic,
    mismatch, partial, insufficient-data and not-supported cases).
 4. ~~Expand countries where the existing identifier rules encode meaningful
-   attributes.~~ Done for 36 additional countries, protected by
+   attributes.~~ Done for 37 additional countries, protected by
    `identity-consistency-country-cases.json` in both runtimes.
 5. Add Angular and ASP.NET integration only after the core contract stabilizes.
 6. Extend support only where institutional specifications make additional

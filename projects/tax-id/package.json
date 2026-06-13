@@ -1,6 +1,6 @@
 {
   "name": "tax-id",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Local pre-validation of national identifiers for 195 countries, with normalization, confidence levels, checksums and an optional Angular adapter.",
   "keywords": [
     "tax-id",

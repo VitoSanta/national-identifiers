@@ -238,6 +238,14 @@ export const ENCODED_IDENTITY_DECODERS: Readonly<Record<string, IdentityDecoder>
     };
   },
 
+  // Luxembourg matricule: yyyymmdd + serial + check digits. Full birth date,
+  // no sex marker.
+  LU: (v) => ({
+    year: numberAt(v, 0, 4),
+    month: numberAt(v, 4, 6),
+    day: numberAt(v, 6, 8),
+  }),
+
   EE: (v) => balticIdentity(v),
   LT: (v) => balticIdentity(v),
 

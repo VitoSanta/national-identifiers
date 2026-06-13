@@ -38,6 +38,8 @@ internal static class EncodedIdentity
             ["DK"] = DecodeDenmark,
             ["FI"] = DecodeFinland,
             ["IS"] = DecodeIceland,
+            ["LU"] = v => new DecodedIdentity(
+                Year: NumberAt(v, 0, 4), Month: NumberAt(v, 4, 6), Day: NumberAt(v, 6, 8)),
             ["EE"] = DecodeBaltic,
             ["LT"] = DecodeBaltic,
             ["LV"] = DecodeLatvia,

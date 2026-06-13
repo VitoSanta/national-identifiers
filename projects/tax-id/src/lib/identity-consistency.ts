@@ -127,6 +127,7 @@ const IDENTITY_CHECKERS: Readonly<Partial<Record<TaxIdCountry, IdentityChecker>>
   HU: encoded('HU', DATE_ONLY),
   IS: encoded('IS', DATE_ONLY),
   KG: encoded('KG', DATE_ONLY),
+  LU: encoded('LU', DATE_ONLY),
   LV: encoded('LV', DATE_ONLY),
   MN: encoded('MN', DATE_ONLY),
   MX: encoded('MX', DATE_ONLY),
