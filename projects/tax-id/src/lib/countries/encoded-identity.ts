@@ -57,18 +57,23 @@ export function buildEncodedIdentityCheck(decoder: IdentityDecoder) {
     }
 
     const birthDate = parseIsoDate(identity.birthDate);
-    const hasDecodedDate =
-      decoded.month !== undefined &&
-      decoded.day !== undefined &&
-      (decoded.year !== undefined || decoded.yearMod100 !== undefined);
+    // The birth date is checked to whatever granularity the format encodes.
+    // Some identifiers carry only year (+ month); month and day are compared
+    // only when the decoder supplies them.
+    const hasDecodedYear =
+      decoded.year !== undefined || decoded.yearMod100 !== undefined;
 
-    if (birthDate && hasDecodedDate) {
+    if (birthDate && hasDecodedYear) {
       checked.push('birthDate');
       const yearMatches =
         decoded.year !== undefined
           ? decoded.year === birthDate.year
           : decoded.yearMod100 === birthDate.year % 100;
-      if (!yearMatches || decoded.month !== birthDate.month || decoded.day !== birthDate.day) {
+      const monthMatches =
+        decoded.month === undefined || decoded.month === birthDate.month;
+      const dayMatches =
+        decoded.day === undefined || decoded.day === birthDate.day;
+      if (!yearMatches || !monthMatches || !dayMatches) {
         mismatched.push('birthDate');
       }
     }

@@ -71,10 +71,27 @@
     }
   },
   {
+    "country": "EG",
+    "taxId": "29501150101238",
+    "identity": {
+      "birthDate": "1995-01-15",
+      "gender": "M",
+      "birthPlaceCode": "01"
+    }
+  },
+  {
     "country": "FI",
     "taxId": "131052-308T",
     "identity": {
       "birthDate": "1952-10-13",
+      "gender": "F"
+    }
+  },
+  {
+    "country": "FR",
+    "taxId": "269054958815780",
+    "identity": {
+      "birthDate": "1969-05-15",
       "gender": "F"
     }
   },
@@ -114,6 +131,13 @@
     "identity": {
       "birthDate": "1990-01-01",
       "gender": "M"
+    }
+  },
+  {
+    "country": "KW",
+    "taxId": "289011212345",
+    "identity": {
+      "birthDate": "1989-01-12"
     }
   },
   {
@@ -179,9 +203,13 @@
   },
   {
     "country": "MX",
-    "taxId": "GODE561231GR8",
+    "taxId": "HEGG560427MVZRRL04",
     "identity": {
-      "birthDate": "1956-12-31"
+      "firstName": "Gabriela",
+      "lastName": "Hernández",
+      "birthDate": "1956-04-27",
+      "gender": "F",
+      "birthPlaceCode": "VZ"
     }
   },
   {
@@ -276,6 +304,15 @@
     "identity": {
       "birthDate": "1990-01-01",
       "gender": "M"
+    }
+  },
+  {
+    "country": "VN",
+    "taxId": "001205012345",
+    "identity": {
+      "birthDate": "2005-08-08",
+      "gender": "M",
+      "birthPlaceCode": "001"
     }
   },
   {

@@ -90,11 +90,12 @@ public static class TaxIdIdentityValidator
     {
         ArgumentNullException.ThrowIfNull(identity);
 
-        var validation = Validator.Validate(country, taxId);
-        var capability = Capability(validation.Country);
+        var normalizedCountry = country?.Trim().ToUpperInvariant() ?? string.Empty;
+        var capability = Capability(normalizedCountry);
 
         if (capability is null)
         {
+            var validation = Validator.Validate(country, taxId);
             return new TaxIdIdentityConsistencyResult(
                 IdentityConsistencyStatus.NotSupported,
                 validation.Country,
@@ -102,37 +103,19 @@ public static class TaxIdIdentityValidator
                 [], [], []);
         }
 
-        if (!validation.IsValid)
+        var normalized = Resolve(normalizedCountry, taxId);
+
+        if (normalized is null)
         {
             return new TaxIdIdentityConsistencyResult(
                 IdentityConsistencyStatus.InsufficientData,
-                validation.Country,
+                normalizedCountry,
                 false,
                 [], [],
                 capability.RequiredFields.ToArray());
         }
 
-        IReadOnlyList<string> checkedFields;
-        IReadOnlyList<string> mismatchedFields;
-
-        if (validation.Country == "IT")
-        {
-            (checkedFields, mismatchedFields) =
-                ItalyIdentity.Check(validation.NormalizedValue, identity);
-        }
-        else if (EncodedIdentity.Decoders.TryGetValue(validation.Country, out var decoder))
-        {
-            (checkedFields, mismatchedFields) =
-                EncodedIdentity.Check(decoder, validation.NormalizedValue, identity);
-        }
-        else
-        {
-            return new TaxIdIdentityConsistencyResult(
-                IdentityConsistencyStatus.NotSupported,
-                validation.Country,
-                true,
-                [], [], []);
-        }
+        var (checkedFields, mismatchedFields) = Check(normalizedCountry, normalized, identity);
 
         var missingFields = capability.RequiredFields
             .Where(field => !checkedFields.Contains(field))
@@ -145,11 +128,59 @@ public static class TaxIdIdentityValidator
 
         return new TaxIdIdentityConsistencyResult(
             status,
-            validation.Country,
+            normalizedCountry,
             true,
             checkedFields,
             mismatchedFields,
             missingFields);
+    }
+
+    /// <summary>Validates and normalizes the supplied identifier, or returns null.</summary>
+    private static string? Resolve(string country, object? taxId)
+    {
+        // Mexico accepts the CURP (national ID) or the RFC (tax id).
+        if (country == "MX")
+        {
+            return IdentityDocuments.All["MX"].Resolve(taxId) ?? ViaTaxId("MX", taxId);
+        }
+
+        if (IdentityDocuments.All.TryGetValue(country, out var document))
+        {
+            return document.Resolve(taxId);
+        }
+
+        return ViaTaxId(country, taxId);
+    }
+
+    private static string? ViaTaxId(string country, object? taxId)
+    {
+        var result = Validator.Validate(country, taxId);
+        return result.IsValid ? result.NormalizedValue : null;
+    }
+
+    private static (IReadOnlyList<string>, IReadOnlyList<string>) Check(
+        string country,
+        string normalized,
+        TaxIdIdentity identity)
+    {
+        if (country == "IT")
+            return ItalyIdentity.Check(normalized, identity);
+
+        if (country == "MX")
+        {
+            var decoder = normalized.Length == 18
+                ? IdentityDocuments.All["MX"].Decode
+                : EncodedIdentity.Decoders["MX"];
+            return EncodedIdentity.Check(decoder, normalized, identity);
+        }
+
+        if (IdentityDocuments.All.TryGetValue(country, out var document))
+            return EncodedIdentity.Check(document.Decode, normalized, identity);
+
+        if (EncodedIdentity.Decoders.TryGetValue(country, out var encoded))
+            return EncodedIdentity.Check(encoded, normalized, identity);
+
+        return ([], []);
     }
 
     private static IReadOnlyDictionary<string, TaxIdIdentityCapability> BuildCapabilities()
@@ -163,13 +194,13 @@ public static class TaxIdIdentityValidator
         Add(
             capabilities,
             DateAndGenderFields,
-            "BA", "BE", "BG", "CZ", "DK", "EE", "FI", "KR", "KZ", "LK", "LT",
-            "ME", "MK", "NO", "PL", "RO", "RS", "SE", "SK", "UA", "UZ", "ZA");
-        Add(capabilities, DateGenderAndPlaceFields, "CN", "ID", "MY");
+            "BA", "BE", "BG", "CZ", "DK", "EE", "FI", "FR", "KR", "KZ", "LK",
+            "LT", "ME", "MK", "NO", "PL", "RO", "RS", "SE", "SK", "UA", "UZ", "ZA");
+        Add(capabilities, DateGenderAndPlaceFields, "CN", "EG", "ID", "MX", "MY", "VN");
         Add(
             capabilities,
             DateFields,
-            "AL", "CU", "HU", "IS", "KG", "LU", "LV", "MN", "MX", "NI", "SV");
+            "AL", "CU", "HU", "IS", "KG", "KW", "LU", "LV", "MN", "NI", "SV");
         Add(capabilities, GenderFields, "PK");
 
         return capabilities;

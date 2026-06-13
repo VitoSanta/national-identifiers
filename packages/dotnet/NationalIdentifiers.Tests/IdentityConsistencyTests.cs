@@ -57,15 +57,15 @@ public class IdentityConsistencyTests
     {
         string[] expectedCountries =
         [
-            "AL", "BA", "BE", "BG", "CN", "CU", "CZ", "DK", "EE", "FI", "HU",
-            "ID", "IS", "IT", "KG", "KR", "KZ", "LK", "LT", "LU", "LV", "ME",
-            "MK", "MN", "MX", "MY", "NI", "NO", "PK", "PL", "RO", "RS", "SE",
-            "SK", "SV", "UA", "UZ", "ZA",
+            "AL", "BA", "BE", "BG", "CN", "CU", "CZ", "DK", "EE", "EG", "FI",
+            "FR", "HU", "ID", "IS", "IT", "KG", "KR", "KW", "KZ", "LK", "LT",
+            "LU", "LV", "ME", "MK", "MN", "MX", "MY", "NI", "NO", "PK", "PL",
+            "RO", "RS", "SE", "SK", "SV", "UA", "UZ", "VN", "ZA",
         ];
 
         Assert.All(expectedCountries, country =>
             Assert.NotNull(TaxIdIdentityValidator.Capability(country)));
-        Assert.Equal(38, expectedCountries.Length);
+        Assert.Equal(42, expectedCountries.Length);
     }
 
     [Fact]
@@ -79,7 +79,7 @@ public class IdentityConsistencyTests
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
         Assert.NotNull(fixtures);
-        Assert.Equal(37, fixtures.Count);
+        Assert.Equal(41, fixtures.Count);
 
         foreach (var fixture in fixtures)
         {
@@ -104,6 +104,41 @@ public class IdentityConsistencyTests
             Assert.Empty(result.MismatchedFields);
             Assert.Empty(result.MissingFields);
         }
+    }
+
+    [Fact]
+    public void Validates_National_Identity_Documents()
+    {
+        // Mexican CURP: full date + sex + state.
+        var curp = TaxIdIdentityValidator.Validate("MX", "HEGG560427MVZRRL04",
+            new TaxIdIdentity(BirthDate: new DateOnly(1956, 4, 27), Gender: 'F', BirthPlaceCode: "VZ"));
+        Assert.Equal(IdentityConsistencyStatus.Match, curp.Status);
+        Assert.Equal(new[] { "birthDate", "gender", "birthPlaceCode" }, curp.CheckedFields);
+
+        // Mexican RFC fallback: date only → partial.
+        var rfc = TaxIdIdentityValidator.Validate("MX", "GODE561231GR8",
+            new TaxIdIdentity(BirthDate: new DateOnly(1956, 12, 31), Gender: 'M', BirthPlaceCode: "VZ"));
+        Assert.Equal(IdentityConsistencyStatus.PartialMatch, rfc.Status);
+        Assert.Equal(new[] { "gender", "birthPlaceCode" }, rfc.MissingFields);
+
+        // French NIR: year + month, no day.
+        Assert.Equal(IdentityConsistencyStatus.Match, TaxIdIdentityValidator.Validate(
+            "FR", "269054958815780",
+            new TaxIdIdentity(BirthDate: new DateOnly(1969, 5, 30), Gender: 'F')).Status);
+        Assert.Equal(IdentityConsistencyStatus.Mismatch, TaxIdIdentityValidator.Validate(
+            "FR", "269054958815780",
+            new TaxIdIdentity(BirthDate: new DateOnly(1969, 7, 30), Gender: 'F')).Status);
+
+        // Egyptian National ID: sex mismatch.
+        var eg = TaxIdIdentityValidator.Validate("EG", "29501150101238",
+            new TaxIdIdentity(BirthDate: new DateOnly(1995, 1, 15), Gender: 'F', BirthPlaceCode: "01"));
+        Assert.Equal(IdentityConsistencyStatus.Mismatch, eg.Status);
+        Assert.Equal(new[] { "gender" }, eg.MismatchedFields);
+
+        // Structurally invalid document → insufficient_data.
+        Assert.Equal(IdentityConsistencyStatus.InsufficientData, TaxIdIdentityValidator.Validate(
+            "FR", "269054958815700",
+            new TaxIdIdentity(BirthDate: new DateOnly(1969, 5, 30), Gender: 'F')).Status);
     }
 
     [Theory]

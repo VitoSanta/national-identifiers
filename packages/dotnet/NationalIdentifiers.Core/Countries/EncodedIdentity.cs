@@ -89,18 +89,20 @@ internal static class EncodedIdentity
         if (decoded is null)
             return (checkedFields, mismatchedFields);
 
-        bool hasDecodedDate =
-            decoded.Month is not null &&
-            decoded.Day is not null &&
-            (decoded.Year is not null || decoded.YearMod100 is not null);
+        // The birth date is checked to whatever granularity the format
+        // encodes. Some identifiers carry only year (+ month); month and day
+        // are compared only when the decoder supplies them.
+        bool hasDecodedYear = decoded.Year is not null || decoded.YearMod100 is not null;
 
-        if (identity.BirthDate is { } birthDate && hasDecodedDate)
+        if (identity.BirthDate is { } birthDate && hasDecodedYear)
         {
             checkedFields.Add("birthDate");
             bool yearMatches = decoded.Year is { } fullYear
                 ? fullYear == birthDate.Year
                 : decoded.YearMod100 == birthDate.Year % 100;
-            if (!yearMatches || decoded.Month != birthDate.Month || decoded.Day != birthDate.Day)
+            bool monthMatches = decoded.Month is null || decoded.Month == birthDate.Month;
+            bool dayMatches = decoded.Day is null || decoded.Day == birthDate.Day;
+            if (!yearMatches || !monthMatches || !dayMatches)
                 mismatchedFields.Add("birthDate");
         }
 

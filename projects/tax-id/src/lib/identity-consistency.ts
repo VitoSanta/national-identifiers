@@ -5,6 +5,7 @@ import {
   ENCODED_IDENTITY_DECODERS,
   buildEncodedIdentityCheck,
 } from './countries/encoded-identity';
+import { IDENTITY_DOCUMENTS } from './countries/identity-documents';
 
 /**
  * Outcome of a local structural-consistency check between an identifier and
@@ -53,7 +54,7 @@ export interface TaxIdIdentityCapability {
 export interface TaxIdIdentityConsistencyResult {
   readonly status: IdentityConsistencyStatus;
   readonly country: string;
-  /** Whether the identifier itself passed `validateTaxId`. */
+  /** Whether the supplied identifier passed its structural validation. */
   readonly taxIdValid: boolean;
   /** Fields that were provided and evaluated against the identifier. */
   readonly checkedFields: readonly TaxIdIdentityField[];
@@ -63,21 +64,23 @@ export interface TaxIdIdentityConsistencyResult {
   readonly missingFields: readonly TaxIdIdentityField[];
 }
 
+type IdentityCheck = (
+  normalizedValue: string,
+  identity: TaxIdIdentity,
+) => { checked: TaxIdIdentityField[]; mismatched: TaxIdIdentityField[] };
+
 interface IdentityChecker {
   readonly capability: TaxIdIdentityCapability;
-  readonly check: (
-    normalizedTaxId: string,
-    identity: TaxIdIdentity,
-  ) => { checked: TaxIdIdentityField[]; mismatched: TaxIdIdentityField[] };
+  /** Validates and normalizes the supplied identifier, or returns null. */
+  readonly resolve: (value: unknown, country: string) => string | null;
+  readonly check: IdentityCheck;
 }
 
-const encoded = (
-  country: keyof typeof ENCODED_IDENTITY_DECODERS,
-  requiredFields: readonly TaxIdIdentityField[],
-): IdentityChecker => ({
-  capability: { level: 'partial', requiredFields },
-  check: buildEncodedIdentityCheck(ENCODED_IDENTITY_DECODERS[country]),
-});
+/** Default resolver: the country's tax identifier, via `validateTaxId`. */
+function viaTaxId(value: unknown, country: string): string | null {
+  const result = validateTaxId(country, value);
+  return result.valid ? result.normalizedValue : null;
+}
 
 const DATE_AND_GENDER: readonly TaxIdIdentityField[] = ['birthDate', 'gender'];
 const DATE_GENDER_PLACE: readonly TaxIdIdentityField[] = [
@@ -85,15 +88,50 @@ const DATE_GENDER_PLACE: readonly TaxIdIdentityField[] = [
 ];
 const DATE_ONLY: readonly TaxIdIdentityField[] = ['birthDate'];
 
+/** Checker for a country whose tax identifier itself encodes the data. */
+const encoded = (
+  country: keyof typeof ENCODED_IDENTITY_DECODERS,
+  requiredFields: readonly TaxIdIdentityField[],
+): IdentityChecker => ({
+  capability: { level: 'partial', requiredFields },
+  resolve: viaTaxId,
+  check: buildEncodedIdentityCheck(ENCODED_IDENTITY_DECODERS[country]),
+});
+
+/** Checker for a national identity document validated outside `validateTaxId`. */
+const document = (
+  country: keyof typeof IDENTITY_DOCUMENTS,
+  requiredFields: readonly TaxIdIdentityField[],
+): IdentityChecker => ({
+  capability: { level: 'partial', requiredFields },
+  resolve: (value) => IDENTITY_DOCUMENTS[country].resolve(value),
+  check: buildEncodedIdentityCheck(IDENTITY_DOCUMENTS[country].decode),
+});
+
+// Mexico exposes two documents: the CURP (date + sex + state) and the RFC
+// (date only). Accept either; decode by length.
+const mexico: IdentityChecker = {
+  capability: { level: 'partial', requiredFields: DATE_GENDER_PLACE },
+  resolve: (value) => IDENTITY_DOCUMENTS['MX'].resolve(value) ?? viaTaxId(value, 'MX'),
+  check: (normalizedValue, identity) => {
+    const decoder =
+      normalizedValue.length === 18
+        ? IDENTITY_DOCUMENTS['MX'].decode
+        : ENCODED_IDENTITY_DECODERS['MX'];
+    return buildEncodedIdentityCheck(decoder)(normalizedValue, identity);
+  },
+};
+
 const IDENTITY_CHECKERS: Readonly<Partial<Record<TaxIdCountry, IdentityChecker>>> = {
   IT: {
     capability: {
       level: 'full',
       requiredFields: ['firstName', 'lastName', 'birthDate', 'gender', 'birthPlaceCode'],
     },
+    resolve: viaTaxId,
     check: checkItalianIdentity,
   },
-  // Birth date and sex are encoded in the identifier.
+  // Tax identifier encodes birth date and sex.
   BA: encoded('BA', DATE_AND_GENDER),
   BE: encoded('BE', DATE_AND_GENDER),
   BG: encoded('BG', DATE_AND_GENDER),
@@ -116,11 +154,11 @@ const IDENTITY_CHECKERS: Readonly<Partial<Record<TaxIdCountry, IdentityChecker>>
   UA: encoded('UA', DATE_AND_GENDER),
   UZ: encoded('UZ', DATE_AND_GENDER),
   ZA: encoded('ZA', DATE_AND_GENDER),
-  // Birth date, sex and a registration-division code are encoded.
+  // Tax identifier encodes birth date, sex and a registration-division code.
   CN: encoded('CN', DATE_GENDER_PLACE),
   ID: encoded('ID', DATE_GENDER_PLACE),
   MY: encoded('MY', DATE_GENDER_PLACE),
-  // Only the birth date is encoded (or the sex convention is not
+  // Tax identifier encodes only the birth date (or the sex convention is not
   // institutionally settled, as for AL and KG).
   AL: encoded('AL', DATE_ONLY),
   CU: encoded('CU', DATE_ONLY),
@@ -130,11 +168,16 @@ const IDENTITY_CHECKERS: Readonly<Partial<Record<TaxIdCountry, IdentityChecker>>
   LU: encoded('LU', DATE_ONLY),
   LV: encoded('LV', DATE_ONLY),
   MN: encoded('MN', DATE_ONLY),
-  MX: encoded('MX', DATE_ONLY),
   NI: encoded('NI', DATE_ONLY),
   SV: encoded('SV', DATE_ONLY),
-  // Only the sex is encoded (CNIC final digit).
+  // Tax identifier encodes only the sex (CNIC final digit).
   PK: encoded('PK', ['gender']),
+  // National identity documents validated outside the tax-id contract.
+  MX: mexico,
+  EG: document('EG', DATE_GENDER_PLACE),
+  FR: document('FR', DATE_AND_GENDER),
+  VN: document('VN', DATE_GENDER_PLACE),
+  KW: document('KW', DATE_ONLY),
 };
 
 /** Declared identity-consistency capability for a country, or `null`. */
@@ -154,10 +197,12 @@ export function taxIdIdentityCapability(
 export function validateTaxIdIdentity(
   request: TaxIdIdentityRequest,
 ): TaxIdIdentityConsistencyResult {
-  const validation = validateTaxId(request.country, request.taxId);
-  const checker = IDENTITY_CHECKERS[validation.country as TaxIdCountry];
+  const country =
+    typeof request.country === 'string' ? request.country.trim().toUpperCase() : '';
+  const checker = IDENTITY_CHECKERS[country as TaxIdCountry];
 
   if (!checker) {
+    const validation = validateTaxId(request.country, request.taxId);
     return {
       status: 'not_supported',
       country: validation.country,
@@ -168,10 +213,12 @@ export function validateTaxIdIdentity(
     };
   }
 
-  if (!validation.valid) {
+  const normalizedValue = checker.resolve(request.taxId, country);
+
+  if (normalizedValue === null) {
     return {
       status: 'insufficient_data',
-      country: validation.country,
+      country,
       taxIdValid: false,
       checkedFields: [],
       mismatchedFields: [],
@@ -179,10 +226,7 @@ export function validateTaxIdIdentity(
     };
   }
 
-  const { checked, mismatched } = checker.check(
-    validation.normalizedValue,
-    request.identity ?? {},
-  );
+  const { checked, mismatched } = checker.check(normalizedValue, request.identity ?? {});
   const missing = missingRequiredFields(checker, checked);
 
   let status: IdentityConsistencyStatus;
@@ -198,7 +242,7 @@ export function validateTaxIdIdentity(
 
   return {
     status,
-    country: validation.country,
+    country,
     taxIdValid: true,
     checkedFields: checked,
     mismatchedFields: mismatched,

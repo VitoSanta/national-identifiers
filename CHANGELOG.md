@@ -5,6 +5,22 @@ follows Semantic Versioning.
 
 ## [Unreleased]
 
+### Added
+
+- Identity consistency now covers 42 countries (was 38). Five decode a
+  national identity document validated independently of the tax identifier:
+  Egypt (National ID), France (NIR), Kuwait (Civil ID), Mexico (CURP) and
+  Vietnam (CCCD). Mexico still accepts the RFC tax id as a date-only fallback.
+- Partial-date matching: identifiers that encode an incomplete birth date
+  (France: year + month; Vietnam: year only) are compared to the granularity
+  they encode and still report `birthDate` as checked.
+
+### Changed
+
+- The identity layer resolves each country's document through a per-country
+  validator, so national-identity documents (CURP, NIR, …) are supported
+  without touching the `validateTaxId` contract or the supported-tax-id set.
+
 ## [0.2.0] - 2026-06-13
 
 ### Added

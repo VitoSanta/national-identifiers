@@ -7,6 +7,11 @@ consistent** with it. This file classifies the 195 states by what their
 identifiers actually encode, so implementation never claims more than the
 number contains.
 
+> **Status (unreleased):** the verified Group B candidates — FR (NIR),
+> EG (National ID), MX (CURP, date+sex+state), VN (CCCD) and KW (Civil ID) —
+> are now implemented, bringing identity consistency to 42 countries. The
+> remaining 🟡/⚠️ entries below still need source verification before coding.
+
 Date of this pass: 2026-06-13. Entries are marked:
 
 - ✅ **verified** — encoding confirmed by a cited source this pass;

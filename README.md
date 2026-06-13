@@ -827,11 +827,15 @@ The .NET equivalent is `TaxIdIdentityValidator.Validate(country, taxId, new
 TaxIdIdentity(...))`. Capabilities are declared per country through
 `taxIdIdentityCapability` and `TaxIdIdentityValidator.Capability`.
 
-The current implementation covers 38 countries: Italy has full name, date,
-gender and place consistency, while 37 additional formats expose partial
-checks for encoded birth date, gender or administrative place code. See the
-[capability matrix](docs/IDENTITY-CONSISTENCY.md). A `match` is not identity
-verification, and no personal value is logged or echoed back.
+The current implementation covers 42 countries: Italy has full name, date,
+gender and place consistency, while 41 additional formats expose partial
+checks for encoded birth date, gender or administrative place code. Five of
+these (EG, FR, KW, MX, VN) decode a **national identity document** — the
+Egyptian National ID, the French NIR, the Kuwaiti Civil ID, the Mexican CURP
+and the Vietnamese CCCD — which is validated independently of the country's
+tax identifier. See the [capability matrix](docs/IDENTITY-CONSISTENCY.md) and
+[expansion research](docs/IDENTITY-CONSISTENCY-RESEARCH.md). A `match` is not
+identity verification, and no personal value is logged or echoed back.
 
 ---
 

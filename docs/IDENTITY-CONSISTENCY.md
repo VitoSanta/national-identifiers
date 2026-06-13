@@ -90,19 +90,29 @@ identityConsistency: {
 }
 ```
 
-The current implementation exposes 38 countries:
+The current implementation exposes 42 countries:
 
 - full name, birth date, gender and birthplace: IT;
-- birth date and gender: BA, BE, BG, CZ, DK, EE, FI, KR, KZ, LK, LT, ME, MK,
-  NO, PL, RO, RS, SE, SK, UA, UZ and ZA;
-- birth date, gender and an encoded administrative place code: CN, ID and MY;
-- birth date only: AL, CU, HU, IS, KG, LU, LV, MN, MX, NI and SV;
+- birth date and gender: BA, BE, BG, CZ, DK, EE, FI, FR, KR, KZ, LK, LT, ME,
+  MK, NO, PL, RO, RS, SE, SK, UA, UZ and ZA;
+- birth date, gender and an encoded administrative place code: CN, EG, ID, MX,
+  MY and VN;
+- birth date only: AL, CU, HU, IS, KG, KW, LU, LV, MN, NI and SV;
 - gender only: PK.
 
-For formats that encode only a two-digit year, consistency compares the final
-two digits and does not infer a century. Administrative codes are compared as
-encoded values; they are not presented as proof of birthplace unless the
-country specification defines them that way.
+Five countries decode a **national identity document** rather than the tax
+identifier: EG (National ID), FR (NIR), KW (Civil ID), MX (CURP) and VN
+(CCCD). These are validated structurally inside the identity layer, so the
+`validateTaxId` contract is untouched. Mexico also accepts the RFC tax id as a
+fallback, which yields a date-only (`partial_match`) check.
+
+Some formats encode an incomplete date: FR encodes birth year and month (no
+day) and VN encodes only the birth year. For these, the birth date is compared
+to the available granularity and the result still reports `birthDate` as
+checked. For formats that encode only a two-digit year, consistency compares
+the final two digits and does not infer a century. Administrative codes are
+compared as encoded values; they are not presented as proof of birthplace
+unless the country specification defines them that way.
 
 ## Privacy and Security
 
