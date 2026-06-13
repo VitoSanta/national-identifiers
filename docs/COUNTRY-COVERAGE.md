@@ -233,9 +233,109 @@ indica la profondita disponibile: checksum, formato, dati codificati oppure
 `not_applicable`. I miglioramenti futuri sono tracciati nella roadmap e nei
 limiti noti, non in questa matrice.
 
-## Giurisdizioni e territori
+## Expansion roadmap (beyond the 195 states)
 
-Territories and independently administered tax jurisdictions are outside the
-current 195-state scope. Examples include Hong Kong, Macao, Taiwan, Greenland,
-the Faroe Islands, Puerto Rico and other territories with autonomous tax
-systems.
+The 195-state personal-tax-id scope and the 47-jurisdiction identity-consistency
+scope are complete. This roadmap tracks the deliberate expansion into adjacent
+scopes that still have public formats and algorithms. It is the checklist we
+follow before cutting the next release.
+
+**Rules for every item below** (same discipline as the rest of the library):
+
+1. Record an institutional source (see `RULE-SOURCE-POLICY.md`) *before* coding.
+   Anything that cannot be sourced stays unchecked — no inferred algorithms.
+2. Implement TypeScript and .NET together.
+3. Add positive + negative cases and a shared cross-runtime fixture.
+4. Update the docs and run the full gate (Node + Angular + xUnit + demo + pack).
+
+**Release decision.** Hold the next publish until the workstreams below are
+done. If Workstream B ships the identifier-family API (a new public surface),
+release as **1.0.0** and freeze the contracts per `ROADMAP.md`; otherwise a
+**0.3.0** minor is enough. Recommendation: 1.0.0. The npm package is still at
+0.1.0 and must be caught up at the same time as the NuGet push.
+
+### Workstream A — Territories & autonomous tax jurisdictions
+
+These extend tax-id *validation* to ISO 3166-1 codes outside the 195 UN states.
+
+Architecture (do first):
+
+- [ ] Introduce a `SUPPORTED_TAX_ID_TERRITORIES` set kept **separate** from
+      `SUPPORTED_TAX_ID_COUNTRIES` (which stays exactly the 195). Dispatch both
+      through `validateTaxId`; the result keeps the ISO code.
+- [ ] Update `coverage-consistency` to assert "195 states + N territories"
+      instead of a single 195 count, so the invariant stays meaningful.
+
+Per territory (source → TS validator → .NET validator → fixtures → tests → docs):
+
+- [ ] **HK** Hong Kong — HKID: 1–2 letters + 6 digits + mod-11 check
+      (letters A=10…Z=35, leading blank=36, weights 9→2 then check; check =
+      (11 − sum mod 11), 11→0, 10→A). Algorithm confirmed; reuse the Taiwan
+      letter-mapping pattern in `identity-documents`.
+- [ ] **TW** Taiwan — ROC ID as a tax id: identical letter+digit checksum
+      already implemented for identity consistency; promote it to a tax-id
+      validator (reuse, don't reimplement).
+- [ ] **GL** Greenland & **FO** Faroe — use the Danish CPR system: reuse the
+      `DK` validator and the `DK` identity decoder (date + sex) verbatim.
+- [ ] **MO** Macao — resident ID (prefix 1/5/7 + 6 digits + parenthesised
+      check); verify the check-digit source before coding.
+- [ ] **PR** Puerto Rico — personal identifier is the US SSN/ITIN (reuse `US`);
+      the local merchant-registration number is separate and out of scope.
+- [ ] **GI** Gibraltar, **JE** Jersey, **GG** Guernsey, **IM** Isle of Man —
+      verify each tax-reference format (UK-linked); implement those with a
+      documented structure.
+- [ ] **AW** Aruba, **CW** Curaçao, **SX** Sint Maarten — verify
+      persoonsnummer / crib structure.
+- [ ] Sweep remaining ISO 3166-1 territories with autonomous tax systems and
+      record which expose a documented format vs. which do not.
+
+### Workstream B — VAT & business identifiers (new identifier family)
+
+This is the largest expansion and introduces identifier *families*.
+
+Architecture (do first):
+
+- [ ] Add `validateIdentifier({ country, type, value })` with
+      `type ∈ { 'tax_id_person', 'vat', 'tax_id_company' }`; keep
+      `validateTaxId(country, value)` as the person-scoped alias (no breaking
+      change). Add `identifierType` to the result model.
+- [ ] Mirror the family API in .NET (`TaxIdValidator.Validate(country, type,
+      value)` overload or a sibling validator).
+
+Per-country VAT (each sourced before coding):
+
+- [ ] **IT** — the 11-digit partita IVA is already validated; expose it as
+      `type: 'vat'` (wire-up, not new logic).
+- [ ] **EU-27** VAT: format + check digit per state — FR (mod-97 key over
+      SIREN), DE (ISO 7064 / 11), NL (mod-11 + `B` suffix), BE (mod-97), ES
+      (CIF letter/number), IE, PT (mod-11), GR, PL, etc. Verify each algorithm
+      individually; implement only the sourced ones.
+- [ ] Non-EU VAT with public algorithms: **GB** (9/12-digit mod-97), **CH**
+      (UID-MWST mod-11), **NO** (MVA = org. number mod-11), **AU** (ABN
+      mod-89), and others as sourced.
+- [ ] **VIES / live registry lookups**: explicitly an *optional online add-on*
+      package, kept OUT of the offline core (offline = format/checksum only).
+
+### Workstream C — Mexico full identity (CURP name matching)
+
+- [ ] Implement the RENAPO name-encoding algorithm: paternal surname (1st
+      letter + 1st internal vowel), maternal surname (1st letter), given name
+      (1st letter, skipping common first names like MARIA/JOSE), internal
+      consonants at positions 14–16, plus the "inconvenient words" substitution
+      table (e.g. `BUEI`→`BUEX`). Source: RENAPO instructivo.
+- [ ] Verify `firstName` / `lastName` against the CURP and promote **MX** to
+      `level: 'full'` (date + sex + state + name) — the second full country
+      after Italy.
+- [ ] Fixtures with canonical CURPs including an inconvenient-word case; TS +
+      .NET parity.
+
+### Definition of done
+
+- [ ] All sourced items above implemented in both runtimes with fixtures.
+- [ ] Docs updated: this file, `IDENTITY-CONSISTENCY.md`, README counts,
+      `KNOWN-LIMITATIONS.md`, `CHANGELOG.md`.
+- [ ] Versions bumped; tag pushed (NuGet auto-publishes); **npm published** to
+      catch up from 0.1.0.
+
+Anything that cannot be sourced after research stays here unchecked and is
+documented as a known limit — the library claims only what it can verify.

@@ -1,5 +1,19 @@
 # Roadmap
 
+## Status (2026-06-13)
+
+- **Shipped:** 195-state validation (npm 0.1.0; NuGet 0.2.0). Identity
+  consistency for 47 jurisdictions (Italy full; 46 partial) is implemented
+  and **unreleased**.
+- **Next release is on hold by decision.** It will bundle the expansion below
+  and ship as **1.0.0** if the identifier-family API lands, else 0.3.0. npm
+  must be caught up from 0.1.0 at the same time.
+- **Detailed, step-by-step expansion checklist:**
+  [docs/COUNTRY-COVERAGE.md → Expansion roadmap](docs/COUNTRY-COVERAGE.md#expansion-roadmap-beyond-the-195-states)
+  (Workstream A: territories with public algorithms — HK/TW/GL/FO/MO/…;
+  Workstream B: VAT & business identifiers / families; Workstream C: Mexico
+  full identity via CURP name).
+
 ## 0.1 - Stable validation foundation
 
 - 195-country coverage in TypeScript and .NET.
