@@ -90,21 +90,31 @@ identityConsistency: {
 }
 ```
 
-The current implementation exposes 42 countries:
+The current implementation exposes 47 jurisdictions:
 
 - full name, birth date, gender and birthplace: IT;
 - birth date and gender: BA, BE, BG, CZ, DK, EE, FI, FR, KR, KZ, LK, LT, ME,
   MK, NO, PL, RO, RS, SE, SK, UA, UZ and ZA;
 - birth date, gender and an encoded administrative place code: CN, EG, ID, MX,
   MY and VN;
-- birth date only: AL, CU, HU, IS, KG, KW, LU, LV, MN, NI and SV;
+- birth date only: AE, AL, BD, BH, CU, HU, IS, KG, KW, LU, LV, MN, NI, QA
+  and SV;
+- gender and registration region: TW;
 - gender only: PK.
 
-Five countries decode a **national identity document** rather than the tax
-identifier: EG (National ID), FR (NIR), KW (Civil ID), MX (CURP) and VN
-(CCCD). These are validated structurally inside the identity layer, so the
+Ten jurisdictions decode a **national identity document** rather than the tax
+identifier: EG (National ID), FR (NIR), KW (Civil ID), MX (CURP), VN (CCCD),
+AE (Emirates ID), BH (CPR), QA (QID), BD (17-digit NID) and TW (National ID).
+These are validated structurally inside the identity layer, so the
 `validateTaxId` contract is untouched. Mexico also accepts the RFC tax id as a
-fallback, which yields a date-only (`partial_match`) check.
+fallback, which yields a date-only (`partial_match`) check. Taiwan is a
+jurisdiction outside the 195-state tax-id set; `validateTaxId('TW', …)` still
+returns `unsupported_country`.
+
+The year-only formats (AE, BD, QA — and VN, which adds sex and province)
+compare just the birth year and are the weakest date signal; AE/BD/QA encode
+no other field. They are included because the signal, while weak, is real and
+verified.
 
 Some formats encode an incomplete date: FR encodes birth year and month (no
 day) and VN encodes only the birth year. For these, the birth date is compared

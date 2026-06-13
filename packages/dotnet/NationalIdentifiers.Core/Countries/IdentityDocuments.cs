@@ -22,12 +22,29 @@ internal static class IdentityDocuments
     internal static readonly IReadOnlyDictionary<string, IdentityDocument> All =
         new Dictionary<string, IdentityDocument>(StringComparer.Ordinal)
         {
+            ["AE"] = new(ResolveUae, DecodeUae),
+            ["BD"] = new(ResolveBangladesh, DecodeBangladesh),
+            ["BH"] = new(ResolveBahrain, DecodeBahrain),
             ["EG"] = new(ResolveEgypt, DecodeEgypt),
             ["FR"] = new(ResolveFrance, DecodeFrance),
             ["KW"] = new(ResolveKuwait, DecodeKuwait),
             ["MX"] = new(ResolveMexico, DecodeMexico),
+            ["QA"] = new(ResolveQatar, DecodeQatar),
+            ["TW"] = new(ResolveTaiwan, DecodeTaiwan),
             ["VN"] = new(ResolveVietnam, DecodeVietnam),
         };
+
+    private static readonly IReadOnlyDictionary<char, int> TaiwanLetterCodes =
+        new Dictionary<char, int>
+        {
+            ['A'] = 10, ['B'] = 11, ['C'] = 12, ['D'] = 13, ['E'] = 14, ['F'] = 15,
+            ['G'] = 16, ['H'] = 17, ['I'] = 34, ['J'] = 18, ['K'] = 19, ['L'] = 20,
+            ['M'] = 21, ['N'] = 22, ['O'] = 35, ['P'] = 23, ['Q'] = 24, ['R'] = 25,
+            ['S'] = 26, ['T'] = 27, ['U'] = 28, ['V'] = 29, ['W'] = 32, ['X'] = 30,
+            ['Y'] = 31, ['Z'] = 33,
+        };
+
+    private static bool PlausibleYear(int year) => year >= 1900 && year <= DateTime.UtcNow.Year;
 
     private static string Compact(object? value)
     {
@@ -134,4 +151,64 @@ internal static class IdentityDocuments
         return new DecodedIdentity(
             Year: century + Num(n, 1, 3), Month: Num(n, 3, 5), Day: Num(n, 5, 7));
     }
+
+    // UAE Emirates ID (15): 784 + full birth year + serial + check. Year only.
+    private static string? ResolveUae(object? value)
+    {
+        var n = Compact(value);
+        if (!Regex.IsMatch(n, @"^784\d{12}$")) return null;
+        return PlausibleYear(Num(n, 3, 7)) ? n : null;
+    }
+
+    private static DecodedIdentity DecodeUae(string n) => new(Year: Num(n, 3, 7));
+
+    // Bahrain CPR (9): YYMM + serial + check. Birth year (2-digit) and month.
+    private static string? ResolveBahrain(object? value)
+    {
+        var n = Compact(value);
+        if (!Regex.IsMatch(n, @"^\d{9}$")) return null;
+        int month = Num(n, 2, 4);
+        return month is >= 1 and <= 12 ? n : null;
+    }
+
+    private static DecodedIdentity DecodeBahrain(string n) =>
+        new(YearMod100: Num(n, 0, 2), Month: Num(n, 2, 4));
+
+    // Qatar QID (11): century + birth year + nationality + serial. Year only.
+    private static string? ResolveQatar(object? value)
+    {
+        var n = Compact(value);
+        return Regex.IsMatch(n, @"^[23]\d{10}$") ? n : null;
+    }
+
+    private static DecodedIdentity DecodeQatar(string n) =>
+        new(Year: (n[0] == '3' ? 2000 : 1900) + Num(n, 1, 3));
+
+    // Bangladesh NID, 17-digit form: full birth year + registration codes.
+    private static string? ResolveBangladesh(object? value)
+    {
+        var n = Compact(value);
+        if (!Regex.IsMatch(n, @"^\d{17}$")) return null;
+        return PlausibleYear(Num(n, 0, 4)) ? n : null;
+    }
+
+    private static DecodedIdentity DecodeBangladesh(string n) => new(Year: Num(n, 0, 4));
+
+    // Taiwan National ID: region letter + sex digit + 7 serial + check digit.
+    // Encodes sex and registration region, no birth date. A jurisdiction
+    // beyond the 195 UN states, supported for identity consistency only.
+    private static string? ResolveTaiwan(object? value)
+    {
+        var n = Compact(value);
+        if (!Regex.IsMatch(n, @"^[A-Z][12]\d{8}$")) return null;
+        if (!TaiwanLetterCodes.TryGetValue(n[0], out int code)) return null;
+
+        int[] weights = [8, 7, 6, 5, 4, 3, 2, 1, 1];
+        int sum = code / 10 + code % 10 * 9;
+        for (int i = 1; i < 10; i++) sum += (n[i] - '0') * weights[i - 1];
+        return sum % 10 == 0 ? n : null;
+    }
+
+    private static DecodedIdentity DecodeTaiwan(string n) =>
+        new(Gender: n[1] == '1' ? 'M' : 'F', BirthPlaceCode: n[..1]);
 }

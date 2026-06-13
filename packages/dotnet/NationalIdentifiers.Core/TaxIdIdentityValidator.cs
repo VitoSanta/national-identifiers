@@ -72,6 +72,9 @@ public static class TaxIdIdentityValidator
 
     private static readonly IReadOnlyList<string> GenderFields = ["gender"];
 
+    private static readonly IReadOnlyList<string> GenderAndPlaceFields =
+        ["gender", "birthPlaceCode"];
+
     private static readonly IReadOnlyDictionary<string, TaxIdIdentityCapability> Capabilities =
         BuildCapabilities();
 
@@ -200,8 +203,10 @@ public static class TaxIdIdentityValidator
         Add(
             capabilities,
             DateFields,
-            "AL", "CU", "HU", "IS", "KG", "KW", "LU", "LV", "MN", "NI", "SV");
+            "AE", "AL", "BD", "BH", "CU", "HU", "IS", "KG", "KW", "LU", "LV",
+            "MN", "NI", "QA", "SV");
         Add(capabilities, GenderFields, "PK");
+        Add(capabilities, GenderAndPlaceFields, "TW");
 
         return capabilities;
     }

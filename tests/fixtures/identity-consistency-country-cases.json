@@ -1,5 +1,12 @@
 [
   {
+    "country": "AE",
+    "taxId": "784198512345678",
+    "identity": {
+      "birthDate": "1985-03-10"
+    }
+  },
+  {
     "country": "AL",
     "taxId": "K30315001A",
     "identity": {
@@ -12,6 +19,13 @@
     "identity": {
       "birthDate": "2006-01-01",
       "gender": "M"
+    }
+  },
+  {
+    "country": "BD",
+    "taxId": "19901234567890123",
+    "identity": {
+      "birthDate": "1990-12-01"
     }
   },
   {
@@ -28,6 +42,13 @@
     "identity": {
       "birthDate": "2000-01-01",
       "gender": "M"
+    }
+  },
+  {
+    "country": "BH",
+    "taxId": "850123456",
+    "identity": {
+      "birthDate": "1985-01-20"
     }
   },
   {
@@ -252,6 +273,13 @@
     }
   },
   {
+    "country": "QA",
+    "taxId": "28463412345",
+    "identity": {
+      "birthDate": "1984-07-07"
+    }
+  },
+  {
     "country": "RO",
     "taxId": "1960523420017",
     "identity": {
@@ -288,6 +316,14 @@
     "taxId": "0614-241287-102-5",
     "identity": {
       "birthDate": "1987-12-24"
+    }
+  },
+  {
+    "country": "TW",
+    "taxId": "A123456789",
+    "identity": {
+      "gender": "M",
+      "birthPlaceCode": "A"
     }
   },
   {

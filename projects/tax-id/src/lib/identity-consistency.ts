@@ -87,6 +87,7 @@ const DATE_GENDER_PLACE: readonly TaxIdIdentityField[] = [
   'birthDate', 'gender', 'birthPlaceCode',
 ];
 const DATE_ONLY: readonly TaxIdIdentityField[] = ['birthDate'];
+const GENDER_AND_PLACE: readonly TaxIdIdentityField[] = ['gender', 'birthPlaceCode'];
 
 /** Checker for a country whose tax identifier itself encodes the data. */
 const encoded = (
@@ -122,7 +123,9 @@ const mexico: IdentityChecker = {
   },
 };
 
-const IDENTITY_CHECKERS: Readonly<Partial<Record<TaxIdCountry, IdentityChecker>>> = {
+// Keyed by string, not TaxIdCountry: identity consistency may cover a
+// jurisdiction (e.g. TW) that is outside the 195-state tax-id set.
+const IDENTITY_CHECKERS: Readonly<Record<string, IdentityChecker>> = {
   IT: {
     capability: {
       level: 'full',
@@ -178,6 +181,13 @@ const IDENTITY_CHECKERS: Readonly<Partial<Record<TaxIdCountry, IdentityChecker>>
   FR: document('FR', DATE_AND_GENDER),
   VN: document('VN', DATE_GENDER_PLACE),
   KW: document('KW', DATE_ONLY),
+  // Birth year (or year + month) only — a weak but verified date signal.
+  AE: document('AE', DATE_ONLY),
+  BD: document('BD', DATE_ONLY),
+  BH: document('BH', DATE_ONLY),
+  QA: document('QA', DATE_ONLY),
+  // Sex + registration region (no birth date). A jurisdiction beyond the 195.
+  TW: document('TW', GENDER_AND_PLACE),
 };
 
 /** Declared identity-consistency capability for a country, or `null`. */

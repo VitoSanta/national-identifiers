@@ -7,10 +7,17 @@ consistent** with it. This file classifies the 195 states by what their
 identifiers actually encode, so implementation never claims more than the
 number contains.
 
-> **Status (unreleased):** the verified Group B candidates — FR (NIR),
-> EG (National ID), MX (CURP, date+sex+state), VN (CCCD) and KW (Civil ID) —
-> are now implemented, bringing identity consistency to 42 countries. The
-> remaining 🟡/⚠️ entries below still need source verification before coding.
+> **Status (unreleased):** the verified Group B candidates are implemented,
+> bringing identity consistency to 47 jurisdictions — FR (NIR), EG (National
+> ID), MX (CURP), VN (CCCD), KW (Civil ID), plus AE (Emirates ID, year),
+> BH (CPR, year+month), QA (QID, year), BD (17-digit NID, year) and TW
+> (National ID, sex+region; a jurisdiction outside the 195-state set).
+> Still **not implemented** (source could not be confirmed this pass):
+> Belarus (personal number), Mauritius (NIC — DDMMYY suspected but the
+> structure and check algorithm are not officially documented), Namibia and
+> Honduras. Hong Kong / Macau national IDs encode no personal data. This is
+> at or near the practical ceiling: the remaining states use random or
+> sequential identifiers.
 
 Date of this pass: 2026-06-13. Entries are marked:
 
