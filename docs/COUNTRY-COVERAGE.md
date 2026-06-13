@@ -317,8 +317,9 @@ Per-country VAT (each sourced before coding):
       cross-runtime fixtures.
 - [x] Fourth **EU VAT** batch: **CZ** (IČO plus personal DIČ variants) and
       **IE** (modern Tax Reference Number variants), mirrored across runtimes.
-- [ ] Remaining **EU-27 VAT**: **BG**. Source and implement all 9/10-digit
-      entity/person checksum branches before declaring the country covered.
+- [x] Remaining **EU-27 VAT**: **BG** — 9-digit EIK (two-pass modulo 11) and
+      10-digit sole-trader (EGN check). Foreigner (PNF) / miscellaneous
+      10-digit variants are documented as a known limit. EU-27 now complete.
 - [x] First non-EU VAT/business batch: **GB** (9/12-digit mod-97 plus GD/HA
       ranges), **CH** (UID-MWST/TVA/IVA mod-11), **NO** (MVA organization
       number mod-11), **AU** (ABN mod-89), mirrored across both runtimes.

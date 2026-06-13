@@ -3,6 +3,7 @@ import {
   validateAustrianVat,
   validateAustralianVat,
   validateBelgianVat,
+  validateBulgarianVat,
   validateCypriotVat,
   validateCzechVat,
   validateDanishVat,
@@ -51,7 +52,7 @@ function withChecksumLevel(
 }
 
 export type VatCountry =
-  | 'AT' | 'AU' | 'BE' | 'CH' | 'CY' | 'CZ' | 'DE' | 'DK' | 'EE'
+  | 'AT' | 'AU' | 'BE' | 'BG' | 'CH' | 'CY' | 'CZ' | 'DE' | 'DK' | 'EE'
   | 'ES' | 'FI' | 'FR' | 'GB' | 'GR' | 'HR' | 'HU' | 'IE' | 'IT'
   | 'LT' | 'LU' | 'LV' | 'MT' | 'NL' | 'NO' | 'PL' | 'PT' | 'RO'
   | 'SE' | 'SI' | 'SK';
@@ -62,6 +63,7 @@ export const VAT_VALIDATION_REGISTRY: Readonly<
   AT: validateAustrianVat,
   AU: validateAustralianVat,
   BE: validateBelgianVat,
+  BG: validateBulgarianVat,
   CH: validateSwissVat,
   CY: validateCypriotVat,
   CZ: validateCzechVat,

@@ -7,9 +7,9 @@ public static class VatCountries
 {
     private static readonly ReadOnlyCollection<string> Codes = Array.AsReadOnly(
     [
-        "AT", "AU", "BE", "CH", "CY", "CZ", "DE", "DK", "EE", "ES",
-        "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IT", "LT", "LU",
-        "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"
+        "AT", "AU", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE",
+        "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IT", "LT",
+        "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"
     ]);
 
     private static readonly HashSet<string> CodeSet = new(Codes, StringComparer.OrdinalIgnoreCase);

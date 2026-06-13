@@ -56,6 +56,32 @@ internal static class EuropeanVat
             : Fail("BE", n, ValidationErrorCode.InvalidChecksum);
     }
 
+    internal static ValidationResult Bulgaria(object? value)
+    {
+        var n = Compact(value, "BG");
+        if (string.IsNullOrEmpty(n)) return Fail("BG", n, ValidationErrorCode.Empty);
+        if (n.Length != 9 && n.Length != 10) return Fail("BG", n, ValidationErrorCode.InvalidLength);
+        if (!Regex.IsMatch(n, @"^\d+$")) return Fail("BG", n, ValidationErrorCode.InvalidFormat);
+
+        if (n.Length == 9)
+        {
+            // EIK / Bulstat (legal entity): two-pass modulo 11.
+            var check = WeightedSum(n[..8], [1, 2, 3, 4, 5, 6, 7, 8]) % 11;
+            if (check == 10)
+            {
+                check = WeightedSum(n[..8], [3, 4, 5, 6, 7, 8, 9, 10]) % 11;
+                if (check == 10) check = 0;
+            }
+            return n[8] - '0' == check ? Ok("BG", n) : Fail("BG", n, ValidationErrorCode.InvalidChecksum);
+        }
+
+        // 10-digit sole trader: the check digit is the EGN check. Foreigner
+        // (PNF) and miscellaneous variants are not covered (KNOWN-LIMITATIONS).
+        var egn = WeightedSum(n[..9], [2, 4, 8, 5, 10, 9, 7, 3, 6]) % 11;
+        if (egn == 10) egn = 0;
+        return n[9] - '0' == egn ? Ok("BG", n) : Fail("BG", n, ValidationErrorCode.InvalidChecksum);
+    }
+
     internal static ValidationResult Germany(object? value)
     {
         var n = Compact(value, "DE");

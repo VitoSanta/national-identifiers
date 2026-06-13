@@ -43,13 +43,13 @@ describe('supported countries', () => {
 
   it('exposes dedicated VAT coverage separately', () => {
     expect(SUPPORTED_VAT_COUNTRIES).toEqual([
-      'AT', 'AU', 'BE', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES',
-      'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU',
-      'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK',
+      'AT', 'AU', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE',
+      'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT',
+      'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK',
     ]);
     expect(Object.isFrozen(SUPPORTED_VAT_COUNTRIES)).toBe(true);
     expect(isSupportedVatCountry('FR')).toBe(true);
     expect(isSupportedVatCountry('ES')).toBe(true);
-    expect(isSupportedVatCountry('BG')).toBe(false);
+    expect(isSupportedVatCountry('US')).toBe(false);
   });
 });

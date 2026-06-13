@@ -11,13 +11,15 @@ suite manuale è ora `XX` (codice non assegnato a nessuno Stato ISO 3166-1).
 ## Identifier families and online verification
 
 The explicit family API currently validates `tax_id_person` for the existing
-country/territory coverage and `vat` for 26 EU countries: AT, BE, CY, CZ, DE,
-DK, EE, ES, FI, FR, GR, HR, HU, IE, IT, LT, LU, LV, MT, NL, PL, PT, RO, SE,
-SI and SK, plus AU, CH, GB and NO. The French offline rule accepts the numeric
+country/territory coverage and `vat` for all 27 EU countries: AT, BE, BG, CY,
+CZ, DE, DK, EE, ES, FI, FR, GR, HR, HU, IE, IT, LT, LU, LV, MT, NL, PL, PT,
+RO, SE, SI and SK, plus AU, CH, GB and NO. The French offline rule accepts the numeric
 two-character VAT key;
 alphanumeric French key variants remain unsupported. The Latvian VAT rule
 covers legal-entity registration numbers rather than historical personal
-codes. Other VAT and `tax_id_company` combinations return
+codes. The Bulgarian VAT rule covers the 9-digit EIK and the 10-digit
+sole-trader (EGN) check; foreigner (PNF) and miscellaneous 10-digit variants
+are not validated. Other VAT and `tax_id_company` combinations return
 `unsupported_identifier_type`; they are not silently routed through personal
 tax-id rules.
 

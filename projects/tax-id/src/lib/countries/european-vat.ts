@@ -55,6 +55,33 @@ export function validateBelgianVat(value: unknown): TaxIdValidationResult {
     : failure('BE', n, 'invalid_checksum');
 }
 
+export function validateBulgarianVat(value: unknown): TaxIdValidationResult {
+  const n = compactVat(value, ['BG']);
+  if (!n) return failure('BG', n, 'empty');
+  if (n.length !== 9 && n.length !== 10) return failure('BG', n, 'invalid_length');
+  if (!/^\d+$/.test(n)) return failure('BG', n, 'invalid_format');
+
+  if (n.length === 9) {
+    // EIK / Bulstat (legal entity): two-pass modulo 11.
+    let check = weightedSum(n.slice(0, 8), [1, 2, 3, 4, 5, 6, 7, 8]) % 11;
+    if (check === 10) {
+      check = weightedSum(n.slice(0, 8), [3, 4, 5, 6, 7, 8, 9, 10]) % 11;
+      if (check === 10) check = 0;
+    }
+    return Number(n[8]) === check
+      ? success('BG', n)
+      : failure('BG', n, 'invalid_checksum');
+  }
+
+  // 10-digit sole trader: the check digit is the EGN check. Foreigner (PNF)
+  // and miscellaneous 10-digit variants are not covered (see KNOWN-LIMITATIONS).
+  let egn = weightedSum(n.slice(0, 9), [2, 4, 8, 5, 10, 9, 7, 3, 6]) % 11;
+  if (egn === 10) egn = 0;
+  return Number(n[9]) === egn
+    ? success('BG', n)
+    : failure('BG', n, 'invalid_checksum');
+}
+
 export function validateGermanVat(value: unknown): TaxIdValidationResult {
   const n = compactVat(value, ['DE']);
   if (!n) return failure('DE', n, 'empty');

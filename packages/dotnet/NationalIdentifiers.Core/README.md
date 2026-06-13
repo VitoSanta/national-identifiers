@@ -18,7 +18,7 @@ TaxIdValidator.Validate("BR", "111.444.777-35"); // CPF: normalized and checked
 TaxIdValidator.Validate("HK", "A123456(3)"); // HKID: checksum validated
 
 var vatCountries = new TaxIdValidator().SupportedVatCountries;
-// 30 countries; inspect this immutable list at runtime
+// 31 countries; inspect this immutable list at runtime
 ```
 
 ## What you get
@@ -29,7 +29,7 @@ var vatCountries = new TaxIdValidator().SupportedVatCountries;
   wrong.
 - **Format/structure validation for the rest** — length and pattern rules
   from institutional sources (OECD AEOI, national tax authorities).
-- **Dedicated VAT validation for 30 countries** — 26 EU countries plus
+- **Dedicated VAT validation for 31 countries** — all 27 EU countries plus
   Australia, Switzerland, the United Kingdom and Norway, discoverable through
   `SupportedVatCountries`, with the same coverage as the TypeScript package.
 - **Explicit confidence levels** — every successful result carries

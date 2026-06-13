@@ -236,6 +236,7 @@ public class TaxIdValidator : ITaxIdValidator
             ("AT", IdentifierType.Vat) => EuropeanVat.Austria(value),
             ("AU", IdentifierType.Vat) => EuropeanVat.Australia(value),
             ("BE", IdentifierType.Vat) => EuropeanVat.Belgium(value),
+            ("BG", IdentifierType.Vat) => EuropeanVat.Bulgaria(value),
             ("CH", IdentifierType.Vat) => EuropeanVat.Switzerland(value),
             ("CY", IdentifierType.Vat) => EuropeanVat.Cyprus(value),
             ("CZ", IdentifierType.Vat) => EuropeanVat.CzechRepublic(value),

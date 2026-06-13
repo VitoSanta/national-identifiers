@@ -43,14 +43,14 @@ public class TaxIdValidatorTests
     public void SupportedVatCountries_ArePublicSortedAndReadOnly()
     {
         Assert.Equal([
-                "AT", "AU", "BE", "CH", "CY", "CZ", "DE", "DK", "EE", "ES",
-                "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IT", "LT", "LU",
-                "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"
+                "AT", "AU", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE",
+                "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IT", "LT",
+                "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"
             ],
             V.SupportedVatCountries);
         Assert.True(VatCountries.IsSupported(" fr "));
         Assert.True(VatCountries.IsSupported("ES"));
-        Assert.False(VatCountries.IsSupported("BG"));
+        Assert.False(VatCountries.IsSupported("US"));
         Assert.Throws<NotSupportedException>(
             () => ((IList<string>)V.SupportedVatCountries).Add("ES"));
     }

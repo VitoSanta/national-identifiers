@@ -384,14 +384,6 @@
     "outcome": "block"
   },
   {
-    "country": "BG",
-    "type": "vat",
-    "value": "BG123456789",
-    "valid": false,
-    "error": "unsupported_identifier_type",
-    "outcome": "warn"
-  },
-  {
     "country": "AU",
     "type": "vat",
     "value": "51 824 753 556",
@@ -502,5 +494,29 @@
     "valid": false,
     "error": "unsupported_country",
     "outcome": "warn"
+  },
+  {
+    "country": "BG",
+    "type": "vat",
+    "value": "175074752",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "BG",
+    "type": "vat",
+    "value": "BG6401015000",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "BG",
+    "type": "vat",
+    "value": "175074753",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
   }
 ]
