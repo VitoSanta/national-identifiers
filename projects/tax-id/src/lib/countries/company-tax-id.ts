@@ -58,6 +58,44 @@ export function validateIndianGstin(value: unknown): TaxIdValidationResult {
     : { ...base, valid: false, error: 'invalid_checksum' };
 }
 
+// ISO 7064 MOD 11,10 checksum: a valid number (incl. its check digit) yields 1.
+function iso7064Mod11_10(digits: string): number {
+  let check = 5;
+  for (const ch of digits) check = (((check || 10) * 2) % 11 + Number(ch)) % 10;
+  return check;
+}
+
+// Serbia PIB: 9 digits, ISO 7064 MOD 11,10 check digit.
+// Source: Serbian Tax Administration; python-stdnum. Verified: 101134702.
+export function validateSerbianPib(value: unknown): TaxIdValidationResult {
+  const n = compact(value);
+  const base = { country: 'RS', normalizedValue: n } as const;
+  if (!n) return { ...base, valid: false, error: 'empty' };
+  if (n.length !== 9) return { ...base, valid: false, error: 'invalid_length' };
+  if (!/^\d{9}$/.test(n)) return { ...base, valid: false, error: 'invalid_format' };
+  return iso7064Mod11_10(n) === 1
+    ? { ...base, valid: true, validationLevel: 'checksum' }
+    : { ...base, valid: false, error: 'invalid_checksum' };
+}
+
+// South Korea Business Registration Number: 10 digits, NTS weighted check.
+// Source: NTS; DataPrep. Verified: 1348672683.
+export function validateKoreanBrn(value: unknown): TaxIdValidationResult {
+  const n = compact(value);
+  const base = { country: 'KR', normalizedValue: n } as const;
+  if (!n) return { ...base, valid: false, error: 'empty' };
+  if (n.length !== 10) return { ...base, valid: false, error: 'invalid_length' };
+  if (!/^\d{10}$/.test(n)) return { ...base, valid: false, error: 'invalid_format' };
+
+  const weights = [1, 3, 7, 1, 3, 7, 1, 3, 5];
+  let sum = weights.reduce((total, w, i) => total + Number(n[i]) * w, 0);
+  sum += Math.floor((Number(n[8]) * 5) / 10);
+  const expected = (10 - (sum % 10)) % 10;
+  return Number(n[9]) === expected
+    ? { ...base, valid: true, validationLevel: 'checksum' }
+    : { ...base, valid: false, error: 'invalid_checksum' };
+}
+
 // Japan Corporate Number (Houjin Bangō): 13 digits = 1 check digit + 12-digit
 // base. Check = 9 - ((Σ Pn·Qn) mod 9), Pn from the right, Qn = 1 (odd) / 2 (even).
 // Source: MOF Ordinance No. 70 of 2014. Verified: 5835678256246 valid.

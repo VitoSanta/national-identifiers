@@ -38,6 +38,7 @@ import { validateColombianTaxId } from './countries/colombia';
 import { validateArgentineTaxId } from './countries/argentina';
 import { validateRussianTaxId } from './countries/russia';
 import { validateIsraeliTaxId } from './countries/israel';
+import { validateSerbianPib } from './countries/company-tax-id';
 
 function withoutPrefix(
   value: unknown,
@@ -61,7 +62,7 @@ export type VatCountry =
   | 'AR' | 'AT' | 'AU' | 'BE' | 'BG' | 'CH' | 'CL' | 'CO' | 'CY' | 'CZ'
   | 'DE' | 'DK' | 'EE' | 'ES' | 'FI' | 'FR' | 'GB' | 'GR' | 'HR' | 'HU'
   | 'IE' | 'IL' | 'IT' | 'LT' | 'LU' | 'LV' | 'MT' | 'NL' | 'NO' | 'PL'
-  | 'PT' | 'RO' | 'RU' | 'SE' | 'SI' | 'SK';
+  | 'PT' | 'RO' | 'RS' | 'RU' | 'SE' | 'SI' | 'SK';
 
 export const VAT_VALIDATION_REGISTRY: Readonly<
   Record<VatCountry, (value: unknown) => TaxIdValidationResult>
@@ -108,6 +109,7 @@ export const VAT_VALIDATION_REGISTRY: Readonly<
     validatePortugueseTaxId(withoutPrefix(value, ['PT'])),
   ),
   RO: validateRomanianVat,
+  RS: validateSerbianPib,
   RU: (value) => withChecksumLevel(validateRussianTaxId(value)),
   SE: validateSwedishVat,
   SI: validateSlovenianVat,

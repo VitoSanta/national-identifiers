@@ -19,12 +19,14 @@ Date of this pass: 2026-06-14.
 > implemented — VAT for AR, CL, CO, IL and RU (reusing the registered entity's
 > checksummed identifier), and company tax id for China (USCC, ISO 7064 MOD
 > 31-3, verified against the Tencent USCC), Norway and New Zealand (reuse).
-> VAT now covers 36 jurisdictions; company covers 8 — the latter now includes
-> **Japan (Corporate Number, MOF mod-9)** and **Turkey (VKN)**, each verified
-> against the python-stdnum example (`5835678256246`, `4540536920`). **Still
-> pending a confirmed algorithm + verifiable example** (documented, not
-> implemented): Serbia PIB, Korea BRN, Singapore UEN, Saudi Arabia VAT, Taiwan
-> business number, and the broader EU company-registration tail.
+> VAT now covers 37 jurisdictions; company covers 10. Newly implemented and
+> each verified against a real example from an authoritative library test
+> suite: **JP** Corporate Number (`5835678256246`), **TR** VKN
+> (`4540536920`), **RS** PIB (`101134702`, ISO 7064 MOD 11-10) and **KR** BRN
+> (`1348672683`). **Still pending** (documented, not implemented): Singapore
+> UEN, Saudi Arabia VAT, Taiwan business number (algorithm not officially
+> published or example not yet confirmed), the broader EU company-registration
+> tail, and identity for Belarus / Mauritius.
 
 ---
 
@@ -163,18 +165,16 @@ algorithm not officially published / not confirmable.
   - Verifiable example (python-stdnum): **4540536920** is valid.
   - Family: `tax_id_company` (also the company VAT base). Source: python-stdnum.
 
-- **RS — PIB, 9 digits — EXAMPLE PENDING.**
-  - Algorithm: ISO 7064 MOD 11-10 over the first 8 digits; 9th is the check.
-  - No confirmed real PIB obtained yet. Implement once a verifiable example is
-    sourced (Serbian Business Registers Agency / a published company PIB).
-  - Family: `vat` + `tax_id_company`. Source: Serbian Tax Administration.
+- **RS — PIB, 9 digits — DONE.**
+  - Algorithm: ISO 7064 MOD 11-10 (a valid full number checksums to 1).
+  - Verified example (python-stdnum `rs.pib`): **101134702** valid;
+    **101134703** invalid. Family: `vat` + `tax_id_company`.
 
-- **KR — Business Registration Number, 10 digits — EXAMPLE PENDING.**
-  - Algorithm (NTS; DataPrep `kr_brn`): weights `[1,3,7,1,3,7,1,3,5]` over
-    digits 1-9; add `floor(d9 · 5 / 10)`; check (digit 10) =
-    `(10 − (sum mod 10)) mod 10`.
-  - No confirmed real BRN obtained yet.
-  - Family: `tax_id_company`. Source: NTS; DataPrep.
+- **KR — Business Registration Number, 10 digits — DONE.**
+  - Algorithm (NTS): weights `[1,3,7,1,3,7,1,3,5]` over digits 1-9; add
+    `floor(d9 · 5 / 10)`; check (digit 10) = `(10 − (sum mod 10)) mod 10`.
+  - Verified example (DataPrep `kr_brn`): **1348672683** valid.
+    Family: `tax_id_company`.
 
 - **SG — UEN — LIMIT.** The trailing check-letter algorithm is not officially
   published by ACRA and the format varies by entity type. Documented limit.

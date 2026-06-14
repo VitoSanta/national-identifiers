@@ -50,7 +50,7 @@ describe('supported countries', () => {
       'AR', 'AT', 'AU', 'BE', 'BG', 'CH', 'CL', 'CO', 'CY', 'CZ',
       'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU',
       'IE', 'IL', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL',
-      'PT', 'RO', 'RU', 'SE', 'SI', 'SK',
+      'PT', 'RO', 'RS', 'RU', 'SE', 'SI', 'SK',
     ]);
     expect(Object.isFrozen(SUPPORTED_VAT_COUNTRIES)).toBe(true);
     expect(isSupportedVatCountry('FR')).toBe(true);
@@ -59,7 +59,9 @@ describe('supported countries', () => {
   });
 
   it('exposes dedicated company tax coverage separately', () => {
-    expect(SUPPORTED_COMPANY_TAX_COUNTRIES).toEqual(['AU', 'BR', 'CN', 'IN', 'JP', 'NO', 'NZ', 'TR']);
+    expect(SUPPORTED_COMPANY_TAX_COUNTRIES).toEqual(
+      ['AU', 'BR', 'CN', 'IN', 'JP', 'KR', 'NO', 'NZ', 'RS', 'TR'],
+    );
     expect(Object.isFrozen(SUPPORTED_COMPANY_TAX_COUNTRIES)).toBe(true);
     expect(isSupportedCompanyTaxCountry('BR')).toBe(true);
     expect(isSupportedCompanyTaxCountry('DE')).toBe(false);

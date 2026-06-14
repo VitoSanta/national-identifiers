@@ -217,18 +217,18 @@ The platform validates the following identifier categories. Not every country im
 | `tax_id_company` | Company or entity tax number | FR SIREN/SIRET, DE Steuernummer |
 | `national_id` | Civil / personal identity number | CN 居民身份证, IN Aadhaar (scope-limited) |
 | `personal_id` | Integrated personal identifier used as functional TIN | DK CPR, SE Personnummer, MY NRIC |
-| `vat` | Value-added tax registration number | 36 countries |
+| `vat` | Value-added tax registration number | 37 countries |
 | `social_security` | Social insurance / pension number | US SSN, CA SIN, FR NIR |
 | `company_registration` | Commercial registry entry number | UK Companies House, DE Handelsregister |
 
 The family API currently exposes `tax_id_person`, `vat` and
 `tax_id_company`. Personal identifiers use the established coverage; offline
-VAT format/checksum validation is implemented for 36 jurisdictions: all 27 EU
-countries plus AR, AU, CH, CL, CO, GB, IL, NO and RU. Offline
-`tax_id_company` checksum validation covers Brazil (CNPJ), India (GSTIN),
-Australia (ACN), China (USCC), Japan (Corporate Number), Turkey (VKN),
-Norway and New Zealand. Unsupported country/family combinations return
-`unsupported_identifier_type`.
+VAT format/checksum validation is implemented for 37 jurisdictions: all 27 EU
+countries plus AR, AU, CH, CL, CO, GB, IL, NO, RS and RU. Offline
+`tax_id_company` checksum validation covers 10 jurisdictions: Brazil (CNPJ),
+India (GSTIN), Australia (ACN), China (USCC), Japan (Corporate Number), South
+Korea (BRN), Serbia (PIB), Turkey (VKN), Norway and New Zealand. Unsupported
+country/family combinations return `unsupported_identifier_type`.
 
 ---
 

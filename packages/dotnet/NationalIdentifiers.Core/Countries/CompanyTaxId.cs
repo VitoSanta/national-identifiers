@@ -75,6 +75,45 @@ internal static class CompanyTaxId
             : ValidationResult.Fail("IN", n, ValidationErrorCode.InvalidChecksum);
     }
 
+    // ISO 7064 MOD 11,10: a valid number (incl. its check digit) yields 1.
+    private static int Iso7064Mod11_10(string digits)
+    {
+        var check = 5;
+        foreach (var ch in digits)
+            check = ((check == 0 ? 10 : check) * 2 % 11 + (ch - '0')) % 10;
+        return check;
+    }
+
+    // Serbia PIB: 9 digits, ISO 7064 MOD 11,10. Verified: 101134702.
+    internal static ValidationResult Serbia(object? value)
+    {
+        var n = Compact(value);
+        if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("RS", n, ValidationErrorCode.Empty);
+        if (n.Length != 9) return ValidationResult.Fail("RS", n, ValidationErrorCode.InvalidLength);
+        if (!Regex.IsMatch(n, @"^\d{9}$")) return ValidationResult.Fail("RS", n, ValidationErrorCode.InvalidFormat);
+        return Iso7064Mod11_10(n) == 1
+            ? ValidationResult.Ok("RS", n, ValidationLevel.Checksum)
+            : ValidationResult.Fail("RS", n, ValidationErrorCode.InvalidChecksum);
+    }
+
+    // South Korea Business Registration Number: 10 digits. Verified: 1348672683.
+    internal static ValidationResult Korea(object? value)
+    {
+        var n = Compact(value);
+        if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("KR", n, ValidationErrorCode.Empty);
+        if (n.Length != 10) return ValidationResult.Fail("KR", n, ValidationErrorCode.InvalidLength);
+        if (!Regex.IsMatch(n, @"^\d{10}$")) return ValidationResult.Fail("KR", n, ValidationErrorCode.InvalidFormat);
+
+        int[] weights = [1, 3, 7, 1, 3, 7, 1, 3, 5];
+        var sum = 0;
+        for (var i = 0; i < 9; i++) sum += (n[i] - '0') * weights[i];
+        sum += (n[8] - '0') * 5 / 10;
+        var expected = (10 - sum % 10) % 10;
+        return n[9] - '0' == expected
+            ? ValidationResult.Ok("KR", n, ValidationLevel.Checksum)
+            : ValidationResult.Fail("KR", n, ValidationErrorCode.InvalidChecksum);
+    }
+
     // Japan Corporate Number: 13 digits = 1 check digit + 12-digit base.
     // Check = 9 - ((Σ Pn·Qn) mod 9), Pn from the right, Qn = 1 (odd) / 2 (even).
     // Source: MOF Ordinance No. 70 of 2014. Verified: 5835678256246.

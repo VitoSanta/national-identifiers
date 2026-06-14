@@ -10,10 +10,11 @@ follows Semantic Versioning.
 - Explicit identifier-family APIs in TypeScript and .NET:
   `validateIdentifier({ country, type, value })` and
   `TaxIdValidator.Validate(country, type, value)`. Dedicated offline VAT
-  format/checksum validation covers 36 jurisdictions: all 27 EU countries
-  plus AR, AU (ABN), CH (UID), CL, CO, GB, IL, NO and RU. The `tax_id_company`
-  family covers Brazil (CNPJ), India (GSTIN), Australia (ACN), China (USCC),
-  Japan (Corporate Number), Turkey (VKN), Norway and New Zealand. Unsupported
+  format/checksum validation covers 37 jurisdictions: all 27 EU countries
+  plus AR, AU (ABN), CH (UID), CL, CO, GB, IL, NO, RS and RU. The
+  `tax_id_company` family covers 10 jurisdictions: Brazil (CNPJ), India
+  (GSTIN), Australia (ACN), China (USCC), Japan (Corporate Number), South
+  Korea (BRN), Serbia (PIB), Turkey (VKN), Norway and New Zealand. Unsupported
   family/country combinations do not fall back to personal TIN rules.
 - Full Mexican CURP identity consistency, including name initials, internal
   consonants, common first names, surname particles, inconvenient-word

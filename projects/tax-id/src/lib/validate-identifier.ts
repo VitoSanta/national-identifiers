@@ -14,6 +14,8 @@ import {
   validateChineseUscc,
   validateJapaneseCorporateNumber,
   validateTurkishVkn,
+  validateSerbianPib,
+  validateKoreanBrn,
 } from './countries/company-tax-id';
 import { validateNewZealandTaxId } from './countries/new-zealand';
 import { validateNorwegianVat } from './countries/european-vat';
@@ -32,6 +34,8 @@ const COMPANY_TAX_ID_REGISTRY: Readonly<Record<string, IdentifierValidator>> = {
   CN: validateChineseUscc,
   IN: validateIndianGstin,
   JP: validateJapaneseCorporateNumber,
+  KR: validateKoreanBrn,
+  RS: validateSerbianPib,
   TR: validateTurkishVkn,
   // Norway's organisation number and New Zealand's IRD number identify the
   // registered entity and reuse the same checksum as their tax-id rules.

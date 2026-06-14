@@ -251,7 +251,7 @@ test('keeps VAT coverage separate and aligned across runtimes', async () => {
     matches(csharpDispatcher, /\("([A-Z]{2})", IdentifierType\.Vat\)/g),
   );
 
-  assert.equal(tsVatCountries.size, 36, 'VAT coverage count is stale');
+  assert.equal(tsVatCountries.size, 37, 'VAT coverage count is stale');
   assertSameCountries(
     'TypeScript VAT registry',
     tsVatCountries,

@@ -686,5 +686,45 @@
     "valid": false,
     "error": "invalid_checksum",
     "outcome": "block"
+  },
+  {
+    "country": "RS",
+    "type": "vat",
+    "value": "101134702",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "RS",
+    "type": "vat",
+    "value": "101134703",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "RS",
+    "type": "tax_id_company",
+    "value": "101134702",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "KR",
+    "type": "tax_id_company",
+    "value": "1348672683",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "KR",
+    "type": "tax_id_company",
+    "value": "1348672684",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
   }
 ]

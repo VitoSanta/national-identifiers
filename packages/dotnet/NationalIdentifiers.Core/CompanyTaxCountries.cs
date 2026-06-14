@@ -7,7 +7,7 @@ public static class CompanyTaxCountries
 {
     private static readonly ReadOnlyCollection<string> Codes = Array.AsReadOnly(
     [
-        "AU", "BR", "CN", "IN", "JP", "NO", "NZ", "TR"
+        "AU", "BR", "CN", "IN", "JP", "KR", "NO", "NZ", "RS", "TR"
     ]);
 
     private static readonly HashSet<string> CodeSet = new(Codes, StringComparer.OrdinalIgnoreCase);
