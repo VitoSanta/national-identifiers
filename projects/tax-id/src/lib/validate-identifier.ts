@@ -11,7 +11,10 @@ import {
   validateBrazilianCnpj,
   validateIndianGstin,
   validateAustralianAcn,
+  validateChineseUscc,
 } from './countries/company-tax-id';
+import { validateNewZealandTaxId } from './countries/new-zealand';
+import { validateNorwegianVat } from './countries/european-vat';
 
 export interface IdentifierValidationRequest {
   readonly country: string | null | undefined;
@@ -24,7 +27,12 @@ type IdentifierValidator = (value: unknown) => TaxIdValidationResult;
 const COMPANY_TAX_ID_REGISTRY: Readonly<Record<string, IdentifierValidator>> = {
   AU: validateAustralianAcn,
   BR: validateBrazilianCnpj,
+  CN: validateChineseUscc,
   IN: validateIndianGstin,
+  // Norway's organisation number and New Zealand's IRD number identify the
+  // registered entity and reuse the same checksum as their tax-id rules.
+  NO: validateNorwegianVat,
+  NZ: validateNewZealandTaxId,
 };
 
 export const SUPPORTED_COMPANY_TAX_COUNTRIES = Object.freeze(

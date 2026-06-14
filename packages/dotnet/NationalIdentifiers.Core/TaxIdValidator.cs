@@ -267,9 +267,17 @@ public class TaxIdValidator : ITaxIdValidator
             ("SE", IdentifierType.Vat) => EuropeanVat.Sweden(value),
             ("SI", IdentifierType.Vat) => EuropeanVat.Slovenia(value),
             ("SK", IdentifierType.Vat) => EuropeanVat.Slovakia(value),
+            ("AR", IdentifierType.Vat) => Argentina.Validate(value),
+            ("CL", IdentifierType.Vat) => Chile.Validate(value),
+            ("CO", IdentifierType.Vat) => Colombia.Validate(value),
+            ("IL", IdentifierType.Vat) => Israel.Validate(value),
+            ("RU", IdentifierType.Vat) => Russia.Validate(value),
             ("AU", IdentifierType.TaxIdCompany) => CompanyTaxId.Australia(value),
             ("BR", IdentifierType.TaxIdCompany) => CompanyTaxId.Brazil(value),
+            ("CN", IdentifierType.TaxIdCompany) => CompanyTaxId.China(value),
             ("IN", IdentifierType.TaxIdCompany) => CompanyTaxId.India(value),
+            ("NO", IdentifierType.TaxIdCompany) => EuropeanVat.Norway(value),
+            ("NZ", IdentifierType.TaxIdCompany) => NewZealand.Validate(value),
             _ => null,
         };
 

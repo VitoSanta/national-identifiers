@@ -574,5 +574,85 @@
     "valid": false,
     "error": "unsupported_identifier_type",
     "outcome": "warn"
+  },
+  {
+    "country": "AR",
+    "type": "vat",
+    "value": "20267565393",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CL",
+    "type": "vat",
+    "value": "12.345.678-5",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CO",
+    "type": "vat",
+    "value": "8903215670",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "IL",
+    "type": "vat",
+    "value": "000000018",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "RU",
+    "type": "vat",
+    "value": "7707083893",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "RU",
+    "type": "vat",
+    "value": "7707083894",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "CN",
+    "type": "tax_id_company",
+    "value": "9144030071526726XG",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "CN",
+    "type": "tax_id_company",
+    "value": "9144030071526726XH",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "NO",
+    "type": "tax_id_company",
+    "value": "974760673",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "NZ",
+    "type": "tax_id_company",
+    "value": "49091850",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
   }
 ]

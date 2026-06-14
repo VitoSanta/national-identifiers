@@ -75,6 +75,29 @@ internal static class CompanyTaxId
             : ValidationResult.Fail("IN", n, ValidationErrorCode.InvalidChecksum);
     }
 
+    // China USCC: 18 chars, ISO 7064 MOD 31-3 (charset excludes I,O,S,V,Z).
+    private const string UsccAlphabet = "0123456789ABCDEFGHJKLMNPQRTUWXY";
+    private static readonly int[] UsccWeights =
+        [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28];
+    private static readonly Regex UsccPattern =
+        new(@"^[0-9ABCDEFGHJKLMNPQRTUWXY]{18}$", RegexOptions.Compiled);
+
+    internal static ValidationResult China(object? value)
+    {
+        var n = Compact(value);
+        if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("CN", n, ValidationErrorCode.Empty);
+        if (n.Length != 18) return ValidationResult.Fail("CN", n, ValidationErrorCode.InvalidLength);
+        if (!UsccPattern.IsMatch(n)) return ValidationResult.Fail("CN", n, ValidationErrorCode.InvalidFormat);
+
+        var sum = 0;
+        for (var i = 0; i < 17; i++) sum += UsccAlphabet.IndexOf(n[i]) * UsccWeights[i];
+        var remainder = 31 - sum % 31;
+        var expected = UsccAlphabet[remainder == 31 ? 0 : remainder];
+        return n[17] == expected
+            ? ValidationResult.Ok("CN", n, ValidationLevel.Checksum)
+            : ValidationResult.Fail("CN", n, ValidationErrorCode.InvalidChecksum);
+    }
+
     // Australia ACN: 9-digit company number, modulo-10 weighted check (ASIC).
     internal static ValidationResult Australia(object? value)
     {

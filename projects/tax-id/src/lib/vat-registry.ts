@@ -32,6 +32,12 @@ import { validateGreekTaxId } from './countries/greece';
 import { validateItalianVatNumber } from './countries/italy';
 import { validateIrishTaxId } from './countries/ireland';
 import { validatePortugueseTaxId } from './countries/portugal';
+// Non-EU VAT reusing the same checksummed identifier as the registered entity.
+import { validateChileanTaxId } from './countries/chile';
+import { validateColombianTaxId } from './countries/colombia';
+import { validateArgentineTaxId } from './countries/argentina';
+import { validateRussianTaxId } from './countries/russia';
+import { validateIsraeliTaxId } from './countries/israel';
 
 function withoutPrefix(
   value: unknown,
@@ -52,19 +58,22 @@ function withChecksumLevel(
 }
 
 export type VatCountry =
-  | 'AT' | 'AU' | 'BE' | 'BG' | 'CH' | 'CY' | 'CZ' | 'DE' | 'DK' | 'EE'
-  | 'ES' | 'FI' | 'FR' | 'GB' | 'GR' | 'HR' | 'HU' | 'IE' | 'IT'
-  | 'LT' | 'LU' | 'LV' | 'MT' | 'NL' | 'NO' | 'PL' | 'PT' | 'RO'
-  | 'SE' | 'SI' | 'SK';
+  | 'AR' | 'AT' | 'AU' | 'BE' | 'BG' | 'CH' | 'CL' | 'CO' | 'CY' | 'CZ'
+  | 'DE' | 'DK' | 'EE' | 'ES' | 'FI' | 'FR' | 'GB' | 'GR' | 'HR' | 'HU'
+  | 'IE' | 'IL' | 'IT' | 'LT' | 'LU' | 'LV' | 'MT' | 'NL' | 'NO' | 'PL'
+  | 'PT' | 'RO' | 'RU' | 'SE' | 'SI' | 'SK';
 
 export const VAT_VALIDATION_REGISTRY: Readonly<
   Record<VatCountry, (value: unknown) => TaxIdValidationResult>
 > = {
+  AR: (value) => withChecksumLevel(validateArgentineTaxId(value)),
   AT: validateAustrianVat,
   AU: validateAustralianVat,
   BE: validateBelgianVat,
   BG: validateBulgarianVat,
   CH: validateSwissVat,
+  CL: (value) => withChecksumLevel(validateChileanTaxId(value)),
+  CO: (value) => withChecksumLevel(validateColombianTaxId(value)),
   CY: validateCypriotVat,
   CZ: validateCzechVat,
   DE: validateGermanVat,
@@ -84,6 +93,7 @@ export const VAT_VALIDATION_REGISTRY: Readonly<
   IE: (value) => withChecksumLevel(
     validateIrishTaxId(withoutPrefix(value, ['IE'])),
   ),
+  IL: (value) => withChecksumLevel(validateIsraeliTaxId(value)),
   IT: (value) => withChecksumLevel(
     validateItalianVatNumber(withoutPrefix(value, ['IT'])),
   ),
@@ -98,6 +108,7 @@ export const VAT_VALIDATION_REGISTRY: Readonly<
     validatePortugueseTaxId(withoutPrefix(value, ['PT'])),
   ),
   RO: validateRomanianVat,
+  RU: (value) => withChecksumLevel(validateRussianTaxId(value)),
   SE: validateSwedishVat,
   SI: validateSlovenianVat,
   SK: validateSlovakVat,

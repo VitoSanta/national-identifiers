@@ -58,6 +58,28 @@ export function validateIndianGstin(value: unknown): TaxIdValidationResult {
     : { ...base, valid: false, error: 'invalid_checksum' };
 }
 
+// China USCC (Unified Social Credit Code): 18 chars, ISO 7064 MOD 31-3.
+// Charset excludes I, O, S, V, Z. Source: GB 32100-2015.
+const USCC_ALPHABET = '0123456789ABCDEFGHJKLMNPQRTUWXY';
+const USCC_WEIGHTS = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28];
+const USCC_PATTERN = /^[0-9ABCDEFGHJKLMNPQRTUWXY]{18}$/;
+
+export function validateChineseUscc(value: unknown): TaxIdValidationResult {
+  const n = compact(value);
+  const base = { country: 'CN', normalizedValue: n } as const;
+  if (!n) return { ...base, valid: false, error: 'empty' };
+  if (n.length !== 18) return { ...base, valid: false, error: 'invalid_length' };
+  if (!USCC_PATTERN.test(n)) return { ...base, valid: false, error: 'invalid_format' };
+
+  let sum = 0;
+  for (let i = 0; i < 17; i += 1) sum += USCC_ALPHABET.indexOf(n[i]) * USCC_WEIGHTS[i];
+  const remainder = 31 - (sum % 31);
+  const expected = USCC_ALPHABET[remainder === 31 ? 0 : remainder];
+  return n[17] === expected
+    ? { ...base, valid: true, validationLevel: 'checksum' }
+    : { ...base, valid: false, error: 'invalid_checksum' };
+}
+
 // Australia ACN: 9-digit company number, modulo-10 weighted check (ASIC).
 export function validateAustralianAcn(value: unknown): TaxIdValidationResult {
   const n = compact(value);

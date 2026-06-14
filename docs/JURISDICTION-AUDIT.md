@@ -15,6 +15,15 @@ are available; otherwise it is a documented limit.
 
 Date of this pass: 2026-06-14.
 
+> **Backlog progress (2026-06-14):** the solid, source-verified items are now
+> implemented — VAT for AR, CL, CO, IL and RU (reusing the registered entity's
+> checksummed identifier), and company tax id for China (USCC, ISO 7064 MOD
+> 31-3, verified against the Tencent USCC), Norway and New Zealand (reuse).
+> VAT now covers 36 jurisdictions; company covers 6. **Still pending a
+> confirmed algorithm + verifiable example** (documented, not implemented):
+> Serbia PIB, Japan corporate/VAT, Singapore UEN, Saudi Arabia VAT, Taiwan
+> business VAT, and the broader EU company-registration tail.
+
 ---
 
 ## Axis 1 — Personal tax identifier (195 states)
