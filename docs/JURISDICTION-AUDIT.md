@@ -19,10 +19,12 @@ Date of this pass: 2026-06-14.
 > implemented — VAT for AR, CL, CO, IL and RU (reusing the registered entity's
 > checksummed identifier), and company tax id for China (USCC, ISO 7064 MOD
 > 31-3, verified against the Tencent USCC), Norway and New Zealand (reuse).
-> VAT now covers 36 jurisdictions; company covers 6. **Still pending a
-> confirmed algorithm + verifiable example** (documented, not implemented):
-> Serbia PIB, Japan corporate/VAT, Singapore UEN, Saudi Arabia VAT, Taiwan
-> business VAT, and the broader EU company-registration tail.
+> VAT now covers 36 jurisdictions; company covers 8 — the latter now includes
+> **Japan (Corporate Number, MOF mod-9)** and **Turkey (VKN)**, each verified
+> against the python-stdnum example (`5835678256246`, `4540536920`). **Still
+> pending a confirmed algorithm + verifiable example** (documented, not
+> implemented): Serbia PIB, Korea BRN, Singapore UEN, Saudi Arabia VAT, Taiwan
+> business number, and the broader EU company-registration tail.
 
 ---
 
@@ -135,6 +137,75 @@ documented limits.
   concrete, bounded, sourced backlog (~12–16 identifiers) above. The honest
   statement is therefore: the *personal* scope is complete; the *business and
   territory* scope is a curated subset with a known remaining list.
+
+## Detailed implementation backlog (meticulous, 2026-06-14 deep pass)
+
+Per-candidate spec to follow when finalizing. Status legend: **READY** =
+public algorithm + a verifiable example in hand; **EXAMPLE PENDING** =
+algorithm public/standard but no confirmed real example yet; **LIMIT** =
+algorithm not officially published / not confirmable.
+
+### Company / business tax id
+
+- **JP — Corporate Number (Houjin Bangō), 13 digits — DONE.**
+  - Algorithm (MOF Ordinance No.70 of 2014): the 13-digit number is a 1-digit
+    check digit followed by the 12-digit base. Check = `9 − ((Σ Pn·Qn) mod 9)`
+    where `Pn` is the n-th base digit counting from the **right** (n=1 is the
+    rightmost) and `Qn` = 1 if n is odd, 2 if n is even.
+  - Verifiable example (python-stdnum `jp.cn`): **5835678256246** is valid;
+    **2835678256246** is invalid (same base, wrong check digit).
+  - Family: `tax_id_company`. Source: MOF ordinance; python-stdnum.
+
+- **TR — VKN (Vergi Kimlik Numarası), 10 digits — DONE.**
+  - Algorithm (python-stdnum `tr.vkn`): for i=0..8, `c1=(d_i + 9 − i) mod 10`;
+    `c2=(c1 · 2^(9−i)) mod 9`, and if `c1≠0 and c2==0` then `c2=9`; the check
+    digit (10th) = `(10 − (Σ c2) mod 10) mod 10`.
+  - Verifiable example (python-stdnum): **4540536920** is valid.
+  - Family: `tax_id_company` (also the company VAT base). Source: python-stdnum.
+
+- **RS — PIB, 9 digits — EXAMPLE PENDING.**
+  - Algorithm: ISO 7064 MOD 11-10 over the first 8 digits; 9th is the check.
+  - No confirmed real PIB obtained yet. Implement once a verifiable example is
+    sourced (Serbian Business Registers Agency / a published company PIB).
+  - Family: `vat` + `tax_id_company`. Source: Serbian Tax Administration.
+
+- **KR — Business Registration Number, 10 digits — EXAMPLE PENDING.**
+  - Algorithm (NTS; DataPrep `kr_brn`): weights `[1,3,7,1,3,7,1,3,5]` over
+    digits 1-9; add `floor(d9 · 5 / 10)`; check (digit 10) =
+    `(10 − (sum mod 10)) mod 10`.
+  - No confirmed real BRN obtained yet.
+  - Family: `tax_id_company`. Source: NTS; DataPrep.
+
+- **SG — UEN — LIMIT.** The trailing check-letter algorithm is not officially
+  published by ACRA and the format varies by entity type. Documented limit.
+
+### VAT
+
+- **RS, KR** as above (shared identifier with the company number).
+- **SA — VAT, 15 digits — LIMIT.** A check digit exists ("10th position") but
+  no clean public algorithm was found. Documented limit pending a source.
+- **TW — business number (BAN), 8 digits — EXAMPLE PENDING.** Custom weighted
+  checksum referenced by several libraries; confirm the exact weights and a
+  real example before implementing.
+
+### Identity consistency (data encoded in the personal code)
+
+- **BY — Belarus personal number — LIMIT.** Structure (century/sex char +
+  DDMMYY + region…) is suspected but not confirmed by an institutional source.
+- **MU — Mauritius NIC — LIMIT.** Suspected `letter + DDMMYY + serial + check`
+  but neither the positions nor the check algorithm are officially documented.
+- No other state was found whose **personal** tax code encodes biographical
+  data beyond the 47 already covered; this axis remains at the ceiling.
+
+### Plan to finalize before publishing
+
+1. Implement the **READY** items now: JP Corporate Number, TR VKN
+   (`tax_id_company`), each verified against the example above.
+2. Source a verifiable example for **RS PIB** and **KR BRN**; implement on
+   confirmation, else leave as documented limits.
+3. Leave SG, SA, TW, BY, MU as documented limits until an official source
+   appears.
+4. Then bump versions and publish 1.0.0.
 
 ## Sources
 

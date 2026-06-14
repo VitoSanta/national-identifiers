@@ -75,6 +75,52 @@ internal static class CompanyTaxId
             : ValidationResult.Fail("IN", n, ValidationErrorCode.InvalidChecksum);
     }
 
+    // Japan Corporate Number: 13 digits = 1 check digit + 12-digit base.
+    // Check = 9 - ((Σ Pn·Qn) mod 9), Pn from the right, Qn = 1 (odd) / 2 (even).
+    // Source: MOF Ordinance No. 70 of 2014. Verified: 5835678256246.
+    internal static ValidationResult Japan(object? value)
+    {
+        var n = Compact(value);
+        if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("JP", n, ValidationErrorCode.Empty);
+        if (n.Length != 13) return ValidationResult.Fail("JP", n, ValidationErrorCode.InvalidLength);
+        if (!Regex.IsMatch(n, @"^[1-9]\d{12}$")) return ValidationResult.Fail("JP", n, ValidationErrorCode.InvalidFormat);
+
+        var body = n[1..];
+        var sum = 0;
+        for (var i = 0; i < 12; i++)
+        {
+            var weight = (12 - i) % 2 == 1 ? 1 : 2;
+            sum += (body[i] - '0') * weight;
+        }
+        var expected = 9 - sum % 9;
+        return n[0] - '0' == expected
+            ? ValidationResult.Ok("JP", n, ValidationLevel.Checksum)
+            : ValidationResult.Fail("JP", n, ValidationErrorCode.InvalidChecksum);
+    }
+
+    // Turkey VKN (Vergi Kimlik Numarası): 10 digits, weighted algorithm.
+    // Source: python-stdnum tr.vkn. Verified: 4540536920.
+    internal static ValidationResult Turkey(object? value)
+    {
+        var n = Compact(value);
+        if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("TR", n, ValidationErrorCode.Empty);
+        if (n.Length != 10) return ValidationResult.Fail("TR", n, ValidationErrorCode.InvalidLength);
+        if (!Regex.IsMatch(n, @"^\d{10}$")) return ValidationResult.Fail("TR", n, ValidationErrorCode.InvalidFormat);
+
+        var sum = 0;
+        for (var i = 0; i < 9; i++)
+        {
+            var c1 = (n[i] - '0' + 9 - i) % 10;
+            var c2 = c1 * (1 << (9 - i)) % 9;
+            if (c1 != 0 && c2 == 0) c2 = 9;
+            sum += c2;
+        }
+        var expected = (10 - sum % 10) % 10;
+        return n[9] - '0' == expected
+            ? ValidationResult.Ok("TR", n, ValidationLevel.Checksum)
+            : ValidationResult.Fail("TR", n, ValidationErrorCode.InvalidChecksum);
+    }
+
     // China USCC: 18 chars, ISO 7064 MOD 31-3 (charset excludes I,O,S,V,Z).
     private const string UsccAlphabet = "0123456789ABCDEFGHJKLMNPQRTUWXY";
     private static readonly int[] UsccWeights =

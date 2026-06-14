@@ -19,9 +19,9 @@ covers legal-entity registration numbers rather than historical personal
 codes. The Bulgarian VAT rule covers the 9-digit EIK and the 10-digit
 sole-trader (EGN) check; foreigner (PNF) and miscellaneous 10-digit variants
 are not validated. The `tax_id_company` family covers Brazil (CNPJ), India
-(GSTIN), Australia (ACN), China (USCC), Norway and New Zealand; further
-company identifiers (e.g. Korea BRN, Turkey VKN, Singapore UEN, Japan
-corporate number, Serbia PIB) are candidates pending a confirmed public
+(GSTIN), Australia (ACN), China (USCC), Japan (Corporate Number), Turkey
+(VKN), Norway and New Zealand; further company identifiers (e.g. Korea BRN,
+Singapore UEN, Serbia PIB) are candidates pending a confirmed public
 algorithm and a verifiable example. Other VAT and
 `tax_id_company` combinations return
 `unsupported_identifier_type`; they are not silently routed through personal

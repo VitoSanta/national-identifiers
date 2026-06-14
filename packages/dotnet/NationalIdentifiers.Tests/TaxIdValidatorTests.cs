@@ -59,7 +59,7 @@ public class TaxIdValidatorTests
     [Fact]
     public void SupportedCompanyTaxCountries_ArePublicAndReadOnly()
     {
-        Assert.Equal(["AU", "BR", "CN", "IN", "NO", "NZ"], V.SupportedCompanyTaxCountries);
+        Assert.Equal(["AU", "BR", "CN", "IN", "JP", "NO", "NZ", "TR"], V.SupportedCompanyTaxCountries);
         Assert.True(CompanyTaxCountries.IsSupported(" br "));
         Assert.False(CompanyTaxCountries.IsSupported("DE"));
         Assert.Throws<NotSupportedException>(

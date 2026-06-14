@@ -226,8 +226,9 @@ The family API currently exposes `tax_id_person`, `vat` and
 VAT format/checksum validation is implemented for 36 jurisdictions: all 27 EU
 countries plus AR, AU, CH, CL, CO, GB, IL, NO and RU. Offline
 `tax_id_company` checksum validation covers Brazil (CNPJ), India (GSTIN),
-Australia (ACN), China (USCC), Norway and New Zealand. Unsupported
-country/family combinations return `unsupported_identifier_type`.
+Australia (ACN), China (USCC), Japan (Corporate Number), Turkey (VKN),
+Norway and New Zealand. Unsupported country/family combinations return
+`unsupported_identifier_type`.
 
 ---
 

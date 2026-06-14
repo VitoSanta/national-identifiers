@@ -13,8 +13,8 @@ follows Semantic Versioning.
   format/checksum validation covers 36 jurisdictions: all 27 EU countries
   plus AR, AU (ABN), CH (UID), CL, CO, GB, IL, NO and RU. The `tax_id_company`
   family covers Brazil (CNPJ), India (GSTIN), Australia (ACN), China (USCC),
-  Norway and New Zealand. Unsupported family/country combinations do not fall
-  back to personal TIN rules.
+  Japan (Corporate Number), Turkey (VKN), Norway and New Zealand. Unsupported
+  family/country combinations do not fall back to personal TIN rules.
 - Full Mexican CURP identity consistency, including name initials, internal
   consonants, common first names, surname particles, inconvenient-word
   substitution and the CURP check digit. Mexico is now the second `full`

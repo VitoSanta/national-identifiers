@@ -654,5 +654,37 @@
     "valid": true,
     "validationLevel": "checksum",
     "outcome": "accept"
+  },
+  {
+    "country": "JP",
+    "type": "tax_id_company",
+    "value": "5835678256246",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "JP",
+    "type": "tax_id_company",
+    "value": "2835678256246",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
+  },
+  {
+    "country": "TR",
+    "type": "tax_id_company",
+    "value": "4540536920",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept"
+  },
+  {
+    "country": "TR",
+    "type": "tax_id_company",
+    "value": "4540536921",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block"
   }
 ]

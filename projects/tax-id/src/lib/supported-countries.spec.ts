@@ -59,7 +59,7 @@ describe('supported countries', () => {
   });
 
   it('exposes dedicated company tax coverage separately', () => {
-    expect(SUPPORTED_COMPANY_TAX_COUNTRIES).toEqual(['AU', 'BR', 'CN', 'IN', 'NO', 'NZ']);
+    expect(SUPPORTED_COMPANY_TAX_COUNTRIES).toEqual(['AU', 'BR', 'CN', 'IN', 'JP', 'NO', 'NZ', 'TR']);
     expect(Object.isFrozen(SUPPORTED_COMPANY_TAX_COUNTRIES)).toBe(true);
     expect(isSupportedCompanyTaxCountry('BR')).toBe(true);
     expect(isSupportedCompanyTaxCountry('DE')).toBe(false);

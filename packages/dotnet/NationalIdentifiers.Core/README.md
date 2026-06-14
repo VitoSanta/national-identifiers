@@ -33,8 +33,8 @@ var vatCountries = new TaxIdValidator().SupportedVatCountries;
   AR, AU, CH, CL, CO, GB, IL, NO and RU, discoverable through
   `SupportedVatCountries`, with the same coverage as the TypeScript package.
 - **Dedicated company tax validation** — Brazil (CNPJ), India (GSTIN),
-  Australia (ACN), China (USCC), Norway and New Zealand, via
-  `SupportedCompanyTaxCountries`.
+  Australia (ACN), China (USCC), Japan (Corporate Number), Turkey (VKN),
+  Norway and New Zealand, via `SupportedCompanyTaxCountries`.
 - **Explicit confidence levels** — every successful result carries
   `ValidationLevel.Checksum` or `ValidationLevel.Format`, so you always know
   how strong the check was.

@@ -276,6 +276,8 @@ public class TaxIdValidator : ITaxIdValidator
             ("BR", IdentifierType.TaxIdCompany) => CompanyTaxId.Brazil(value),
             ("CN", IdentifierType.TaxIdCompany) => CompanyTaxId.China(value),
             ("IN", IdentifierType.TaxIdCompany) => CompanyTaxId.India(value),
+            ("JP", IdentifierType.TaxIdCompany) => CompanyTaxId.Japan(value),
+            ("TR", IdentifierType.TaxIdCompany) => CompanyTaxId.Turkey(value),
             ("NO", IdentifierType.TaxIdCompany) => EuropeanVat.Norway(value),
             ("NZ", IdentifierType.TaxIdCompany) => NewZealand.Validate(value),
             _ => null,

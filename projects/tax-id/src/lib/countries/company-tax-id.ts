@@ -58,6 +58,51 @@ export function validateIndianGstin(value: unknown): TaxIdValidationResult {
     : { ...base, valid: false, error: 'invalid_checksum' };
 }
 
+// Japan Corporate Number (Houjin Bangō): 13 digits = 1 check digit + 12-digit
+// base. Check = 9 - ((Σ Pn·Qn) mod 9), Pn from the right, Qn = 1 (odd) / 2 (even).
+// Source: MOF Ordinance No. 70 of 2014. Verified: 5835678256246 valid.
+export function validateJapaneseCorporateNumber(value: unknown): TaxIdValidationResult {
+  const n = compact(value);
+  const base = { country: 'JP', normalizedValue: n } as const;
+  if (!n) return { ...base, valid: false, error: 'empty' };
+  if (n.length !== 13) return { ...base, valid: false, error: 'invalid_length' };
+  if (!/^[1-9]\d{12}$/.test(n)) return { ...base, valid: false, error: 'invalid_format' };
+
+  const body = n.slice(1);
+  let sum = 0;
+  for (let i = 0; i < 12; i += 1) {
+    const positionFromRight = 12 - i; // n=1 is the rightmost base digit
+    const weight = positionFromRight % 2 === 1 ? 1 : 2;
+    sum += Number(body[i]) * weight;
+  }
+  const expected = 9 - (sum % 9);
+  return Number(n[0]) === expected
+    ? { ...base, valid: true, validationLevel: 'checksum' }
+    : { ...base, valid: false, error: 'invalid_checksum' };
+}
+
+// Turkey VKN (Vergi Kimlik Numarası): 10 digits, NTA weighted algorithm.
+// Source: python-stdnum tr.vkn. Verified: 4540536920 valid.
+export function validateTurkishVkn(value: unknown): TaxIdValidationResult {
+  const n = compact(value);
+  const base = { country: 'TR', normalizedValue: n } as const;
+  if (!n) return { ...base, valid: false, error: 'empty' };
+  if (n.length !== 10) return { ...base, valid: false, error: 'invalid_length' };
+  if (!/^\d{10}$/.test(n)) return { ...base, valid: false, error: 'invalid_format' };
+
+  let sum = 0;
+  for (let i = 0; i < 9; i += 1) {
+    const c1 = (Number(n[i]) + 9 - i) % 10;
+    let c2 = (c1 * 2 ** (9 - i)) % 9;
+    if (c1 !== 0 && c2 === 0) c2 = 9;
+    sum += c2;
+  }
+  const expected = (10 - (sum % 10)) % 10;
+  return Number(n[9]) === expected
+    ? { ...base, valid: true, validationLevel: 'checksum' }
+    : { ...base, valid: false, error: 'invalid_checksum' };
+}
+
 // China USCC (Unified Social Credit Code): 18 chars, ISO 7064 MOD 31-3.
 // Charset excludes I, O, S, V, Z. Source: GB 32100-2015.
 const USCC_ALPHABET = '0123456789ABCDEFGHJKLMNPQRTUWXY';
