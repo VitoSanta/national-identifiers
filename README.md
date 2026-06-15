@@ -31,6 +31,8 @@ ownership or registry-verification service.
 - [Roadmap](ROADMAP.md)
 - [Country coverage](docs/COUNTRY-COVERAGE.md)
 - [Known limitations](docs/KNOWN-LIMITATIONS.md)
+- [Official-source implementation backlog](docs/OFFICIAL-SOURCE-BACKLOG.md)
+- [Rule-source policy and catalogue](docs/RULE-SOURCE-POLICY.md)
 - [Identity consistency proposal](docs/IDENTITY-CONSISTENCY.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
@@ -214,20 +216,18 @@ The platform validates the following identifier categories. Not every country im
 | Type constant | Description | Examples |
 |---|---|---|
 | `tax_id_person` | Personal tax identification number | IT Codice Fiscale, DE Steuer-IdNr., US SSN |
-| `tax_id_company` | Company or entity tax number | FR SIREN/SIRET, DE Steuernummer |
+| `tax_id_company` | Company or entity tax number | FR SIREN, US EIN, JP Corporate Number |
 | `national_id` | Civil / personal identity number | CN 居民身份证, IN Aadhaar (scope-limited) |
 | `personal_id` | Integrated personal identifier used as functional TIN | DK CPR, SE Personnummer, MY NRIC |
-| `vat` | Value-added tax registration number | 37 countries |
+| `vat` | Value-added tax registration number | 38 countries |
 | `social_security` | Social insurance / pension number | US SSN, CA SIN, FR NIR |
 | `company_registration` | Commercial registry entry number | UK Companies House, DE Handelsregister |
 
 The family API currently exposes `tax_id_person`, `vat` and
-`tax_id_company`. Personal identifiers use the established coverage; offline
-VAT format/checksum validation is implemented for 37 jurisdictions: all 27 EU
-countries plus AR, AU, CH, CL, CO, GB, IL, NO, RS and RU. Offline
-`tax_id_company` checksum validation covers 10 jurisdictions: Brazil (CNPJ),
-India (GSTIN), Australia (ACN), China (USCC), Japan (Corporate Number), South
-Korea (BRN), Serbia (PIB), Turkey (VKN), Norway and New Zealand. Unsupported
+`tax_id_company`. Personal identifiers use the established coverage. Offline
+VAT format/checksum validation covers 38 countries, while company/entity
+tax-id validation covers 12. Discover the exact immutable sets through
+`SUPPORTED_VAT_COUNTRIES` and `SUPPORTED_COMPANY_TAX_COUNTRIES`. Unsupported
 country/family combinations return `unsupported_identifier_type`.
 
 ---
@@ -242,8 +242,17 @@ Islands, Greenland, Guernsey, Hong Kong, Jersey, Puerto Rico and Taiwan. They
 do not alter the 195-state coverage invariant.
 
 See the [country catalogue](docs/COUNTRY-COVERAGE.md), the
-[known limitations](docs/KNOWN-LIMITATIONS.md), and the package-specific
+[known limitations](docs/KNOWN-LIMITATIONS.md), the
+[official-source implementation backlog](docs/OFFICIAL-SOURCE-BACKLOG.md),
+the [rule-source policy and structured catalogue](docs/RULE-SOURCE-POLICY.md),
+and the package-specific
 [coverage details](projects/tax-id/README.md).
+
+The machine-readable provenance catalogue covers all **252** current registry
+combinations: 195 personal state identifiers, seven territories, 38 VAT rules
+and 12 company/entity rules. Evidence is reported as `verified`,
+`corroborated` or `documented_limit`; these labels describe source strength,
+not whether an identifier was officially issued.
 
 A `checksum` result means a publicly documented algorithm was applied. `format + date` means the identifier encodes a birth date that is validated in addition to the regex. `format only` means structure is checked but no algorithm is claimed.
 
@@ -514,7 +523,7 @@ point is tree-shakable and has no Angular dependency.
 **Package:** `NationalIdentifiers.Core` (NuGet)  
 **Integration package:** `NationalIdentifiers.AspNetCore`
 
-Both packages currently cover the same 195 country codes and 5 separately
+Both packages currently cover the same 195 country codes and 7 separately
 tracked territory codes as the JavaScript/TypeScript implementation, and
 target .NET 8 and .NET 10.
 

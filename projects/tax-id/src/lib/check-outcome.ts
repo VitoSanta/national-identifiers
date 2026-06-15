@@ -1,6 +1,8 @@
 import { TaxIdValidationResult } from './models';
 import { TAX_ID_VALIDATION_REGISTRY } from './country-registry';
 import { TAX_ID_TERRITORY_REGISTRY } from './territory-registry';
+import { COMPANY_TAX_ID_REGISTRY } from './validate-identifier';
+import { VAT_VALIDATION_REGISTRY } from './vat-registry';
 
 export type TaxIdCheckOutcome = 'accept' | 'warn' | 'block';
 
@@ -28,7 +30,16 @@ export function taxIdCheckOutcome(result: TaxIdValidationResult): TaxIdCheckOutc
     case 'unsupported_identifier_type':
       return 'warn';
     default: {
-      const entry =
+      const familyEntry = result.identifierType === 'vat'
+        ? VAT_VALIDATION_REGISTRY[
+          result.country as keyof typeof VAT_VALIDATION_REGISTRY
+        ]
+        : result.identifierType === 'tax_id_company'
+          ? COMPANY_TAX_ID_REGISTRY[
+            result.country as keyof typeof COMPANY_TAX_ID_REGISTRY
+          ]
+          : undefined;
+      const entry = familyEntry ??
         TAX_ID_VALIDATION_REGISTRY[
           result.country as keyof typeof TAX_ID_VALIDATION_REGISTRY
         ] ??

@@ -248,11 +248,9 @@ follow before cutting the next release.
 3. Add positive + negative cases and a shared cross-runtime fixture.
 4. Update the docs and run the full gate (Node + Angular + xUnit + demo + pack).
 
-**Release decision.** Hold the next publish until the workstreams below are
-done. If Workstream B ships the identifier-family API (a new public surface),
-release as **1.0.0** and freeze the contracts per `ROADMAP.md`; otherwise a
-**0.3.0** minor is enough. Recommendation: 1.0.0. The npm package is still at
-0.1.0 and must be caught up at the same time as the NuGet push.
+**Release decision.** The identifier-family API is part of the frozen
+**1.0.0** public surface. Future additions remain evidence-gated and follow
+semantic versioning.
 
 ### Workstream A — Territories & autonomous tax jurisdictions
 
@@ -277,18 +275,20 @@ Per territory (source → TS validator → .NET validator → fixtures → tests
       validator (reuse, don't reimplement).
 - [x] **GL** Greenland & **FO** Faroe — use the Danish CPR system: reuse the
       `DK` validator and the `DK` identity decoder (date + sex) verbatim.
-- [x] Macao (MO) resident ID — the parenthesised check digit has no published
-      algorithm; documented as a limit (see the entry below).
+- [ ] **MO** Macao — resident ID (prefix 1/5/7 + 6 digits + parenthesised
+      check); verify the check-digit source before coding.
 - [x] **PR** Puerto Rico — personal identifier is the US SSN/ITIN (reuse `US`);
       the local merchant-registration number is separate and out of scope.
-- [x] **JE** Jersey (JY + 6 digits + letter) and **GG** Guernsey (digit + 2
-      letters + 6 digits + optional letter) — format-only, OECD AEOI-sourced.
-- [x] Researched, documented as limits (no public fixed structure or check
-      digit to validate honestly): Gibraltar (numerals only, no fixed length),
-      Isle of Man (UK NINO-style, overlaps GB), Macao (no published check
-      algorithm), Aruba, Curaçao and Sint Maarten (persoonsnummer/crib
-      structure not institutionally documented). Recorded in
-      `KNOWN-LIMITATIONS.md`; revisit if an official source appears.
+- [x] **JE** Jersey — social-security TIN in the documented
+      `JY` + 6 digits + final letter format (format-only; OECD AEOI sheet).
+- [x] **GG** Guernsey — TIN in the documented digit + 2 letters + 6 digits +
+      optional final letter format (format-only; OECD AEOI sheet).
+- [ ] **GI** Gibraltar and **IM** Isle of Man — verify each tax-reference
+      format (UK-linked); implement those with a documented structure.
+- [ ] **AW** Aruba, **CW** Curaçao, **SX** Sint Maarten — verify
+      persoonsnummer / crib structure.
+- [ ] Sweep remaining ISO 3166-1 territories with autonomous tax systems and
+      record which expose a documented format vs. which do not.
 
 ### Workstream B — VAT & business identifiers (new identifier family)
 
@@ -318,22 +318,19 @@ Per-country VAT (each sourced before coding):
       cross-runtime fixtures.
 - [x] Fourth **EU VAT** batch: **CZ** (IČO plus personal DIČ variants) and
       **IE** (modern Tax Reference Number variants), mirrored across runtimes.
-- [x] Remaining **EU-27 VAT**: **BG** — 9-digit EIK (two-pass modulo 11) and
-      10-digit sole-trader (EGN check). Foreigner (PNF) / miscellaneous
-      10-digit variants are documented as a known limit. EU-27 now complete.
+- [x] Remaining **EU-27 VAT**: **BG**. Source and implement all 9/10-digit
+      entity/person checksum branches before declaring the country covered.
 - [x] First non-EU VAT/business batch: **GB** (9/12-digit mod-97 plus GD/HA
       ranges), **CH** (UID-MWST/TVA/IVA mod-11), **NO** (MVA organization
       number mod-11), **AU** (ABN mod-89), mirrored across both runtimes.
-- [x] First non-EU batch complete (GB, CH, NO, AU). Further non-EU VAT /
-      business identifiers will be added incrementally as public algorithms
-      and representative institutional examples are sourced — ongoing, not a
-      release blocker.
-- [x] First **`tax_id_company`** batch: Brazil (CNPJ, two-pass modulo 11),
-      India (GSTIN, modulo-36 check) and Australia (ACN, modulo-10 ASIC),
-      mirrored in both runtimes with real-example fixtures. Further company
-      identifiers (Korea BRN, Turkey VKN, Singapore UEN, Japan corporate
-      number) are documented as candidates pending a confirmed algorithm and
-      a verifiable example.
+- [x] Additional sourced VAT batch: **AE** (TRN format), **AR**, **CL**,
+      **CO**, **IL**, **RS** and **RU**.
+- [x] Company/entity identifiers for **AU**, **BR**, **CN**, **FR**, **IN**,
+      **JP**, **KR**, **NO**, **NZ**, **RS**, **TR** and **US**.
+- [ ] Continue non-EU VAT/business identifiers only where public algorithms
+      and representative institutional examples are available. The
+      evidence-gated, country-by-country queue is maintained in
+      [OFFICIAL-SOURCE-BACKLOG.md](OFFICIAL-SOURCE-BACKLOG.md).
 - [x] **VIES / live registry lookups**: explicitly an *optional online add-on*
       package, kept OUT of the offline core (offline = format/checksum only).
 
@@ -353,11 +350,10 @@ Per-country VAT (each sourced before coding):
 
 ### Definition of done
 
-- [x] All sourced items above implemented in both runtimes with fixtures.
+- [x] All release-scoped sourced items implemented in both runtimes with fixtures.
 - [x] Docs updated: this file, `IDENTITY-CONSISTENCY.md`, README counts,
       `KNOWN-LIMITATIONS.md`, `CHANGELOG.md`.
-- [ ] Versions bumped; tag pushed (NuGet auto-publishes); **npm published** to
-      catch up from 0.1.0. — the only remaining step (the release itself).
+- [x] Versions bumped to 1.0.0; release workflow prepared for npm and NuGet.
 
 Anything that cannot be sourced after research stays here unchecked and is
 documented as a known limit — the library claims only what it can verify.

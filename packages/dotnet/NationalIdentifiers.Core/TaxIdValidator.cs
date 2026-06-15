@@ -236,6 +236,7 @@ public class TaxIdValidator : ITaxIdValidator
 
         ValidationResult? result = (normalizedCountry, type) switch
         {
+            ("AE", IdentifierType.Vat) => NonEuropeanVat.UnitedArabEmirates(value),
             ("AT", IdentifierType.Vat) => EuropeanVat.Austria(value),
             ("AU", IdentifierType.Vat) => EuropeanVat.Australia(value),
             ("BE", IdentifierType.Vat) => EuropeanVat.Belgium(value),
@@ -276,11 +277,13 @@ public class TaxIdValidator : ITaxIdValidator
             ("AU", IdentifierType.TaxIdCompany) => CompanyTaxId.Australia(value),
             ("BR", IdentifierType.TaxIdCompany) => CompanyTaxId.Brazil(value),
             ("CN", IdentifierType.TaxIdCompany) => CompanyTaxId.China(value),
+            ("FR", IdentifierType.TaxIdCompany) => CompanyTaxId.France(value),
             ("IN", IdentifierType.TaxIdCompany) => CompanyTaxId.India(value),
             ("JP", IdentifierType.TaxIdCompany) => CompanyTaxId.Japan(value),
             ("KR", IdentifierType.TaxIdCompany) => CompanyTaxId.Korea(value),
             ("RS", IdentifierType.TaxIdCompany) => CompanyTaxId.Serbia(value),
             ("TR", IdentifierType.TaxIdCompany) => CompanyTaxId.Turkey(value),
+            ("US", IdentifierType.TaxIdCompany) => CompanyTaxId.UnitedStates(value),
             ("NO", IdentifierType.TaxIdCompany) => EuropeanVat.Norway(value),
             ("NZ", IdentifierType.TaxIdCompany) => NewZealand.Validate(value),
             _ => null,

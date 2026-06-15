@@ -8,13 +8,13 @@
     <RootNamespace>NationalIdentifiers.Core</RootNamespace>
     <AssemblyName>NationalIdentifiers.Core</AssemblyName>
     <PackageId>NationalIdentifiers.Core</PackageId>
-    <Version>0.2.0</Version>
+    <Version>1.0.0</Version>
     <Authors>Vito Santanelli</Authors>
     <PackageProjectUrl>https://github.com/VitoSanta/national-identifiers</PackageProjectUrl>
     <RepositoryUrl>https://github.com/VitoSanta/national-identifiers.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <Description>Local pre-validation of national identifiers for 195 countries, with normalization, format and checksum confidence levels, and accept/warn/block policy decisions.</Description>
+    <Description>Offline validation of personal tax IDs, VAT numbers and company identifiers across 195 countries and supported territories, with confidence levels and policy decisions.</Description>
     <PackageTags>tax-id;tin;codice-fiscale;partita-iva;vat;national-identifier;validation;checksum</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>

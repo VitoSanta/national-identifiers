@@ -17,7 +17,9 @@ const files = {
   csharpSupportedTerritories: 'packages/dotnet/NationalIdentifiers.Core/TaxIdTerritories.cs',
   tsTerritoryRegistry: 'projects/tax-id/src/lib/territory-registry.ts',
   tsVatRegistry: 'projects/tax-id/src/lib/vat-registry.ts',
+  tsIdentifierRegistry: 'projects/tax-id/src/lib/validate-identifier.ts',
   csharpVatCountries: 'packages/dotnet/NationalIdentifiers.Core/VatCountries.cs',
+  csharpCompanyTaxCountries: 'packages/dotnet/NationalIdentifiers.Core/CompanyTaxCountries.cs',
 };
 
 async function read(path) {
@@ -251,7 +253,7 @@ test('keeps VAT coverage separate and aligned across runtimes', async () => {
     matches(csharpDispatcher, /\("([A-Z]{2})", IdentifierType\.Vat\)/g),
   );
 
-  assert.equal(tsVatCountries.size, 37, 'VAT coverage count is stale');
+  assert.equal(tsVatCountries.size, 38, 'VAT coverage count is stale');
   assertSameCountries(
     'TypeScript VAT registry',
     tsVatCountries,
@@ -269,6 +271,51 @@ test('keeps VAT coverage separate and aligned across runtimes', async () => {
     [...csharpSupportedVatCountries],
     [...csharpSupportedVatCountries].sort(),
   );
+});
+
+test('keeps company-tax coverage aligned across runtimes', async () => {
+  const [tsRegistry, csharpDispatcher, csharpCountries] = await Promise.all([
+    read(files.tsIdentifierRegistry),
+    read(files.csharpDispatcher),
+    read(files.csharpCompanyTaxCountries),
+  ]);
+
+  const registryBlock = tsRegistry.match(
+    /COMPANY_TAX_ID_REGISTRY[\s\S]*?= \{(?<countries>[\s\S]*?)^\};/m,
+  )?.groups?.countries;
+  assert.ok(registryBlock, 'TypeScript company-tax registry was not found');
+  const tsCountries = uniqueSet(
+    'TypeScript company-tax registry',
+    matches(registryBlock, /^\s{2}([A-Z]{2}):/gm),
+  );
+  const csharpBlock = csharpCountries.match(
+    /Array\.AsReadOnly\(\s*\[(?<countries>[\s\S]*?)\]\);/,
+  )?.groups?.countries;
+  assert.ok(csharpBlock, '.NET supported company-tax countries list was not found');
+  const csharpSupported = uniqueSet(
+    '.NET supported company-tax countries API',
+    matches(csharpBlock, /"([A-Z]{2})"/g),
+  );
+  const csharpDispatched = uniqueSet(
+    '.NET company-tax dispatcher',
+    matches(csharpDispatcher, /\("([A-Z]{2})", IdentifierType\.TaxIdCompany\)/g),
+  );
+
+  assert.equal(tsCountries.size, 12, 'company-tax coverage count is stale');
+  assertSameCountries(
+    'TypeScript company-tax registry',
+    tsCountries,
+    '.NET supported company-tax countries API',
+    csharpSupported,
+  );
+  assertSameCountries(
+    'TypeScript company-tax registry',
+    tsCountries,
+    '.NET company-tax dispatcher',
+    csharpDispatched,
+  );
+  assert.deepEqual([...tsCountries], [...tsCountries].sort());
+  assert.deepEqual([...csharpSupported], [...csharpSupported].sort());
 });
 
 test('keeps checksum policy metadata aligned across TypeScript and .NET', async () => {

@@ -153,6 +153,8 @@ export * from './lib/countries/togo';
 export * from './lib/countries/zimbabwe';
 export * from './lib/countries/hong-kong';
 export * from './lib/countries/taiwan';
+export * from './lib/countries/company-tax-id';
+export * from './lib/countries/non-european-vat';
 export * from './lib/check-outcome';
 export * from './lib/identity-consistency';
 export * from './lib/models';

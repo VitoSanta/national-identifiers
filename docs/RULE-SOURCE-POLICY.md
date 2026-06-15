@@ -14,24 +14,44 @@ Preferred, in order:
 Community packages, blog posts and generated examples can support research but
 cannot be the sole authority for a checksum rule.
 
-## Required record
+## Structured catalogue
 
-Each identifier family should eventually have:
+Every supported personal, territory, VAT and company identifier has one record in
+[`tests/fixtures/rule-sources.json`](../tests/fixtures/rule-sources.json),
+validated against
+[`rule-sources.schema.json`](../tests/fixtures/rule-sources.schema.json).
 
 ```json
 {
-  "country": "SG",
-  "identifierType": "foreign_resident_id",
+  "country": "AE",
+  "jurisdictionType": "state",
+  "identifierType": "vat",
+  "identifierName": "Tax Registration Number (TRN)",
   "validationLevel": "format",
-  "authority": "Immigration & Checkpoints Authority",
-  "sourceUrl": "https://example.gov/official-document",
-  "accessedAt": "2026-06-12",
-  "lastReviewedAt": "2026-06-12",
+  "authority": "UAE Federal Tax Authority",
+  "sourceUrl": "https://tax.gov.ae/en/taxes/Vat/vat.topics/registration.for.vat.aspx",
+  "sourceType": "tax_authority",
+  "accessedAt": "2026-06-15",
+  "lastReviewedAt": "2026-06-15",
+  "provenanceStatus": "verified",
   "limitations": [
-    "The M-series check-letter table is not institutionally published."
+    "Offline validation checks only the documented 15-digit structure."
   ]
 }
 ```
+
+The catalogue uses three terminal evidence states:
+
+- `verified`: the linked institutional source directly supports the implemented
+  offline validation level;
+- `corroborated`: the rule is cross-runtime tested and supported by the
+  repository evidence audit, but the full primary algorithm publication was
+  not publicly located;
+- `documented_limit`: only a documented format, non-applicability decision or
+  jurisdiction mapping is claimed.
+
+`corroborated` and `documented_limit` are closed evidence decisions, not hidden
+verification claims. They can be upgraded when a stronger source appears.
 
 ## Review rules
 
@@ -42,5 +62,8 @@ Each identifier family should eventually have:
 - Downgrade to format-only when a checksum cannot be supported institutionally.
 - Never include production user data in fixtures.
 
-The structured catalogue is a 0.3 roadmap deliverable. Until complete, source
-comments and package documentation must state known limitations explicitly.
+The Node.js and .NET suites enforce all 252 current registry combinations,
+unique jurisdiction/country/family keys, institutional HTTPS sources, registry
+validation-level parity, terminal evidence decisions and a review date no
+older than one year. No rule can enter either runtime without a catalogue
+record.

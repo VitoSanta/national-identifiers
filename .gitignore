@@ -42,6 +42,7 @@ __screenshots__/
 [Oo]bj/
 *.user
 packages/dotnet/artifacts/
+/artifacts/
 
 # npm pack output
 *.tgz

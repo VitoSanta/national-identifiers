@@ -726,5 +726,53 @@
     "valid": false,
     "error": "invalid_checksum",
     "outcome": "block"
+  },
+  {
+    "country": "US",
+    "type": "tax_id_company",
+    "value": "12-3456789",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "US",
+    "type": "tax_id_company",
+    "value": "12-345678",
+    "valid": false,
+    "error": "invalid_length",
+    "outcome": "warn"
+  },
+  {
+    "country": "FR",
+    "type": "tax_id_company",
+    "value": "552 100 554",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "FR",
+    "type": "tax_id_company",
+    "value": "55210A554",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
+  },
+  {
+    "country": "AE",
+    "type": "vat",
+    "value": "100-1234-5670-0003",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept"
+  },
+  {
+    "country": "AE",
+    "type": "vat",
+    "value": "10012345670000A",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn"
   }
 ]

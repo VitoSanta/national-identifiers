@@ -199,4 +199,29 @@ internal static class CompanyTaxId
             ? ValidationResult.Ok("AU", n, ValidationLevel.Checksum)
             : ValidationResult.Fail("AU", n, ValidationErrorCode.InvalidChecksum);
     }
+
+    // France SIREN: nine digits identifying a legal unit. The cited INSEE
+    // definition identifies a control digit but does not publish its
+    // calculation, so this remains format-only.
+    internal static ValidationResult France(object? value)
+    {
+        var n = Compact(value);
+        if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("FR", n, ValidationErrorCode.Empty);
+        if (n.Length != 9) return ValidationResult.Fail("FR", n, ValidationErrorCode.InvalidLength);
+        if (!Regex.IsMatch(n, @"^\d{9}$") || n == "000000000")
+            return ValidationResult.Fail("FR", n, ValidationErrorCode.InvalidFormat);
+        return ValidationResult.Ok("FR", n, ValidationLevel.Format);
+    }
+
+    // United States EIN: IRS Publication 1635 defines nine digits printed as
+    // XX-XXXXXXX. There is no offline checksum claim.
+    internal static ValidationResult UnitedStates(object? value)
+    {
+        var n = Compact(value);
+        if (string.IsNullOrEmpty(n)) return ValidationResult.Fail("US", n, ValidationErrorCode.Empty);
+        if (n.Length != 9) return ValidationResult.Fail("US", n, ValidationErrorCode.InvalidLength);
+        if (!Regex.IsMatch(n, @"^\d{9}$") || n == "000000000")
+            return ValidationResult.Fail("US", n, ValidationErrorCode.InvalidFormat);
+        return ValidationResult.Ok("US", n, ValidationLevel.Format);
+    }
 }

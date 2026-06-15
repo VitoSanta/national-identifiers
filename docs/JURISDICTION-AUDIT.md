@@ -8,22 +8,26 @@ for the claim "we are at the verifiable ceiling" — or the exact list of what
 remains.
 
 Scope: ISO 3166-1 has 249 codes — 195 UN states + ~54 territories.
-Sources: OECD AEOI TIN sheets, Wikipedia "VAT identification number" and
-"National identification number", official registries. Rule: an item is
-"implementable" only if a public check algorithm **and** a verifiable example
-are available; otherwise it is a documented limit.
+Sources: OECD AEOI TIN sheets, national authorities, legislation, official
+technical specifications and government registries. Discovery sources may
+suggest a lead but cannot authorize an implementation. A rule is
+"implementable" only when an institutional source establishes its accepted
+structure or algorithm; otherwise it remains a documented limit.
 
-Date of this pass: 2026-06-14.
+Date of this pass: 2026-06-15.
 
-> **Backlog progress (2026-06-14):** the solid, source-verified items are now
-> implemented — VAT for AR, CL, CO, IL and RU (reusing the registered entity's
-> checksummed identifier), and company tax id for China (USCC, ISO 7064 MOD
-> 31-3, verified against the Tencent USCC), Norway and New Zealand (reuse).
-> VAT now covers 37 jurisdictions; company covers 10. Newly implemented and
-> each verified against a real example from an authoritative library test
-> suite: **JP** Corporate Number (`5835678256246`), **TR** VKN
+> **Backlog progress (2026-06-15):** VAT now covers 38 jurisdictions and
+> company identifiers cover 12. The structured catalogue distinguishes
+> primary-source provenance from executable examples. **AU ABN** is verified
+> against the official ABR modulus-89 specification and example; **JP**
+> Corporate Number is verified against Article 2 of Ministry of Finance
+> Ordinance No. 70. The following implemented checks still have executable
+> examples and are classified `corroborated` because their exact primary
+> algorithm publication was not publicly located: **TR** VKN
 > (`4540536920`), **RS** PIB (`101134702`, ISO 7064 MOD 11-10) and **KR** BRN
-> (`1348672683`). **Still pending** (documented, not implemented): Singapore
+> (`1348672683`). Format-level UAE TRN, French SIREN and US EIN are separately
+> primary-source verified.
+> **Still pending** (documented, not implemented): Singapore
 > UEN, Saudi Arabia VAT, Taiwan business number (algorithm not officially
 > published or example not yet confirmed), the broader EU company-registration
 > tail, and identity for Belarus / Mauritius.
@@ -55,50 +59,27 @@ Date of this pass: 2026-06-14.
 
 **Verdict: at the ceiling, modulo Belarus/Mauritius pending sources.**
 
-## Axis 3 — VAT / GST (31 implemented)
+## Axis 3 — VAT / GST (38 implemented)
 
-- **Implemented: 31** — all 27 EU + AU (ABN), CH (UID), GB, NO (MVA).
-- **Implementable but not done (public check digit confirmed this pass):**
+- **Implemented: 38** — all 27 EU countries plus AE, AR, AU, CH, CL, CO, GB,
+  IL, NO, RS and RU.
+- **Source-gaps:** CA, JP qualified-invoice numbers, SA, SG, TW and ZA.
+  These remain out until a primary offline format/check specification is
+  archived. Registry-only verification belongs in an optional online adapter.
 
-  | Country | Number | Check | Source |
-  |---|---|---|---|
-  | **RU** Russia | INN 10/12 | MOD 11-10 | Wikipedia VAT |
-  | **RS** Serbia | PIB 9 | ISO 7064 MOD 11-10 | Wikipedia VAT |
-  | **IL** Israel | 9 digits | Luhn | Wikipedia VAT |
-  | **JP** Japan | 13 digits | leading check digit | Wikipedia VAT |
-  | **CL** Chile | RUT 8+1 | modulo 11 (already a personal validator) | Wikipedia VAT |
-  | **CO** Colombia | NIT 10 | modulo 11 (already a personal validator) | Wikipedia VAT |
-  | **TW** Taiwan | business 8 | custom checksum | Wikipedia VAT |
-  | **SA** Saudi Arabia | 15 digits | check at 10th position | Wikipedia VAT (verify) |
+**Verdict: at the current official-source ceiling.**
 
-  CL/CO can largely reuse the existing personal RUT/NIT checksum logic.
+## Axis 4 — Company / entity tax id (12 implemented)
 
-- **No check digit (format-only at best, lower value):** CA, CN, ID, MX, NZ,
-  NG, UA, IS, AR (table says none; CUIT mod-11 exists — verify), TR (table
-  says none; VKN check exists — verify).
+- **Implemented: 12** — AU, BR, CN, FR, IN, JP, KR, NO, NZ, RS, TR and US.
+- **Promotion candidates:** AR, CL, CO, EC, MX, PE, PY and VE already have
+  related personal/VAT logic, but legal-entity applicability must be proven
+  by a primary source before registry wiring.
+- **Source-gaps:** SG UEN and other company-registration families whose
+  subtype/check rules are not yet institutionally documented in the source
+  catalogue.
 
-**Verdict: NOT at the ceiling. ~6–8 sourced VAT countries remain.**
-
-## Axis 4 — Company / entity tax id (3 implemented)
-
-- **Implemented: 3** — Brazil (CNPJ), India (GSTIN), Australia (ACN).
-- **Implementable but not done (public check digit confirmed this pass):**
-
-  | Country | Number | Check | Source |
-  |---|---|---|---|
-  | **SG** Singapore | UEN | trailing check letter | ACRA / search |
-  | **JP** Japan | Corporate Number 13 | leading check digit | National Tax Agency |
-  | **IL** Israel | H.P. company 9 | Luhn mod-10 | search |
-  | **CN** China | USCC 18 | ISO 7064 MOD 31-3 | search |
-  | **NO** Norway | Organisasjonsnummer 9 | MOD 11 (already used for NO VAT) | Brønnøysund |
-  | **NZ** New Zealand | NZBN / IRD | IRD check digit (already a personal validator) | search |
-
-- **Lower confidence / verify:** most EU countries also have a company
-  registration number with a check; to be added only where the algorithm and
-  an example are confirmed per country.
-
-**Verdict: NOT at the ceiling. ~6 sourced company identifiers remain, plus a
-long EU tail to verify case by case.**
+**Verdict: substantial coverage; further expansion remains evidence-gated.**
 
 ## Axis 5 — Territories (7 implemented)
 
@@ -116,15 +97,18 @@ long EU tail to verify case by case.**
 
 ---
 
-## Actionable implementable backlog (sourced)
+## Evidence-gated future work
 
-Ordered by value/confidence:
+The current registry has no unresolved provenance workflow records. Future
+expansion remains optional and evidence-gated:
 
-1. **VAT, reuse-friendly:** CL, CO (reuse personal checksum) — quick wins.
-2. **VAT, new checksum:** RU, RS, IL, JP (+ SA/TW to verify).
-3. **Company, new checksum:** SG, JP, IL, CN (+ NO/NZ reuse).
-4. **Territories by reuse:** French collectivities + Åland (verify the linked
-   system applies to individuals).
+1. Promote `corroborated` records only when an exact primary algorithm document
+   is found.
+2. Add related entity identifiers only after primary-source applicability
+   review.
+3. Keep authoritative issuance/activity checks in optional online adapters.
+4. Revisit reuse-based territories only when an institutional source confirms
+   applicability to individuals.
 
 Each item still requires: confirm the exact algorithm against an institutional
 source **and** a verifiable example, then implement TS + .NET, add a shared
@@ -140,12 +124,11 @@ documented limits.
   statement is therefore: the *personal* scope is complete; the *business and
   territory* scope is a curated subset with a known remaining list.
 
-## Detailed implementation backlog (meticulous, 2026-06-14 deep pass)
+## Historical research notes (not source authority)
 
-Per-candidate spec to follow when finalizing. Status legend: **READY** =
-public algorithm + a verifiable example in hand; **EXAMPLE PENDING** =
-algorithm public/standard but no confirmed real example yet; **LIMIT** =
-algorithm not officially published / not confirmable.
+These notes preserve implementation context but do not establish provenance.
+The machine-readable status and institutional source for every implemented VAT
+and company rule are authoritative in `tests/fixtures/rule-sources.json`.
 
 ### Company / business tax id
 
@@ -197,20 +180,16 @@ algorithm not officially published / not confirmable.
 - No other state was found whose **personal** tax code encodes biographical
   data beyond the 47 already covered; this axis remains at the ceiling.
 
-### Plan to finalize before publishing
+### Remaining provenance work
 
-1. Implement the **READY** items now: JP Corporate Number, TR VKN
-   (`tax_id_company`), each verified against the example above.
-2. Source a verifiable example for **RS PIB** and **KR BRN**; implement on
-   confirmation, else leave as documented limits.
-3. Leave SG, SA, TW, BY, MU as documented limits until an official source
-   appears.
-4. Then bump versions and publish 1.0.0.
+1. Replace third-party implementation references with exact primary algorithm
+   documents before changing a catalogue record to `verified`.
+2. Leave SG, SA, TW, BY and MU as documented limits until an institutional
+   source appears.
+3. Keep release readiness separate from official issuance verification, which
+   remains outside the offline core.
 
 ## Sources
 
-- [Wikipedia — VAT identification number](https://en.wikipedia.org/wiki/VAT_identification_number)
-- [Wikipedia — National identification number](https://en.wikipedia.org/wiki/National_identification_number)
-- [Wikipedia — Corporate Number (Japan)](https://en.wikipedia.org/wiki/Corporate_Number)
 - [Brønnøysund Register Centre — organisation number](https://www.brreg.no/en/about-us-2/our-registers/about-the-central-coordinating-register-for-legal-entities-ccr/about-the-organisation-number/)
 - OECD AEOI/CRS TIN country sheets (per jurisdiction).

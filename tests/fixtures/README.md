@@ -20,3 +20,19 @@ identifier family before 1.0.
 `identity-consistency-country-cases.json` contains one matching example for
 every non-Italian country that declares encoded identity data. Both runtimes
 consume the same file so capability and decoding changes cannot drift silently.
+
+`rule-sources.json` is the machine-readable provenance catalogue for all 252
+current registry combinations: 195 personal state identifiers, seven
+territories, 38 VAT rules and 12 company/entity rules. Its shape is documented
+by `rule-sources.schema.json`. Node.js and .NET tests require exact registry
+coverage, institutional HTTPS sources and a review date no older than one year.
+
+`provenanceStatus: "verified"` means that the recorded source directly supports
+the implemented offline validation level. `"corroborated"` means the rule is
+cross-runtime tested but its complete primary algorithm publication was not
+publicly located. `"documented_limit"` is used for format-only,
+non-applicability and bounded jurisdiction-mapping decisions.
+
+Run `node scripts/generate-rule-source-catalogue.mjs` after changing the
+personal or territory registries. The generator preserves explicit VAT/company
+records and regenerates registry-derived personal coverage deterministically.

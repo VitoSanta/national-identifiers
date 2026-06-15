@@ -178,3 +178,30 @@ export function validateAustralianAcn(value: unknown): TaxIdValidationResult {
     ? { ...base, valid: true, validationLevel: 'checksum' }
     : { ...base, valid: false, error: 'invalid_checksum' };
 }
+
+// France SIREN: nine digits identifying a legal unit. INSEE documents the
+// ninth digit as a control digit but does not publish its calculation on the
+// cited definition page, so the public rule deliberately remains format-only.
+export function validateFrenchSiren(value: unknown): TaxIdValidationResult {
+  const n = compact(value);
+  const base = { country: 'FR', normalizedValue: n } as const;
+  if (!n) return { ...base, valid: false, error: 'empty' };
+  if (n.length !== 9) return { ...base, valid: false, error: 'invalid_length' };
+  if (!/^\d{9}$/.test(n) || n === '000000000') {
+    return { ...base, valid: false, error: 'invalid_format' };
+  }
+  return { ...base, valid: true, validationLevel: 'format' };
+}
+
+// United States EIN: IRS Publication 1635 defines a nine-digit identifier
+// printed as XX-XXXXXXX. No offline checksum is claimed.
+export function validateUnitedStatesEin(value: unknown): TaxIdValidationResult {
+  const n = compact(value);
+  const base = { country: 'US', normalizedValue: n } as const;
+  if (!n) return { ...base, valid: false, error: 'empty' };
+  if (n.length !== 9) return { ...base, valid: false, error: 'invalid_length' };
+  if (!/^\d{9}$/.test(n) || n === '000000000') {
+    return { ...base, valid: false, error: 'invalid_format' };
+  }
+  return { ...base, valid: true, validationLevel: 'format' };
+}

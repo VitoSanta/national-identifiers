@@ -24,6 +24,7 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci
+      - run: npm run sources:check
       - run: npm test
       - run: npm run test:angular -- --browsers=ChromeHeadless
       - run: npm run build:demo

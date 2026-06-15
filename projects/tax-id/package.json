@@ -1,7 +1,7 @@
 {
   "name": "tax-id",
-  "version": "0.2.0",
-  "description": "Local pre-validation of national identifiers for 195 countries, with normalization, confidence levels, checksums and an optional Angular adapter.",
+  "version": "1.0.0",
+  "description": "Offline validation of personal tax IDs, VAT numbers and company identifiers across 195 countries and supported territories, with an optional Angular adapter.",
   "keywords": [
     "tax-id",
     "tin",

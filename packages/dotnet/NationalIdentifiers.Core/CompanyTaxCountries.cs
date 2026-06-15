@@ -7,7 +7,7 @@ public static class CompanyTaxCountries
 {
     private static readonly ReadOnlyCollection<string> Codes = Array.AsReadOnly(
     [
-        "AU", "BR", "CN", "IN", "JP", "KR", "NO", "NZ", "RS", "TR"
+        "AU", "BR", "CN", "FR", "IN", "JP", "KR", "NO", "NZ", "RS", "TR", "US"
     ]);
 
     private static readonly HashSet<string> CodeSet = new(Codes, StringComparer.OrdinalIgnoreCase);
@@ -18,4 +18,7 @@ public static class CompanyTaxCountries
     /// <summary>Returns whether dedicated company tax validation is available.</summary>
     public static bool IsSupported(string? country) =>
         country is not null && CodeSet.Contains(country.Trim());
+
+    internal static bool UsesChecksumPolicy(string country) =>
+        country is not "FR" and not "US" && CodeSet.Contains(country);
 }

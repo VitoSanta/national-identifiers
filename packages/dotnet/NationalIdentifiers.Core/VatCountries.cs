@@ -7,7 +7,7 @@ public static class VatCountries
 {
     private static readonly ReadOnlyCollection<string> Codes = Array.AsReadOnly(
     [
-        "AR", "AT", "AU", "BE", "BG", "CH", "CL", "CO", "CY", "CZ",
+        "AE", "AR", "AT", "AU", "BE", "BG", "CH", "CL", "CO", "CY", "CZ",
         "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU",
         "IE", "IL", "IT", "LT", "LU", "LV", "MT", "NL", "NO", "PL",
         "PT", "RO", "RS", "RU", "SE", "SI", "SK"
@@ -21,4 +21,13 @@ public static class VatCountries
     /// <summary>Returns whether dedicated VAT validation is available.</summary>
     public static bool IsSupported(string? country) =>
         country is not null && CodeSet.Contains(country.Trim());
+
+    internal static bool UsesChecksumPolicy(string country, string normalizedValue) =>
+        country switch
+        {
+            "AE" => false,
+            "GB" when normalizedValue.StartsWith("GD", StringComparison.Ordinal)
+                || normalizedValue.StartsWith("HA", StringComparison.Ordinal) => false,
+            _ => CodeSet.Contains(country),
+        };
 }

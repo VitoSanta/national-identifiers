@@ -1,0 +1,4079 @@
+[
+  {
+    "country": "AU",
+    "identifierType": "tax_id_company",
+    "identifierName": "Australian Company Number (ACN)",
+    "validationLevel": "checksum",
+    "authority": "Australian Securities and Investments Commission",
+    "sourceUrl": "https://asic.gov.au/for-business/registering-a-company/steps-to-register-a-company/australian-company-numbers/",
+    "sourceType": "government_registry",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the official check-digit calculation.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "BR",
+    "identifierType": "tax_id_company",
+    "identifierName": "Cadastro Nacional da Pessoa Juridica (CNPJ)",
+    "validationLevel": "checksum",
+    "authority": "Receita Federal do Brasil",
+    "sourceUrl": "https://www.gov.br/receitafederal/pt-br/assuntos/cadastros/cnpj",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Numeric CNPJ only; re-review before the alphanumeric transition.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "CN",
+    "identifierType": "tax_id_company",
+    "identifierName": "Unified Social Credit Code",
+    "validationLevel": "checksum",
+    "authority": "State Administration for Market Regulation",
+    "sourceUrl": "https://www.samr.gov.cn/",
+    "sourceType": "government_registry",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the official GB 32100 coding specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "FR",
+    "identifierType": "tax_id_company",
+    "identifierName": "SIREN",
+    "validationLevel": "format",
+    "authority": "Institut national de la statistique et des etudes economiques",
+    "sourceUrl": "https://www.insee.fr/fr/metadonnees/definition/c2047",
+    "sourceType": "government_registry",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "verified",
+    "limitations": [
+      "The cited definition identifies a control digit but does not publish its calculation."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "IN",
+    "identifierType": "tax_id_company",
+    "identifierName": "Goods and Services Tax Identification Number (GSTIN)",
+    "validationLevel": "checksum",
+    "authority": "Goods and Services Tax Network",
+    "sourceUrl": "https://www.gst.gov.in/",
+    "sourceType": "government_portal",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the official base-36 checksum specification and examples.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "JP",
+    "identifierType": "tax_id_company",
+    "identifierName": "Corporate Number",
+    "validationLevel": "checksum",
+    "authority": "Japan Ministry of Finance via e-Gov",
+    "sourceUrl": "https://elaws.e-gov.go.jp/document?lawid=426M60000040070",
+    "sourceType": "legislation",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "verified",
+    "limitations": [
+      "Article 2 of Ministry of Finance Ordinance No. 70 defines the check-digit formula; offline validation does not confirm that an entity is active."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "KR",
+    "identifierType": "tax_id_company",
+    "identifierName": "Business Registration Number",
+    "validationLevel": "checksum",
+    "authority": "National Tax Service of Korea",
+    "sourceUrl": "https://www.nts.go.kr/english/main.do",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary weighted check-digit specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "NO",
+    "identifierType": "tax_id_company",
+    "identifierName": "Organisasjonsnummer",
+    "validationLevel": "checksum",
+    "authority": "Bronnoysund Register Centre",
+    "sourceUrl": "https://www.brreg.no/en/about-us-2/our-registers/about-the-central-coordinating-register-for-legal-entities-ccr/",
+    "sourceType": "government_registry",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary modulus-11 technical specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "NZ",
+    "identifierType": "tax_id_company",
+    "identifierName": "IRD number",
+    "validationLevel": "checksum",
+    "authority": "New Zealand Inland Revenue",
+    "sourceUrl": "https://www.ird.govt.nz/managing-my-tax/ird-numbers",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Confirm entity applicability and archive the primary checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "RS",
+    "identifierType": "tax_id_company",
+    "identifierName": "Poreski identifikacioni broj (PIB)",
+    "validationLevel": "checksum",
+    "authority": "Tax Administration of the Republic of Serbia",
+    "sourceUrl": "https://www.purs.gov.rs/en.html",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary ISO 7064 rule and representative official example.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "TR",
+    "identifierType": "tax_id_company",
+    "identifierName": "Vergi Kimlik Numarasi (VKN)",
+    "validationLevel": "checksum",
+    "authority": "Gelir Idaresi Baskanligi",
+    "sourceUrl": "https://www.gib.gov.tr/",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary VKN weighted checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "US",
+    "identifierType": "tax_id_company",
+    "identifierName": "Employer Identification Number (EIN)",
+    "validationLevel": "format",
+    "authority": "Internal Revenue Service",
+    "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p1635.pdf",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "verified",
+    "limitations": [
+      "Offline validation checks only the documented nine-digit structure."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "AD",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Andorra - NRT (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "AE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Emirati Arabi Uniti - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "AF",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Afghanistan - identificatore nazionale e-Tazkira (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "AG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Antigua e Barbuda - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "AL",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Albania - numero personale (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "AM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Armenia - PSN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "AO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Angola - NIF (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "AR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Argentina - CUIT/CUIL",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "AT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Austria - TIN personale (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "AU",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Australia - TFN (9 cifre)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "AZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Azerbaigian - VÖEN/TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Bosnia ed Erzegovina - JMBG",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "BB",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Barbados - TIN/NRN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BD",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Bangladesh - eTIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Belgio - numero di registro nazionale",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "BF",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Burkina Faso - IFU (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Bulgaria - EGN",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "BH",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Bahrein - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "BI",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Burundi - NIF (struttura 10 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BJ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Benin - IFU (struttura 13 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Brunei - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "BO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Bolivia - NIT (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Brasile - CPF",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "BS",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Bahamas - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "BT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Bhutan - CID (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BW",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Botswana - Omang (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BY",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Bielorussia - UNP (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "BZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Belize - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Canada - SIN",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "CD",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Repubblica Democratica del Congo - NIF (struttura 9 caratteri)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CF",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Repubblica Centrafricana - NIF (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Repubblica del Congo - NIU (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CH",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Svizzera - numero AVS/AHV",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "CI",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Costa d'Avorio - numero contribuente (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CL",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Cile - RUT/RUN",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "CM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Camerun - NIU personale (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Cina - numero di identità dei residenti",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "CO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Colombia - NIT",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "CR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Costa Rica - cédula personale (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CU",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Cuba - carnet de identidad (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CV",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Capo Verde - NIF (checksum modulo 11)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "CY",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Cipro - TIN personale (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "CZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Cechia - rodné číslo",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "DE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Germania - steuerliche Identifikationsnummer",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "DJ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Gibuti - NIF alfanumerico (struttura, 4-16 caratteri)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "DK",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Danimarca - CPR (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "DM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Dominica - taxpayer number (struttura fino a 6 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "DO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Repubblica Dominicana - cédula",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "DZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Algeria - NIF (struttura 15/20 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "EC",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Ecuador - cédula e RUC personale",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "EE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Estonia - isikukood",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "EG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Egitto - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "ER",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Eritrea - TIN alfanumerico (struttura, 4-16 caratteri)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "ES",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Spagna - DNI e NIE",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "ET",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Etiopia - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "FI",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Finlandia - HETU",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "FJ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Figi - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "FM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Micronesia - Social Security Number (struttura 2+6 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "FR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Francia - numero fiscale SPI",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "GA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Gabon - NIF (struttura 13 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "GB",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Regno Unito - NINO/UTR (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "GD",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Grenada - TIN (struttura 6 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "GE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Georgia - numero personale (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "GH",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Ghana - GhanaCard PIN/GRA TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "GM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Gambia - TIN numerico (struttura, 10 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "GN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Guinea - NIFp (checksum Luhn)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "GQ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Guinea Equatoriale - NIF alfanumerico (struttura, 7-9 caratteri)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "GR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Grecia - AFM",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "GT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Guatemala - NIT (mod 11 con K)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "GW",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Guinea-Bissau - NIF (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "GY",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Guyana - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "HN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Honduras - RTN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "HR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Croazia - OIB",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "HT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Haiti - NIF (struttura 10 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "HU",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Ungheria - adóazonosító jel",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "ID",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Indonesia - NPWP e NIK",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "IE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Irlanda - PPS Number",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "IL",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Israele - numero di identità",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "IN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "India - PAN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "IQ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Iraq - TIN (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "IR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Iran - codice nazionale",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "IS",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Islanda - kennitala",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "IT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Italia - Codice Fiscale e Partita IVA / CF numerico (checksum)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "JM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Giamaica - TRN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "JO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Giordania - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "JP",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Giappone - My Number",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "KE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Kenya - KRA PIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "KG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Kirghizistan - INN personale (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "KH",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Cambogia - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "KI",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Kiribati - TIN alfanumerico (struttura, 4-16 caratteri)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "KM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Comore - NIF numerico (struttura, 8-10 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "KN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Saint Kitts e Nevis - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "KP",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Corea del Nord - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "KR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Corea del Sud - RRN (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "KW",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Kuwait - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "KZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Kazakistan - IIN",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "LA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Laos - TIN (struttura 11 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "LB",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Libano - TIN numerico e suffissi IVA (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "LC",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Saint Lucia - TIN (struttura fino a 6 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "LI",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Liechtenstein - PEID (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "LK",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Sri Lanka - NIC (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "LR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Liberia - TIN (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "LS",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Lesotho - TIN (struttura 8 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "LT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Lituania - asmens kodas",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "LU",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Lussemburgo - matricola nazionale",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "LV",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Lettonia - personas kods",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "LY",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Libia - numero nazionale (struttura 12 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Marocco - identifiant fiscal (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MC",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Monaco - TIN personale (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MD",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Moldova - IDNP (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "ME",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Montenegro - JMBG",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "MG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Madagascar - NIF (struttura 10 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MH",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Isole Marshall - employee identification number (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MK",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Macedonia del Nord - EMBG",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "ML",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Mali - NIF (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Myanmar - TIN (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Mongolia - registro civile (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Mauritania - NIF (struttura 8 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Malta - TIN personale (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MU",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Mauritius - TAN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MV",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Maldive - TIN personale (struttura 7 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MW",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Malawi - TPIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MX",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Messico - RFC personale",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "MY",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Malaysia - NRIC (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "MZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Mozambico - NUIT (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "NA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Namibia - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "NE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Niger - NIF numerico (struttura, 4-16 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "NG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Nigeria - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "NI",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Nicaragua - RUC (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "NL",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Paesi Bassi - BSN",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "NO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Norvegia - fødselsnummer e varianti numeriche",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "NP",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Nepal - PAN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "NR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Nauru - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "NZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Nuova Zelanda - IRD number",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "OM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Oman - TIN personale non ancora applicabile (riforma 2028)",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "PA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Panama - RUC personale/cédula (struttura DGI)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "PE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Peru - RUC/DNI",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "PG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Papua Nuova Guinea - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "PH",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Filippine - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "PK",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Pakistan - CNIC e NTN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "PL",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Polonia - PESEL",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "PS",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Palestina - numero d'identita (checksum Luhn)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "PT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Portogallo - NIF",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "PW",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Palau - ROP Social Security Number (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "PY",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Paraguay - RUC (mod 11, fonte DNIT)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "QA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Qatar - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "RO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Romania - CNP",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "RS",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Serbia - JMBG",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "RU",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Russia - INN",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "RW",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Ruanda - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Arabia Saudita - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "SB",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Isole Salomone - TIN (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SC",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Seychelles - TIN personale (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SD",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Sudan - National ID (struttura alfanumerica)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Svezia - personnummer e samordningsnummer",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "SG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Singapore - NRIC/FIN (serie M solo struttura)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "SI",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Slovenia - davčna številka",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "SK",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Slovacchia - rodné číslo",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "SL",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Sierra Leone - TIN (struttura 8 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "San Marino - Codice ISS/COE (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Senegal - NINEA e COFI (checksum)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "SO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Somalia - TIN numerico (struttura, 4-12 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Suriname - FIN numerico fino a 10 cifre (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SS",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Sud Sudan - TIN (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "ST",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Sao Tome e Principe - NIF (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SV",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "El Salvador - NIT (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SY",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Siria - TIN (struttura 11 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "SZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Eswatini - TIN (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TD",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Ciad - NIF/NIFU alfanumerico (struttura, 4-16 caratteri)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Togo - NIF personale (struttura 13 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TH",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Thailandia - numero di identità nazionale",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "TJ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Tagikistan - INN (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TL",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Timor Est - TIN (struttura 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Turkmenistan - HSB (struttura, 12 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Tunisia - matricule fiscal (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TO",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Tonga - TIN alfanumerico (struttura, 4-16 caratteri)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TR",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Turchia - T.C. Kimlik No.",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "TT",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Trinidad e Tobago - BIR Number (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "TV",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Tuvalu - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "TZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Tanzania - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "UA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Ucraina - RNOKPP (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "UG",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Uganda - TIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "US",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Stati Uniti - SSN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "UY",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Uruguay - CI",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "UZ",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Uzbekistan - PINFL (struttura e data)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "VA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Citta del Vaticano - TIN personale non applicabile",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "VC",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Saint Vincent e Grenadine - TIN numerico (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "VE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Venezuela - RIF",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "VN",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Vietnam - MST e numero d'identità personale (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "VU",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Vanuatu - nessun TIN personale generalizzato",
+    "validationLevel": "not_applicable",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The jurisdiction is represented explicitly as having no generalized personal TIN in the documented scope; re-review after tax-system changes."
+    ]
+  },
+  {
+    "country": "WS",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Samoa - TIN (struttura 5-9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "YE",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Yemen - raqm daribiy (struttura, 9 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "ZA",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Sudafrica - tax reference number e ID (Luhn, fonte OECD/SARS)",
+    "validationLevel": "checksum",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implemented checksum is covered by cross-runtime fixtures and the repository evidence audit; preserve an exact national primary-source URL before changing the algorithm."
+    ]
+  },
+  {
+    "country": "ZM",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Zambia - TPIN (struttura)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "ZW",
+    "jurisdictionType": "state",
+    "identifierType": "tax_id_person",
+    "identifierName": "Zimbabwe - TIN (struttura 10 cifre)",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation and recorded national authority",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "Only the institutionally documented offline structure is claimed; no unpublished checksum or issuance status is inferred."
+    ]
+  },
+  {
+    "country": "FO",
+    "jurisdictionType": "territory",
+    "identifierType": "tax_id_person",
+    "identifierName": "Danish CPR used in the Faroe Islands",
+    "validationLevel": "format",
+    "authority": "Danish Agency for Digital Government",
+    "sourceUrl": "https://lifeindenmark.borger.dk/theme/before-moving",
+    "sourceType": "government_portal",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The territory mapping supports documented offline structure only; no registry or issuance check is performed."
+    ]
+  },
+  {
+    "country": "GG",
+    "jurisdictionType": "territory",
+    "identifierType": "tax_id_person",
+    "identifierName": "Guernsey Tax Reference Number",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The territory mapping supports documented offline structure only; no registry or issuance check is performed."
+    ]
+  },
+  {
+    "country": "GL",
+    "jurisdictionType": "territory",
+    "identifierType": "tax_id_person",
+    "identifierName": "Danish CPR used in Greenland",
+    "validationLevel": "format",
+    "authority": "Danish Agency for Digital Government",
+    "sourceUrl": "https://lifeindenmark.borger.dk/theme/before-moving",
+    "sourceType": "government_portal",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The territory mapping supports documented offline structure only; no registry or issuance check is performed."
+    ]
+  },
+  {
+    "country": "HK",
+    "jurisdictionType": "territory",
+    "identifierType": "tax_id_person",
+    "identifierName": "Hong Kong Identity Card number",
+    "validationLevel": "checksum",
+    "authority": "Hong Kong Inland Revenue Department",
+    "sourceUrl": "https://www.ird.gov.hk/eng/tax/bus_ebr.htm",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The checksum is implemented and cross-runtime tested; the catalogue does not claim authoritative issuance verification."
+    ]
+  },
+  {
+    "country": "JE",
+    "jurisdictionType": "territory",
+    "identifierType": "tax_id_person",
+    "identifierName": "Jersey Tax Identification Number",
+    "validationLevel": "format",
+    "authority": "OECD Global Forum TIN documentation",
+    "sourceUrl": "https://www.oecd.org/en/networks/global-forum-tax-transparency/resources/aeoi-implementation-portal/tax-identification-numbers.html",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The territory mapping supports documented offline structure only; no registry or issuance check is performed."
+    ]
+  },
+  {
+    "country": "PR",
+    "jurisdictionType": "territory",
+    "identifierType": "tax_id_person",
+    "identifierName": "United States SSN or ITIN used in Puerto Rico",
+    "validationLevel": "format",
+    "authority": "United States Social Security Administration",
+    "sourceUrl": "https://www.ssa.gov/number-card",
+    "sourceType": "government_portal",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "documented_limit",
+    "limitations": [
+      "The territory mapping supports documented offline structure only; no registry or issuance check is performed."
+    ]
+  },
+  {
+    "country": "TW",
+    "jurisdictionType": "territory",
+    "identifierType": "tax_id_person",
+    "identifierName": "Taiwan National Identification Card number",
+    "validationLevel": "checksum",
+    "authority": "Taiwan Ministry of Finance",
+    "sourceUrl": "https://www.etax.nat.gov.tw/etwmain/en",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The checksum is implemented and cross-runtime tested; the catalogue does not claim authoritative issuance verification."
+    ]
+  },
+  {
+    "country": "AE",
+    "identifierType": "vat",
+    "identifierName": "Tax Registration Number (TRN)",
+    "validationLevel": "format",
+    "authority": "UAE Federal Tax Authority",
+    "sourceUrl": "https://tax.gov.ae/en/taxes/Vat/vat.topics/registration.for.vat.aspx",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "verified",
+    "limitations": [
+      "Offline validation checks only the documented 15-digit structure."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "AR",
+    "identifierType": "vat",
+    "identifierName": "CUIT",
+    "validationLevel": "checksum",
+    "authority": "Agencia de Recaudacion y Control Aduanero",
+    "sourceUrl": "https://www.arca.gob.ar/",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary CUIT check-digit specification used by the implementation.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "AT",
+    "identifierType": "vat",
+    "identifierName": "Umsatzsteuer-Identifikationsnummer",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "AU",
+    "identifierType": "vat",
+    "identifierName": "Australian Business Number (ABN)",
+    "validationLevel": "checksum",
+    "authority": "Australian Business Register",
+    "sourceUrl": "https://abr.business.gov.au/Help/AbnFormat",
+    "sourceType": "government_registry",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "verified",
+    "limitations": [
+      "The official ABN Lookup specification documents the modulus-89 calculation and example; offline validation does not confirm current registration."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "BE",
+    "identifierType": "vat",
+    "identifierName": "VAT identification number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "BG",
+    "identifierType": "vat",
+    "identifierName": "VAT identification number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive primary specifications for every accepted 9/10-digit branch.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "CH",
+    "identifierType": "vat",
+    "identifierName": "UID MWST/TVA/IVA",
+    "validationLevel": "checksum",
+    "authority": "Swiss Federal Statistical Office UID Register",
+    "sourceUrl": "https://www.uid.admin.ch/",
+    "sourceType": "government_registry",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary UID check-digit specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "CL",
+    "identifierType": "vat",
+    "identifierName": "Rol Unico Tributario (RUT)",
+    "validationLevel": "checksum",
+    "authority": "Servicio de Impuestos Internos",
+    "sourceUrl": "https://www.sii.cl/",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary RUT modulus-11 specification for VAT use.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "CO",
+    "identifierType": "vat",
+    "identifierName": "Numero de Identificacion Tributaria (NIT)",
+    "validationLevel": "checksum",
+    "authority": "Direccion de Impuestos y Aduanas Nacionales",
+    "sourceUrl": "https://www.dian.gov.co/",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary NIT verification-digit specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "CY",
+    "identifierType": "vat",
+    "identifierName": "VAT identification number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "CZ",
+    "identifierType": "vat",
+    "identifierName": "Danove identifikacni cislo (DIC)",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive primary specifications for every accepted Czech subtype.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "DE",
+    "identifierType": "vat",
+    "identifierName": "Umsatzsteuer-Identifikationsnummer",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "DK",
+    "identifierType": "vat",
+    "identifierName": "CVR VAT number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "EE",
+    "identifierType": "vat",
+    "identifierName": "VAT identification number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "ES",
+    "identifierType": "vat",
+    "identifierName": "Numero de Identificacion Fiscal (NIF)",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive primary specifications for every accepted Spanish subtype.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "FI",
+    "identifierType": "vat",
+    "identifierName": "Arvonlisaveronumero",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "FR",
+    "identifierType": "vat",
+    "identifierName": "Numero de TVA intracommunautaire",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Only numeric VAT keys are implemented; archive the primary key specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "GB",
+    "identifierType": "vat",
+    "identifierName": "VAT registration number",
+    "validationLevel": "checksum",
+    "authority": "HM Revenue and Customs",
+    "sourceUrl": "https://www.gov.uk/vat-registration",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the HMRC offline modulus specification; GD/HA variants are format-only.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "GR",
+    "identifierType": "vat",
+    "identifierName": "Arithmos Forologikou Mitroou",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "HR",
+    "identifierType": "vat",
+    "identifierName": "OIB VAT number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "HU",
+    "identifierType": "vat",
+    "identifierName": "Kozossegi adoszam",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "IE",
+    "identifierType": "vat",
+    "identifierName": "VAT registration number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive primary specifications for every accepted Irish subtype.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "IL",
+    "identifierType": "vat",
+    "identifierName": "VAT dealer number",
+    "validationLevel": "checksum",
+    "authority": "Israel Tax Authority",
+    "sourceUrl": "https://www.gov.il/en/departments/israel_tax_authority/govil-landing-page",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary check-digit specification for VAT dealer numbers.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "IT",
+    "identifierType": "vat",
+    "identifierName": "Partita IVA",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary Italian check-digit specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "LT",
+    "identifierType": "vat",
+    "identifierName": "PVM moketojo kodas",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive primary specifications for both accepted lengths.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "LU",
+    "identifierType": "vat",
+    "identifierName": "Numero de TVA",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "LV",
+    "identifierType": "vat",
+    "identifierName": "PVN registration number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "The implementation covers legal entities; archive the national checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "MT",
+    "identifierType": "vat",
+    "identifierName": "VAT registration number",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "NL",
+    "identifierType": "vat",
+    "identifierName": "BTW-identificatienummer",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the national specification for the accepted legacy checksum form.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "NO",
+    "identifierType": "vat",
+    "identifierName": "Organisation number with MVA suffix",
+    "validationLevel": "checksum",
+    "authority": "Bronnoysund Register Centre",
+    "sourceUrl": "https://www.brreg.no/en/about-us-2/our-registers/about-the-central-coordinating-register-for-legal-entities-ccr/",
+    "sourceType": "government_registry",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary modulus-11 technical specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "PL",
+    "identifierType": "vat",
+    "identifierName": "NIP",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "PT",
+    "identifierType": "vat",
+    "identifierName": "Numero de Identificacao Fiscal",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the national checksum specification and accepted entity prefixes.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "RO",
+    "identifierType": "vat",
+    "identifierName": "Cod de identificare fiscala",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the national checksum specification for all accepted lengths.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "RS",
+    "identifierType": "vat",
+    "identifierName": "Poreski identifikacioni broj (PIB)",
+    "validationLevel": "checksum",
+    "authority": "Tax Administration of the Republic of Serbia",
+    "sourceUrl": "https://www.purs.gov.rs/en.html",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary ISO 7064 rule and representative official example.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "RU",
+    "identifierType": "vat",
+    "identifierName": "INN",
+    "validationLevel": "checksum",
+    "authority": "Federal Tax Service of Russia",
+    "sourceUrl": "https://www.nalog.gov.ru/eng/",
+    "sourceType": "tax_authority",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the primary INN checksum specification for VAT applicability.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "SE",
+    "identifierType": "vat",
+    "identifierName": "VAT-nummer",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "Archive the national specification for organisation number plus VAT suffix.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "SI",
+    "identifierType": "vat",
+    "identifierName": "Identifikacijska stevilka za DDV",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  },
+  {
+    "country": "SK",
+    "identifierType": "vat",
+    "identifierName": "IC DPH",
+    "validationLevel": "checksum",
+    "authority": "European Commission VIES",
+    "sourceUrl": "https://ec.europa.eu/taxation_customs/vies/",
+    "sourceType": "intergovernmental",
+    "accessedAt": "2026-06-15",
+    "lastReviewedAt": "2026-06-15",
+    "provenanceStatus": "corroborated",
+    "limitations": [
+      "VIES is authoritative for status; archive the national offline checksum specification.",
+      "The 2026-06-15 provenance audit did not locate a public primary document containing the full algorithm; the rule remains cross-runtime tested and must not be described as primary-source verified."
+    ],
+    "jurisdictionType": "state"
+  }
+]

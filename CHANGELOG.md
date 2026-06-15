@@ -3,19 +3,16 @@
 All notable changes to this project are documented in this file. The project
 follows Semantic Versioning.
 
-## [Unreleased]
+## [1.0.0] - 2026-06-15
 
 ### Added
 
 - Explicit identifier-family APIs in TypeScript and .NET:
   `validateIdentifier({ country, type, value })` and
-  `TaxIdValidator.Validate(country, type, value)`. Dedicated offline VAT
-  format/checksum validation covers 37 jurisdictions: all 27 EU countries
-  plus AR, AU (ABN), CH (UID), CL, CO, GB, IL, NO, RS and RU. The
-  `tax_id_company` family covers 10 jurisdictions: Brazil (CNPJ), India
-  (GSTIN), Australia (ACN), China (USCC), Japan (Corporate Number), South
-  Korea (BRN), Serbia (PIB), Turkey (VKN), Norway and New Zealand. Unsupported
-  family/country combinations do not fall back to personal TIN rules.
+  `TaxIdValidator.Validate(country, type, value)`. Dedicated offline
+  validation covers 38 VAT jurisdictions and 12 company/entity tax-id
+  jurisdictions. Unsupported family/country combinations do not fall back to
+  personal TIN rules.
 - Full Mexican CURP identity consistency, including name initials, internal
   consonants, common first names, surname particles, inconvenient-word
   substitution and the CURP check digit. Mexico is now the second `full`
@@ -23,8 +20,8 @@ follows Semantic Versioning.
 - Tax-id validation for seven ISO territories, tracked separately from the
   195-state invariant: Hong Kong and Taiwan with checksum validation,
   Greenland and the Faroe Islands through Danish CPR rules, Puerto Rico
-  through US SSN rules, and Jersey and Guernsey as OECD-sourced format-only
-  rules. Both runtimes expose a dedicated supported-territory list.
+  through US SSN rules, and Jersey and Guernsey through their documented
+  format rules. Both runtimes expose a dedicated supported-territory list.
 - Identity consistency now covers 47 jurisdictions (was 38). Ten decode a
   national identity document validated independently of the tax identifier:
   Egypt (National ID), France (NIR), Kuwait (Civil ID), Mexico (CURP),
@@ -34,6 +31,25 @@ follows Semantic Versioning.
 - Partial-date matching: identifiers that encode an incomplete birth date
   (France: year + month; UAE/Qatar/Bangladesh/Vietnam: year only) are compared
   to the granularity they encode and still report `birthDate` as checked.
+- Public official-source backlog for unsupported VAT, company-tax and
+  identity-consistency rules. It separates implementation-ready format rules
+  from candidates whose checksum is documented only by non-primary sources.
+- Format-level US EIN and French SIREN company-tax validation, plus UAE TRN
+  VAT validation, mirrored in TypeScript and .NET. Identifier-family policy
+  now derives `warn`/`block` from the selected family registry rather than
+  falling back to the personal-tax-id country metadata.
+- Machine-readable rule-source catalogue and JSON Schema for all 252 current
+  registry combinations: 195 personal state identifiers, seven territories,
+  38 VAT rules and 12 company/entity rules. Node.js and .NET tests enforce
+  exact registry coverage, validation-level parity, institutional HTTPS
+  sources, terminal evidence decisions and annual source review.
+- ABN and Japanese Corporate Number provenance promoted to `verified`: the
+  catalogue now links the ABR modulus-89 specification and Article 2 of Japan
+  Ministry of Finance Ordinance No. 70 respectively.
+- Deterministic catalogue generator for personal and territory registry
+  metadata. Evidence without a publicly located primary algorithm is now
+  classified as `corroborated` or `documented_limit`; no `needs_review`
+  workflow state remains.
 
 ### Changed
 

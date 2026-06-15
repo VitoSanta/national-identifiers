@@ -43,7 +43,7 @@ public class TaxIdValidatorTests
     public void SupportedVatCountries_ArePublicSortedAndReadOnly()
     {
         Assert.Equal([
-                "AR", "AT", "AU", "BE", "BG", "CH", "CL", "CO", "CY", "CZ",
+                "AE", "AR", "AT", "AU", "BE", "BG", "CH", "CL", "CO", "CY", "CZ",
                 "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU",
                 "IE", "IL", "IT", "LT", "LU", "LV", "MT", "NL", "NO", "PL",
                 "PT", "RO", "RS", "RU", "SE", "SI", "SK"
@@ -51,6 +51,7 @@ public class TaxIdValidatorTests
             V.SupportedVatCountries);
         Assert.True(VatCountries.IsSupported(" fr "));
         Assert.True(VatCountries.IsSupported("ES"));
+        Assert.True(VatCountries.IsSupported("AE"));
         Assert.False(VatCountries.IsSupported("US"));
         Assert.Throws<NotSupportedException>(
             () => ((IList<string>)V.SupportedVatCountries).Add("ES"));
@@ -60,9 +61,10 @@ public class TaxIdValidatorTests
     public void SupportedCompanyTaxCountries_ArePublicAndReadOnly()
     {
         Assert.Equal(
-            ["AU", "BR", "CN", "IN", "JP", "KR", "NO", "NZ", "RS", "TR"],
+            ["AU", "BR", "CN", "FR", "IN", "JP", "KR", "NO", "NZ", "RS", "TR", "US"],
             V.SupportedCompanyTaxCountries);
         Assert.True(CompanyTaxCountries.IsSupported(" br "));
+        Assert.True(CompanyTaxCountries.IsSupported("US"));
         Assert.False(CompanyTaxCountries.IsSupported("DE"));
         Assert.Throws<NotSupportedException>(
             () => ((IList<string>)V.SupportedCompanyTaxCountries).Add("US"));

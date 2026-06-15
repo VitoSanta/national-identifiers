@@ -10,6 +10,25 @@ permissions:
   id-token: write
 
 jobs:
+  npm:
+    name: Publish npm package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - run: npm run sources:check
+      - run: npm test
+      - run: npm run test:angular -- --browsers=ChromeHeadless
+      - run: npm run build:demo
+      - run: npm publish ./dist/tax-id --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   nuget:
     name: Publish NuGet packages
     runs-on: ubuntu-latest
@@ -18,6 +37,12 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run sources:check
       - run: dotnet test packages/dotnet/NationalIdentifiers.Tests/NationalIdentifiers.Tests.csproj --configuration Release
       - run: dotnet pack packages/dotnet/NationalIdentifiers.Core/NationalIdentifiers.Core.csproj --configuration Release --output artifacts
       - run: dotnet pack packages/dotnet/NationalIdentifiers.AspNetCore/NationalIdentifiers.AspNetCore.csproj --configuration Release --output artifacts

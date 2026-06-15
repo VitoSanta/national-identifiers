@@ -8,14 +8,19 @@ import { isSupportedTaxIdTerritory } from './territory-registry';
 import { validateTaxId } from './validate-tax-id';
 import { VAT_VALIDATION_REGISTRY } from './vat-registry';
 import {
+  TaxIdValidationEntry,
+} from './country-registry';
+import {
   validateBrazilianCnpj,
   validateIndianGstin,
   validateAustralianAcn,
   validateChineseUscc,
+  validateFrenchSiren,
   validateJapaneseCorporateNumber,
   validateTurkishVkn,
   validateSerbianPib,
   validateKoreanBrn,
+  validateUnitedStatesEin,
 } from './countries/company-tax-id';
 import { validateNewZealandTaxId } from './countries/new-zealand';
 import { validateNorwegianVat } from './countries/european-vat';
@@ -26,21 +31,21 @@ export interface IdentifierValidationRequest {
   readonly value: unknown;
 }
 
-type IdentifierValidator = (value: unknown) => TaxIdValidationResult;
-
-const COMPANY_TAX_ID_REGISTRY: Readonly<Record<string, IdentifierValidator>> = {
-  AU: validateAustralianAcn,
-  BR: validateBrazilianCnpj,
-  CN: validateChineseUscc,
-  IN: validateIndianGstin,
-  JP: validateJapaneseCorporateNumber,
-  KR: validateKoreanBrn,
-  RS: validateSerbianPib,
-  TR: validateTurkishVkn,
+export const COMPANY_TAX_ID_REGISTRY: Readonly<Record<string, TaxIdValidationEntry>> = {
+  AU: { validate: validateAustralianAcn, validationLevel: 'checksum' },
+  BR: { validate: validateBrazilianCnpj, validationLevel: 'checksum' },
+  CN: { validate: validateChineseUscc, validationLevel: 'checksum' },
+  FR: { validate: validateFrenchSiren, validationLevel: 'format' },
+  IN: { validate: validateIndianGstin, validationLevel: 'checksum' },
+  JP: { validate: validateJapaneseCorporateNumber, validationLevel: 'checksum' },
+  KR: { validate: validateKoreanBrn, validationLevel: 'checksum' },
   // Norway's organisation number and New Zealand's IRD number identify the
   // registered entity and reuse the same checksum as their tax-id rules.
-  NO: validateNorwegianVat,
-  NZ: validateNewZealandTaxId,
+  NO: { validate: validateNorwegianVat, validationLevel: 'checksum' },
+  NZ: { validate: validateNewZealandTaxId, validationLevel: 'checksum' },
+  RS: { validate: validateSerbianPib, validationLevel: 'checksum' },
+  TR: { validate: validateTurkishVkn, validationLevel: 'checksum' },
+  US: { validate: validateUnitedStatesEin, validationLevel: 'format' },
 };
 
 export const SUPPORTED_COMPANY_TAX_COUNTRIES = Object.freeze(
@@ -78,9 +83,9 @@ export function validateIdentifier(
   }
 
   const registry = type === 'vat' ? VAT_VALIDATION_REGISTRY : COMPANY_TAX_ID_REGISTRY;
-  const validator = registry[country as keyof typeof registry];
-  if (validator) {
-    return { ...validator(request.value), identifierType: type };
+  const entry = registry[country as keyof typeof registry];
+  if (entry) {
+    return { ...entry.validate(request.value), identifierType: type };
   }
 
   const countryKnown =

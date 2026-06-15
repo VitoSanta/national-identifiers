@@ -1,7 +1,7 @@
 # NationalIdentifiers.Core
 
-Validation of national tax identifiers for **195 countries**, plus 7
-separately tracked ISO territories (FO, GG, GL, HK, JE, PR, TW). Pure .NET, no
+Validation of national tax identifiers for **195 countries**, plus 5
+separately tracked ISO territories (FO, GL, HK, PR, TW). Pure .NET, no
 dependencies, targets .NET 8 and .NET 10.
 
 ```csharp
@@ -18,7 +18,8 @@ TaxIdValidator.Validate("BR", "111.444.777-35"); // CPF: normalized and checked
 TaxIdValidator.Validate("HK", "A123456(3)"); // HKID: checksum validated
 
 var vatCountries = new TaxIdValidator().SupportedVatCountries;
-// 37 countries; inspect this immutable list at runtime
+var companyCountries = new TaxIdValidator().SupportedCompanyTaxCountries;
+// 38 VAT and 12 company-tax countries; both lists are immutable
 ```
 
 ## What you get
@@ -29,12 +30,10 @@ var vatCountries = new TaxIdValidator().SupportedVatCountries;
   wrong.
 - **Format/structure validation for the rest** — length and pattern rules
   from institutional sources (OECD AEOI, national tax authorities).
-- **Dedicated VAT validation for 37 countries** — all 27 EU countries plus
-  AR, AU, CH, CL, CO, GB, IL, NO, RS and RU, discoverable through
+- **Dedicated VAT validation for 38 countries** — all EU countries plus
+  sourced non-EU VAT/GST identifiers, discoverable through
   `SupportedVatCountries`, with the same coverage as the TypeScript package.
-- **Dedicated company tax validation for 10 jurisdictions** — Brazil (CNPJ),
-  India (GSTIN), Australia (ACN), China (USCC), Japan (Corporate Number),
-  South Korea (BRN), Serbia (PIB), Turkey (VKN), Norway and New Zealand, via
+- **Dedicated company-tax validation for 12 countries**, discoverable through
   `SupportedCompanyTaxCountries`.
 - **Explicit confidence levels** — every successful result carries
   `ValidationLevel.Checksum` or `ValidationLevel.Format`, so you always know
@@ -42,9 +41,13 @@ var vatCountries = new TaxIdValidator().SupportedVatCountries;
 - **Graceful handling of edge cases** — countries without a personal TIN
   (UAE, Qatar, Kuwait…) return `NotApplicable` instead of failing; unknown
   country codes return `UnsupportedCountry` instead of throwing.
-- **Optional identity consistency for 47 jurisdictions** — compares encoded birth
-  date, gender or administrative place codes and, for Italy, name fragments.
-  This remains a local consistency check, not identity verification.
+- **Optional identity consistency for 47 jurisdictions** — compares encoded
+  birth date, gender or administrative place codes; Italy and Mexico also
+  check name-derived characters. This remains a local consistency check, not
+  identity verification.
+
+Additional families are admitted only through the public
+[official-source backlog](../../../docs/OFFICIAL-SOURCE-BACKLOG.md).
 
 ### Confidence semantics
 

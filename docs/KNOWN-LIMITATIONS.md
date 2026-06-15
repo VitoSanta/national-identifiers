@@ -1,6 +1,6 @@
 # Known Validation Limitations
 
-Status as of 2026-06-12: all 195 states in the current scope are represented.
+Status as of 2026-06-15: all 195 states in the current scope are represented.
 This document records deliberately limited validation and the institutional
 sources used for rules where no public checksum is available. Coverage does
 not imply equal confidence across countries.
@@ -11,36 +11,30 @@ suite manuale è ora `XX` (codice non assegnato a nessuno Stato ISO 3166-1).
 ## Identifier families and online verification
 
 The explicit family API currently validates `tax_id_person` for the existing
-country/territory coverage and `vat` for 37 jurisdictions: all 27 EU
-countries plus AR, AU, CH, CL, CO, GB, IL, NO, RS and RU. The French offline
-rule accepts the numeric two-character VAT key;
+country/territory coverage, `vat` for 38 countries and `tax_id_company` for
+12. The French VAT rule accepts the numeric two-character key;
 alphanumeric French key variants remain unsupported. The Latvian VAT rule
 covers legal-entity registration numbers rather than historical personal
-codes. The Bulgarian VAT rule covers the 9-digit EIK and the 10-digit
-sole-trader (EGN) check; foreigner (PNF) and miscellaneous 10-digit variants
-are not validated. The `tax_id_company` family covers Brazil (CNPJ), India
-(GSTIN), Australia (ACN), China (USCC), Japan (Corporate Number), South Korea
-(BRN), Serbia (PIB), Turkey (VKN), Norway and New Zealand; further company
-identifiers (e.g. Singapore UEN, Saudi Arabia, Taiwan business number) are
-candidates pending a confirmed public algorithm and a verifiable example.
-Other VAT and
-`tax_id_company` combinations return
+codes. Other VAT and `tax_id_company` combinations return
 `unsupported_identifier_type`; they are not silently routed through personal
 tax-id rules.
-
-Bulgarian VAT remains unsupported because its 9/10-digit space includes
-multiple entity and personal-number checksum families. It will be enabled
-only when every accepted branch can be sourced and tested without treating
-the personal EGN algorithm as a universal Bulgarian VAT rule.
 
 For the United Kingdom, ordinary 9/12-digit VAT numbers receive checksum
 validation. Government departments (`GD`) and health authorities (`HA`) have
 only a documented range rule and therefore return `validationLevel: 'format'`.
+UAE TRN, French SIREN and US EIN validation is format-only. It confirms the
+officially documented local shape, not issuance, activity or ownership.
 
 The core remains fully offline. It validates format and checksum but does not
 query VIES or national registries, and therefore cannot prove that a VAT
 number was issued, is active or belongs to a specific entity. Any future VIES
 integration will live in an optional online package.
+
+Research for additional VAT, company-tax and identity-consistency rules is
+tracked in the
+[official-source implementation backlog](OFFICIAL-SOURCE-BACKLOG.md).
+Algorithms without a public institutional specification remain intentionally
+unsupported even when third-party implementations are widely available.
 
 Fonti istituzionali verificate per gli inserimenti del 2026-06-11:
 
@@ -102,22 +96,6 @@ ZA) sono state implementate. Fonti verificate online durante l'implementazione:
 Sezione svuotata il 12-06-2026: le ultime 12 voci (TD, KM, DJ, GQ, ER, GM, NE,
 SO, TM, YE, KI, TO) sono state implementate con struttura format-only, poiché
 non sono disponibili algoritmi di checksum pubblici per questi paesi.
-
-## Territories researched but not validated
-
-These ISO 3166-1 territories were researched for the expansion roadmap but
-expose no institutionally documented structure or check digit that can be
-validated honestly, so they are intentionally not supported:
-
-- Gibraltar (GI): taxpayer reference is numeric only, with no published fixed
-  length or check digit.
-- Isle of Man (IM): individuals use UK NINO-style references that overlap the
-  GB rules; not separately modelled.
-- Macao (MO): the resident-ID check digit algorithm is not publicly documented.
-- Aruba (AW), Curaçao (CW), Sint Maarten (SX): persoonsnummer / crib structure
-  is not institutionally documented.
-
-They will be added if an official source becomes available.
 
 ## Country limitations to revisit
 

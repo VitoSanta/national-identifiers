@@ -8,6 +8,8 @@
     "build:demo": "ng build tax-id && ng build manual-test",
     "build": "ng build tax-id",
     "watch": "ng build --watch --configuration development",
+    "sources:generate": "node scripts/generate-rule-source-catalogue.mjs",
+    "sources:check": "node scripts/generate-rule-source-catalogue.mjs --check",
     "test": "npm run build && node --test tests/node/*.test.mjs",
     "test:angular": "ng test tax-id --watch=false",
     "verify": "npm test && npm run test:angular && npm run build:demo"

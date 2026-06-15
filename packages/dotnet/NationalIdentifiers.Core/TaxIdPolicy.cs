@@ -55,6 +55,16 @@ public static class TaxIdPolicy
     }
 
     private static bool UsesChecksumPolicy(ValidationResult result) =>
+        result.IdentifierType switch
+        {
+            IdentifierType.Vat => VatCountries.UsesChecksumPolicy(
+                result.Country,
+                result.NormalizedValue),
+            IdentifierType.TaxIdCompany => CompanyTaxCountries.UsesChecksumPolicy(result.Country),
+            _ => UsesPersonalChecksumPolicy(result),
+        };
+
+    private static bool UsesPersonalChecksumPolicy(ValidationResult result) =>
         result.Country switch
         {
             "CZ" or "SK" when result.NormalizedValue.Length == 9 => false,
