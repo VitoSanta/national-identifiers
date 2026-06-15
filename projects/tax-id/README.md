@@ -1,6 +1,9 @@
-# tax-id
+# national-identifiers
 
 Angular and TypeScript utilities for validating tax identifiers by country.
+
+This package is published on npm as `national-identifiers`. The former
+`tax-id` package name is retained only as a deprecated migration path.
 
 This package is designed for international sign-up and onboarding flows where user-provided national identifiers must be validated with a combination of normalization, format rules and, when available, checksum algorithms. The same validation semantics are replicated in the .NET package so frontend and backend behavior stay aligned.
 
@@ -284,7 +287,7 @@ tax identifier that can be validated by this library.
 ## TypeScript API
 
 ```ts
-import { validateTaxId } from 'tax-id';
+import { validateTaxId } from 'national-identifiers';
 
 const result = validateTaxId('IT', 'RSSMRA85T10A562S');
 
@@ -300,7 +303,7 @@ an identifier was issued by a government authority.
 
 `validateTaxIdIdentity` optionally compares user-supplied attributes with data
 encoded in an identifier. `taxIdIdentityCapability(country)` reports whether
-full or partial comparison is available. The current release covers 37
+full or partial comparison is available. The current release covers 47
 countries; see `docs/IDENTITY-CONSISTENCY.md` in the repository for the
 capability matrix and privacy constraints.
 
@@ -308,7 +311,7 @@ capability matrix and privacy constraints.
 
 ```ts
 import { FormControl, Validators } from '@angular/forms';
-import { taxIdValidator } from 'tax-id/angular';
+import { taxIdValidator } from 'national-identifiers/angular';
 
 const fiscalCode = new FormControl('', [
   Validators.required,

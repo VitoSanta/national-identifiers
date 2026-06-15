@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import {
   taxIdCheckOutcome,
   validateIdentifier,
-} from '../../dist/tax-id/fesm2022/tax-id.mjs';
+} from '../../dist/tax-id/fesm2022/national-identifiers.mjs';
 
 const fixtures = JSON.parse(
   await readFile(

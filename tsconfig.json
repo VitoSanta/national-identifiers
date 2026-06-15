@@ -15,10 +15,10 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "tax-id": [
+      "national-identifiers": [
         "./dist/tax-id"
       ],
-      "tax-id/angular": [
+      "national-identifiers/angular": [
         "./dist/tax-id/angular"
       ]
     }

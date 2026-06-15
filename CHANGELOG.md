@@ -3,6 +3,15 @@
 All notable changes to this project are documented in this file. The project
 follows Semantic Versioning.
 
+## Unreleased
+
+### Changed
+
+- Renamed the canonical npm package from `tax-id` to
+  `national-identifiers`, including the Angular secondary entry point
+  `national-identifiers/angular`. The public API and version remain unchanged;
+  `tax-id@1.0.0` is retained as a deprecated migration package.
+
 ## [1.0.0] - 2026-06-15
 
 ### Added

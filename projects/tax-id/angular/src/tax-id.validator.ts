@@ -5,7 +5,7 @@ import {
   TaxIdValidationResult,
   taxIdCheckOutcome,
   validateTaxId,
-} from 'tax-id';
+} from 'national-identifiers';
 
 export interface TaxIdValidationError {
   readonly taxId: TaxIdValidationResult;

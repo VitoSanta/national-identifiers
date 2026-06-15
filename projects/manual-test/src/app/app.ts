@@ -5,8 +5,8 @@ import {
   TaxIdValidationResult,
   normalizeTaxId,
   validateTaxId,
-} from 'tax-id';
-import { taxIdValidator } from 'tax-id/angular';
+} from 'national-identifiers';
+import { taxIdValidator } from 'national-identifiers/angular';
 
 interface TestCase {
   readonly label: string;

@@ -9,7 +9,7 @@ import {
   SUPPORTED_TAX_ID_TERRITORIES,
   SUPPORTED_VAT_COUNTRIES,
   VAT_VALIDATION_REGISTRY,
-} from '../../dist/tax-id/fesm2022/tax-id.mjs';
+} from '../../dist/tax-id/fesm2022/national-identifiers.mjs';
 
 const [catalogue, countryRegistrySource, territoryRegistrySource] =
   await Promise.all([

@@ -1,7 +1,7 @@
 import { FormControl, Validators } from '@angular/forms';
 
 import { calculateItalianFiscalCodeCheckCharacter, validateItalianFiscalCode } from './countries/italy';
-import { taxIdValidator } from 'tax-id/angular';
+import { taxIdValidator } from '../../angular/src/tax-id.validator';
 import { taxIdCheckOutcome } from './check-outcome';
 import { normalizeTaxId } from './normalize';
 import { validateTaxId } from './validate-tax-id';

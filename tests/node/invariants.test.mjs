@@ -6,7 +6,7 @@ import {
   SUPPORTED_TAX_ID_TERRITORIES,
   normalizeTaxId,
   validateTaxId,
-} from '../../dist/tax-id/fesm2022/tax-id.mjs';
+} from '../../dist/tax-id/fesm2022/national-identifiers.mjs';
 
 function generatedValues(count) {
   let state = 0x5eed1234;
@@ -54,7 +54,7 @@ test('never throws while validating generated input across supported territories
 });
 
 test('never throws while checking identity consistency for generated input', async () => {
-  const { validateTaxIdIdentity } = await import('../../dist/tax-id/fesm2022/tax-id.mjs');
+  const { validateTaxIdIdentity } = await import('../../dist/tax-id/fesm2022/national-identifiers.mjs');
   const identity = { firstName: 'Mario', lastName: 'Rossi', birthDate: '1985-12-10', gender: 'M', birthPlaceCode: 'A562' };
 
   for (const value of generatedValues(300)) {

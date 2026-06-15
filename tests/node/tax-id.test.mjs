@@ -10,8 +10,8 @@ import {
   taxIdCheckOutcome,
   validateItalianFiscalCode,
   validateTaxId,
-} from '../../dist/tax-id/fesm2022/tax-id.mjs';
-import { taxIdValidator } from '../../dist/tax-id/fesm2022/tax-id-angular.mjs';
+} from '../../dist/tax-id/fesm2022/national-identifiers.mjs';
+import { taxIdValidator } from '../../dist/tax-id/fesm2022/national-identifiers-angular.mjs';
 import { FormControl, Validators } from '@angular/forms';
 
 test('exposes the supported countries through the public API', () => {

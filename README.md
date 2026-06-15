@@ -67,8 +67,8 @@ national-identifiers/
 
 | Package | Responsibility |
 |---|---|
-| `tax-id` | Normalisation, validation registry, checksums, result model and policy helper. |
-| `tax-id/angular` | Synchronous `ValidatorFn` with policy and strict modes. |
+| `national-identifiers` | Normalisation, validation registry, checksums, result model and policy helper. |
+| `national-identifiers/angular` | Synchronous `ValidatorFn` with policy and strict modes. |
 | `NationalIdentifiers.Core` | .NET validation engine targeting `net8.0` and `net10.0`. |
 | `NationalIdentifiers.AspNetCore` | Dependency injection, `ValidationAttribute` and action filter integration. |
 
@@ -269,18 +269,23 @@ A `checksum` result means a publicly documented algorithm was applied. `format +
 
 ## JavaScript / TypeScript Package
 
-**Package:** `tax-id`
+**Package:** `national-identifiers`
+
+The canonical npm package was renamed from `tax-id` to
+`national-identifiers` after the initial 1.0.0 publication. The API is
+unchanged. Existing installations of `tax-id` continue to resolve, but new
+projects should use the canonical package name.
 
 ### Installation
 
 ```bash
-npm install tax-id
+npm install national-identifiers
 ```
 
 ### Basic usage
 
 ```ts
-import { validateTaxId } from 'tax-id';
+import { validateTaxId } from 'national-identifiers';
 
 const result = validateTaxId('IT', 'RSSMRA85T10A562S');
 
@@ -295,7 +300,7 @@ if (result.valid) {
 ### Batch validation
 
 ```ts
-import { validateTaxId } from 'tax-id';
+import { validateTaxId } from 'national-identifiers';
 
 const entries = [
   { country: 'IT', value: 'RSSMRA85T10A562S' },
@@ -318,7 +323,7 @@ import type {
   TaxIdValidationResult,
   TaxIdErrorCode,
   TaxIdValidationLevel,
-} from 'tax-id';
+} from 'national-identifiers';
 ```
 
 `TaxIdCountry` is a string union of all supported ISO 3166-1 alpha-2 codes. Passing an unrecognised code does not throw; it returns `error: 'unsupported_country'`.
@@ -335,10 +340,10 @@ import {
   SUPPORTED_TAX_ID_TERRITORIES,
   isSupportedTaxIdCountry,
   isSupportedTaxIdTerritory,
-} from 'tax-id';
+} from 'national-identifiers';
 
 SUPPORTED_TAX_ID_COUNTRIES.length; // 195
-SUPPORTED_TAX_ID_TERRITORIES.length; // 5
+SUPPORTED_TAX_ID_TERRITORIES.length; // 7
 isSupportedTaxIdCountry('IT');     // true
 isSupportedTaxIdTerritory('HK');   // true
 isSupportedTaxIdCountry('it');     // false: ISO codes are uppercase
@@ -353,7 +358,7 @@ legal entities, each with its own check-digit algorithm.
 Use `validateIdentifier` when the field semantics are known:
 
 ```ts
-import { validateIdentifier } from 'tax-id';
+import { validateIdentifier } from 'national-identifiers';
 
 const vat = validateIdentifier({
   country: 'IT',
@@ -374,7 +379,7 @@ performs VIES or other live registry lookups.
 for sign-up flows where the country is known but rule quality varies:
 
 ```ts
-import { taxIdCheckOutcome, validateTaxId } from 'tax-id';
+import { taxIdCheckOutcome, validateTaxId } from 'national-identifiers';
 
 taxIdCheckOutcome(validateTaxId('IT', 'RSSMRA85T10A562A')); // 'block'  — failed checksum, definitely wrong
 taxIdCheckOutcome(validateTaxId('SO', '12'));               // 'warn'   — format-only country, store and flag
@@ -398,7 +403,7 @@ general personal TIN.
 `normalizeTaxId` is exported for use without full validation:
 
 ```ts
-import { normalizeTaxId } from 'tax-id';
+import { normalizeTaxId } from 'national-identifiers';
 
 normalizeTaxId('RSSM RA85-T10A562S'); // 'RSSMRA85T10A562S'
 normalizeTaxId(null);                  // ''
@@ -411,19 +416,19 @@ The function strips leading/trailing whitespace, internal whitespace, and hyphen
 
 ## Angular Integration
 
-**Package:** `tax-id/angular`
+**Package:** `national-identifiers/angular`
 
 ### Installation
 
 ```bash
-npm install tax-id
+npm install national-identifiers
 ```
 
 ### Reactive Forms — static country
 
 ```ts
 import { FormControl, Validators } from '@angular/forms';
-import { taxIdValidator } from 'tax-id/angular';
+import { taxIdValidator } from 'national-identifiers/angular';
 
 const taxId = new FormControl('', [
   Validators.required,
@@ -435,7 +440,7 @@ const taxId = new FormControl('', [
 
 ```ts
 import { FormControl, FormGroup } from '@angular/forms';
-import { taxIdValidator } from 'tax-id/angular';
+import { taxIdValidator } from 'national-identifiers/angular';
 
 const form = new FormGroup({
   country: new FormControl('IT', { nonNullable: true }),
@@ -669,7 +674,7 @@ public enum ValidationLevel { Format, Checksum }
 
 ## Packaging and Distribution
 
-### npm (`tax-id`, `tax-id/angular`)
+### npm (`national-identifiers`, `national-identifiers/angular`)
 
 **Build outputs**
 
@@ -679,7 +684,7 @@ Node.js 20.19 or newer.
 
 The package has one small runtime dependency (`tslib`). Angular is declared as
 an optional peer dependency (`^20.3.0`) and is required only when importing the
-`tax-id/angular` entry point.
+`national-identifiers/angular` entry point.
 
 **Versioning:** semantic versioning. A new country with checksum validation is a minor release. A new country format-only is a patch release. Any change to the result model shape or error codes is a major release.
 
@@ -690,7 +695,7 @@ npm run build
 npm publish ./dist/tax-id --access public
 ```
 
-The Angular adapter is published as the `tax-id/angular` secondary entry point
+The Angular adapter is published as the `national-identifiers/angular` secondary entry point
 of the same package.
 
 ### NuGet (`NationalIdentifiers.Core`, `NationalIdentifiers.AspNetCore`)
@@ -853,7 +858,7 @@ documented in [Identity Consistency Validation](docs/IDENTITY-CONSISTENCY.md);
 the cross-runtime contract and the Italian first slice are implemented:
 
 ```ts
-import { validateTaxIdIdentity } from 'tax-id';
+import { validateTaxIdIdentity } from 'national-identifiers';
 
 const result = validateTaxIdIdentity({
   country: 'IT',
