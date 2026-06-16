@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace NationalIdentifiers.Core;
@@ -35,5 +36,15 @@ public static class TaxIdNormalizer
             return string.Empty;
 
         return StripPattern.Replace(str.Trim(), string.Empty).ToUpperInvariant();
+    }
+
+    internal static bool ContainsNonAsciiDecimalDigit(object? value)
+    {
+        if (value is not string s)
+            return false;
+
+        return s.Any(character =>
+            CharUnicodeInfo.GetUnicodeCategory(character) == UnicodeCategory.DecimalDigitNumber &&
+            character is < '0' or > '9');
     }
 }

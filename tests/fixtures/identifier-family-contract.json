@@ -774,5 +774,13 @@
     "valid": false,
     "error": "invalid_format",
     "outcome": "warn"
+  },
+  {
+    "country": "CZ",
+    "type": "vat",
+    "value": "１２３４５６７８９０",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "block"
   }
 ]

@@ -25,6 +25,16 @@ public class TaxIdValidator : ITaxIdValidator
     {
         var normalizedCountry = country?.Trim().ToUpperInvariant() ?? string.Empty;
 
+        if (TaxIdNormalizer.ContainsNonAsciiDecimalDigit(value) &&
+            (TaxIdCountries.IsSupported(normalizedCountry) ||
+             TaxIdTerritories.IsSupported(normalizedCountry)))
+        {
+            return ValidationResult.Fail(
+                normalizedCountry,
+                TaxIdNormalizer.Normalize(value),
+                ValidationErrorCode.InvalidFormat);
+        }
+
         return normalizedCountry switch
         {
             "AD" => Andorra.Validate(value),
@@ -233,6 +243,16 @@ public class TaxIdValidator : ITaxIdValidator
 
         if (type == IdentifierType.TaxIdPerson)
             return Validate(normalizedCountry, value) with { IdentifierType = type };
+
+        if (TaxIdNormalizer.ContainsNonAsciiDecimalDigit(value) &&
+            ((type == IdentifierType.Vat && VatCountries.IsSupported(normalizedCountry)) ||
+             (type == IdentifierType.TaxIdCompany && CompanyTaxCountries.IsSupported(normalizedCountry))))
+        {
+            return ValidationResult.Fail(
+                normalizedCountry,
+                TaxIdNormalizer.Normalize(value),
+                ValidationErrorCode.InvalidFormat) with { IdentifierType = type };
+        }
 
         ValidationResult? result = (normalizedCountry, type) switch
         {

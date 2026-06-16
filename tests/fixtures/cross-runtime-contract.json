@@ -362,5 +362,12 @@
     "valid": false,
     "error": "invalid_format",
     "outcome": "warn"
+  },
+  {
+    "country": "BG",
+    "value": "１２３４５６７８９０",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "block"
   }
 ]
