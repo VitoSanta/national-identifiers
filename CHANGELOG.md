@@ -3,14 +3,21 @@
 All notable changes to this project are documented in this file. The project
 follows Semantic Versioning.
 
-## Unreleased
+## [1.0.1] - 2026-06-16
 
-### Changed
+### Documentation
 
-- Renamed the canonical npm package from `tax-id` to
-  `national-identifiers`, including the Angular secondary entry point
-  `national-identifiers/angular`. The public API and version remain unchanged;
-  `tax-id@1.0.0` is retained as a deprecated migration package.
+- Aligned the root README, npm package README and NuGet README files.
+- Fixed territory coverage count consistency: the supported territory set is
+  seven entries (FO, GL, GG, HK, JE, PR, TW).
+- Clarified the official .NET API usage style: use the static
+  `TaxIdValidator.Validate(...)` API for one-off validation, and create or
+  inject an instance only for discovery lists or DI scenarios.
+- Documented `national-identifiers` as the canonical npm package name and
+  `national-identifiers/angular` as the Angular secondary entry point.
+- Declared the public API stable from 1.0.1 onward: breaking changes require
+  a 2.0.0 release.
+- No runtime or API changes.
 
 ## [1.0.0] - 2026-06-15
 

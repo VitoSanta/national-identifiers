@@ -546,8 +546,8 @@ using NationalIdentifiers.Core;
 
 var validator = new TaxIdValidator();
 
-ValidationResult result = validator.Validate("IT", "RSSMRA85T10A562S");
-ValidationResult vat = validator.Validate("IT", IdentifierType.Vat, "00743110157");
+ValidationResult result = TaxIdValidator.Validate("IT", "RSSMRA85T10A562S");
+ValidationResult vat = TaxIdValidator.Validate("IT", IdentifierType.Vat, "00743110157");
 IReadOnlyList<string> countries = validator.SupportedCountries;
 IReadOnlyList<string> territories = validator.SupportedTerritories;
 bool supportsItaly = TaxIdCountries.IsSupported("it"); // true
@@ -572,6 +572,12 @@ builder.Services.AddNationalIdentifiers();
 ```
 
 This registers `ITaxIdValidator` as a singleton. The validator is thread-safe and stateless.
+
+The official usage style for one-off validation is the static
+`TaxIdValidator.Validate(...)` API. Create an instance only when you need
+discovery properties such as `SupportedCountries`, `SupportedTerritories`,
+`SupportedVatCountries` or `SupportedCompanyTaxCountries`, or when consuming
+`ITaxIdValidator` through dependency injection.
 
 ```csharp
 // Service layer
@@ -686,7 +692,11 @@ The package has one small runtime dependency (`tslib`). Angular is declared as
 an optional peer dependency (`^20.3.0`) and is required only when importing the
 `national-identifiers/angular` entry point.
 
-**Versioning:** semantic versioning. A new country with checksum validation is a minor release. A new country format-only is a patch release. Any change to the result model shape or error codes is a major release.
+**Versioning:** semantic versioning. The public API is considered stable from
+`1.0.1` onward: any breaking change to exported function signatures, result
+model shape or error codes requires a `2.0.0` release. A new country with
+checksum validation is a minor release; a new format-only country is a patch
+release.
 
 **Publishing**
 

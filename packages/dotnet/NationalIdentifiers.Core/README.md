@@ -1,8 +1,8 @@
 # NationalIdentifiers.Core
 
-Validation of national tax identifiers for **195 countries**, plus 5
-separately tracked ISO territories (FO, GL, HK, PR, TW). Pure .NET, no
-dependencies, targets .NET 8 and .NET 10.
+Validation of national tax identifiers for **195 countries**, plus 7
+separately tracked ISO territories (FO, GL, GG, HK, JE, PR, TW). Pure .NET,
+no dependencies, targets .NET 8 and .NET 10.
 
 ```csharp
 using NationalIdentifiers.Core;
@@ -21,6 +21,12 @@ var vatCountries = new TaxIdValidator().SupportedVatCountries;
 var companyCountries = new TaxIdValidator().SupportedCompanyTaxCountries;
 // 38 VAT and 12 company-tax countries; both lists are immutable
 ```
+
+The official usage style for one-off validation is the static
+`TaxIdValidator.Validate(...)` API. Create an instance only when you need
+discovery properties such as `SupportedCountries`, `SupportedTerritories`,
+`SupportedVatCountries` or `SupportedCompanyTaxCountries`, or when consuming
+`ITaxIdValidator` through dependency injection.
 
 ## What you get
 
@@ -94,7 +100,7 @@ part of the offline core.
 
 - `NationalIdentifiers.AspNetCore` — DI extensions, validation attribute and
   action filter for ASP.NET Core.
-- `tax-id` on npm — the same rules for TypeScript/JavaScript, with an
+- `national-identifiers` on npm — the same rules for TypeScript/JavaScript, with an
   Angular adapter.
 
 ## License
