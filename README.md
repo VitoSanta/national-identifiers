@@ -828,16 +828,39 @@ For countries with published checksum algorithms, the test suite includes an ind
 
 ### Performance
 
-Validation is synchronous and O(n) in identifier length. Benchmarks run in CI using `vitest bench` (JS) and `BenchmarkDotNet` (.NET).
+Validation is synchronous and O(n) in identifier length. The core performs no
+network calls and does not allocate caches or background state.
 
-Current baselines (single-call, warm JIT):
+Run the local measurements with:
 
-| Platform | Median per call |
-|---|---|
-| Node.js 22 | < 0.05 ms |
-| .NET 9 | < 0.02 ms |
+```bash
+npm run benchmark
+npm run benchmark:dotnet
+```
 
-Batch throughput is limited by the calling loop, not the validator. No internal caching is applied; results are not memoised.
+Current local baseline, measured on 2026-06-16:
+
+| Artifact | Raw | gzip -9 |
+|---|---:|---:|
+| Core FESM | 254.94 KiB | 35.78 KiB |
+| Angular FESM | 814 B | 386 B |
+
+| Runtime | Case | Median per call |
+|---|---|---:|
+| Node.js 26.3.0 | tax_id_person checksum (IT) | 0.28 us |
+| Node.js 26.3.0 | tax_id_person format (US) | 0.21 us |
+| Node.js 26.3.0 | vat checksum (IT) | 0.17 us |
+| Node.js 26.3.0 | company format (US) | 0.14 us |
+| Node.js 26.3.0 | identity consistency (IT) | 1.27 us |
+| .NET 10.0.9 | tax_id_person checksum (IT) | 0.10 us |
+| .NET 10.0.9 | tax_id_person format (US) | 0.21 us |
+| .NET 10.0.9 | vat checksum (IT) | 0.14 us |
+| .NET 10.0.9 | company format (US) | 0.25 us |
+| .NET 10.0.9 | identity consistency (IT) | 0.46 us |
+
+These numbers are environment-dependent and are meant as a regression baseline,
+not as a contractual SLA. Batch throughput is limited by the calling loop, not
+the validator. Results are not memoised.
 
 ### Fallback handling
 

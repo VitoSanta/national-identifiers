@@ -12,6 +12,8 @@
     "sources:check": "node scripts/generate-rule-source-catalogue.mjs --check",
     "test": "npm run build && node --test tests/node/*.test.mjs",
     "test:angular": "ng test tax-id --watch=false",
+    "benchmark": "npm run build && node scripts/measure-performance.mjs",
+    "benchmark:dotnet": "dotnet run --project packages/dotnet/NationalIdentifiers.Benchmarks/NationalIdentifiers.Benchmarks.csproj --configuration Release",
     "verify": "npm test && npm run test:angular && npm run build:demo"
   },
   "prettier": {
