@@ -8,7 +8,7 @@
     <RootNamespace>NationalIdentifiers.AspNetCore</RootNamespace>
     <AssemblyName>NationalIdentifiers.AspNetCore</AssemblyName>
     <PackageId>NationalIdentifiers.AspNetCore</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Vito Santanelli</Authors>
     <PackageProjectUrl>https://github.com/VitoSanta/national-identifiers</PackageProjectUrl>
     <RepositoryUrl>https://github.com/VitoSanta/national-identifiers.git</RepositoryUrl>

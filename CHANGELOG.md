@@ -3,7 +3,7 @@
 All notable changes to this project are documented in this file. The project
 follows Semantic Versioning.
 
-## Unreleased
+## [1.0.2] - 2026-06-16
 
 ### Documentation
 
@@ -13,6 +13,25 @@ follows Semantic Versioning.
   README files.
 - Clarified that country coverage is depth-based and does not imply registry
   issuance, activity, ownership or identity verification.
+- Added integration recipes for Angular, TypeScript backend policy handling,
+  B2B VAT checkout, ASP.NET Core Minimal API, MVC validation and service-layer
+  onboarding workflows.
+- Added benchmark and package-footprint measurements with reproducible npm
+  scripts for JavaScript and .NET.
+- Formalized the evidence-gated rule expansion workflow, including candidate
+  intake fields, required cross-runtime implementation bundles and release
+  checklist checks for new rules.
+
+### Fixed
+
+- Hardened .NET validation against malformed Unicode decimal digits so
+  validators return structured `invalid_format` failures instead of throwing.
+
+### Tests
+
+- Added a public cross-runtime examples fixture consumed by Node.js and .NET.
+- Expanded malformed-input invariant tests across personal identifiers,
+  territories, VAT, company-tax identifiers and identity consistency.
 
 ## [1.0.1] - 2026-06-16
 

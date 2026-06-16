@@ -1,6 +1,6 @@
 {
   "name": "national-identifiers",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Offline validation of personal tax IDs, VAT numbers and company identifiers across 195 countries and supported territories, with an optional Angular adapter.",
   "keywords": [
     "tax-id",
