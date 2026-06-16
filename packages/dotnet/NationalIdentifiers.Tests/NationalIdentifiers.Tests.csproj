@@ -43,6 +43,9 @@
     <None Include="..\..\..\tests\fixtures\identifier-family-contract.json"
           Link="identifier-family-contract.json"
           CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\tests\fixtures\public-examples.json"
+          Link="public-examples.json"
+          CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\..\tests\fixtures\rule-sources.json"
           Link="rule-sources.json"
           CopyToOutputDirectory="PreserveNewest" />

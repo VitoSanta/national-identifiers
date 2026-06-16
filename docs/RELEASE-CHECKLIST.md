@@ -64,6 +64,9 @@ Confirm:
 - npm package name is `national-identifiers`;
 - npm version matches the release;
 - npm exports include `.` and `./angular`;
+- npm trusted publishing is configured for the GitHub repository and
+  `.github/workflows/release.yml`; the workflow publishes with provenance and
+  does not require an `NPM_TOKEN` secret;
 - NuGet package IDs are unchanged;
 - `NationalIdentifiers.AspNetCore` depends on the same `NationalIdentifiers.Core`
   version;
@@ -93,11 +96,10 @@ curl -s https://api.nuget.org/v3-flatcontainer/nationalidentifiers.core/index.js
 curl -s https://api.nuget.org/v3-flatcontainer/nationalidentifiers.aspnetcore/index.json
 ```
 
-## 8. Known release issue
+## 8. Registry publication
 
 NuGet trusted publishing is configured and should publish from GitHub Actions.
 
-npm publishing currently requires manual authentication/2FA unless trusted
-publishing or a valid `NPM_TOKEN` is configured. Do not consider the release
-complete until npm `latest` and both NuGet package indexes expose the intended
-version.
+npm publishing is expected to use trusted publishing/OIDC from GitHub Actions.
+Do not consider the release complete until npm `latest` and both NuGet package
+indexes expose the intended version.

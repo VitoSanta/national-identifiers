@@ -1,0 +1,122 @@
+[
+  {
+    "id": "it-person-checksum-valid",
+    "country": "IT",
+    "type": "tax_id_person",
+    "value": "RSSMRA85T10A562S",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept",
+    "exampleType": "synthetic_valid",
+    "source": "repository cross-runtime contract",
+    "notes": "Synthetic Italian codice fiscale example used to demonstrate checksum-backed validation."
+  },
+  {
+    "id": "it-person-checksum-invalid",
+    "country": "IT",
+    "type": "tax_id_person",
+    "value": "RSSMRA85T10A562A",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block",
+    "exampleType": "synthetic_invalid_checksum",
+    "source": "repository cross-runtime contract",
+    "notes": "Same structure as the valid Italian sample, with an intentionally wrong control character."
+  },
+  {
+    "id": "us-person-format-valid",
+    "country": "US",
+    "type": "tax_id_person",
+    "value": "123-45-6789",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept",
+    "exampleType": "synthetic_valid",
+    "source": "repository cross-runtime contract",
+    "notes": "Format-only sample; local validation does not confirm issuance or identity."
+  },
+  {
+    "id": "us-person-format-invalid",
+    "country": "US",
+    "type": "tax_id_person",
+    "value": "000-45-6789",
+    "valid": false,
+    "error": "invalid_format",
+    "outcome": "warn",
+    "exampleType": "synthetic_invalid_format",
+    "source": "repository cross-runtime contract",
+    "notes": "Reserved SSN area pattern; policy is warn because the country is format-only."
+  },
+  {
+    "id": "ae-person-not-applicable",
+    "country": "AE",
+    "type": "tax_id_person",
+    "value": "123456789",
+    "valid": false,
+    "error": "not_applicable",
+    "outcome": "warn",
+    "exampleType": "documented_limit",
+    "source": "repository cross-runtime contract",
+    "notes": "The registry marks this personal national tax identifier family as not applicable."
+  },
+  {
+    "id": "hk-person-checksum-valid",
+    "country": "HK",
+    "type": "tax_id_person",
+    "value": "A123456(3)",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept",
+    "exampleType": "synthetic_valid",
+    "source": "repository territory tests",
+    "notes": "Territory example for HKID checksum validation."
+  },
+  {
+    "id": "hk-person-checksum-invalid",
+    "country": "HK",
+    "type": "tax_id_person",
+    "value": "A123456(4)",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block",
+    "exampleType": "synthetic_invalid_checksum",
+    "source": "repository territory tests",
+    "notes": "HKID sample with an intentionally wrong check digit."
+  },
+  {
+    "id": "it-vat-checksum-valid",
+    "country": "IT",
+    "type": "vat",
+    "value": "00743110157",
+    "valid": true,
+    "validationLevel": "checksum",
+    "outcome": "accept",
+    "exampleType": "synthetic_valid",
+    "source": "repository identifier-family contract",
+    "notes": "Italian VAT checksum example for the explicit identifier-family API."
+  },
+  {
+    "id": "it-vat-checksum-invalid",
+    "country": "IT",
+    "type": "vat",
+    "value": "00743110158",
+    "valid": false,
+    "error": "invalid_checksum",
+    "outcome": "block",
+    "exampleType": "synthetic_invalid_checksum",
+    "source": "repository identifier-family contract",
+    "notes": "Italian VAT sample with an intentionally wrong check digit."
+  },
+  {
+    "id": "us-ein-format-valid",
+    "country": "US",
+    "type": "tax_id_company",
+    "value": "12-3456789",
+    "valid": true,
+    "validationLevel": "format",
+    "outcome": "accept",
+    "exampleType": "synthetic_valid",
+    "source": "repository identifier-family contract",
+    "notes": "US EIN format-only company identifier example."
+  }
+]

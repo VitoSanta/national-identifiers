@@ -748,6 +748,9 @@ validator remains independent from ASP.NET Core.
 
 **Publishing**
 
+Prefer the GitHub Actions release workflow with trusted publishing/OIDC. Manual
+push with an API key is a fallback for emergency releases only:
+
 ```bash
 dotnet nuget push artifacts/*.nupkg \
   --source https://api.nuget.org/v3/index.json \
@@ -772,13 +775,13 @@ npm ci
 ```
 
 Automate this gate in the CI provider before publishing npm or NuGet packages.
+The default release workflow publishes npm with provenance through trusted
+publishing and NuGet through OIDC login.
 
-**Required repository secrets**
+**Optional repository secrets**
 
 | Secret | Used by |
 |---|---|
-| `NPM_TOKEN` | `npm publish` |
-| `NUGET_API_KEY` | `dotnet nuget push` |
 | `CODECOV_TOKEN` | Coverage upload |
 
 ---
@@ -813,6 +816,11 @@ it('snapshot: IT valid identifier', () => {
 ### Regression test corpus
 
 Known edge cases collected from production reports are stored in `tests/corpus/`. These are not grouped by country but by failure mode: all-zero inputs, omocodia characters, identifiers at boundary lengths, leap-day birth dates, identifiers from decommissioned regions.
+
+The shared fixture [`tests/fixtures/public-examples.json`](tests/fixtures/public-examples.json)
+contains a small set of synthetic and documented-limit examples that are safe
+to quote in public documentation. Node.js and .NET consume the same fixture so
+README/package examples cannot drift from runtime behavior.
 
 ### Checksum verification
 

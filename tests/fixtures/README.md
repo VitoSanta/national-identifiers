@@ -17,6 +17,11 @@ identifier family before 1.0.
 `identifier-family-contract.json` protects the explicit
 `tax_id_person`/`vat`/`tax_id_company` API and unsupported-family semantics.
 
+`public-examples.json` is a curated, documentation-facing corpus of synthetic
+or documented-limit examples. It is intentionally small, readable and safe to
+quote in README pages, package pages and release notes. Node.js and .NET tests
+consume it unchanged so examples cannot drift from runtime behavior.
+
 `identity-consistency-country-cases.json` contains one matching example for
 every non-Italian country that declares encoded identity data. Both runtimes
 consume the same file so capability and decoding changes cannot drift silently.
