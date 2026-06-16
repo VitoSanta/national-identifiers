@@ -203,14 +203,11 @@ Rules are expressed as structured objects. The current TypeScript implementation
 
 The JS/TS package uses the centralized `TAX_ID_VALIDATION_REGISTRY` for validation dispatch and policy metadata. `validateTaxId` resolves validators from this registry, while `taxIdCheckOutcome` derives `block` or `warn` decisions from the same entries. Countries with multiple identifier families can provide value-specific policy metadata, so format-only variants are not treated as checksum failures.
 
-Adding a new country currently requires:
-
-1. A rule object (or JSON definition) specifying pattern, lengths, and optionally checksum algorithm and metadata extraction.
-2. A validator function calling `normalizeTaxId` then applying the rule steps.
-3. An entry in `country-registry.ts` and the equivalent mapping in the .NET validator.
-4. At least two positive and two negative test cases.
-
-No changes to the pipeline or result model are needed for standard countries.
+Adding a new country or identifier family requires the evidence-gated workflow
+in [Adding a new country](#adding-a-new-country): official source first,
+TypeScript and .NET implementation together, shared fixtures and source
+catalogue coverage. No changes to the pipeline or result model are needed for
+standard countries.
 
 ---
 
@@ -981,13 +978,24 @@ dotnet build packages/dotnet/NationalIdentifiers.AspNetCore/NationalIdentifiers.
 
 ### Adding a new country
 
-1. Create `projects/tax-id/src/lib/countries/{country-code}.ts`.
-2. Implement `validateXxxTaxId(value: unknown): TaxIdValidationResult` using `normalizeTaxId` and the rule steps.
-3. Add the validator import and metadata entry in `country-registry.ts`.
-4. Add the country code to `TaxIdCountry` in `models.ts`.
-5. Export from `public-api.ts`.
-6. Add test cases in `validate-tax-id.spec.ts` and `tests/node/tax-id.test.mjs`.
-7. Add an entry in `projects/manual-test/src/app/app.ts`.
+1. Add or update the candidate in
+   [docs/OFFICIAL-SOURCE-BACKLOG.md](docs/OFFICIAL-SOURCE-BACKLOG.md) using
+   the candidate intake checklist.
+2. Record the institutional source in
+   [docs/RULE-SOURCE-POLICY.md](docs/RULE-SOURCE-POLICY.md) and
+   `tests/fixtures/rule-sources.json`.
+3. Implement both runtime paths in the same change:
+   - TypeScript validator and registry metadata;
+   - .NET validator and dispatcher/registry metadata.
+4. Add shared fixture coverage for valid, invalid length, invalid format and
+   invalid checksum cases where applicable.
+5. Update coverage docs, package README files, the manual-test demo and the
+   changelog.
+6. Run the complete release gate from
+   [docs/RELEASE-CHECKLIST.md](docs/RELEASE-CHECKLIST.md).
+
+Do not add a runtime-only rule or promote a community algorithm to checksum
+validation without an institutional source.
 8. Update `docs/COUNTRY-COVERAGE.md` and `docs/KNOWN-LIMITATIONS.md`.
 9. Update `projects/tax-id/README.md` with the new entry and its validation level.
 

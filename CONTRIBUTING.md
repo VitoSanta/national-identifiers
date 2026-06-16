@@ -12,15 +12,20 @@ Thank you for improving National Identifiers.
 
 ## Adding or changing a rule
 
-1. Add the institutional source and review details described in
+1. Add or update the candidate in `docs/OFFICIAL-SOURCE-BACKLOG.md` using the
+   candidate intake checklist.
+2. Add the institutional source and review details described in
    `docs/RULE-SOURCE-POLICY.md`.
-2. Implement or update both TypeScript and .NET validators.
-3. Run `npm run sources:generate` after changing personal or territory
+3. Implement or update both TypeScript and .NET validators.
+4. Run `npm run sources:generate` after changing personal or territory
    registry coverage; edit VAT/company source records explicitly.
-4. Add positive, format-error, length-error and checksum-error cases where applicable.
-5. Add representative cases to `tests/fixtures/cross-runtime-contract.json`.
-6. Update the country documentation and validation limitations.
-7. Run `npm run sources:check` and the complete release gate from the root README.
+5. Add positive, format-error, length-error and checksum-error cases where applicable.
+6. Add representative cases to `tests/fixtures/cross-runtime-contract.json`.
+7. Update the country documentation and validation limitations.
+8. Run `npm run sources:check` and the complete release gate from the root README.
+
+Do not submit a rule implemented in only one runtime. Public behavior must stay
+aligned across TypeScript and .NET in the same change.
 
 Coverage belongs in `docs/COUNTRY-COVERAGE.md`; reduced or intentionally
 unsupported behavior belongs in `docs/KNOWN-LIMITATIONS.md`.

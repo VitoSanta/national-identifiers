@@ -16,6 +16,11 @@ Preferred, in order:
 Community packages, blog posts and generated examples can support research but
 cannot be the sole authority for a checksum rule.
 
+If a source only exposes an online lookup or registration portal, the maximum
+offline claim is usually `format` or `not_applicable`. Online authority checks
+belong in optional integrations and must not be silently performed by the core
+validator.
+
 ## Structured catalogue
 
 Every supported personal, territory, VAT and company identifier has one record in
@@ -63,6 +68,9 @@ verification claims. They can be upgraded when a stronger source appears.
 - Preserve historical formats when official documentation says they remain valid.
 - Downgrade to format-only when a checksum cannot be supported institutionally.
 - Never include production user data in fixtures.
+- Add candidates to `docs/OFFICIAL-SOURCE-BACKLOG.md` before writing code.
+- Ship TypeScript and .NET changes together; a single-runtime rule is not a
+  supported contribution state.
 
 The Node.js and .NET suites enforce all 252 current registry combinations,
 unique jurisdiction/country/family keys, institutional HTTPS sources, registry

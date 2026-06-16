@@ -29,6 +29,52 @@ Every `ready` item must still ship in TypeScript and .NET together, with
 shared fixtures, positive and negative cases, README counts, limitations and
 changelog entries.
 
+## Candidate intake checklist
+
+Before a row can move from research to implementation, record the following
+fields in this document. If any required field is unknown, the candidate stays
+`source-gap` or `not-actionable`.
+
+| Field | Required | Notes |
+|---|---|---|
+| Country or territory | Yes | Use ISO 3166-1 alpha-2 for states and separately tracked territories. |
+| Identifier family | Yes | `tax_id_person`, `vat`, `tax_id_company` or a proposed future family. |
+| Authority | Yes | Name the tax authority, civil registry, social-security body, legislature or equivalent institution. |
+| Source URL | Yes | Prefer stable HTTPS pages, PDFs or legal texts from the authority. |
+| Source date | Yes | Record both publication/effective date when available and local review date. |
+| Claimed validation level | Yes | Maximum honest level: `checksum`, `format` or `not_applicable`. |
+| Accepted subtypes | Yes | State whether the rule applies to natural persons, companies, VAT/GST registrants or mixed identifiers. |
+| Normalization rule | Yes | Prefixes, separators, case folding and legacy printed forms. |
+| Positive examples | Yes | Synthetic or authority-published examples only. |
+| Negative examples | Yes | Format/length failures and checksum failures when checksum is claimed. |
+| Runtime impact | Yes | TypeScript validator, .NET validator, registry, policy metadata and docs touched. |
+| Limitations | Yes | Explicitly state what the local rule does not prove. |
+
+Implementation can start only when the candidate has enough evidence to fill
+this table honestly. A live registry search page proves that an identifier can
+be checked online; it does not by itself justify an offline checksum or format
+rule in the core package.
+
+## Required implementation bundle
+
+Every promoted candidate must land as one coherent cross-runtime change:
+
+1. TypeScript validator and registry entry.
+2. .NET validator and dispatcher/registry entry.
+3. Shared fixture coverage:
+   - valid example;
+   - invalid length;
+   - invalid format;
+   - invalid checksum when `checksum` is claimed;
+   - explicit `warn`/`block` policy outcome.
+4. Source catalogue record in `tests/fixtures/rule-sources.json`.
+5. README/package documentation and coverage-count updates.
+6. Known limitation text when the maximum honest level is format-only.
+7. Changelog entry and release classification.
+
+Do not merge a runtime-only implementation. TypeScript and .NET must keep the
+same public semantics, error codes and policy outcomes.
+
 ## Completed from the official-source queue
 
 These entries have now shipped in both runtimes with shared fixtures.

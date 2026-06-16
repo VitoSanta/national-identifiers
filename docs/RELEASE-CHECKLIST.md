@@ -32,6 +32,16 @@ style:
 - `docs/COVERAGE-DEPTH.md`
 - `docs/KNOWN-LIMITATIONS.md`
 - `docs/RULE-SOURCE-POLICY.md`
+- `docs/OFFICIAL-SOURCE-BACKLOG.md`
+- `docs/RECIPES.md`
+
+If the release adds or changes a rule, confirm that:
+
+- the candidate was recorded in `docs/OFFICIAL-SOURCE-BACKLOG.md` before code;
+- the maximum validation level matches the cited institutional source;
+- TypeScript and .NET implementations land together;
+- shared fixtures cover positive and negative cases;
+- source catalogue counts and coverage docs were updated.
 
 Current canonical counts:
 
