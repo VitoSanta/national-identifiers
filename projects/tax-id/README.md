@@ -28,6 +28,8 @@ Coverage depth is documented separately in
 [docs/COVERAGE-DEPTH.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/COVERAGE-DEPTH.md), including the
 difference between checksum-backed validation, format-only validation and
 `not_applicable` jurisdictions.
+Copy-paste frontend/backend flows are collected in
+[docs/RECIPES.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/RECIPES.md).
 
 For countries with multiple identifier families, policy can be value-specific. Indonesian NPWP values use checksum validation while NIK values are format-only; Singapore `S`/`T`/`F`/`G` identifiers use checksum validation while `M` FIN values are format-only.
 
@@ -352,6 +354,10 @@ while format-only advisory failures are allowed. Use
 `taxIdValidator('IT', { mode: 'strict' })` to reject every failed result.
 Empty values are accepted; combine the validator with `Validators.required`
 when the field is mandatory.
+
+See
+[docs/RECIPES.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/RECIPES.md)
+for dynamic-country forms, backend policy handling and B2B VAT examples.
 
 ## Development
 

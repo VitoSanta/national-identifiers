@@ -9,6 +9,8 @@ It also supports the same 7 separately tracked ISO territories as
 Coverage depth and the offline trust boundary are documented in
 [docs/COVERAGE-DEPTH.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/COVERAGE-DEPTH.md) and
 [docs/TRUST-MODEL.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/TRUST-MODEL.md).
+Copy-paste Minimal API, MVC and service-layer examples are available in
+[docs/RECIPES.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/RECIPES.md).
 
 ## Setup
 

@@ -58,6 +58,8 @@ Coverage depth is documented in
 [docs/COVERAGE-DEPTH.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/COVERAGE-DEPTH.md), including the
 difference between checksum-backed validation, format-only validation and
 `NotApplicable` jurisdictions.
+Copy-paste Minimal API, MVC and service-layer examples are available in
+[docs/RECIPES.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/RECIPES.md).
 
 ### Confidence semantics
 

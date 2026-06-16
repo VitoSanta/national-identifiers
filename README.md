@@ -33,6 +33,7 @@ ownership or registry-verification service.
 - [Coverage depth](docs/COVERAGE-DEPTH.md)
 - [Trust model](docs/TRUST-MODEL.md)
 - [API stability](docs/API-STABILITY.md)
+- [Integration recipes](docs/RECIPES.md)
 - [Known limitations](docs/KNOWN-LIMITATIONS.md)
 - [Official-source implementation backlog](docs/OFFICIAL-SOURCE-BACKLOG.md)
 - [Rule-source policy and catalogue](docs/RULE-SOURCE-POLICY.md)
@@ -255,6 +256,8 @@ See also the [country catalogue](docs/COUNTRY-COVERAGE.md), the
 the [rule-source policy and structured catalogue](docs/RULE-SOURCE-POLICY.md),
 the [trust model](docs/TRUST-MODEL.md), and the package-specific
 [coverage details](projects/tax-id/README.md).
+For copy-paste application flows, see the
+[integration recipes](docs/RECIPES.md).
 
 The machine-readable provenance catalogue covers all **252** current registry
 combinations: 195 personal state identifiers, seven territories, 38 VAT rules
@@ -533,6 +536,9 @@ point is tree-shakable and has no Angular dependency.
 - Do not disable form submission based solely on frontend validation; always validate server-side.
 - For country selectors with many options, pre-load rules for the default country on init and lazy-load others on `country` change.
 
+More copy-paste frontend and backend flows are available in
+[docs/RECIPES.md](docs/RECIPES.md).
+
 ---
 
 ## .NET Package
@@ -613,6 +619,9 @@ public class CustomerService
     }
 }
 ```
+
+Minimal API, MVC and service-layer recipes are available in
+[docs/RECIPES.md](docs/RECIPES.md).
 
 ### Model validation attribute
 
