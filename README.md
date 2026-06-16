@@ -30,10 +30,14 @@ ownership or registry-verification service.
 - [Development](#development)
 - [Roadmap](ROADMAP.md)
 - [Country coverage](docs/COUNTRY-COVERAGE.md)
+- [Coverage depth](docs/COVERAGE-DEPTH.md)
+- [Trust model](docs/TRUST-MODEL.md)
+- [API stability](docs/API-STABILITY.md)
 - [Known limitations](docs/KNOWN-LIMITATIONS.md)
 - [Official-source implementation backlog](docs/OFFICIAL-SOURCE-BACKLOG.md)
 - [Rule-source policy and catalogue](docs/RULE-SOURCE-POLICY.md)
 - [Identity consistency proposal](docs/IDENTITY-CONSISTENCY.md)
+- [Release checklist](docs/RELEASE-CHECKLIST.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
 - [Changelog](CHANGELOG.md)
@@ -83,7 +87,7 @@ issued the identifier.
 User input
     │
     ▼
-[tax-id] ───────── realtime UX feedback (format errors, checksum errors)
+[national-identifiers] ─ realtime UX feedback (format errors, checksum errors)
     │
     ▼
 HTTP request
@@ -241,11 +245,15 @@ Seven ISO territories are supported through a separate registry: Faroe
 Islands, Greenland, Guernsey, Hong Kong, Jersey, Puerto Rico and Taiwan. They
 do not alter the 195-state coverage invariant.
 
-See the [country catalogue](docs/COUNTRY-COVERAGE.md), the
+Start with the [coverage depth guide](docs/COVERAGE-DEPTH.md). It explains
+which checks are checksum-backed, which are format-only, which jurisdictions
+are `not_applicable`, and what the source evidence labels mean.
+
+See also the [country catalogue](docs/COUNTRY-COVERAGE.md), the
 [known limitations](docs/KNOWN-LIMITATIONS.md), the
 [official-source implementation backlog](docs/OFFICIAL-SOURCE-BACKLOG.md),
 the [rule-source policy and structured catalogue](docs/RULE-SOURCE-POLICY.md),
-and the package-specific
+the [trust model](docs/TRUST-MODEL.md), and the package-specific
 [coverage details](projects/tax-id/README.md).
 
 The machine-readable provenance catalogue covers all **252** current registry
@@ -254,7 +262,11 @@ and 12 company/entity rules. Evidence is reported as `verified`,
 `corroborated` or `documented_limit`; these labels describe source strength,
 not whether an identifier was officially issued.
 
-A `checksum` result means a publicly documented algorithm was applied. `format + date` means the identifier encodes a birth date that is validated in addition to the regex. `format only` means structure is checked but no algorithm is claimed.
+A `checksum` result means a public algorithm was applied. `format + date`
+means the identifier encodes a birth date that is validated in addition to the
+regex. `format only` means structure is checked but no algorithm is claimed.
+None of these levels proves issuance, activity, ownership or identity; see the
+[trust model](docs/TRUST-MODEL.md).
 
 ### Future expansion opportunities
 
@@ -696,7 +708,7 @@ an optional peer dependency (`^20.3.0`) and is required only when importing the
 `1.0.1` onward: any breaking change to exported function signatures, result
 model shape or error codes requires a `2.0.0` release. A new country with
 checksum validation is a minor release; a new format-only country is a patch
-release.
+release. See [API stability](docs/API-STABILITY.md).
 
 **Publishing**
 

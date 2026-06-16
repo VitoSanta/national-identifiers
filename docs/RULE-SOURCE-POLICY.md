@@ -1,6 +1,8 @@
 # Rule Source Policy
 
 Every validation rule must be traceable to an institutional source.
+The public interpretation of each validation level is documented in
+[Coverage Depth](COVERAGE-DEPTH.md).
 
 ## Accepted sources
 

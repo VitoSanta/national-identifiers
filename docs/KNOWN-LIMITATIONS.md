@@ -33,6 +33,9 @@ integration will live in an optional online package.
 Research for additional VAT, company-tax and identity-consistency rules is
 tracked in the
 [official-source implementation backlog](OFFICIAL-SOURCE-BACKLOG.md).
+For the difference between coverage, validation depth and registry-level
+verification, see [Coverage Depth](COVERAGE-DEPTH.md) and
+[Trust Model](TRUST-MODEL.md).
 Algorithms without a public institutional specification remain intentionally
 unsupported even when third-party implementations are widely available.
 

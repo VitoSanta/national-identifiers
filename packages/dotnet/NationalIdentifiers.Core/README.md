@@ -53,7 +53,11 @@ discovery properties such as `SupportedCountries`, `SupportedTerritories`,
   identity verification.
 
 Additional families are admitted only through the public
-[official-source backlog](../../../docs/OFFICIAL-SOURCE-BACKLOG.md).
+[official-source backlog](https://github.com/VitoSanta/national-identifiers/blob/main/docs/OFFICIAL-SOURCE-BACKLOG.md).
+Coverage depth is documented in
+[docs/COVERAGE-DEPTH.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/COVERAGE-DEPTH.md), including the
+difference between checksum-backed validation, format-only validation and
+`NotApplicable` jurisdictions.
 
 ### Confidence semantics
 
@@ -95,6 +99,8 @@ Local validation confirms the value is *well-formed*, not that it was
 actually *issued* to someone. For registry-level verification use official
 services (e.g. VIES for EU VAT numbers). Live lookups are intentionally not
 part of the offline core.
+The broader frontend/backend trust boundary is documented in
+[docs/TRUST-MODEL.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/TRUST-MODEL.md).
 
 ## Related packages
 
@@ -102,6 +108,8 @@ part of the offline core.
   action filter for ASP.NET Core.
 - `national-identifiers` on npm — the same rules for TypeScript/JavaScript, with an
   Angular adapter.
+- [API stability](https://github.com/VitoSanta/national-identifiers/blob/main/docs/API-STABILITY.md) — SemVer and breaking-change
+  policy.
 
 ## License
 

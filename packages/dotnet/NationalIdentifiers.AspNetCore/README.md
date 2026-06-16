@@ -6,6 +6,10 @@ validation of national tax identifiers for 195 countries in web APIs.
 It also supports the same 7 separately tracked ISO territories as
 `NationalIdentifiers.Core`. Targets .NET 8 and .NET 10.
 
+Coverage depth and the offline trust boundary are documented in
+[docs/COVERAGE-DEPTH.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/COVERAGE-DEPTH.md) and
+[docs/TRUST-MODEL.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/TRUST-MODEL.md).
+
 ## Setup
 
 ```csharp
@@ -54,6 +58,9 @@ dependency injection when you want the same behavior behind an application
 service or endpoint filter.
 
 This package now shares the same policy semantics as the JS helper `taxIdCheckOutcome`, making warning and blocking behavior consistent between backend and frontend validation.
+
+SemVer and API stability rules are documented in
+[docs/API-STABILITY.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/API-STABILITY.md).
 
 ## License
 

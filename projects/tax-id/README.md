@@ -23,7 +23,11 @@ Unsupported country/family combinations return
 
 The evidence-gated queue for additional VAT, company-tax and identity rules is
 maintained in the public
-[official-source backlog](../../docs/OFFICIAL-SOURCE-BACKLOG.md).
+[official-source backlog](https://github.com/VitoSanta/national-identifiers/blob/main/docs/OFFICIAL-SOURCE-BACKLOG.md).
+Coverage depth is documented separately in
+[docs/COVERAGE-DEPTH.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/COVERAGE-DEPTH.md), including the
+difference between checksum-backed validation, format-only validation and
+`not_applicable` jurisdictions.
 
 For countries with multiple identifier families, policy can be value-specific. Indonesian NPWP values use checksum validation while NIK values are format-only; Singapore `S`/`T`/`F`/`G` identifiers use checksum validation while `M` FIN values are format-only.
 
@@ -298,6 +302,8 @@ if (!result.valid) {
 
 Validation checks the public format and checksum rules. It does not confirm that
 an identifier was issued by a government authority.
+For the trust boundary between frontend UX, backend enforcement and official
+registry verification, see [docs/TRUST-MODEL.md](https://github.com/VitoSanta/national-identifiers/blob/main/docs/TRUST-MODEL.md).
 
 ## Identity consistency
 

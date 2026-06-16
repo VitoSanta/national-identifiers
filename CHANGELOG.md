@@ -3,6 +3,17 @@
 All notable changes to this project are documented in this file. The project
 follows Semantic Versioning.
 
+## Unreleased
+
+### Documentation
+
+- Added public coverage-depth, trust-model, API-stability and release-checklist
+  documentation.
+- Linked the new documentation from the root README, npm README and NuGet
+  README files.
+- Clarified that country coverage is depth-based and does not imply registry
+  issuance, activity, ownership or identity verification.
+
 ## [1.0.1] - 2026-06-16
 
 ### Documentation

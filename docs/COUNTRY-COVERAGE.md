@@ -16,6 +16,10 @@ Local validation does not certify that an identifier was actually issued.
 Countries without a generalized personal TIN are represented explicitly as
 `not_applicable`; undocumented checksums are not inferred.
 
+For the public confidence model, source-status meanings and registry-wide
+counts, read [Coverage Depth](COVERAGE-DEPTH.md). This file remains the
+country-by-country checklist.
+
 ## Africa (54)
 
 - [x] DZ - Algeria - NIF (struttura 15/20 cifre)
